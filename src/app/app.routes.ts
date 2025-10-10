@@ -5,6 +5,7 @@ import { Home } from './features/home/home';
 import { Position } from './features/position/position';
 import { Team } from './features/team/team';
 import { Profile } from './features/profile/profile';
+import { Game } from './features/game/game';
 
 
 export const routes: Routes = [
@@ -15,6 +16,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: Home },
       { path: 'position', component: Position },
+      { path: 'game', component: Game },
       { path: 'team', component: Team },
       { path: 'profile', component: Profile },
     ],
