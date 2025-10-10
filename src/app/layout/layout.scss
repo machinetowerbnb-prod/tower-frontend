@@ -1,0 +1,78 @@
+/* Layout Container */
+.layout-container {
+  height: 100vh;
+  background-color: #f7f9fc;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 🔝 Top Navbar */
+.top-nav {
+  background: white;
+  height: 60px;
+  padding: 0 16px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.top-nav .logo {
+  height: 32px;
+  margin-right: 8px;
+}
+
+.top-nav .title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.lang-btn {
+  color: #333;
+  font-weight: 500;
+}
+
+/* 🧭 Main Section */
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+/* 🔚 Bottom Navbar */
+.bottom-nav {
+  background: #ffffff;
+  border-top: 1px solid #eee;
+  padding: 6px 0;
+  position: sticky;
+  bottom: 0;
+}
+
+.bottom-nav a {
+  text-decoration: none;
+  color: #555;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+
+.bottom-nav a.active {
+  color: #0057ff;
+}
+
+.bottom-nav .nav-icon {
+  width: 22px;
+  height: 22px;
+  margin-bottom: 4px;
+}
+
+/* 💻 Laptop Responsiveness */
+@media (min-width: 768px) {
+  .layout-container {
+    max-width: 420px;
+    margin: auto;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+}

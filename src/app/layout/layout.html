@@ -1,0 +1,43 @@
+<div class="layout-container" fxLayout="column" fxFlexFill>
+
+  <!-- 🌐 Top Navbar -->
+  <header class="top-nav" fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="left-section" fxLayout="row" fxLayoutAlign="start center">
+      <img src="assets/icons/logo.svg" alt="Logo" class="logo" />
+      <span class="title">Home Page</span>
+    </div>
+
+    <div class="right-section" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-button class="lang-btn">
+        English
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <!-- 🧭 Main Content -->
+  <main class="main-content" fxFlex>
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- 🧩 Bottom Navbar -->
+  <footer class="bottom-nav" fxLayout="row" fxLayoutAlign="space-around center">
+    <a routerLink="/" routerLinkActive="active" fxLayout="column" fxLayoutAlign="center center">
+      <img src="assets/icons/home.svg" alt="Home" class="nav-icon" />
+      <span>Home</span>
+    </a>
+    <a routerLink="/position" routerLinkActive="active" fxLayout="column" fxLayoutAlign="center center">
+      <img src="assets/icons/position.svg" alt="Position" class="nav-icon" />
+      <span>Position</span>
+    </a>
+    <a routerLink="/team" routerLinkActive="active" fxLayout="column" fxLayoutAlign="center center">
+      <img src="assets/icons/team.svg" alt="Team" class="nav-icon" />
+      <span>Team</span>
+    </a>
+    <a routerLink="/profile" routerLinkActive="active" fxLayout="column" fxLayoutAlign="center center">
+      <img src="assets/icons/profile.svg" alt="Profile" class="nav-icon" />
+      <span>Profile</span>
+    </a>
+  </footer>
+
+</div>
