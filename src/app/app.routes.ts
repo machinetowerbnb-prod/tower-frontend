@@ -6,10 +6,12 @@ import { Position } from './features/position/position';
 import { Team } from './features/team/team';
 import { Profile } from './features/profile/profile';
 import { Game } from './features/game/game';
+import { Signin } from './features/signin/signin';
 
 
 export const routes: Routes = [
-  {
+   { path: 'signin', component: Signin },
+{
     path: '',
     component: Layout,
     children: [

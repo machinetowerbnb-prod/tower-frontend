@@ -1,0 +1,147 @@
+<div class="layout-container" fxLayout="column" fxFlexFill>
+  <header>
+    <div class="header">
+      <div class="logo-section">
+        <span class="logo">LOGO</span>
+        <mat-form-field class="language-selector" appearance="fill">
+          <mat-select value="English">
+            <mat-option value="English">English</mat-option>
+            <mat-option value="Spanish">Spanish</mat-option>
+            <mat-option value="French">French</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </header>
+  <div class="signin-container">
+    <div class="welcome-section">
+      <h2>Welcome</h2>
+      <h4>to Mission Town</h4>
+    </div>
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- <div class="welcome-section">
+      <h1>Welcome</h1>
+      <p>to Mission Town</p>
+      <div class="coin-icon">
+        <img
+          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMzIiIGZpbGw9IiNGRkQ3MDAiLz4KPHN2ZyB4PSIxNiIgeT0iMTYiIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMTIgMkM2LjQ4IDIgMiA2LjQ4IDIgMTJTNi40OCAyMiAxMiAyMlMyMiAxNy41MiAyMiAxMlMxNy41MiAyIDEyIDJaTTEzLjUgNlYxMC41SDE1VjEyLjVIMTMuNVYxN0gxMC41VjEyLjVIOVYxMC41SDEwLjVWNkgxMy41WiIgZmlsbD0iIzFBMTAyQSIvPgo8L3N2Zz4KPC9zdmc+"
+          alt="Coin"
+        />
+      </div>
+    </div> -->
+
+      <!-- Login Card -->
+      <div class="login-card">
+        <div class="hero-coin">
+          <img src="/golden_coin.svg" alt="Golden Coin" />
+        </div>
+        <h2 class="form-heading">Log In</h2>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <!-- Mobile Number Section -->
+          <div class="mobile-section">
+            <div class="section-labels">
+              <span>Country</span>
+              <span
+                [class.error-label]="
+                  loginForm.get('mobile')?.invalid &&
+                  (loginForm.get('mobile')?.touched || loginForm.get('mobile')?.dirty)
+                "
+                >Mobile</span
+              >
+            </div>
+
+            <div class="mobile-input-group">
+              <mat-form-field class="country-code" appearance="outline">
+                <mat-select formControlName="countryCode" id="country-code-select">
+                  <mat-option *ngFor="let country of countryCodes" [value]="country.code">
+                    {{ country.code }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field class="mobile-number" appearance="outline">
+                <input
+                  matInput
+                  formControlName="mobile"
+                  placeholder="987654321"
+                  type="tel"
+                  maxlength="10"
+                />
+                <mat-error *ngIf="loginForm.get('mobile')?.hasError('required')">
+                  Mobile number is required
+                </mat-error>
+                <mat-error *ngIf="loginForm.get('mobile')?.hasError('pattern')">
+                  Please enter a valid 10-digit mobile number
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Password Section -->
+          <div class="password-section">
+            <div class="section-labels">
+              <span
+                [class.error-label]="
+                  loginForm.get('password')?.invalid &&
+                  (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)
+                "
+                >Password</span
+              >
+            </div>
+
+            <mat-form-field class="password-field" appearance="outline">
+              <input
+                matInput
+                [type]="hidePassword ? 'password' : 'text'"
+                formControlName="password"
+                placeholder="xxxxxxxxxx"
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                type="button"
+                (click)="togglePasswordVisibility()"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hidePassword"
+              >
+                <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+              <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+                Password is required
+              </mat-error>
+              <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
+                Password must be at least 6 characters
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Remember Me and Forgot Password -->
+          <div class="form-options">
+            <mat-checkbox formControlName="rememberMe">Remember me</mat-checkbox>
+            <a href="#" class="forgot-password">Forgot password?</a>
+          </div>
+
+          <!-- Login Button -->
+        </form>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <button
+      mat-raised-button
+      (click)="onSubmit()"
+      type="submit"
+      class="login-button"
+      [disabled]="loginForm.invalid"
+    >
+      Log In
+    </button>
+    <!-- Sign Up Link -->
+    <div class="signup-link">
+      <span>Don't have an account? </span>
+      <a href="#" class="signup-text"> Sign Up</a>
+    </div>
+  </footer>
+</div>
