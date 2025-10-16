@@ -2,10 +2,8 @@
     <div class="logo-section">
         <span class="logo">LOGO</span>
         <mat-form-field class="language-selector" appearance="fill">
-            <mat-select value="English">
-                <mat-option value="English">English</mat-option>
-                <mat-option value="Spanish">Spanish</mat-option>
-                <mat-option value="French">French</mat-option>
+            <mat-select [value]="selectedLang" (selectionChange)="onLanguageChange($event.value)">
+                <mat-option *ngFor="let lang of languages" [value]="lang">{{ lang }}</mat-option>
             </mat-select>
         </mat-form-field>
     </div>

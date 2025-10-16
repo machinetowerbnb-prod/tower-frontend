@@ -4,40 +4,30 @@
   </header>
   <div class="signin-container">
     <div class="welcome-section">
-      <h2>Welcome</h2>
-      <h4>to Mission Town</h4>
+      <h2>{{'Welcome' | translate}}</h2>
+      <h4>{{'to Mission Town' | translate}}</h4>
     </div>
     <!-- Main Content -->
     <div class="main-content">
-      <!-- <div class="welcome-section">
-      <h1>Welcome</h1>
-      <p>to Mission Town</p>
-      <div class="coin-icon">
-        <img
-          src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMzIiIGZpbGw9IiNGRkQ3MDAiLz4KPHN2ZyB4PSIxNiIgeT0iMTYiIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMTIgMkM2LjQ4IDIgMiA2LjQ4IDIgMTJTNi40OCAyMiAxMiAyMlMyMiAxNy41MiAyMiAxMlMxNy41MiAyIDEyIDJaTTEzLjUgNlYxMC41SDE1VjEyLjVIMTMuNVYxN0gxMC41VjEyLjVIOVYxMC41SDEwLjVWNkgxMy41WiIgZmlsbD0iIzFBMTAyQSIvPgo8L3N2Zz4KPC9zdmc+"
-          alt="Coin"
-        />
-      </div>
-    </div> -->
 
       <!-- Login Card -->
       <div class="login-card">
         <div class="hero-coin">
           <img src="/golden_coin.svg" alt="Golden Coin" />
         </div>
-        <h2 class="form-heading">Log In</h2>
+        <h2 class="form-heading">{{'Log In' | translate}}</h2>
 
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <!-- Mobile Number Section -->
           <div class="mobile-section">
             <div class="section-labels">
-              <span>Country</span>
+              <span>{{'Country' | translate}}</span>
               <span
                 [class.error-label]="
                   loginForm.get('mobile')?.invalid &&
                   (loginForm.get('mobile')?.touched || loginForm.get('mobile')?.dirty)
                 "
-                >Mobile</span
+                >{{'Mobile' | translate}}</span
               >
             </div>
 
@@ -76,7 +66,7 @@
                   loginForm.get('password')?.invalid &&
                   (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)
                 "
-                >Password</span
+                >{{'Password' | translate}}</span
               >
             </div>
 
@@ -108,8 +98,8 @@
 
           <!-- Remember Me and Forgot Password -->
           <div class="form-options">
-            <mat-checkbox formControlName="rememberMe">Remember me</mat-checkbox>
-            <a href="#" class="forgot-password">Forgot password?</a>
+            <mat-checkbox formControlName="rememberMe">{{'Remember me' | translate}}</mat-checkbox>
+            <a href="#" class="forgot-password">{{'Forgot password' | translate}}</a>
           </div>
 
           <!-- Login Button -->
@@ -125,12 +115,12 @@
       class="login-button"
       [disabled]="loginForm.invalid"
     >
-      Log In
+      {{'Log In' | translate}}
     </button>
     <!-- Sign Up Link -->
     <div class="signup-link">
-      <span>Don't have an account? </span>
-      <a href="#" class="signup-text"> Sign Up</a>
+      <span>{{"Don't have an account" | translate}} </span>
+      <a href="#" class="signup-text"> {{'Sign Up' | translate}}</a>
     </div>
   </footer>
 </div>

@@ -13,6 +13,9 @@ import { CommonModule } from '@angular/common';
 
 import { TopNav } from '../top-nav/top-nav'
 
+import { TranslatePipe } from '../../pipes/translate-pipe';
+
+
 @Component({
   selector: 'app-signin',
   imports: [
@@ -26,7 +29,8 @@ import { TopNav } from '../top-nav/top-nav'
     MatIconModule,
     MatSnackBarModule,
     CommonModule,
-    TopNav
+    TopNav,
+    TranslatePipe
   ],
   templateUrl: './signin.html',
   styleUrl: './signin.scss'
