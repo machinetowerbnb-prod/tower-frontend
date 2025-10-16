@@ -28,6 +28,9 @@ export class Language {
     "Uzbek - o'zbek"
   ];
 
+  private rtlLanguages = ['Arabic - عربي', 'Persian - فارسی'];
+
+
 
   private translations: Record<string, Record<string, string>> = {
     English: {
@@ -256,12 +259,25 @@ export class Language {
 
 
   private currentLang = signal<string>('English');
+  private currentDirection = signal<'ltr' | 'rtl'>('ltr');
+
 
   constructor() {
     const savedLang = this.safeGetLocalStorage('app_lang');
+    const savedDir = this.safeGetLocalStorage('app_dir');
+
     if (savedLang && this.allLanguages.includes(savedLang)) {
       this.currentLang.set(savedLang);
     }
+
+    if (savedDir === 'rtl' || savedDir === 'ltr') {
+      this.currentDirection.set(savedDir as 'rtl' | 'ltr');
+    } else {
+      this.setDirectionByLanguage(this.currentLang());
+    }
+
+    this.applyDirection(this.currentDirection());
+
   }
 
   get languages() {
@@ -272,10 +288,32 @@ export class Language {
     return this.currentLang();
   }
 
+  get direction() {
+    return this.currentDirection();
+  }
+
   setLanguage(lang: string) {
     if (this.allLanguages.includes(lang)) {
       this.currentLang.set(lang);
       this.safeSetLocalStorage('app_lang', lang);
+      this.setDirectionByLanguage(lang);
+    }
+  }
+
+  private setDirectionByLanguage(lang: string) {
+    const isRTL = this.rtlLanguages.includes(lang);
+    const dir = isRTL ? 'rtl' : 'ltr';
+    this.currentDirection.set(dir);
+    this.safeSetLocalStorage('app_dir', dir);
+    this.applyDirection(dir);
+  }
+
+  private applyDirection(dir: 'ltr' | 'rtl') {
+    if (isPlatformBrowser(this.platformId)) {
+      const htmlTag = document.documentElement;
+      htmlTag.setAttribute('dir', dir);
+      htmlTag.setAttribute('lang', this.currentLang());
+      document.body.style.direction = dir;
     }
   }
 

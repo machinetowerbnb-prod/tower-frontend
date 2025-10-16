@@ -37,3 +37,13 @@ body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* global styles.css */
+[dir="rtl"] .header {
+  text-align: right;
+}
+
+[dir="ltr"] .header {
+  text-align: left;
+}
