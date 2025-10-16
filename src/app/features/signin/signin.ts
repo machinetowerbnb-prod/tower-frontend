@@ -11,6 +11,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 
+import { TopNav } from '../top-nav/top-nav'
+
 @Component({
   selector: 'app-signin',
   imports: [
@@ -23,7 +25,8 @@ import { CommonModule } from '@angular/common';
     MatCheckboxModule,
     MatIconModule,
     MatSnackBarModule,
-    CommonModule
+    CommonModule,
+    TopNav
   ],
   templateUrl: './signin.html',
   styleUrl: './signin.scss'

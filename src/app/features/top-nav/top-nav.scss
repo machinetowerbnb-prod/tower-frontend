@@ -1,0 +1,99 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+    text-align: center;
+    padding: 10px;
+    background: #fff;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; // Spread items to both corners
+  width: 100%; // Take full width
+  gap: 0; // Remove gap since items are at opposite ends
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1a102a;
+}
+
+.language-selector {
+  min-width: 120px;
+  
+  // Remove all Material Design styling to make it look clean
+  ::ng-deep .mat-mdc-form-field-underline {
+    display: none !important;
+  }
+  
+  ::ng-deep .mat-mdc-line-ripple {
+    display: none !important;
+  }
+  
+  ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+    display: none !important;
+  }
+  
+  ::ng-deep .mat-mdc-form-field-bottom-align {
+    display: none !important;
+  }
+  
+  ::ng-deep .mat-mdc-form-field-wrapper {
+    background: white !important;
+    padding: 0;
+  }
+  
+  ::ng-deep .mat-mdc-form-field-flex {
+    background: white !important;
+    border: none;
+    padding: 0;
+  }
+  
+  // Make the select field background white
+  ::ng-deep .mat-mdc-select-value {
+    background: white !important;
+  }
+  
+  ::ng-deep .mat-mdc-form-field-infix {
+    background: white !important;
+  }
+  
+  // Remove width from mdc-line-ripple to prevent underlines
+  ::ng-deep .mdc-line-ripple::before,
+  ::ng-deep .mdc-line-ripple::after {
+    width: 0 !important;
+  }
+  
+  // Set width for text field wrapper specifically for language selector
+  ::ng-deep .mat-mdc-text-field-wrapper {
+    width: 100% !important;
+  }
+  
+  // Remove padding from mdc-text-field for language selector
+  ::ng-deep .mdc-text-field {
+    padding: 0 !important;
+  }
+  
+  // Higher specificity to override Material Design styles
+  ::ng-deep.language-selector .mat-mdc-form-field {
+    text-align: unset !important;
+    display: block !important;
+  }
+  
+  // Multiple selectors for maximum coverage
+  ::ng-deep .language-selector .mat-mdc-form-field,
+  ::ng-deep .language-selector.mat-mdc-form-field,
+  ::ng-deep mat-form-field.language-selector {
+    text-align: unset !important;
+    display: block !important;
+  }
+  
+  // Target the specific class combination from your inspection
+  ::ng-deep .mat-mdc-form-field.language-selector.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-fill {
+    text-align: unset !important;
+    display: block !important;
+  }
+}
