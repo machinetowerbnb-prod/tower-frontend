@@ -10,6 +10,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { TopNav } from '../top-nav/top-nav'
 
@@ -29,24 +30,18 @@ import { TranslatePipe } from '../../pipes/translate-pipe';
     MatIconModule,
     MatSnackBarModule,
     CommonModule,
+    RouterModule,
     TopNav,
     TranslatePipe
   ],
   templateUrl: './signin.html',
   styleUrl: './signin.scss'
 })
-export class Signin implements OnInit{
+export class Signin implements OnInit {
   loginForm: FormGroup;
   hidePassword = true;
-  
-  selectedLanguage = 'en'; // Default selection
 
-  countryCodes = [
-    { code: '+91', country: 'IN' },
-    { code: '+1', country: 'US' },
-    { code: '+44', country: 'UK' },
-    { code: '+86', country: 'CN' }
-  ];
+  selectedLanguage = 'en'; // Default selection
 
   constructor(
     private fb: FormBuilder,
@@ -54,20 +49,18 @@ export class Signin implements OnInit{
     private snackBar: MatSnackBar
   ) {
     this.loginForm = this.fb.group({
-      // countryCode: ['+91', Validators.required],
-      // mobile: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       rememberMe: [false]
     });
   }
-ngOnInit(): void {
-  console.log("we are in signin page");
-}
+  ngOnInit(): void {
+    console.log("we are in signin page");
+  }
   onSubmit() {
     if (this.loginForm.valid) {
       console.log('Login form submitted:', this.loginForm.value);
-      
+
       // Simulate login process (replace with actual authentication logic)
       this.performLogin();
     } else {
@@ -82,7 +75,6 @@ ngOnInit(): void {
   }
 
   get passwordControl() { return this.loginForm.get('password'); }
-  get mobileControl() { return this.loginForm.get('mobile'); }
 
   private performLogin() {
     // Simulate API call delay
