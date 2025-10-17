@@ -18,46 +18,29 @@
         <h2 class="form-heading">{{'Log In' | translate}}</h2>
 
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-          <!-- Mobile Number Section -->
-          <div class="mobile-section">
+          <div class="password-section">
             <div class="section-labels">
-              <span>{{'Country' | translate}}</span>
               <span
                 [class.error-label]="
-                  loginForm.get('mobile')?.invalid &&
-                  (loginForm.get('mobile')?.touched || loginForm.get('mobile')?.dirty)
+                  loginForm.get('email')?.invalid &&
+                  (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)
                 "
-                >{{'Mobile' | translate}}</span
+                >{{'Email' | translate}}</span
               >
             </div>
 
-            <div class="mobile-input-group">
-              <mat-form-field class="country-code" appearance="outline">
-                <mat-select formControlName="countryCode" id="country-code-select">
-                  <mat-option *ngFor="let country of countryCodes" [value]="country.code">
-                    {{ country.code }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-
-              <mat-form-field class="mobile-number" appearance="outline">
-                <input
-                  matInput
-                  formControlName="mobile"
-                  placeholder="987654321"
-                  type="tel"
-                  maxlength="10"
-                />
-                <mat-error *ngIf="loginForm.get('mobile')?.hasError('required')">
-                  Mobile number is required
-                </mat-error>
-                <mat-error *ngIf="loginForm.get('mobile')?.hasError('pattern')">
-                  Please enter a valid 10-digit mobile number
-                </mat-error>
-              </mat-form-field>
-            </div>
+            <mat-form-field class="password-field" appearance="outline">
+              <input
+                matInput
+                type= "email"
+                formControlName="email"
+                placeholder="example@gmail.com"
+              />
+              <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+                {{'Email is required' | translate}}
+              </mat-error>
+            </mat-form-field>
           </div>
-
           <!-- Password Section -->
           <div class="password-section">
             <div class="section-labels">
@@ -88,10 +71,10 @@
                 <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
               </button>
               <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
-                Password is required
+                {{'Password is required' | translate}}
               </mat-error>
               <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
-                Password must be at least 6 characters
+                {{'Password must be at least 6 characters' | translate}}
               </mat-error>
             </mat-form-field>
           </div>

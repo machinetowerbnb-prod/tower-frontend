@@ -54,8 +54,9 @@ export class Signin implements OnInit{
     private snackBar: MatSnackBar
   ) {
     this.loginForm = this.fb.group({
-      countryCode: ['+91', Validators.required],
-      mobile: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      // countryCode: ['+91', Validators.required],
+      // mobile: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       rememberMe: [false]
     });
