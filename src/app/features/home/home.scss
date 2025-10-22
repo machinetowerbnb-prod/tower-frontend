@@ -1,0 +1,236 @@
+.home-container {
+    padding: 16px;
+    background: #f7f9fc;
+    flex: 1;
+}
+
+/* 🔹 Carousel */
+.carousel-container {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 16px;
+
+    .carousel {
+        width: 100%;
+        // height: 200px;
+        border-radius: 14px;
+        overflow: hidden;
+
+        .carousel-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 14px;
+        }
+    }
+
+    .carousel-dots {
+        position: absolute;
+        bottom: 10px;
+        right: 70px;
+        display: flex;
+        gap: 6px;
+        z-index: 10;
+
+        span {
+            width: 10px;
+            height: 10px;
+            border-radius: 5px;
+            /* slight rounding for modern square look */
+            background: #E7EDFF;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        span.active {
+            background: #2752E7;
+            transform: scale(1.1);
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+        }
+    }
+
+}
+
+/* 🔹 Wallet Section */
+.wallet-section {
+    background: #E7EDFF;
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 16px;
+    margin-top: 15px;
+
+    .wallet-buttons {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 16px;
+
+        .wallet-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #707070;
+            font-weight: 500;
+            gap: 6px;
+
+            img {
+                width: 32px;
+                height: 32px;
+            }
+        }
+    }
+
+    .wallet-values {
+        display: flex;
+        justify-content: space-between;
+        text-align: start;
+        border-top: 1px solid #2752E747;
+        padding-top: 12px;
+
+        .wallet-item {
+            // flex: 1;
+
+            p {
+                font-size: 14px;
+                color: #606060;
+                margin-bottom: 4px;
+            }
+
+            h3 {
+                font-size: 18px;
+                font-weight: 600;
+                color: #2752E7;
+                margin-top: 6px;
+
+                span {
+                    font-size: 12px;
+                    color: #2752E7;
+                }
+            }
+        }
+    }
+}
+
+/* 🔹 Referral Section */
+.referral-section {
+    background: white;
+    border-radius: 14px;
+    padding: 16px;
+    text-align: start;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 16px;
+
+    h3 {
+        color: #2752E7;
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 12px;
+        margin-top: 5px;
+    }
+
+    h6 {
+        margin: 0px;
+        padding: 0px;
+        color: #00000066;
+        font-weight: 400;
+    }
+
+    .code-box {
+        display: flex;
+
+        input {
+            border: 1.5px #858585 dotted;
+            padding: 6px;
+            background: transparent;
+            color: #42474E;
+            font-weight: 600;
+            outline: none;
+            width: 80px;
+            text-align: center;
+        }
+
+        mat-icon {
+            color: #555;
+            cursor: pointer;
+            margin-left: 6px;
+            margin-top: 6px;
+            font-size: 20px;
+        }
+    }
+}
+
+/* 🔹 Telegram Banner */
+.telegram-banner {
+    background: linear-gradient(90deg, #2440A0, #2752E7, );
+    color: white;
+    border-radius: 10px;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    .telegram-icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    p {
+        font-weight: 600;
+        margin: 0;
+    }
+
+    span {
+        font-size: 13px;
+        opacity: 0.9;
+    }
+}
+
+/* 🔹 Responsive */
+@media (max-width: 768px) {
+    .home-container {
+        // padding: 12px;
+    }
+}
+
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.carousel-image {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: #ccc;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.dot.active {
+    background: #0057ff;
+    width: 10px;
+    height: 10px;
+}
