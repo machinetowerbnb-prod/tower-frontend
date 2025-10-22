@@ -9,6 +9,7 @@ import { Game } from './features/game/game';
 import { Signin } from './features/signin/signin';
 import { Signup } from './features/signup/signup';
 import { VerifyEmail } from './features/verify-email/verify-email'
+import { EmailConfirmation } from './features/email-confirmation/email-confirmation'
 
 
 export const routes: Routes = [
@@ -16,6 +17,7 @@ export const routes: Routes = [
    { path: 'signin', component: Signin },
    { path: 'signup', component: Signup },
    { path: 'verify-email', component: VerifyEmail },
+   { path: 'email-confirm', component: EmailConfirmation },
 {
     path: '',
     component: Layout,
