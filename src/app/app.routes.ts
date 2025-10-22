@@ -8,12 +8,14 @@ import { Profile } from './features/profile/profile';
 import { Game } from './features/game/game';
 import { Signin } from './features/signin/signin';
 import { Signup } from './features/signup/signup';
+import { VerifyEmail } from './features/verify-email/verify-email'
 
 
 export const routes: Routes = [
   { path: '', redirectTo: 'signin', pathMatch: 'full' },
    { path: 'signin', component: Signin },
    { path: 'signup', component: Signup },
+   { path: 'verify-email', component: VerifyEmail },
 {
     path: '',
     component: Layout,
