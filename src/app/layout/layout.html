@@ -1,6 +1,6 @@
 <div class="layout-container" fxLayout="column" fxFlexFill>
   <!-- <header class="top-nav" fxLayout="row" fxLayoutAlign="space-between center"> -->
-    <app-top-nav></app-top-nav>
+  <app-top-nav></app-top-nav>
   <!-- </header> -->
 
   <!-- 🧭 Main Content -->
@@ -18,9 +18,8 @@
       <img src="position.svg" alt="Position" class="nav-icon" />
       <span>Position</span>
     </a>
-    <a routerLink="/game" routerLinkActive="active" fxLayout="column" fxLayoutAlign="center center">
-      <img src="game.svg" alt="Game" class="nav-icon" />
-      <span>Game</span>
+    <a routerLink="/game" routerLinkActive="active" class="game-icon" fxLayout="column" fxLayoutAlign="center center">
+      <img src="game.svg" alt="Game" class="nav-icon" style="width:50px;height: 50px;" />
     </a>
     <a routerLink="/team" routerLinkActive="active" fxLayout="column" fxLayoutAlign="center center">
       <img src="team.svg" alt="Team" class="nav-icon" />
