@@ -20,9 +20,10 @@ export class Home implements OnInit, OnDestroy {
   @ViewChild('depositModal') depositModal!: Deposit;
 
   carouselImages = [
-    '/corousle1.svg',
-    '/corousle1.svg',
-    '/corousle1.svg'
+    '/corosule1.svg',
+    '/corosule2.svg',
+    '/corosule3.svg',
+    '/corosule4.svg'
   ];
 
   walletActions = [
