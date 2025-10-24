@@ -1,0 +1,73 @@
+<div class="layout-container" fxLayout="column" fxFlexFill>
+  <header>
+    <app-top-nav></app-top-nav>
+  </header>
+
+  <div class="withdrawal-container">
+    <!-- 🔹 Blue Gradient Banner (2-layer) -->
+    <div class="blue-banner">
+      <div class="upper-blue">
+        <button class="back-btn" (click)="goBack()">
+           <img src="/leftarraow.svg" alt="back"/>
+        </button>
+        <h2>Withdrawal</h2>
+      </div>
+      <div class="lower-blue"></div>
+    </div>
+
+    <!-- 🔹 Floating Wallet Card -->
+    <div class="wallet-card">
+      <div class="wallet-info">
+        <p>WITHDRAWAL WALLET</p>
+        <h3>50000 <span>USDT</span></h3>
+      </div>
+      <div class="wallet-gif">
+        <img src="/wallet.gif" alt="wallet" />
+      </div>
+    </div>
+
+    <!-- 🔹 Form Section -->
+    <div class="form-section">
+      <form [formGroup]="withdrawalForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label>Enter amount</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <input matInput type="number" placeholder="00.00" formControlName="amount" />
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <label>USDT–BEP20 wallet address</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <input matInput placeholder="Enter wallet address" formControlName="walletAddress" />
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <label>M–PIN password</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <input matInput type="password" placeholder="Enter E–PIN withdrawal password" formControlName="pin" />
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+
+    <!-- 🔹 Warm Reminder -->
+    <div class="reminder-box">
+      <h4>Warm reminder</h4>
+      <ul>
+        <li>The minimum withdrawal amount is 20 USDT.</li>
+        <li>The withdrawal fee for all Pioneer’s level users is fixed at 8%.</li>
+        <li>The withdrawal process takes 24 – 72 hours.</li>
+        <li>Each withdrawal is subject to review; only one at a time.</li>
+        <li>You get one free withdrawal every 21 days.</li>
+        <li>After changing password or wallet address, wait 24 hours to request withdrawal.</li>
+      </ul>
+    </div>
+  </div>
+  <footer class="footer">
+    <button mat-raised-button type="submit" class="confirm-btn">
+      Confirm
+    </button>
+  </footer>
+</div>

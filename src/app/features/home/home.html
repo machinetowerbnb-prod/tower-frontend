@@ -59,3 +59,37 @@
     </div>
 
 </div>
+
+<!-- 🔹 Support Popup Overlay -->
+<div class="support-overlay" *ngIf="showSupport" (click)="closeSupportPopup()"></div>
+
+<!-- 🔹 Support Popup -->
+<div class="support-popup" *ngIf="showSupport">
+  <div class="support-header">
+    <h3>We’re here to help</h3>
+    <button class="close-btn" (click)="closeSupportPopup()">×</button>
+  </div>
+
+  <div class="support-content">
+    <p>
+      Get a Welcome Trial Bonus › Intern Newbies 2 Days Experience package RIB
+    </p>
+    <p>
+      -- Activation fee – [Free] Redeem 100 USDT for 2-day free trial to
+      Experience the work by joining the Official Group / Contact customer service
+      or Redeem through authorized Managers by providing your Account details.
+    </p>
+    <p>
+      Tips: The free trial bonus of 100 USDT is exclusively available to new users
+      for the purpose of experiencing the project, allowing them to earn up to
+      2 USDT. The earnings from the trial will be credited to the withdrawal
+      wallet and can be withdrawn once the user makes a subsequent official
+      investment in one of the RIBs packages.
+    </p>
+    <p>
+      Join Official Announcement Channel of Mission Tower:
+    </p>
+  </div>
+
+  <button class="support-btn">Support</button>
+</div>

@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+
+
 .home-container {
     padding: 16px;
     background: #f7f9fc;
@@ -233,4 +241,97 @@
     background: #0057ff;
     width: 10px;
     height: 10px;
+}
+
+//support-popup
+
+/* 🔹 Overlay for blur background */
+.support-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(3px);
+  z-index: 99;
+}
+
+/* 🔹 Popup bottom sheet */
+.support-popup {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  z-index: 100;
+  padding: 18px;
+  animation: slideUp 0.3s ease;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Header */
+.support-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+
+  h3 {
+    font-size: 17px;
+    font-weight: 600;
+    color: #000;
+    margin: 0;
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 26px;
+    color: #333;
+    cursor: pointer;
+  }
+}
+
+/* Scrollable Content */
+.support-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 6px;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.6;
+
+  p {
+    margin-bottom: 10px;
+  }
+}
+
+/* Support Button */
+.support-btn {
+  background: #2752e7;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  height: 50px;
+  font-weight: 600;
+  width: 100%;
+  margin-top: 14px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.3s ease all;
+
+  &:hover {
+    background: #003ee6;
+  }
 }
