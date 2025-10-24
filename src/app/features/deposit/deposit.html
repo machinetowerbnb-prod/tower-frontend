@@ -1,0 +1,64 @@
+<!-- 🔹 Overlay -->
+<div class="overlay" *ngIf="isVisible" (click)="closeModal()"></div>
+
+<!-- 🔹 Deposit Modal -->
+<div class="deposit-modal" *ngIf="isVisible" [class.fade-in]="isVisible" [class.fade-out]="!isVisible">
+
+  <!-- 🔹 Blue Header -->
+  <div class="modal-header-blue">
+    <h3 *ngIf="this.compoletedDeposit == false">Create deposit</h3>
+    <h3 *ngIf="this.compoletedDeposit == true">Congratulations</h3>
+    <!-- <mat-icon class="close-icon" (click)="animateClose()">delete</mat-icon> -->
+    <img src="/close_round.svg" (click)="animateClose()" alt="close" />
+  </div>
+
+  <!-- 🔹 Modal Body -->
+  <div class="modal-body">
+    <div *ngIf="this.compoletedDeposit == false">
+      <p class="info-text">
+        You are about to start deposit process. The process is fully automated and usually takes about 20 minutes.
+        Make sure to send exact total amount, including fees.
+      </p>
+
+      <div class="input-section">
+        <label>Enter amount</label>
+        <input matInput type="number" [(ngModel)]="amount" placeholder="2500" />
+      </div>
+
+      <div class="quick-amounts">
+        <button *ngFor="let amt of quickAmounts" class="quick-btn" [class.active]="amt === amount"
+          (click)="setAmount(amt)">
+          {{ amt }}
+        </button>
+      </div>
+
+      <div class="token-section">
+        <label>BNB Smart Chain (BEP20) Token</label>
+        <div class="token-options">
+          <button *ngFor="let token of ['USDT', 'USDC']" class="token-btn" [class.active]="token === selectedToken"
+            (click)="selectToken(token)">
+            {{ token }}
+          </button>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button mat-raised-button color="primary" class="confirm-btn" (click)="confirmDeposit()">
+          Confirm
+        </button>
+        <button mat-stroked-button class="cancel-btn" (click)="closeModal()">Cancel</button>
+      </div>
+    </div>
+    <div *ngIf="this.compoletedDeposit == true" class="success-content">
+      <img src="/success.gif" alt="success" />
+    </div>
+    <div *ngIf="this.compoletedDeposit == true" class="success-content"
+      style="color: #111111;font-weight: 500;font-size: 16px;">
+      <p>Deposit Successful!</p>
+    </div>
+    <div *ngIf="this.compoletedDeposit == true" class="success-content"
+      style="padding: 0px 20px;color: #707070;font-size: 13px;">
+      <p>Your payment has been submitted. You can track it anytime in your transaction history.</p>
+    </div>
+  </div>
+</div>

@@ -1,15 +1,18 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { Deposit } from '../deposit/deposit';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, MatIconModule],
+  imports: [CommonModule, MatIconModule, Deposit],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
 export class Home implements OnInit, OnDestroy {
+
+  @ViewChild('depositModal') depositModal!: Deposit;
 
   carouselImages = [
     '/corousle1.svg',
@@ -33,6 +36,14 @@ export class Home implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.startCarousel();
+  }
+
+  onWalletAction(label: string) {
+    if (label === 'Deposit') {
+      this.depositModal.openModal();
+    } else {
+      console.log(`Clicked on ${label}`);
+    }
   }
 
   startCarousel() {
