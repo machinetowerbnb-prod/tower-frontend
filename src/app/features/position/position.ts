@@ -75,7 +75,7 @@ export class Position implements OnInit, AfterViewInit {
     ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
       // Run only in browser environment
-      setTimeout(() => this.scrollToCurrent(), 500);
+      // setTimeout(() => this.scrollToCurrent(), 500);
     }
   }
 
