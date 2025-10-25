@@ -12,6 +12,7 @@ import { VerifyEmail } from './features/verify-email/verify-email'
 import { EmailConfirmation } from './features/email-confirmation/email-confirmation'
 import { Withdrawal } from './features/withdrawal/withdrawal'
 import { History } from './features/history/history'
+import { Commision } from './features/commision/commision'
 
 
 export const routes: Routes = [
@@ -22,6 +23,7 @@ export const routes: Routes = [
    { path: 'email-confirm', component: EmailConfirmation },
    { path: 'withdraw', component: Withdrawal },
    { path: 'history', component: History },
+   { path: 'commission', component: Commision },
 {
     path: '',
     component: Layout,
