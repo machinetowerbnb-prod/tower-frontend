@@ -13,6 +13,7 @@ import { EmailConfirmation } from './features/email-confirmation/email-confirmat
 import { Withdrawal } from './features/withdrawal/withdrawal'
 import { History } from './features/history/history'
 import { Commision } from './features/commision/commision'
+import { Members } from './features/members/members'
 
 
 export const routes: Routes = [
@@ -24,6 +25,7 @@ export const routes: Routes = [
    { path: 'withdraw', component: Withdrawal },
    { path: 'history', component: History },
    { path: 'commission', component: Commision },
+   { path: 'members', component: Members },
 {
     path: '',
     component: Layout,

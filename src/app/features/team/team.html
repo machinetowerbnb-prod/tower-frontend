@@ -54,7 +54,7 @@
 
         <!-- 🔹 Levels Section -->
         <div class="levels-section">
-            <div *ngFor="let level of levels" class="level-card" [ngStyle]="{'border': '1px solid ' + level.color}">
+            <div *ngFor="let level of levels" class="level-card" [ngStyle]="{'border': '1px solid ' + level.color}" (click)="openMembers(level.id)">
                 <div class="level-header">
                     <span class="level-title">LEVEL {{ level.id | number:'2.0' }}</span>
                     <span class="level-percent">{{ level.progress }}%</span>

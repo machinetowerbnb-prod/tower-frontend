@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-team',
@@ -11,6 +12,9 @@ export class Team implements OnInit {
   userName = 'Marcelo';
   data: any = {};
   levels: any[] = [];
+
+  constructor(private router: Router, private route: ActivatedRoute) { }
+
 
   ngOnInit() {
     // Simulated API Response
@@ -37,4 +41,10 @@ export class Team implements OnInit {
       { id: 3, value: this.data.levelThree, max, color: '#2FBDC1', progress: Math.round((this.data.levelThree / max) * 100) },
     ];
   }
+
+  openMembers(level: number) {
+    this.router.navigate(['/members'], { queryParams: { level } });
+  }
+
+
 }
