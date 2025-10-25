@@ -1,1 +1,72 @@
-<p>team works!</p>
+<div class="layout-container" fxLayout="column" fxFlexFill>
+    <div class="team-container">
+        <!-- 🔹 Blue Banner -->
+        <!-- 🔹 Blue Banner -->
+        <div class="blue-banner">
+            <img src="/common-top.svg" alt="banner background" class="banner-bg" />
+
+            <div class="banner-content">
+                <div class="banner-text">
+                    <h2>Hello {{ userName }},</h2>
+                    <p>An overview of your team’s recent performance.</p>
+                </div>
+
+                <div class="banner-img">
+                    <img src="/team-people.svg" alt="Team Banner" />
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 🔹 Team Overview -->
+        <div class="overview-section">
+            <div class="section-header">
+                <h3>Team overview</h3>
+                <a href="#" class="details-link">Commission details →</a>
+            </div>
+
+            <div class="overview-grid">
+                <div class="card">
+                    <img src="/total-teams.svg" alt="icon" />
+                    <h2>{{ data.totalTeams }}</h2>
+                    <p>Total number of teams</p>
+                </div>
+
+                <div class="card">
+                    <img src="/total-comission.svg" alt="icon" />
+                    <h2>${{ data.totalPromationComission | number: '1.2-2' }}</h2>
+                    <p>Total promotion commission</p>
+                </div>
+
+                <div class="card">
+                    <img src="/total-recharge.svg" alt="icon" />
+                    <h2>${{ data.teamRecharge | number: '1.2-2' }}</h2>
+                    <p>Total team recharge</p>
+                </div> 
+
+                <div class="card">
+                    <img src="/total-withdraw.svg" alt="icon" />
+                    <h2>${{ data.teamWitdrawls | number: '1.2-2' }}</h2>
+                    <p>Total team withdrawals</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🔹 Levels Section -->
+        <div class="levels-section">
+            <div *ngFor="let level of levels" class="level-card" [ngStyle]="{'border': '1px solid ' + level.color}">
+                <div class="level-header">
+                    <span class="level-title">LEVEL {{ level.id | number:'2.0' }}</span>
+                    <span class="level-percent">{{ level.progress }}%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" [ngStyle]="{'width': level.progress + '%', 'background': level.color}">
+                    </div>
+                </div>
+                <p class="level-info">
+                    TOTAL VALID MEMBERS: {{ level.value }}/{{ level.max }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
