@@ -19,8 +19,8 @@ export class Profile {
   constructor(private router: Router) { }
 
   user = {
-    name: 'Manikanta',
-    email: 'manikantasai@gmail.com',
+    name: 'Admin',
+    email: 'admin@gmail.com',
     workingWallet: 5000,
     withdrawalWallet: 50000,
   };

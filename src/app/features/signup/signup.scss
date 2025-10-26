@@ -215,7 +215,7 @@
 }
 
 .section-labels span:first-child { /* Country label width matches country code field */
-  width: 80px; /* keep in sync with .country-code flex-basis */
+  width: 100%; /* keep in sync with .country-code flex-basis */
   display: inline-block;
 }
 
@@ -332,13 +332,15 @@
   max-width: 400px;
   margin: 0 auto 10px auto;
   border-radius: 8px;
-  font-weight: 600;
-  background: blue !important;
+  font-weight: 500;
+  background: #2752E7 !important;
   text-transform: none;
   letter-spacing: 0.3px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.08);
   transition: background .25s ease, box-shadow .25s ease, transform .15s ease;
   border: none;
+  color: #ffffff;
+  height: 55px;
 }
 
 .login-button:hover:not([disabled]) {

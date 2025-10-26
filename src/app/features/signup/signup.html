@@ -6,7 +6,7 @@
   <div class="signin-container">
     <div class="welcome-section">
       <h2>{{ 'Welcome' | translate }}</h2>
-      <h4>{{ 'to Mission Town' | translate }}</h4>
+      <h4>{{ 'To Tower BNB' | translate }}</h4>
     </div>
 
     <!-- Main Content -->
@@ -114,7 +114,7 @@
                   signupForm.get('epin')?.invalid &&
                   (signupForm.get('epin')?.touched || signupForm.get('epin')?.dirty)
                 "
-                >{{ 'E-PIN' | translate }}</span
+                >{{ 'M-PIN' | translate }}*</span
               >
             </div>
             <mat-form-field class="password-field" appearance="outline">
@@ -143,7 +143,7 @@
                   signupForm.get('confirmEpin')?.invalid &&
                   (signupForm.get('confirmEpin')?.touched || signupForm.get('confirmEpin')?.dirty)
                 "
-                >{{ 'Confirm E-PIN' | translate }}</span
+                >{{ 'Confirm M-PIN' | translate }}*</span
               >
             </div>
             <mat-form-field class="password-field" appearance="outline">
@@ -156,6 +156,30 @@
               />
               <mat-error *ngIf="signupForm.get('confirmEpin')?.hasError('required')">
                 {{ 'Confirm your E-PIN' | translate }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Refferal -->
+          <div class="password-section">
+            <div class="section-labels">
+              <span
+                [class.error-label]="
+                  signupForm.get('name')?.invalid &&
+                  (signupForm.get('name')?.touched || signupForm.get('name')?.dirty)
+                "
+                >{{ 'Refferal Code' | translate }}</span
+              >
+            </div>
+            <mat-form-field class="password-field" appearance="outline">
+              <input
+                matInput
+                type="text"
+                formControlName="refferal"
+                placeholder="asdfghjkl"
+              />
+              <mat-error *ngIf="signupForm.get('name')?.hasError('required')">
+                {{ 'Refferal name is required' | translate }}
               </mat-error>
             </mat-form-field>
           </div>

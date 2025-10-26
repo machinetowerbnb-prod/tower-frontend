@@ -62,10 +62,16 @@ export class Signin implements OnInit {
       console.log('Login form submitted:', this.loginForm.value);
 
       // Simulate login process (replace with actual authentication logic)
-      this.performLogin();
-    } else {
-      // Mark all as touched so label turns red immediately
-      this.loginForm.markAllAsTouched();
+      if (this.loginForm.value.email == "admin@gmail.com" && this.loginForm.value.password == "password123") this.performLogin();
+      else {
+        this.snackBar.open('Please enter valid user details', 'Close', {
+          duration: 3000,
+          panelClass: ['error-snackbar']
+        });
+      }
+    }
+    else {
+      // this.loginForm.markAllAsTouched();
       console.log('Form is invalid');
       this.snackBar.open('Please fill in all required fields correctly', 'Close', {
         duration: 3000,
@@ -89,7 +95,7 @@ export class Signin implements OnInit {
       setTimeout(() => {
         this.router.navigate(['/home']);
       }, 1000);
-    }, 500);
+    }, 100);
   }
 
   togglePasswordVisibility() {

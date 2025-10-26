@@ -55,7 +55,7 @@
 
 .modal-header-blue h3 {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   margin: 0;
 }
 
@@ -151,14 +151,15 @@
     padding: 10px;
     border-radius: 8px;
     background: #f5f8ff;
-    color: #0d2d7a;
+    color: #94A3B8;
     border: 1px solid #d0d7ff;
     font-weight: 500;
     transition: all 0.3s ease;
+    height: 50px;
 
     &.active {
-      background: #2752E7;
-      color: white;
+      background: #E7EDFF;
+      color: #2752E7;
       border-color: #2752E7;
     }
   }
@@ -174,18 +175,19 @@
 
 .confirm-btn {
   background: #2752E7 !important;
-  color: white !important;
+  color: #ffffff !important;
   border-radius: 8px;
-  font-weight: 600;
+  font-weight: 500;
   height: 44px;
   text-transform: none;
+  height: 55px;
 }
 
 .cancel-btn {
   color: #333 !important;
   border: 1px solid #ddd !important;
   border-radius: 8px;
-  height: 44px;
+  height: 55px;
   text-transform: none;
 }
 

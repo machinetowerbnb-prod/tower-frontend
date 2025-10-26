@@ -55,7 +55,8 @@ export class Signup implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       epin: ['', [Validators.required, Validators.minLength(4)]],
       confirmEpin: ['', Validators.required],
-      terms: [false, Validators.requiredTrue]
+      terms: [false, Validators.requiredTrue],
+      refferal: ['', Validators.required]
     });
 
   }
