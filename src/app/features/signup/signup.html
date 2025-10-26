@@ -97,7 +97,8 @@
                 type="button"
                 (click)="togglePasswordVisibility()"
               >
-                <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                <!-- <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon> -->
+                 <img src="/password-eye.svg" alt="password" />
               </button>
               <mat-error *ngIf="signupForm.get('password')?.hasError('required')">
                 {{ 'Password is required' | translate }}

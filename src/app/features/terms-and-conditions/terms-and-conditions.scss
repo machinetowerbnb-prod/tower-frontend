@@ -1,0 +1,137 @@
+.layout-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Poppins', sans-serif;
+  background: #f7f9fc;
+}
+
+/* 🔹 Banner */
+.banner {
+  background: url('/common-top.svg') center/cover no-repeat;
+  color: #fff;
+  padding: 60px 16px 50px;
+  position: relative;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  text-align: center;
+}
+
+.back-btn {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(255, 255, 255, 0.25);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.4);
+  }
+}
+
+.banner-text {
+  margin-top: 30px;
+
+  h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  p {
+    font-size: 13px;
+    opacity: 0.9;
+    margin: 0;
+  }
+}
+
+/* 🔹 Content Area */
+.content-container {
+  flex: 1;
+  background: #fff;
+//   margin: -30px auto 0;
+  border-radius: 20px 20px 0 0;
+  padding: 24px;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+  width: 92%;
+  max-width: 420px;
+  overflow-y: auto;
+  max-height: calc(100vh - 200px);
+
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #101432;
+    margin-bottom: 10px;
+  }
+
+  h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 20px;
+    color: #0d2d7a;
+  }
+
+  h5 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 16px;
+    color: #2c3e50;
+  }
+
+  p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #555;
+    margin-top: 8px;
+  }
+
+  ul {
+    padding-left: 20px;
+    margin-top: 8px;
+
+    li {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #444;
+      margin-bottom: 6px;
+    }
+  }
+}
+
+/* 🔹 Scrollbar Styling */
+.content-container::-webkit-scrollbar {
+  width: 6px;
+}
+.content-container::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 10px;
+}
+.content-container::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* 🔹 Responsive */
+@media (max-width: 768px) {
+  .banner {
+    padding: 50px 12px 40px;
+  }
+
+  .content-container {
+    width: 94%;
+    padding: 18px;
+  }
+
+  .banner-text h2 {
+    font-size: 17px;
+  }
+}

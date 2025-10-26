@@ -1,0 +1,66 @@
+<div class="layout-container" fxLayout="column" fxFlexFill>
+  <!-- 🔹 Top Navigation -->
+  <header>
+    <app-top-nav></app-top-nav>
+  </header>
+
+  <!-- 🔹 Banner -->
+  <div class="banner">
+    <button class="back-btn" (click)="goBack()">
+        <img src="/leftarraow.svg" alt="back" />
+    </button>
+    <div class="banner-text">
+      <h2>Terms and Conditions</h2>
+      <p>This agreement was last updated on {{ lastUpdated }}</p>
+    </div>
+  </div>
+
+  <!-- 🔹 Scrollable Content Section -->
+  <div class="content-container">
+    <h3>User Terms and Conditions</h3>
+    <p>
+      <strong>TowerBNB Service Agreement: A Summary.</strong>
+    </p>
+
+    <p>
+      This document outlines the Service Agreement for the use of products and services
+      provided by TowerBNB Technologies Inc. ("TowerBNB" or "the platform"). By registering or using the Platform,
+      you agree to be bound by all the terms herein. If you do not agree, you must not use the Platform’s services.
+    </p>
+
+    <h4>Key Provisions of the Agreement</h4>
+    <h5>User Eligibility and Registration (Article 2):</h5>
+    <ul>
+      <li>You must be at least 18 years old and possess the full legal capacity to enter into this agreement.</li>
+      <li>All registration information must be true, accurate, complete, and kept up-to-date.</li>
+      <li>You are prohibited from using the Platform for any illegal activities or those that infringe upon the rights of others.</li>
+    </ul>
+
+    <h5>Service Offerings (Article 3):</h5>
+    <ul>
+      <li>Digital asset management, staking functions, and fund circulation (e.g., USDT).</li>
+      <li>Smartphone Tower mining system (running a computing power package to generate income).</li>
+      <li>Team Incentive Plans (Mission and Node logical incentives).</li>
+    </ul>
+
+    <h5>Account Security and Management (Article 4):</h5>
+    <ul>
+      <li>You are solely responsible for maintaining the confidentiality of your login credentials.</li>
+      <li>TowerBNB shall not be liable for losses due to unauthorized account access caused by user negligence.</li>
+    </ul>
+
+    <h5>Service Adjustments (Article 5):</h5>
+    <p>
+      TowerBNB reserves the right to modify, suspend, or discontinue any part of its services at any time without prior notice.
+    </p>
+
+    <h5>Governing Law (Article 6):</h5>
+    <p>
+      This agreement shall be governed by the laws of the applicable jurisdiction. All disputes shall be resolved through arbitration.
+    </p>
+
+    <p>
+      By continuing to use the Platform, you acknowledge that you have read and agreed to these terms and conditions.
+    </p>
+  </div>
+</div>

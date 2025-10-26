@@ -14,6 +14,9 @@ import { Withdrawal } from './features/withdrawal/withdrawal'
 import { History } from './features/history/history'
 import { Commision } from './features/commision/commision'
 import { Members } from './features/members/members'
+import { ChangePassword } from './features/change-password/change-password'
+import { TermsAndConditions } from './features/terms-and-conditions/terms-and-conditions'
+
 
 
 export const routes: Routes = [
@@ -26,6 +29,8 @@ export const routes: Routes = [
    { path: 'history', component: History },
    { path: 'commission', component: Commision },
    { path: 'members', component: Members },
+   { path: 'change-password', component: ChangePassword },
+   { path: 't&c', component: TermsAndConditions },
 {
     path: '',
     component: Layout,

@@ -170,7 +170,7 @@ export class History implements OnInit {
 
   selectFilter(value: string) {
     this.activeFilter = value;
-    // this.showFilter = false;
+    this.showFilter = false;
 
     // 🔹 Re-filter transactions
     const filtered =

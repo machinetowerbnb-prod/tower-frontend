@@ -1,1 +1,105 @@
-<p>profile works!</p>
+<div class="profile-container">
+    <!-- 🔹 Top Blue Banner -->
+    <div class="banner">
+        <div class="banner-content">
+            <div class="profile-circle">
+                <span>{{ getInitials(user.name) }}</span>
+            </div>
+            <div class="user-info">
+                <h2>{{ user.name }}</h2>
+                <p>{{ user.email }}</p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- 🔹 Wallet Section -->
+    <div class="wallet-section">
+        <div class="wallet-buttons">
+            <div class="wallet-btn" *ngFor="let action of walletActions" (click)="onWalletAction(action.label)">
+                <img [src]="action.icon" alt="{{action.label}}" />
+                <span>{{ action.label }}</span>
+            </div>
+        </div>
+        <app-deposit #depositModal></app-deposit>
+        <div class="wallet-values">
+            <div class="wallet-item">
+                <p>Working Wallet</p>
+                <h3>5000 <span>USDT</span></h3>
+            </div>
+            <div class="wallet-item">
+                <p>Withdrawal Wallet</p>
+                <h3>50,000 <span>USDT</span></h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🔹 Wallet Summary -->
+    <div class="wallet-summary">
+        <h4>Wallet Summary Details</h4>
+
+        <div class="summary-card" *ngFor="let item of walletSummary">
+            <div class="summary-left">
+                <img src="/profile-summary.svg" alt="icon" />
+                <p>{{ item.label }}</p>
+            </div>
+            <div class="summary-right">
+                <span>{{ item.value }} <b>USDT</b></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🔹 Other Settings -->
+    <div class="other-section">
+        <h4>Other settings</h4>
+        <div class="setting-card" *ngFor="let setting of settings" (click)="onSetting(setting.label)">
+            <div class="setting-left">
+                <img src="/profile-summary.svg" alt="icon" />
+                <p style="margin-left: 10px;">{{ setting.label }}</p>
+            </div>
+            <!-- <mat-icon>chevron_right</mat-icon> -->
+            <img src="/chevron_right.svg" alt="chevron_righticon" />
+        </div>
+
+        <div class="logout-card" (click)="logout()" style="height: 50px;">
+            <img src="/logout.svg" alt="logout" />
+            <p>Log out</p>
+            <!-- <img src="/chevron_right.svg" alt="chevron_righticon" /> -->
+        </div>
+    </div>
+</div>
+
+<!-- 🔹 Support Popup Overlay -->
+<div class="support-overlay" *ngIf="showSupport" (click)="closeSupportPopup()"></div>
+
+<!-- 🔹 Support Popup -->
+<div class="support-popup" *ngIf="showSupport">
+    <div class="support-header">
+        <h3>We’re here to help</h3>
+        <button class="close-btn" (click)="closeSupportPopup()">×</button>
+    </div>
+
+    <div class="support-content">
+        <p>
+            Get a Welcome Trial Bonus › Intern Newbies 2 Days Experience package RIB
+        </p>
+        <p>
+            -- Activation fee – [Free] Redeem 100 USDT for 2-day free trial to
+            Experience the work by joining the Official Group / Contact customer service
+            or Redeem through authorized Managers by providing your Account details.
+        </p>
+        <p>
+            Tips: The free trial bonus of 100 USDT is exclusively available to new users
+            for the purpose of experiencing the project, allowing them to earn up to
+            2 USDT. The earnings from the trial will be credited to the withdrawal
+            wallet and can be withdrawn once the user makes a subsequent official
+            investment in one of the RIBs packages.
+        </p>
+        <p>
+            Join Official Announcement Channel of Mission Tower:
+        </p>
+    </div>
+
+    <button class="support-btn">Support</button>
+</div>
