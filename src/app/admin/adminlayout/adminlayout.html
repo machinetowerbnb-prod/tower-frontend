@@ -1,0 +1,30 @@
+<div class="admin-layout">
+  <!-- 🔹 Top Navigation -->
+  <header class="admin-topnav">
+    <div class="menu-icon" (click)="toggleSidebar()">
+      <i class="fa fa-bars"></i>
+    </div>
+    <div class="topnav-title">Mission Tower Admin</div>
+    <div class="admin-profile">
+      <!-- <img src="/admin-avatar.svg" alt="Admin" /> -->
+       <!-- <h3>Admin</h3> -->
+    </div>
+  </header>
+
+  <!-- 🔹 Sidebar -->
+  <aside class="sidebar" [class.closed]="!isSidebarOpen">
+    <div class="sidebar-logo">TMTB Admin</div>
+    <ul class="sidebar-menu">
+      <li (click)="navigateToDashboard()" routerLinkActive="active">
+        <i class="fa fa-home"></i>
+        <span>Dashboard</span>
+      </li>
+      <!-- You can add more items here later -->
+    </ul>
+  </aside>
+
+  <!-- 🔹 Main Content -->
+  <main class="main-content" [class.expanded]="!isSidebarOpen">
+    <router-outlet></router-outlet>
+  </main>
+</div>

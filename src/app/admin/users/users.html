@@ -1,0 +1,80 @@
+<div class="users-container">
+  <div class="top-bar">
+    <button class="send-email-btn">Send email to all user</button>
+
+    <div class="right-controls">
+      <label>Show</label>
+      <select [(ngModel)]="pageSize" (change)="changePageSize(pageSize)">
+        <option *ngFor="let size of [10, 20, 50, 100]" [value]="size">{{ size }}</option>
+      </select>
+      <label>entries</label>
+
+      <input
+        type="text"
+        placeholder="Search..."
+        [(ngModel)]="searchText"
+        (input)="searchUsers()"
+      />
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table class="responsive-table">
+      <thead>
+        <tr>
+          <th>SN</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Referral ID</th>
+          <th>Wallet</th>
+          <th>Earnings</th>
+          <th>Referrals</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let user of paginatedUsers; let i = index">
+          <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.referralId }}</td>
+
+          <td>
+            {{ user.wallet }}
+            <button class="add-btn" (click)="openAddPopup(user, 'wallet')">Add</button>
+          </td>
+
+          <td>
+            {{ user.earnings }}
+            <button class="add-btn" (click)="openAddPopup(user, 'earnings')">Add</button>
+          </td>
+
+          <td>{{ user.referrals }}</td>
+
+          <td>
+            <button
+              class="status-btn"
+              [ngClass]="user.status ? 'active' : 'inactive'"
+              (click)="toggleStatus(user)"
+            >
+              {{ user.status ? 'Active' : 'Inactive' }}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination-controls">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">Prev</button>
+    <span>Page {{ currentPage }} of {{ Math.ceil(filteredUsers.length / pageSize) }}</span>
+    <button
+      (click)="nextPage()"
+      [disabled]="currentPage * pageSize >= filteredUsers.length"
+    >
+      Next
+    </button>
+  </div>
+</div>

@@ -16,6 +16,9 @@ import { Commision } from './features/commision/commision'
 import { Members } from './features/members/members'
 import { ChangePassword } from './features/change-password/change-password'
 import { TermsAndConditions } from './features/terms-and-conditions/terms-and-conditions'
+import { Adminlayout } from './admin/adminlayout/adminlayout'
+import { Dashboard } from './admin/dashboard/dashboard'
+import { Users } from './admin/users/users'
 
 
 
@@ -43,5 +46,14 @@ export const routes: Routes = [
       
     ],
   },
+  {
+  path: 'admin',
+  component: Adminlayout,
+  children: [
+    { path: 'dashboard', component: Dashboard },
+    { path: 'users', component: Users },
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' } // default route
+  ]
+},
   { path: '**', redirectTo: '' },
 ];
