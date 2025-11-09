@@ -15,9 +15,13 @@
   <aside class="sidebar" [class.closed]="!isSidebarOpen">
     <div class="sidebar-logo">TMTB Admin</div>
     <ul class="sidebar-menu">
-      <li (click)="navigateToDashboard()" routerLinkActive="active">
+      <li (click)="navigateToDashboard('dashboard')" routerLinkActive="active">
         <i class="fa fa-home"></i>
         <span>Dashboard</span>
+      </li>
+      <li (click)="navigateToDashboard('users')" routerLinkActive="active">
+        <i class="fa fa-users"></i>
+        <span>Users</span>
       </li>
       <!-- You can add more items here later -->
     </ul>

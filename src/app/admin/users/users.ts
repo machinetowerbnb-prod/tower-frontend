@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import { UpdateAmount } from '../update-amount/update-amount';
 
 @Component({
   selector: 'app-users',
-  imports: [CommonModule, MatIconModule, FormsModule],
+  imports: [CommonModule, MatIconModule, FormsModule, UpdateAmount],
   templateUrl: './users.html',
   styleUrl: './users.scss'
 })
@@ -16,6 +17,11 @@ export class Users implements OnInit {
   searchText: string = '';
   pageSize: number = 10;
   currentPage: number = 1;
+  showPopup = false;
+
+  selectedAction = '';
+  selectedRow: any = null;
+
 
   ngOnInit(): void {
     // Simulated API Response (Replace with real API later)
@@ -25,10 +31,10 @@ export class Users implements OnInit {
       message: 'success',
       data: [
         { id: 1, name: 'SaveSYL', email: 'saveangels75@gmail.com', referralId: 'savesyL_153364', wallet: 0, earnings: 0, referrals: 0, status: true },
-        { id: 2, name: 'Amalia05', email: 'codreaamalia@gmail.com', referralId: 'amalia05_981425', wallet: 0, earnings: 0, referrals: 0, status: true },
+        { id: 2, name: 'Amalia05', email: 'codreaamalia@gmail.com', referralId: 'amalia05_981425', wallet: 0, earnings: 0, referrals: 0, status: false },
         { id: 3, name: 'MrKhan', email: 'nader.arman1368@gmail.com', referralId: 'mrkhan_220816', wallet: 0, earnings: 0, referrals: 0, status: true },
         { id: 4, name: 'Krasimir24', email: 'krasirem@gmail.com', referralId: 'krasimir24_600902', wallet: 0, earnings: 0, referrals: 0, status: true },
-        { id: 5, name: 'Nadia', email: 'nadiaalmasry55@gmail.com', referralId: 'nadia_619189', wallet: 0, earnings: 0, referrals: 0, status: true },
+        { id: 5, name: 'Nadia', email: 'nadiaalmasry55@gmail.com', referralId: 'nadia_619189', wallet: 0, earnings: 0, referrals: 0, status: false },
         { id: 5, name: 'Nadia', email: 'nadiaalmasry55@gmail.com', referralId: 'nadia_619189', wallet: 0, earnings: 0, referrals: 0, status: true },
         { id: 5, name: 'Nadia', email: 'nadiaalmasry55@gmail.com', referralId: 'nadia_619189', wallet: 0, earnings: 0, referrals: 0, status: true },
         { id: 5, name: 'Nadia', email: 'nadiaalmasry55@gmail.com', referralId: 'nadia_619189', wallet: 0, earnings: 0, referrals: 0, status: true },
@@ -97,4 +103,20 @@ export class Users implements OnInit {
   openAddPopup(user: any, field: string) {
     console.log('Open popup for', field, 'of user', user);
   }
+
+  closePopup() {
+    this.showPopup = false;
+  }
+
+  handleSubmit(data: any) {
+    console.log('Popup submitted:', data);
+    this.showPopup = false;
+  }
+
+  openPopup(action: string, row: any) {
+    this.selectedAction = action;
+    this.selectedRow = row;
+    this.showPopup = true;
+  }
+
 }

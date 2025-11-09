@@ -42,12 +42,12 @@
 
           <td>
             {{ user.wallet }}
-            <button class="add-btn" (click)="openAddPopup(user, 'wallet')">Add</button>
+            <button class="add-btn" (click)="openPopup('Credit', user)">Add</button>
           </td>
 
           <td>
             {{ user.earnings }}
-            <button class="add-btn" (click)="openAddPopup(user, 'earnings')">Add</button>
+            <button class="add-btn" (click)="openPopup('Withdraw', user)">Add</button>
           </td>
 
           <td>{{ user.referrals }}</td>
@@ -78,3 +78,12 @@
     </button>
   </div>
 </div>
+
+
+<app-update-amount
+  [show]="showPopup"
+  [actionType]="selectedAction"
+  [rowData]="selectedRow"
+  (close)="closePopup()"
+  (submitData)="handleSubmit($event)"
+></app-update-amount>

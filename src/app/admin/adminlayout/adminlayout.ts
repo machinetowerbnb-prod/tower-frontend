@@ -17,8 +17,9 @@ export class Adminlayout {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
 
-  navigateToDashboard() {
-    this.router.navigate(['/admin/dashboard']);
+  navigateToDashboard(page:any) {
+    if(page == 'dashboard') this.router.navigate(['/admin/dashboard']);
+    else if(page == 'users') this.router.navigate(['/admin/users']);
   }
 
 }

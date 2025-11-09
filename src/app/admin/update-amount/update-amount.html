@@ -1,0 +1,29 @@
+<div class="modal-overlay" *ngIf="show" (click)="closeModal()"></div>
+
+<div class="modal" *ngIf="show">
+  <div class="modal-header">
+    <h3>Update Amount</h3>
+    <button class="close-btn" (click)="closeModal()">×</button>
+  </div>
+
+  <div class="modal-body">
+    <div class="form-group">
+      <label>Action</label>
+      <input type="text" [(ngModel)]="formData.action" readonly />
+    </div>
+
+    <div class="form-group">
+      <label>Amount</label>
+      <input type="number" [(ngModel)]="formData.amount" placeholder="Enter amount" />
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea [(ngModel)]="formData.description" placeholder="Enter description"></textarea>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button class="submit-btn" (click)="submitForm()">Add</button>
+  </div>
+</div>
