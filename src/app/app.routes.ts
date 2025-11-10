@@ -19,6 +19,7 @@ import { TermsAndConditions } from './features/terms-and-conditions/terms-and-co
 import { Adminlayout } from './admin/adminlayout/adminlayout'
 import { Dashboard } from './admin/dashboard/dashboard'
 import { Users } from './admin/users/users'
+import { WithdrawRequest } from './admin/withdraw-request/withdraw-request'
 
 
 
@@ -52,6 +53,7 @@ export const routes: Routes = [
   children: [
     { path: 'dashboard', component: Dashboard },
     { path: 'users', component: Users },
+    { path: 'withdrawls', component: WithdrawRequest },
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' } // default route
   ]
 },

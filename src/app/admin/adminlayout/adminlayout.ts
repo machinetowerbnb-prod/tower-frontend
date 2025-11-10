@@ -20,6 +20,7 @@ export class Adminlayout {
   navigateToDashboard(page:any) {
     if(page == 'dashboard') this.router.navigate(['/admin/dashboard']);
     else if(page == 'users') this.router.navigate(['/admin/users']);
+    else if(page == 'withdrawls') this.router.navigate(['/admin/withdrawls']);
   }
 
 }

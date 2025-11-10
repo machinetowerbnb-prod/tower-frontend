@@ -1,0 +1,146 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+
+.withdraw-container {
+  padding: 20px;
+  background: #f8faff;
+  min-height: calc(100vh - 60px);
+}
+
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 14px;
+
+  .right-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    select,
+    input {
+      padding: 6px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    input {
+      min-width: 160px;
+    }
+  }
+}
+
+.table-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.responsive-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+
+  th,
+  td {
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+  }
+
+  thead {
+    background: #eef2ff;
+    font-weight: 600;
+  }
+
+  .user-link {
+    color: #2752e7;
+    font-weight: 500;
+  }
+
+  .wallet-cell {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    .copy-icon {
+      color: #2752e7;
+      cursor: pointer;
+      transition: 0.2s;
+
+      &:hover {
+        color: #1f3fcf;
+      }
+    }
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 8px;
+
+    button {
+      border: none;
+      padding: 6px 10px;
+      font-size: 13px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      color: #fff;
+      min-width: 70px;
+    }
+
+    .accept-btn {
+      background: #27ae60;
+
+      &:hover {
+        background: #1f8f4f;
+      }
+    }
+
+    .reject-btn {
+      background: #e74c3c;
+
+      &:hover {
+        background: #c0392b;
+      }
+    }
+  }
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+
+  button {
+    background: #2752e7;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+
+    &:disabled {
+      background: #b7c4f1;
+      cursor: not-allowed;
+    }
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .responsive-table th,
+  .responsive-table td {
+    white-space: nowrap;
+  }
+}
