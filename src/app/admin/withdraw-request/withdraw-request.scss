@@ -144,3 +144,48 @@
     white-space: nowrap;
   }
 }
+
+
+/* 🔹 Base chip style */
+.status-badge {
+  display: inline-block;
+  min-width: 90px;
+  padding: 6px 14px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 13px;
+  text-align: center;
+  text-transform: capitalize;
+  letter-spacing: 0.3px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.25s ease;
+  color: #fff;
+
+  &.processing {
+    background: linear-gradient(135deg, #f9a825, #f57c00);
+  }
+
+  &.success {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+  }
+
+  &.rejected {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Optional: glowing edge effect for extra polish */
+.status-badge.processing {
+  box-shadow: 0 0 6px rgba(249, 168, 37, 0.5);
+}
+.status-badge.success {
+  box-shadow: 0 0 6px rgba(46, 204, 113, 0.5);
+}
+.status-badge.rejected {
+  box-shadow: 0 0 6px rgba(231, 76, 60, 0.5);
+}

@@ -20,6 +20,8 @@ import { Adminlayout } from './admin/adminlayout/adminlayout'
 import { Dashboard } from './admin/dashboard/dashboard'
 import { Users } from './admin/users/users'
 import { WithdrawRequest } from './admin/withdraw-request/withdraw-request'
+import { WithdrawAccepts } from './admin/withdraw-accepts/withdraw-accepts'
+import { WithdrawRejects } from './admin/withdraw-rejects/withdraw-rejects'
 
 
 
@@ -53,7 +55,9 @@ export const routes: Routes = [
   children: [
     { path: 'dashboard', component: Dashboard },
     { path: 'users', component: Users },
-    { path: 'withdrawls', component: WithdrawRequest },
+    { path: 'withdrawl-requests', component: WithdrawRequest },
+    { path: 'withdrawl-accepts', component: WithdrawAccepts },
+    { path: 'withdrawl-rejects', component: WithdrawRejects },
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' } // default route
   ]
 },

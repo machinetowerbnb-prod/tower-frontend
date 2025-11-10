@@ -4,7 +4,6 @@
   display: flex;
   height: 100vh;
   background: #f5f7fb;
-  // overflow: hidden;
 }
 
 /* 🔹 Top Navbar */
@@ -32,13 +31,6 @@
     font-weight: 600;
     font-size: 18px;
   }
-
-  .admin-profile img {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    border: 2px solid white;
-  }
 }
 
 /* 🔹 Sidebar */
@@ -51,7 +43,7 @@
   background: white;
   border-right: 1px solid #e0e0e0;
   transition: width 0.3s ease;
-  overflow: hidden;
+  overflow-y: auto;
   z-index: 900;
   display: flex;
   flex-direction: column;
@@ -95,6 +87,41 @@
         color: #2752e7;
       }
     }
+
+    .has-submenu {
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .submenu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      background: #f6f8ff;
+
+      li {
+        padding: 10px 40px;
+        font-size: 14px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: 0.2s;
+
+        i {
+          font-size: 14px;
+        }
+
+        &:hover {
+          background: #e8eeff;
+        }
+
+        &.active {
+          background: #dce6ff;
+          color: #2752e7;
+        }
+      }
+    }
   }
 }
 
@@ -116,7 +143,7 @@
   }
 }
 
-/* 🔹 Main content area */
+/* 🔹 Main content */
 .main-content {
   margin-top: 60px;
   margin-left: 230px;
@@ -129,7 +156,7 @@
   }
 }
 
-/* 🔹 Responsive behavior */
+/* 🔹 Responsive */
 @media (max-width: 768px) {
   .sidebar {
     position: fixed;
@@ -145,16 +172,4 @@
   .main-content {
     margin-left: 0;
   }
-
-  .admin-topnav {
-    .menu-icon {
-      display: block;
-    }
-  }
-}
-
-.sidebar-menu li.active {
-  background: #dce6ff;
-  border-left: 3px solid #2752e7;
-  color: #2752e7;
 }
