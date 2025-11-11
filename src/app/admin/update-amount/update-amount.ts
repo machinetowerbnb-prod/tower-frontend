@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './update-amount.html',
   styleUrl: './update-amount.scss'
 })
-export class UpdateAmount {
+export class UpdateAmount implements OnChanges {
   @Input() show = false;
   @Input() actionType: string = '';
   @Input() rowData: any;
@@ -19,13 +19,19 @@ export class UpdateAmount {
 
   formData = {
     action: '',
+    wallet: '',
     amount: '',
     description: ''
   };
 
   ngOnChanges() {
+    // When action type or rowData changes
     if (this.actionType) {
-      this.formData.action = this.actionType; // Auto-fill
+      this.formData.action = this.actionType;
+    }
+
+    if (this.rowData?.wallet) {
+      this.formData.wallet = this.rowData.wallet;
     }
   }
 
