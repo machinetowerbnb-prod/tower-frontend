@@ -31,7 +31,7 @@ export class Game implements OnInit {
         reward: 'Earn 8 USDT',
         validity: 'CIRCULATION VALIDITY: 1 DAY',
         buttonText: 'Unlock Now',
-        background: '/assets/tower_free.png',
+        background: '/game-card-1.svg',
         enabled: true,
         disableType: 'button'
       },
@@ -42,7 +42,7 @@ export class Game implements OnInit {
         status: 'DEP : 60-500 USDT',
         miningCycle: 'Earn: 1.6% per day',
         buttonText: 'Purchase Now',
-        background: '/assets/tower_core10.png',
+        background: '/game-card-2.svg',
         enabled: true,
         disableType: 'button'
       },
@@ -53,7 +53,7 @@ export class Game implements OnInit {
         status: 'DEP : 501-900 USDT',
         miningCycle: 'Earn: 1.9% per day',
         buttonText: 'Purchase Now',
-        background: '/assets/tower_core10.png',
+        background: '/game-card-3.svg',
         enabled: true,
         disableType: 'button'
       },
@@ -64,7 +64,7 @@ export class Game implements OnInit {
         status: 'DEP : 901-1500 USDT',
         miningCycle: 'Earn: 2.3% per day',
         buttonText: 'Purchase Now',
-        background: '/assets/tower_core10.png',
+        background: '/game-card-4.svg',
         enabled: true,
         disableType: 'button'
       },
@@ -75,7 +75,7 @@ export class Game implements OnInit {
         status: 'Stable Mining Operation',
         miningCycle: '27 days mining cycle',
         buttonText: 'Purchase Now',
-        background: '/assets/tower_core30.png',
+        background: '/game-card-5.svg',
         enabled: false,
         disableType: 'card' // 🔹 disabled (Coming Soon)
       }

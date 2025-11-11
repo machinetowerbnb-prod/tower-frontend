@@ -79,6 +79,7 @@
   background-position: center;
   color: #fff;
   min-height: 180px;
+  z-index: 9999;
   display: flex;
   align-items: flex-end;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
@@ -86,7 +87,7 @@
 
   &:hover:not(.disabled-card) {
     transform: translateY(-3px);
-  }
+  } 
 
   .overlay {
     position: absolute;
@@ -150,7 +151,7 @@
     }
 
     .action-btn {
-      width: 100%;
+      width: 70%;
       background: #fff;
       color: #2752e7;
       border: none;
@@ -194,12 +195,12 @@
   }
 
   .cards-wrapper {
-    padding: 10px;
+    padding: 15px;
     gap: 12px;
   }
 
   .game-card {
-    min-height: 160px;
+    min-height: 215px;
 
     .card-content {
       padding: 12px;
