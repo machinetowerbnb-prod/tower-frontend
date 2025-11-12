@@ -1,0 +1,80 @@
+<div class="admin-layout">
+  <!-- 🔹 Top Navigation -->
+  <header class="admin-topnav">
+    <div class="menu-icon" (click)="toggleSidebar()">
+      <i class="fa fa-bars"></i>
+    </div>
+    <div class="topnav-title">Mission Tower Admin</div>
+    <div class="admin-profile">
+      <!-- optional profile/avatar -->
+    </div>
+  </header>
+
+  <!-- 🔹 Sidebar -->
+  <aside class="sidebar" [class.closed]="!isSidebarOpen">
+    <div class="sidebar-logo">TMTB Admin</div>
+    <ul class="sidebar-menu">
+      <li (click)="navigateTo('dashboard')" routerLinkActive="active">
+        <i class="fa fa-home"></i>
+        <span>Dashboard</span>
+      </li>
+
+      <li (click)="navigateTo('users')" routerLinkActive="active">
+        <i class="fa fa-users"></i>
+        <span>Users</span>
+      </li>
+
+      <!-- 🔹 Withdrawals main menu -->
+      <li
+        class="has-submenu"
+        [class.active]="activeSection === 'withdrawls'"
+        (click)="toggleWithdrawMenu()"
+      >
+        <i class="fa fa-bank"></i>
+        <span>Withdrawls</span>
+        <i
+          class="fa"
+          [ngClass]="{
+            'fa-chevron-down': !withdrawMenuOpen,
+            'fa-chevron-up': withdrawMenuOpen
+          }"
+          style="margin-left:auto;font-size:12px"
+        ></i>
+      </li>
+
+      <!-- 🔹 Submenu items -->
+      <ul
+        class="submenu"
+        *ngIf="withdrawMenuOpen"
+        [@slideInOut]
+      >
+        <li
+          (click)="navigateTo('withdrawl-requests', $event)"
+          routerLinkActive="active"
+        >
+          <i class="fa fa-list"></i>
+          <span>Withdrawl Requests</span>
+        </li>
+        <li
+          (click)="navigateTo('withdrawl-accepts', $event)"
+          routerLinkActive="active"
+        >
+          <i class="fa fa-check-circle"></i>
+          <span>Withdrawl Accepts</span>
+        </li>
+        <li
+          (click)="navigateTo('withdrawl-rejects', $event)"
+          routerLinkActive="active"
+        >
+          <i class="fa fa-times-circle"></i>
+          <span>Withdrawl Rejects</span>
+        </li>
+      </ul>
+    </ul>
+  </aside>
+
+  <!-- 🔹 Main Content -->
+  <main class="main-content" [class.expanded]="!isSidebarOpen">
+    <router-outlet></router-outlet>
+  </main>
+</div>

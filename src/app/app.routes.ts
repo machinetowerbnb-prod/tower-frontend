@@ -16,6 +16,12 @@ import { Commision } from './features/commision/commision'
 import { Members } from './features/members/members'
 import { ChangePassword } from './features/change-password/change-password'
 import { TermsAndConditions } from './features/terms-and-conditions/terms-and-conditions'
+import { Adminlayout } from './admin/adminlayout/adminlayout'
+import { Dashboard } from './admin/dashboard/dashboard'
+import { Users } from './admin/users/users'
+import { WithdrawRequest } from './admin/withdraw-request/withdraw-request'
+import { WithdrawAccepts } from './admin/withdraw-accepts/withdraw-accepts'
+import { WithdrawRejects } from './admin/withdraw-rejects/withdraw-rejects'
 
 
 
@@ -43,5 +49,17 @@ export const routes: Routes = [
       
     ],
   },
+  {
+  path: 'admin',
+  component: Adminlayout,
+  children: [
+    { path: 'dashboard', component: Dashboard },
+    { path: 'users', component: Users },
+    { path: 'withdrawl-requests', component: WithdrawRequest },
+    { path: 'withdrawl-accepts', component: WithdrawAccepts },
+    { path: 'withdrawl-rejects', component: WithdrawRejects },
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' } // default route
+  ]
+},
   { path: '**', redirectTo: '' },
 ];

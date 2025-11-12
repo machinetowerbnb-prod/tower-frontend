@@ -1,1 +1,54 @@
-<p>game works!</p>
+<div class="game-container">
+  <!-- 🔹 Blue Banner (copied from Team layout) -->
+  <div class="blue-banner">
+    <img src="/common-top.svg" alt="banner background" class="banner-bg" />
+
+    <div class="banner-content">
+      <div class="banner-text">
+        <h2>Earn more, level up</h2>
+        <p>Unlock your Tower Strategy Level, circulate your digital assets, and generate sustainable returns with smart circulation</p>
+      </div>
+
+      <div class="banner-img">
+        <img src="/game-banner.svg" alt="Game Banner" />
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔹 Game Cards Section -->
+  <div class="cards-wrapper">
+    <div
+      class="game-card"
+      *ngFor="let card of cards"
+      [ngClass]="{
+        'disabled-card': card.disableType === 'card' && !card.enabled,
+        'disabled-button': card.disableType === 'button' && !card.enabled
+      }"
+      [style.background-image]="'url(' + card.background + ')'"
+    >
+      <div class="overlay" *ngIf="card.disableType === 'card' && !card.enabled">
+        Coming Soon
+      </div>
+
+      <div class="chip validity">{{ card.validity }}</div>
+
+      <div class="card-content">
+        <h3 class="title">{{ card.title }}</h3>
+        <p class="reward">{{ card.reward }}</p>
+
+        <div *ngIf="card.status || card.miningCycle" class="status-chips">
+          <span class="chip small">{{ card.status }}</span>
+          <span class="chip small">{{ card.miningCycle }}</span>
+        </div>
+
+        <button
+          class="action-btn"
+          [disabled]="!card.enabled && card.disableType === 'button'"
+          (click)="onAction(card)"
+        >
+          {{ card.buttonText }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
