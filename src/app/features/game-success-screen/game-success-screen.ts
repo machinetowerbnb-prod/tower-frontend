@@ -18,7 +18,7 @@ export class GameSuccessScreen {
   amount: number | null = null;
   selectedToken = 'USDT';
   quickAmounts = [500, 1000, 2000, 5000];
-  compoletedDeposit = false;
+  compoletedDeposit = true;
 
   openModal() {
     this.isVisible = true;
@@ -42,7 +42,7 @@ export class GameSuccessScreen {
   closeModal() {
     this.isVisible = false;
     this.isClosing = false;
-    this.compoletedDeposit = false;
+    this.compoletedDeposit = true;
     document.body.style.overflow = 'auto';
   }
 

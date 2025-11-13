@@ -79,7 +79,7 @@
   background-position: center;
   color: #fff;
   min-height: 180px;
-  z-index: 9999;
+  // z-index: 9999; // To popup overlay
   display: flex;
   align-items: flex-end;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
@@ -92,7 +92,7 @@
   .overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.55);
+    background: rgb(0 0 0 / 87%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -101,17 +101,18 @@
     color: #fff;
     letter-spacing: 0.5px;
     text-transform: uppercase;
+    z-index: 9999;
   }
 
   .chip {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 25px;
+    left: 18px;
     background: rgba(255, 255, 255, 0.95);
     color: #333;
-    padding: 4px 10px;
-    border-radius: 14px;
-    font-size: 11px;
+    padding: 2px 5px;
+    border-radius: 5px;
+    font-size: 10px;
     font-weight: 600;
     text-transform: uppercase;
 
@@ -119,7 +120,7 @@
       position: static;
       background: rgba(255, 255, 255, 0.85);
       color: #333;
-      font-size: 10px;
+      font-size: 8px;
       margin-right: 6px;
     }
   }
@@ -134,6 +135,8 @@
       font-size: 16px;
       font-weight: 600;
       margin: 0;
+      color: black;
+      margin-left: 15px;
     }
 
     .reward {
@@ -141,6 +144,8 @@
       font-weight: 500;
       opacity: 0.9;
       margin: 4px 0 12px;
+      color: black;
+      margin-left: 15px;
     }
 
     .status-chips {
@@ -151,7 +156,7 @@
     }
 
     .action-btn {
-      width: 70%;
+      width: 65%;
       background: #fff;
       color: #2752e7;
       border: none;
@@ -166,7 +171,7 @@
       }
 
       &:disabled {
-        background: #dcdcdc;
+        background: #aeadad;
         color: #666;
         cursor: not-allowed;
       }
