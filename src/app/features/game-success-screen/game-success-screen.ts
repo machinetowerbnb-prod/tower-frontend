@@ -1,63 +1,29 @@
 import { Component } from '@angular/core';
-
 import { CommonModule } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-game-success-screen',
-  imports: [CommonModule, MatButtonModule, MatInputModule, MatIconModule, FormsModule],
+  imports: [CommonModule],
   templateUrl: './game-success-screen.html',
   styleUrl: './game-success-screen.scss'
 })
 export class GameSuccessScreen {
   isVisible = false;
   isClosing = false;
-  amount: number | null = null;
-  selectedToken = 'USDT';
-  quickAmounts = [500, 1000, 2000, 5000];
-  compoletedDeposit = true;
 
   openModal() {
     this.isVisible = true;
     this.isClosing = false;
     document.body.style.overflow = 'hidden';
-  }
-
-  animateClose() {
-    // 🌀 trigger rotation + slide animation
-    if (this.isClosing) return; // prevent double clicks
-    this.isClosing = true;
-
-    const icon = document.querySelector('.close-icon');
-    icon?.classList.add('rotate-close');
-
-    // Wait for animation to finish before hiding popup
-      icon?.classList.remove('rotate-close');
-      this.closeModal();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   closeModal() {
-    this.isVisible = false;
-    this.isClosing = false;
-    this.compoletedDeposit = true;
-    document.body.style.overflow = 'auto';
-  }
-
-  setAmount(value: number) {
-    this.amount = value;
-  }
-
-  selectToken(token: string) {
-    this.selectedToken = token;
-  }
-
-  confirmDeposit() {
-    // if (!this.amount) return;
-    console.log('Deposit Confirmed:', this.amount, this.selectedToken);
-    this.compoletedDeposit = true;
-    // this.closeModal();
+    this.isClosing = true;
+    setTimeout(() => {
+      this.isVisible = false;
+      this.isClosing = false;
+      document.body.style.overflow = 'auto';
+    }, 300); // sync with fade-out animation
   }
 }

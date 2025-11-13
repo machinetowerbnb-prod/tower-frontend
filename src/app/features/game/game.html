@@ -1,12 +1,15 @@
 <div class="game-container">
-  <!-- 🔹 Blue Banner (copied from Team layout) -->
+  <!-- 🔹 Blue Banner -->
   <div class="blue-banner">
     <img src="/common-top.svg" alt="banner background" class="banner-bg" />
 
     <div class="banner-content">
       <div class="banner-text">
         <h2>Earn more, level up</h2>
-        <p>Unlock your Tower Strategy Level, circulate your digital assets, and generate sustainable returns with smart circulation</p>
+        <p>
+          Unlock your Tower Strategy Level, circulate your digital assets, and
+          generate sustainable returns with smart circulation
+        </p>
       </div>
 
       <div class="banner-img">
@@ -48,8 +51,10 @@
         >
           {{ card.buttonText }}
         </button>
-        <app-game-success-screen #gameSuccessModel></app-game-success-screen>
       </div>
     </div>
   </div>
+
+  <!-- ✅ Single Success Modal Reference -->
+  <app-game-success-screen #gameSuccessModel></app-game-success-screen>
 </div>

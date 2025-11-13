@@ -118,10 +118,11 @@
 
     &.small {
       position: static;
-      background: rgba(255, 255, 255, 0.85);
-      color: #333;
+      background: rgba(255, 255, 255, 0.39);
+      color: #fff;
       font-size: 8px;
       margin-right: 6px;
+      font-weight: 600;
     }
   }
 
@@ -136,7 +137,7 @@
       font-weight: 600;
       margin: 0;
       color: black;
-      margin-left: 15px;
+      margin-left: 6px;
     }
 
     .reward {
@@ -145,7 +146,7 @@
       opacity: 0.9;
       margin: 4px 0 12px;
       color: black;
-      margin-left: 15px;
+      margin-left: 6px;
     }
 
     .status-chips {
@@ -156,7 +157,7 @@
     }
 
     .action-btn {
-      width: 65%;
+      width: 60%;
       background: #fff;
       color: #2752e7;
       border: none;
