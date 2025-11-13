@@ -99,3 +99,16 @@
     transform: translateY(20px);
   }
 }
+
+body.modal-open {
+  overflow: hidden !important;
+  touch-action: none;
+}
+
+.deposit-modal {
+  pointer-events: auto;
+}
+
+body {
+  pointer-events: auto !important;
+}

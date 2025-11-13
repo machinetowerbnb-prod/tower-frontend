@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { GameSuccessScreen } from '../game-success-screen/game-success-screen';
+import { GameSuccessTimer } from '../game-success-timer/game-success-timer';
 
 
 interface GameCard {
@@ -18,7 +19,7 @@ interface GameCard {
 
 @Component({
   selector: 'app-game',
-  imports: [CommonModule, RouterModule, GameSuccessScreen],
+  imports: [CommonModule, RouterModule, GameSuccessScreen, GameSuccessTimer],
   templateUrl: './game.html',
   styleUrl: './game.scss'
 })
@@ -29,6 +30,8 @@ export class Game implements OnInit {
   cards: GameCard[] = [];
 
   @ViewChild('gameSuccessModel') gameSuccessModel!: GameSuccessScreen;
+  @ViewChild('timerPopup') timerPopup!: GameSuccessTimer;
+
 
 
   ngOnInit() {
@@ -93,7 +96,11 @@ export class Game implements OnInit {
     if (!card.enabled && card.disableType === 'button') return;
     if (card.disableType === 'card') return;
     console.log('Clicked:', card);
-    this.gameSuccessModel.openModal();
+    // this.gameSuccessModel.openModal();
+
+    const startTime = new Date().getTime();
+    this.timerPopup.startTimestamp = startTime;
+    this.timerPopup.openModal();
   }
 }
 

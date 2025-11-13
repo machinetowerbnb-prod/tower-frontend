@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,19 +11,32 @@ export class GameSuccessScreen {
   isVisible = false;
   isClosing = false;
 
+  constructor(private renderer: Renderer2) {}
+
   openModal() {
+    if (this.isClosing) return;
     this.isVisible = true;
     this.isClosing = false;
-    document.body.style.overflow = 'hidden';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // ✅ prevent scroll
+    this.renderer.setStyle(document.body, 'overflow', 'hidden');
+    this.renderer.setStyle(document.body, 'position', 'fixed');
+    this.renderer.setStyle(document.body, 'width', '100%');
+    window.scrollTo(0, 0);
   }
 
   closeModal() {
+    if (this.isClosing) return;
     this.isClosing = true;
+
     setTimeout(() => {
       this.isVisible = false;
       this.isClosing = false;
-      document.body.style.overflow = 'auto';
-    }, 300); // sync with fade-out animation
+
+      // ✅ restore scroll cleanly
+      this.renderer.removeStyle(document.body, 'overflow');
+      this.renderer.removeStyle(document.body, 'position');
+      this.renderer.removeStyle(document.body, 'width');
+    }, 300); // match fade-out time
   }
 }
