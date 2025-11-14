@@ -1,0 +1,44 @@
+<div class="timer-modal" *ngIf="isVisible">
+  <div class="overlay" (click)="close()"></div>
+
+  <div class="modal-box" [class.fade-out]="isClosing">
+    <div class="header">
+      <h3>You’re On a Roll!</h3>
+      <img src="/close_round.svg" alt="close" class="close-btn" (click)="close()" />
+    </div>
+
+    <div class="body">
+      <div class="badge">
+        <img src="/game-timer.gif" alt="Badge" />
+      </div>
+
+      <h4>Core computing started successful</h4>
+
+      <p class="desc">
+        Your Core Circulation Strategy Computing Trading activity is now in progress.
+        You’ve earned *** points so far.
+      </p>
+
+      <div class="countdown">
+        <div class="time-box">
+          <span class="num">{{ hours }}</span>
+          <span class="label">Hours</span>
+        </div>
+
+        <div class="time-box">
+          <span class="num">{{ minutes }}</span>
+          <span class="label">Minutes</span>
+        </div>
+
+        <div class="time-box">
+          <span class="num">{{ seconds }}</span>
+          <span class="label">Seconds</span>
+        </div>
+      </div>
+
+      <p class="footer-text">
+        You can start your next Circulation Trading session after the Tower cooldown period.
+      </p>
+    </div>
+  </div>
+</div>

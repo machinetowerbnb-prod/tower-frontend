@@ -1,63 +1,42 @@
-import { Component } from '@angular/core';
-
+import { Component, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-game-success-screen',
-  imports: [CommonModule, MatButtonModule, MatInputModule, MatIconModule, FormsModule],
+  imports: [CommonModule],
   templateUrl: './game-success-screen.html',
   styleUrl: './game-success-screen.scss'
 })
 export class GameSuccessScreen {
   isVisible = false;
   isClosing = false;
-  amount: number | null = null;
-  selectedToken = 'USDT';
-  quickAmounts = [500, 1000, 2000, 5000];
-  compoletedDeposit = false;
+
+  constructor(private renderer: Renderer2) {}
 
   openModal() {
+    if (this.isClosing) return;
     this.isVisible = true;
     this.isClosing = false;
-    document.body.style.overflow = 'hidden';
-  }
 
-  animateClose() {
-    // 🌀 trigger rotation + slide animation
-    if (this.isClosing) return; // prevent double clicks
-    this.isClosing = true;
-
-    const icon = document.querySelector('.close-icon');
-    icon?.classList.add('rotate-close');
-
-    // Wait for animation to finish before hiding popup
-      icon?.classList.remove('rotate-close');
-      this.closeModal();
+    // ✅ prevent scroll
+    this.renderer.setStyle(document.body, 'overflow', 'hidden');
+    this.renderer.setStyle(document.body, 'position', 'fixed');
+    this.renderer.setStyle(document.body, 'width', '100%');
+    window.scrollTo(0, 0);
   }
 
   closeModal() {
-    this.isVisible = false;
-    this.isClosing = false;
-    this.compoletedDeposit = false;
-    document.body.style.overflow = 'auto';
-  }
+    if (this.isClosing) return;
+    this.isClosing = true;
 
-  setAmount(value: number) {
-    this.amount = value;
-  }
+    setTimeout(() => {
+      this.isVisible = false;
+      this.isClosing = false;
 
-  selectToken(token: string) {
-    this.selectedToken = token;
-  }
-
-  confirmDeposit() {
-    // if (!this.amount) return;
-    console.log('Deposit Confirmed:', this.amount, this.selectedToken);
-    this.compoletedDeposit = true;
-    // this.closeModal();
+      // ✅ restore scroll cleanly
+      this.renderer.removeStyle(document.body, 'overflow');
+      this.renderer.removeStyle(document.body, 'position');
+      this.renderer.removeStyle(document.body, 'width');
+    }, 300); // match fade-out time
   }
 }

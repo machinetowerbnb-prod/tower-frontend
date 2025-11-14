@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { GameSuccessScreen } from '../game-success-screen/game-success-screen';
+import { GameSuccessTimer } from '../game-success-timer/game-success-timer';
 
 
 interface GameCard {
@@ -17,12 +19,20 @@ interface GameCard {
 
 @Component({
   selector: 'app-game',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, GameSuccessScreen, GameSuccessTimer],
   templateUrl: './game.html',
   styleUrl: './game.scss'
 })
 export class Game implements OnInit {
+
+  constructor() { }
+
   cards: GameCard[] = [];
+
+  @ViewChild('gameSuccessModel') gameSuccessModel!: GameSuccessScreen;
+  @ViewChild('timer') timer!: GameSuccessTimer;
+
+
 
   ngOnInit() {
     this.cards = [
@@ -30,9 +40,9 @@ export class Game implements OnInit {
         title: 'Tower BNB - Free Trial',
         reward: 'Earn 8 USDT',
         validity: 'CIRCULATION VALIDITY: 1 DAY',
-        buttonText: 'Unlock Now',
+        buttonText: 'Activated',
         background: '/game-card-1.svg',
-        enabled: true,
+        enabled: false,
         disableType: 'button'
       },
       {
@@ -54,7 +64,7 @@ export class Game implements OnInit {
         miningCycle: 'Earn: 1.9% per day',
         buttonText: 'Purchase Now',
         background: '/game-card-3.svg',
-        enabled: true,
+        enabled: false,
         disableType: 'button'
       },
       {
@@ -65,7 +75,7 @@ export class Game implements OnInit {
         miningCycle: 'Earn: 2.3% per day',
         buttonText: 'Purchase Now',
         background: '/game-card-4.svg',
-        enabled: true,
+        enabled: false,
         disableType: 'button'
       },
       {
@@ -85,7 +95,12 @@ export class Game implements OnInit {
   onAction(card: GameCard) {
     if (!card.enabled && card.disableType === 'button') return;
     if (card.disableType === 'card') return;
-    console.log('Clicked:', card.title);
+
+    // const now = Date.now();   
+    const now = 1763141263280;   
+    this.timer.open(now);
+    // this.gameSuccessModel.openModal()
   }
+
 }
 
