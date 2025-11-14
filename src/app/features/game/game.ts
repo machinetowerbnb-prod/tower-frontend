@@ -96,8 +96,10 @@ export class Game implements OnInit {
     if (!card.enabled && card.disableType === 'button') return;
     if (card.disableType === 'card') return;
 
-    const now = Date.now();      
+    // const now = Date.now();   
+    const now = 1763141263280;   
     this.timer.open(now);
+    // this.gameSuccessModel.openModal()
   }
 
 }
