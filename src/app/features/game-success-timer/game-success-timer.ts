@@ -1,71 +1,96 @@
-import { Component, Input, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  Component,
+  Input,
+  Renderer2,
+  NgZone,
+  Inject,
+  PLATFORM_ID,
+  OnDestroy
+} from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
   selector: 'app-game-success-timer',
   imports: [CommonModule],
+  standalone: true,
   templateUrl: './game-success-timer.html',
-  styleUrl: './game-success-timer.scss'
+  styleUrl: './game-success-timer.scss',
 })
-export class GameSuccessTimer implements OnInit, OnDestroy {
-  @Input() startTimestamp!: number; // 🟢 time sent from Game component
-
+export class GameSuccessTimer implements OnDestroy {
   isVisible = false;
+  isClosing = false;
+
   hours = '00';
   minutes = '00';
   seconds = '00';
-  endTime!: number;
-  intervalId: any;
 
-  constructor(private renderer: Renderer2) {}
+  private targetTime = 0;
+  private intervalId: any;
 
-  ngOnInit(): void {}
+  constructor(
+    private zone: NgZone,
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private cdr: ChangeDetectorRef
+  ) { }
 
-  // 🟢 Triggered when opened
-  openModal() {
+  /** Start timer popup */
+  open(startTimestamp: number) {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    this.targetTime = startTimestamp + 24 * 60 * 60 * 1000; // 24 hours
+
     this.isVisible = true;
+    this.isClosing = false;
+
     this.renderer.setStyle(document.body, 'overflow', 'hidden');
 
-    // If time provided, use it. Else, use current time
-    const start = this.startTimestamp ? this.startTimestamp : new Date().getTime();
-    this.endTime = start + 24 * 60 * 60 * 1000; // 24 hours countdown
     this.startCountdown();
   }
 
-  // 🟢 Close modal
-  closeModal() {
-    this.isVisible = false;
+  /** Main timer logic */
+  private startCountdown() {
+    if (this.intervalId) clearInterval(this.intervalId);
+
+    this.zone.runOutsideAngular(() => {
+      this.intervalId = setInterval(() => {
+        const now = Date.now();
+        let diff = this.targetTime - now;
+        if (diff < 0) diff = 0;
+
+        const h = Math.floor(diff / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+
+        this.zone.run(() => {
+          this.hours = h.toString().padStart(2, '0');
+          this.minutes = m.toString().padStart(2, '0');
+          this.seconds = s.toString().padStart(2, '0');
+
+          // 👇 THIS IS THE HERO LINE
+          this.cdr.detectChanges();
+        });
+
+      }, 1000);
+    });
+
+  }
+
+  /** Close popup */
+  close() {
+    this.isClosing = true;
+
+    setTimeout(() => {
+      this.isVisible = false;
+      this.renderer.removeStyle(document.body, 'overflow');
+
+      if (this.intervalId) clearInterval(this.intervalId);
+    }, 250);
+  }
+
+  ngOnDestroy() {
+    if (this.intervalId) clearInterval(this.intervalId);
     this.renderer.removeStyle(document.body, 'overflow');
-    clearInterval(this.intervalId);
-  }
-
-  startCountdown() {
-    if (this.intervalId) clearInterval(this.intervalId);
-
-    this.intervalId = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = this.endTime - now;
-
-      if (distance <= 0) {
-        clearInterval(this.intervalId);
-        this.hours = this.minutes = this.seconds = '00';
-        return;
-      }
-
-      const h = Math.floor((distance / (1000 * 60 * 60)) % 24);
-      const m = Math.floor((distance / (1000 * 60)) % 60);
-      const s = Math.floor((distance / 1000) % 60);
-
-      this.hours = this.format(h);
-      this.minutes = this.format(m);
-      this.seconds = this.format(s);
-    }, 1000);
-  }
-
-  private format(num: number): string {
-    return num < 10 ? '0' + num : num.toString();
-  }
-
-  ngOnDestroy(): void {
-    if (this.intervalId) clearInterval(this.intervalId);
   }
 }
