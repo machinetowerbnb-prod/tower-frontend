@@ -1,11 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  Component,
+  OnInit,
+  Inject,
+  PLATFORM_ID,
+  NgZone,
+  ChangeDetectorRef,
+} from '@angular/core';
+import { CommonModule,isPlatformBrowser } from '@angular/common';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { TopNav } from '../top-nav/top-nav';
 import { MatIconModule } from '@angular/material/icon';
 import { inject } from '@angular/core';
-
+import { AuthService } from '../../services/auth.service';
 interface Member {
   email: string;
   timestamp: string;
@@ -23,54 +30,78 @@ export class Members implements OnInit {
   members: Member[] = [];
   filteredMembers: Member[] = [];
   searchText = '';
-
+ level: number | null = null;
   // constructor(private router: Router, private route: ActivatedRoute) { }
 
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  private authService = inject(AuthService);
+  private ngZone = inject(NgZone);
+  private cdr = inject(ChangeDetectorRef);
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
-  ngOnInit(): void {
+    ngOnInit(): void {
+    // 🔹 Extract level from query params
+    this.route.queryParams.subscribe((params) => {
+      this.level = params['level'] ? Number(params['level']) : null;
+      console.log('📘 Selected Level:', this.level);
 
-    this.route.queryParams.subscribe(params => {
-      const level = params['level'];
-      console.log('Selected Level:', level);
+      if (isPlatformBrowser(this.platformId)) {
+        const userId = localStorage.getItem('userId');
+        if (userId) {
+          this.fetchMembers(userId, this.level);
+        } else {
+          console.error('❌ No userId found in localStorage');
+        }
+      }
     });
+  }
 
-    const response = {
-      statusCode: 200,
-      message: 'success',
-      data: {
-        memberDetails: [
-          {
-            email: 'manikantasai413.ms@gmail.com',
-            timestamp: '2025-10-06T07:54:15.149Z',
-            balance: 2086,
-            inviteCode: 'ASDFGHJKL',
-          },
-          {
-            email: 'mandy.garis@gmail.com',
-            timestamp: '2025-10-06T07:54:15.149Z',
-            balance: 208,
-            inviteCode: 'ZXCVBNMASD',
-          },
-          {
-            email: 'sunder.parka@gmail.com',
-            timestamp: '2025-10-06T07:54:15.149Z',
-            balance: 860,
-            inviteCode: 'QWERTYUIO',
-          },
-          {
-            email: 'kurana.sina@gmail.com',
-            timestamp: '2025-10-06T07:54:15.149Z',
-            balance: 2006,
-            inviteCode: 'LKJHGFDSA',
-          },
-        ],
+  // 🔹 Fetch Members via Avengers API
+  fetchMembers(userId: string, level: number | null) {
+    // Dynamically map level → screen
+    let screen = '';
+    switch (level) {
+      case 1:
+        screen = 'genOne';
+        break;
+      case 2:
+        screen = 'genTwo';
+        break;
+      case 3:
+        screen = 'genThree';
+        break;
+      default:
+        console.warn('⚠️ Invalid or missing level. Defaulting to genOne.');
+        screen = 'genOne';
+    }
+
+    const payload = { screen, userId:"1761757294223237" };
+
+    console.log('🚀 Fetching members with payload:', payload);
+
+    this.authService.avengers(payload).subscribe({
+      next: (res) => {
+        console.log('✅ Avengers Members API Response:', res);
+
+        if (res.statusCode === 200 && res.data?.memberDetails) {
+          // Run UI updates inside Angular zone to ensure re-render
+          this.ngZone.run(() => {
+            this.members = res.data.memberDetails;
+            this.filteredMembers = [...this.members];
+            this.cdr.detectChanges();
+          });
+        } else {
+          console.warn('⚠️ No members found or invalid response.');
+          this.members = [];
+          this.filteredMembers = [];
+          this.cdr.detectChanges();
+        }
       },
-    };
-
-    this.members = response.data.memberDetails;
-    this.filteredMembers = [...this.members];
+      error: (err) => {
+        console.error('❌ Failed to fetch members:', err);
+      }
+    });
   }
 
   filterMembers() {

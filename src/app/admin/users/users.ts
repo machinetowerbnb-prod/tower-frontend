@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, NgZone, Inject, ChangeDetectorRef,PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { UpdateAmount } from '../update-amount/update-amount';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-users',
@@ -22,39 +23,40 @@ export class Users implements OnInit {
   selectedAction = '';
   selectedRow: any = null;
 
+  constructor(
+    private authService: AuthService,
+    private ngZone: NgZone,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
-    // Simulated API Response (Replace with real API later)
-    
-    const response = {
-      statusCode: 200,
-      message: 'success',
-      data: [
-        { id: 1, name: 'SaveSYL', email: 'saveangels75@gmail.com', referralId: 'savesyL_153364', wallet: 0, earnings: 0, referrals: 0, status: true },
-        { id: 2, name: 'Amalia05', email: 'codreaamalia@gmail.com', referralId: 'amalia05_981425', wallet: 0, earnings: 0, referrals: 0, status: false },
-        { id: 3, name: 'MrKhan', email: 'nader.arman1368@gmail.com', referralId: 'mrkhan_220816', wallet: 0, earnings: 0, referrals: 0, status: true },
-        { id: 4, name: 'Krasimir24', email: 'krasirem@gmail.com', referralId: 'krasimir24_600902', wallet: 0, earnings: 0, referrals: 0, status: true },
-        { id: 5, name: 'Nadia', email: 'nadiaalmasry55@gmail.com', referralId: 'nadia_619189', wallet: 0, earnings: 0, referrals: 0, status: false },
-        { id: 5, name: 'Nadia', email: 'nadiaalmasry55@gmail.com', referralId: 'nadia_619189', wallet: 0, earnings: 0, referrals: 0, status: true },
-        { id: 5, name: 'Nadia', email: 'nadiaalmasry55@gmail.com', referralId: 'nadia_619189', wallet: 0, earnings: 0, referrals: 0, status: true },
-        { id: 5, name: 'Nadia', email: 'nadiaalmasry55@gmail.com', referralId: 'nadia_619189', wallet: 0, earnings: 0, referrals: 0, status: true },
-        { id: 5, name: 'Nadia', email: 'nadiaalmasry55@gmail.com', referralId: 'nadia_619189', wallet: 0, earnings: 0, referrals: 0, status: true },
-        { id: 5, name: 'Nadia', email: 'nadiaalmasry55@gmail.com', referralId: 'nadia_619189', wallet: 0, earnings: 0, referrals: 0, status: true },
-        { id: 5, name: 'Nadia', email: 'nadiaalmasry55@gmail.com', referralId: 'nadia_619189', wallet: 0, earnings: 0, referrals: 0, status: true },
-        { id: 5, name: 'Nadia', email: 'nadiaalmasry55@gmail.com', referralId: 'nadia_619189', wallet: 0, earnings: 0, referrals: 0, status: true },
-        { id: 5, name: 'Nadia', email: 'nadiaalmasry55@gmail.com', referralId: 'nadia_619189', wallet: 0, earnings: 0, referrals: 0, status: true },
-        { id: 5, name: 'Nadia', email: 'nadiaalmasry55@gmail.com', referralId: 'nadia_619189', wallet: 0, earnings: 0, referrals: 0, status: true },
-        { id: 5, name: 'Nadia', email: 'nadiaalmasry55@gmail.com', referralId: 'nadia_619189', wallet: 0, earnings: 0, referrals: 0, status: true },
-        { id: 5, name: 'Nadia', email: 'nadiaalmasry55@gmail.com', referralId: 'nadia_619189', wallet: 0, earnings: 0, referrals: 0, status: true },
-        { id: 5, name: 'Nadia', email: 'nadiaalmasry55@gmail.com', referralId: 'nadia_619189', wallet: 0, earnings: 0, referrals: 0, status: true },
-        { id: 5, name: 'Nadia', email: 'nadiaalmasry55@gmail.com', referralId: 'nadia_619189', wallet: 0, earnings: 0, referrals: 0, status: true },
-        { id: 5, name: 'Nadia', email: 'nadiaalmasry55@gmail.com', referralId: 'nadia_619189', wallet: 0, earnings: 0, referrals: 0, status: true },
-        { id: 5, name: 'Nadia', email: 'nadiaalmasry55@gmail.com', referralId: 'nadia_619189', wallet: 0, earnings: 0, referrals: 0, status: true },
-      ]
-    };
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadUsers();
+    }
+  }
 
-    this.users = response.data;
-    this.filteredUsers = [...this.users];
+  loadUsers() {
+    const payload = { screen: 'Users' };
+
+    console.log("📌 Calling Admin Users API:", payload);
+
+    this.authService.admin(payload).subscribe({
+      next: (res) => {
+        console.log("✅ Users API Response:", res);
+
+        if (res.statusCode === 200 && Array.isArray(res.data)) {
+          this.ngZone.run(() => {
+            this.users = res.data;
+            this.filteredUsers = [...this.users];
+            this.cdr.detectChanges();
+          });
+        }
+      },
+      error: (err) => {
+        console.error("❌ Users API Error:", err);
+      }
+    });
   }
 
   // 🔍 Filter users
@@ -92,14 +94,31 @@ export class Users implements OnInit {
       this.currentPage--;
   }
 
-  // 🟢 Toggle Status
+  // 🟢 Toggle Status (later API)
   toggleStatus(user: any) {
     user.status = !user.status;
     console.log('Toggled user:', user);
-    // Later: Call API here
+    let payload = {
+      email: user.email,
+      status: user.status
+    }
+    console.log("📌 Transaction Payload:", payload);
+    this.authService.adminUpdateUserStatus(payload).subscribe({
+    next: (res) => {
+      console.log("✅ Transaction Response:", res);
+
+      if (res.statusCode === 200) {
+        alert(res.message || "Success");
+        this.loadUsers();  // Reload UI with updated wallet/earnings
+      }
+    },
+    error: (err) => {
+      console.error("❌ Transaction Error:", err);
+      alert("Something went wrong!");
+    }
+  });
   }
 
-  // 💰 Add Wallet/Earnings popup trigger (next step)
   openAddPopup(user: any, field: string) {
     console.log('Open popup for', field, 'of user', user);
   }
@@ -110,13 +129,34 @@ export class Users implements OnInit {
 
   handleSubmit(data: any) {
     console.log('Popup submitted:', data);
+    const payload = {
+      screen: data.screen,
+      email: data.row.email,
+      amount: data.amount,
+      action: data.action,
+    }
+    console.log("📌 Transaction Payload:", payload);
+    this.authService.adminTransactionAvengers(payload).subscribe({
+    next: (res) => {
+      console.log("✅ Transaction Response:", res);
+
+      if (res.statusCode === 200) {
+        alert(res.message || "Success");
+        this.loadUsers();  // Reload UI with updated wallet/earnings
+      }
+    },
+    error: (err) => {
+      console.error("❌ Transaction Error:", err);
+      alert("Something went wrong!");
+    }
+  });
     this.showPopup = false;
   }
 
   openPopup(action: string, row: any) {
+    console.log('Open popup for', action, 'of user', row);
     this.selectedAction = action;
     this.selectedRow = row;
     this.showPopup = true;
   }
-
 }

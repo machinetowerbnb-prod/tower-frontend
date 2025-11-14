@@ -35,11 +35,12 @@
       <div class="token-section">
         <label>BNB Smart Chain (BEP20) Token</label>
         <div class="token-options">
-          <button *ngFor="let token of ['USDT', 'USDC']" class="token-btn" [class.active]="token === selectedToken"
+          <button *ngFor="let token of transactionAccounts" class="token-btn" [class.active]="token.id === selectedToken?.id"
             (click)="selectToken(token)">
-            {{ token }}
+            {{ token.name }}
           </button>
         </div>
+
       </div>
 
       <div class="action-buttons">

@@ -1,9 +1,10 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
-import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
+import { routes } from './app.routes';
+
+import { HttpClientModule } from '@angular/common/http'; // ✅ Add this
 import { FlexLayoutModule } from '@ngbracket/ngx-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -12,9 +13,15 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    provideRouter(routes), provideClientHydration(withEventReplay()),
-    FlexLayoutModule,
-    MatButtonModule,
-    MatCardModule
+    provideRouter(routes),
+    provideClientHydration(withEventReplay()),
+
+    // ✅ Import these modules properly using importProvidersFrom()
+    importProvidersFrom(
+      HttpClientModule,
+      FlexLayoutModule,
+      MatButtonModule,
+      MatCardModule
+    )
   ]
 };

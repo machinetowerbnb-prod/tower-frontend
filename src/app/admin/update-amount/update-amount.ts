@@ -18,20 +18,24 @@ export class UpdateAmount implements OnChanges {
   @Output() submitData = new EventEmitter<any>();
 
   formData = {
-    action: '',
+    screen: '',
     wallet: '',
     amount: '',
-    description: ''
+    description: '',
+    action:""
   };
 
   ngOnChanges() {
     // When action type or rowData changes
     if (this.actionType) {
-      this.formData.action = this.actionType;
-    }
-
-    if (this.rowData?.wallet) {
+      console.log('Action Type:', this.actionType);
+      this.formData.screen = this.actionType;
+      if (this.actionType === 'Deposit') {
+      console.log('Row Data Wallet:', this.rowData.wallet);
       this.formData.wallet = this.rowData.wallet;
+    }else{
+      this.formData.wallet = this.rowData.earnings;
+    }
     }
   }
 

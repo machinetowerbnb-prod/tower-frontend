@@ -11,10 +11,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
+import { AuthService } from '../../services/auth.service';
 import { TopNav } from '../top-nav/top-nav'
 
 import { TranslatePipe } from '../../pipes/translate-pipe';
+import { Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 
 @Component({
@@ -44,9 +46,11 @@ export class Signin implements OnInit {
   selectedLanguage = 'en'; // Default selection
 
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     private fb: FormBuilder,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private authService: AuthService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -59,16 +63,37 @@ export class Signin implements OnInit {
   }
   onSubmit() {
     if (this.loginForm.valid) {
-      console.log('Login form submitted:', this.loginForm.value);
+      const payload = {
+        email: this.loginForm.value.email,
+        password: this.loginForm.value.password
+      };
+      console.log('Sending payload:', payload);
+        this.authService.login(payload).subscribe({
+        next: (res) => {
+          console.log('Response:', res);
 
-      // Simulate login process (replace with actual authentication logic)
-      if (this.loginForm.value.email == "admin@gmail.com" && this.loginForm.value.password == "password123") this.performLogin();
-      else {
-        this.snackBar.open('Please enter valid user details', 'Close', {
-          duration: 3000,
-          panelClass: ['error-snackbar']
-        });
-      }
+          if (res.statusCode === 200 && res.data?.isActiveUser) {
+            this.snackBar.open('Login Successful! Welcome back!', 'Close', {
+              duration: 3000,
+              panelClass: ['success-snackbar']
+            });
+            this.safeSetLocalStorage('userId', res.data.userId);
+            this.router.navigate(['/home']);
+          } else {
+            this.snackBar.open(res.message || 'Invalid credentials', 'Close', {
+              duration: 3000,
+              panelClass: ['error-snackbar']
+            });
+          }
+        },
+        error: (err) => {
+          console.error('Login error:', err);
+          this.snackBar.open('Server error. Please try again later.', 'Close', {
+            duration: 3000,
+            panelClass: ['error-snackbar']
+          });
+        }
+      });
     }
     else {
       // this.loginForm.markAllAsTouched();
@@ -101,5 +126,26 @@ export class Signin implements OnInit {
   togglePasswordVisibility() {
     this.hidePassword = !this.hidePassword;
   }
+  private safeGetLocalStorage(key: string): string | null {
+  if (isPlatformBrowser(this.platformId)) {
+    try {
+      return localStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  }
+  return null;
+}
+
+private safeSetLocalStorage(key: string, value: string): void {
+  if (isPlatformBrowser(this.platformId)) {
+    try {
+      localStorage.setItem(key, value);
+    } catch {
+      console.warn('Unable to access localStorage');
+    }
+  }
+}
+
 }
 

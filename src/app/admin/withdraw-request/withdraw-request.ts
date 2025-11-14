@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone, Inject, ChangeDetectorRef, PLATFORM_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { isPlatformBrowser } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-withdraw-request',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,MatSnackBarModule],
   templateUrl: './withdraw-request.html',
   styleUrl: './withdraw-request.scss'
 })
@@ -15,49 +17,52 @@ export class WithdrawRequest implements OnInit {
   searchText = '';
   itemsPerPage = 10;
   currentPage = 1;
+  constructor(
+    private zone: NgZone,
+    private cd: ChangeDetectorRef,
+    private auth: AuthService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit() {
-    // ✅ Mock API data
-    this.withdraws = [
-      {
-        user: 'Haitham',
-        amount: 20,
-        charge: 2,
-        total: 18,
-        wallet: '0x342432280b9d60a92775857aed86cad76475448',
-        network: 'bep',
-        status: 'processing'
-      },
-      {
-        user: 'chnservis',
-        amount: 20,
-        charge: 2,
-        total: 18,
-        wallet: '0x45ccf9d91377ddc75c38528b4ad785e45bec64d7',
-        network: 'trc',
-        status: 'success'
-      },
-      {
-        user: 'Fira82',
-        amount: 10,
-        charge: 1,
-        total: 9,
-        wallet: '0x424d8d0e329c59fb353245082a88dc9923e13f',
-        network: 'bep',
-        status: 'processing'
-      },
-      {
-        user: 'Nguyen Thi Phuong',
-        amount: 10,
-        charge: 1,
-        total: 9,
-        wallet: '0xF5977b42E08131d6f8A6EFC0395F218BC2c5Cb',
-        network: 'bep',
-        status: 'processing'
-      }
-    ];
+    if (isPlatformBrowser(this.platformId))
+    this.fetchWithdrawRequests();
+  }
+  fetchWithdrawRequests() {
+    const payload = {
+      status: "pending"
+    };
 
-    this.filteredWithdraws = [...this.withdraws];
+
+    this.auth.adminWithdrawFilter(payload).subscribe({
+      next: (res: any) => {
+        this.zone.run(() => {
+          if (res.statusCode === 200 && Array.isArray(res.data)) {
+
+            this.withdraws = res.data.map((item:any) => {
+              const charge = item.amount * 0.02;         // 2% static fee
+              const total = item.amount - charge;        // amount - 2%
+              return {
+                user: item.user,
+                amount: item.amount,
+                charge: charge,
+                total: total,
+                wallet: item.wallet,
+                withdrawId: item.withdrawId,
+                status: item.status
+              };
+            });
+
+            this.filteredWithdraws = [...this.withdraws];
+          }
+          this.cd.detectChanges();
+        });
+      },
+      error: (err) => {
+        console.error("Withdraw API Error:", err);
+        this.cd.detectChanges();
+      }
+    });
   }
 
   // ✅ Search function
@@ -67,7 +72,7 @@ export class WithdrawRequest implements OnInit {
       w =>
         w.user.toLowerCase().includes(text) ||
         w.wallet.toLowerCase().includes(text) ||
-        w.network.toLowerCase().includes(text) ||
+        w.withdrawId.toLowerCase().includes(text) ||
         w.status.toLowerCase().includes(text)
     );
   }
@@ -89,17 +94,30 @@ export class WithdrawRequest implements OnInit {
     alert('Wallet address copied!');
   }
 
-  handleDecision(action: 'accept' | 'reject', item: any) {
+  handleDecision(action: 'Approve' | 'Reject', item: any) {
     console.log(`${action.toUpperCase()} clicked for:`, item);
     this.filteredWithdraws = this.filteredWithdraws.filter(w => w !== item);
     this.withdraws = this.withdraws.filter(w => w !== item);
+   const payload = {
+       withdrawId: item.withdrawId,
+       status: action
+    };
 
-    // Optionally, show message
-    const msg =
-      action === 'accept'
-        ? `${item.user}'s request accepted ✅`
-        : `${item.user}'s request rejected ❌`;
-    alert(msg);
+
+    this.auth.adminWithdrawConfirm(payload).subscribe({
+      next: (res: any) => {
+        this.zone.run(() => {
+          if (res.statusCode === 200 && Array.isArray(res.data)) {
+              this.cd.detectChanges();
+          }
+          this.cd.detectChanges();
+        });
+      },
+      error: (err) => {
+        console.error("Withdraw confirm Error:", err);
+        this.cd.detectChanges();
+      }
+    });
   }
 
 }

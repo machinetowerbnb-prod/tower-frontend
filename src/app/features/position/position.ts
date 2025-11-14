@@ -7,8 +7,8 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { isPlatformBrowser } from '@angular/common';
-import { Inject, PLATFORM_ID } from '@angular/core';
-
+import { Inject, PLATFORM_ID,ChangeDetectorRef } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-position',
@@ -19,7 +19,7 @@ import { Inject, PLATFORM_ID } from '@angular/core';
 export class Position implements OnInit, AfterViewInit {
   @ViewChild('scrollContainer') scrollContainer!: ElementRef;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,private authService: AuthService,private cdr: ChangeDetectorRef,) {}
 
   allPositions: any[] = [];
   topThree: any[] = [];
@@ -27,51 +27,37 @@ export class Position implements OnInit, AfterViewInit {
   arrowDirection: 'up' | 'down' = 'down';
   colorMap: Map<number, string> = new Map();
   showSticky = false;
-
-  ngOnInit() {
-    const response = {
-      statusCode: 200,
-      message: 'success',
-      data: {
-        currentPosition: { pid: 17, name: 'Manikanta', points: 6000 },
-        allPositions: [
-          { pid: 1, name: 'Sai', points: 8000 },
-          { pid: 2, name: 'Pradeep', points: 7000 },
-          { pid: 3, name: 'Karthik', points: 6500 },
-          { pid: 4, name: 'Krishna', points: 6400 },
-          { pid: 5, name: 'Manoj', points: 6200 },
-          { pid: 6, name: 'Kumar', points: 6000 },
-          { pid: 7, name: 'Mohan', points: 5900 },
-          { pid: 8, name: 'Vishnu', points: 5800 },
-          { pid: 9, name: 'Teja', points: 5700 },
-          { pid: 10, name: 'Suresh', points: 5600 },
-          { pid: 11, name: 'Sunny', points: 5500 },
-          { pid: 12, name: 'Anil', points: 5400 },
-          { pid: 13, name: 'Kiran', points: 5300 },
-          { pid: 14, name: 'Pavan', points: 5200 },
-          { pid: 15, name: 'Ravi', points: 5100 },
-          { pid: 16, name: 'Deepak', points: 5050 },
-          { pid: 17, name: 'Manikanta', points: 6000 },
-          { pid: 18, name: 'Vamshi', points: 4900 },
-          { pid: 19, name: 'Lokesh', points: 4800 },
-          { pid: 20, name: 'Rajesh', points: 4700 },
-          { pid: 21, name: 'Rajesh', points: 4700 },
-          { pid: 22, name: 'Rajesh', points: 4700 },
-          { pid: 23, name: 'Rajesh', points: 4700 },
-          { pid: 24, name: 'Rajesh', points: 4700 },
-          { pid: 25, name: 'Rajesh', points: 4700 },
-          { pid: 26, name: 'Rajesh', points: 4700 },
-          { pid: 27, name: 'Rajesh', points: 4700 },
-        ],
-      },
-    };
-
-    // Take all except top 3 for the list
-    this.allPositions = response.data.allPositions.slice(3);
-    this.currentPosition = response.data.currentPosition;
-    this.topThree = response.data.allPositions.slice(0, 3);
+  isLoading = true;
+    ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      const userId = localStorage.getItem('userId');
+      if (userId) this.getPositions(userId);
+    }
   }
-
+   getPositions(userId: string) {
+     const payload = {
+      screen: 'position',
+      userId: userId,
+    };
+     this.authService.avengers(payload).subscribe({
+      next: (response) => {
+        this.isLoading = false;
+        if (response.statusCode === 200 && response.data) {
+          const { currentPosition, allPositions } = response.data;
+          this.currentPosition = currentPosition;
+          this.topThree = allPositions.slice(0, 3);
+          this.allPositions = allPositions.slice(3);
+          this.cdr.detectChanges();
+          console.log('✅ Positions fetched successfully:', response.data);
+        } else {
+          console.warn('⚠️ Unexpected API response:', response);
+        }
+      },
+      error: (err) => {
+        console.error('❌ Failed to fetch positions:', err);
+      }
+    });
+   }
     ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
       // Run only in browser environment

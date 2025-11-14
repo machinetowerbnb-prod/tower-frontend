@@ -33,11 +33,11 @@ export class Profile {
   ];
 
   walletSummary = [
-    { label: "Today's commission", value: 45.5 },
-    { label: 'Total withdrawals', value: 5200 },
-    { label: 'Your deposit', value: 250 },
-    { label: 'Total commission', value: 1182 },
-    { label: 'Team daily commission', value: 6952 }
+    { label: "Today's Personal commission", value: 45.5 },
+    { label: 'Team daily commission', value: 5200 },
+    { label: 'Grand Total commission', value: 250 },
+    { label: 'Your Flexible Deposit', value: 1182 },
+    { label: 'Your Total withdrawals', value: 6952 }
   ];
 
   settings = [

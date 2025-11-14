@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit , Inject, PLATFORM_ID,ChangeDetectorRef,NgZone} from '@angular/core';
+import { CommonModule ,isPlatformBrowser} from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { TopNav } from '../top-nav/top-nav';
-
+import { AuthService } from '../../services/auth.service';
 interface Transaction {
   type: string;
   amount: number;
@@ -23,65 +23,64 @@ export class History implements OnInit {
   groupedTransactions: { date: string; transactions: Transaction[] }[] = [];
   showFilter = false;
   activeFilter = 'all';
+  isLoading = true;
+  errorMessage = '';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+     private authService: AuthService,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private cdr: ChangeDetectorRef,
+    private ngZone: NgZone
+  ) { }
 
   ngOnInit(): void {
-    // 🔹 Hardcoded API data
-    const response = {
-      statusCode: 200,
-      message: 'success',
-      data: {
-        transactions: [
-          {
-            type: 'credit',
-            amount: 2000.2,
-            timestamp: '2025-10-25T07:54:15.149Z',
-            transactionId: 'AACNGXR76IGUU3FAINLZDWX',
-          },
-          {
-            type: 'credit',
-            amount: 2000.2,
-            timestamp: '2025-10-24T07:54:15.149Z',
-            transactionId: 'AACNGXR76IGUU3FAINLZDWX',
-          },
-          {
-            type: 'credit',
-            amount: 2000.2,
-            timestamp: '2025-10-24T07:54:15.149Z',
-            transactionId: 'JHGNGXR76IGUU3FAINLZDWX',
-          },
-          {
-            type: 'deposit',
-            amount: 2000.2,
-            timestamp: '2025-10-23T07:54:15.149Z',
-            transactionId: 'ERTNGXR76IGUU3FAINLZDWX',
-          },
-          {
-            type: 'deposit',
-            amount: 2000.2,
-            timestamp: '2025-10-22T07:54:15.149Z',
-            transactionId: 'NBVNGXR76IGUU3FAINLZDWX',
-          },
-          {
-            type: 'reward',
-            amount: 2000.2,
-            timestamp: '2025-10-21T07:54:15.149Z',
-            transactionId: 'MJKNGXR76IGUU3FAINLZDWX',
-          },
-          {
-            type: 'reward',
-            amount: 2000.2,
-            timestamp: '2025-10-21T07:54:15.149Z',
-            transactionId: 'POINGXR76IGUU3FAINLZDWX',
-          },
-        ],
-      },
+    if (isPlatformBrowser(this.platformId)) {
+      const userId = localStorage.getItem('userId');
+      if (userId) {
+        this.fetchTransactionHistory(userId);
+      } else {
+        this.isLoading = false;
+        this.errorMessage = 'User ID not found.';
+      }
+    }
+  }
+
+  fetchTransactionHistory(userId: string) {
+    const payload = {
+      screen: 'history',
+      userId: userId,
     };
 
-    this.transactions = response.data.transactions;
-    this.groupTransactions();
+    this.isLoading = true;
+
+    this.authService.avengers(payload).subscribe({
+      next: (response) => {
+        console.log('✅ History API response:', response);
+        this.isLoading = false;
+
+        if (response.statusCode === 200 && response.data?.transactions) {
+          this.ngZone.run(() => {
+          this.transactions = response.data.transactions.map((t: any) => ({
+            ...t,
+            amount: parseFloat(t.amount), // Ensure it's a number
+          }));
+          this.cdr.detectChanges();
+          this.groupTransactions();
+        })
+        } else {
+          this.errorMessage = 'No transactions found.';
+          this.transactions = [];
+          this.groupedTransactions = [];
+        }
+      },
+      error: (err) => {
+        console.error('❌ Failed to fetch transaction history:', err);
+        this.isLoading = false;
+        this.errorMessage = 'Failed to load transaction history. Please try again.';
+      },
+    });
   }
+
 
   filters = [
     {
@@ -94,7 +93,7 @@ export class History implements OnInit {
       label: 'Your withdrawals',
       desc: 'View recent cashouts.',
       icon: '/deposits-filter.svg',
-      value: 'credit'
+      value: 'withdraw'
     },
     {
       label: 'Commission & rewards',
