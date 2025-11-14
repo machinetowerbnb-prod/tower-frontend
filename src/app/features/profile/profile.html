@@ -37,17 +37,19 @@
 
     <!-- 🔹 Wallet Summary -->
     <div class="wallet-summary">
-        <h4>Wallet Summary Details</h4>
+      <h4>Wallet Summary Details</h4>
 
-        <div class="summary-card" *ngFor="let item of walletSummary">
-            <div class="summary-left">
-                <img src="/profile-summary.svg" alt="icon" />
-                <p>{{ item.label }}</p>
-            </div>
-            <div class="summary-right">
-                <span>{{ item.value }} <b>USDT</b></span>
-            </div>
+      <div class="summary-card" *ngFor="let item of walletSummary">
+        <div class="summary-left">
+          <img src="/profile-summary.svg" alt="icon" />
+          <p>{{ item.label }}</p>
         </div>
+        <div class="summary-right" [ngClass]="{
+            'summary-right-negative': item.label === 'Your Total withdrawals'
+          }">
+          <span>{{ item.value }} <b>USDT</b></span>
+        </div>
+      </div>
     </div>
 
     <!-- 🔹 Other Settings -->

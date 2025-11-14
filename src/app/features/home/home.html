@@ -20,15 +20,15 @@
                 <span>{{ action.label }}</span>
             </div>
         </div>
-        <app-deposit #depositModal></app-deposit>
+     <app-deposit #depositModal (depositCompleted)="onDepositCompleted()"></app-deposit>
         <div class="wallet-values">
             <div class="wallet-item">
                 <p>Working Wallet</p>
-                <h3>5000 <span>USDT</span></h3>
+                <h3>{{ workingWallet }} <span>USDT</span></h3>
             </div>
             <div class="wallet-item">
                 <p>Withdrawal Wallet</p>
-                <h3>50,000 <span>USDT</span></h3>
+                <h3>{{ withdrawalWallet }} <span>USDT</span></h3>
             </div>
         </div>
     </div>
@@ -38,8 +38,8 @@
         <h6>SHARE YOUR CODE</h6>
         <h3>You get $100, when every friend signs up!</h3>
         <div class="code-box">
-            <input type="text" readonly value="GRUKH123" />
-            <img src="/copy.svg" alt="copy"/>
+            <input type="text" readonly value={{refferalCode}} />
+            <img src="/copy.svg" alt="copy" (click)="copyReferralLink()"/>
         </div>
         <div>
             <!-- <img src="giftbox.svg" alt="gift" class="telegram-icon" /> -->
@@ -47,7 +47,7 @@
     </div>
 
     <!-- 🔹 Telegram Banner -->
-    <div class="telegram-banner">
+    <div class="telegram-banner" (click)="openBannerLink()">
         <img src="telegram.svg" alt="Telegram" class="telegram-icon" />
         <div>
             <p>Join us on Telegram</p>

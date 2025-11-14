@@ -11,7 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
+import { AuthService } from '../../services/auth.service';
 import { TopNav } from '../top-nav/top-nav'
 
 import { TranslatePipe } from '../../pipes/translate-pipe';
@@ -47,7 +47,8 @@ export class Signup implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private authService: AuthService
   ) {
     this.signupForm = this.fb.group({
       name: ['', Validators.required],
@@ -70,14 +71,37 @@ export class Signup implements OnInit {
     this.hidePassword = !this.hidePassword;
   }
 
-  onSubmit() {
+onSubmit() {
     if (this.signupForm.valid) {
-      console.log('Signup form:', this.signupForm.value);
-      this.snackBar.open('Account created successfully!', 'Close', {
-        duration: 3000,
-        panelClass: ['success-snackbar']
+      const payload = {
+        userName: this.signupForm.value.name,
+        email: this.signupForm.value.email,
+        password: this.signupForm.value.password,
+        passcode: this.signupForm.value.epin,
+        refferedCode: this.signupForm.value.refferal || ''
+      };
+
+      console.log('Signup payload:', payload);
+
+      this.authService.signup(payload).subscribe({
+        next: (res) => {
+          if (res.statusCode === 201) {
+            this.snackBar.open('Account created successfully!', 'Close', {
+              duration: 3000,
+              panelClass: ['success-snackbar']
+            });
+            setTimeout(() => this.router.navigate(['/signin']), 1000);
+          }
+        },
+        error: (err) => {
+          console.error('Signup error:', err);
+          this.snackBar.open(
+            err.error?.message || 'Something went wrong!',
+            'Close',
+            { duration: 3000, panelClass: ['error-snackbar'] }
+          );
+        }
       });
-      setTimeout(() => this.router.navigate(['/signin']), 1000);
     } else {
       this.signupForm.markAllAsTouched();
       this.snackBar.open('Please fill in all fields correctly', 'Close', {
@@ -86,6 +110,5 @@ export class Signup implements OnInit {
       });
     }
   }
-
 }
 

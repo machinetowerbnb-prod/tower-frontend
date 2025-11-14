@@ -28,7 +28,7 @@
           <th>Charge</th>
           <th>Total Amount</th>
           <th>Wallet Address</th>
-          <th>Network</th>
+          <th>withdraw Id</th>
           <th>Status</th>
         </tr>
       </thead>
@@ -44,10 +44,10 @@
             {{ w.wallet }}
             <i class="fas fa-copy copy-icon" (click)="copyWallet(w.wallet)"></i>
           </td>
-          <td>{{ w.network }}</td>
+          <td>{{ w.withdrawId }}</td>
           <td class="action-buttons">
-            <button class="accept-btn" (click)="handleDecision('accept', w)">Accept</button>
-            <button class="reject-btn" (click)="handleDecision('reject', w)">Reject</button>
+            <button class="accept-btn" (click)="handleDecision('Approve', w)">Accept</button>
+            <button class="reject-btn" (click)="handleDecision('Reject', w)">Reject</button>
           </td>
         </tr>
       </tbody>

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone, Inject, ChangeDetectorRef, PLATFORM_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { isPlatformBrowser } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-withdraw-rejects',
@@ -16,16 +18,52 @@ export class WithdrawRejects implements OnInit {
   itemsPerPage = 10;
   currentPage = 1;
   searchText = '';
+    constructor(
+    private zone: NgZone,
+    private cd: ChangeDetectorRef,
+    private auth: AuthService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit() {
-    this.withdraws = [
-      { user: 'Haitham', amount: 20, charge: 2, total: 18, wallet: '0x3424...', network: 'bep' },
-      { user: 'chnservis', amount: 30, charge: 3, total: 27, wallet: '0x45cc...', network: 'trc' },
-      { user: 'Fira82', amount: 50, charge: 5, total: 45, wallet: '0x424d...', network: 'bep' },
-    ];
+    if (isPlatformBrowser(this.platformId))
+    this.fetchWithdrawRequests();
+  }
+   fetchWithdrawRequests() {
+    const payload = {
+      status: "Rejected"
+    };
 
-    this.filteredWithdraws = [...this.withdraws];
-    this.updatePagination();
+
+    this.auth.adminWithdrawFilter(payload).subscribe({
+      next: (res: any) => {
+        this.zone.run(() => {
+          if (res.statusCode === 200 && Array.isArray(res.data)) {
+
+            this.withdraws = res.data.map((item:any) => {
+              const charge = item.amount * 0.02;         // 2% static fee
+              const total = item.amount - charge;        // amount - 2%
+              return {
+                user: item.user,
+                amount: item.amount,
+                charge: charge,
+                total: total,
+                wallet: item.wallet,
+                withdrawId: item.withdrawId,
+                status: item.status
+              };
+            });
+            this.filteredWithdraws = [...this.withdraws];
+             this.updatePagination();
+          }
+          this.cd.detectChanges();
+        });
+      },
+      error: (err) => {
+        console.error("Withdraw API Error:", err);
+        this.cd.detectChanges();
+      }
+    });
   }
 
   get totalPages() {

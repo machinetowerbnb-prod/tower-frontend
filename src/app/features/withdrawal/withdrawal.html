@@ -19,7 +19,7 @@
     <div class="wallet-card">
       <div class="wallet-info">
         <p>WITHDRAWAL WALLET</p>
-        <h3>50000 <span>USDT</span></h3>
+        <h3>{{ totalRemainingBalance }} <span>USDT</span></h3>
       </div>
       <div class="wallet-gif">
         <img src="/wallet.gif" alt="wallet" />
@@ -28,7 +28,7 @@
 
     <!-- 🔹 Form Section -->
     <div class="form-section">
-      <form [formGroup]="withdrawalForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="withdrawalForm">
         <div class="form-group">
           <label>Enter amount</label>
           <mat-form-field appearance="outline" class="full-width">
@@ -66,7 +66,7 @@
     </div>
   </div>
   <footer class="footer">
-    <button mat-raised-button type="submit" class="confirm-btn">
+    <button mat-raised-button type="submit" (click)="onSubmit()" class="confirm-btn">
       Confirm
     </button>
   </footer>
