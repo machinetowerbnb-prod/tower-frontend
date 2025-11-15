@@ -96,7 +96,7 @@ export class Signup implements OnInit {
               duration: 3000,
               panelClass: ['success-snackbar']
             });
-            setTimeout(() => this.router.navigate(['/signin']), 1000);
+            setTimeout(() => this.router.navigate(['/verify-email']), 1000);
           }
         },
         error: (err) => {
