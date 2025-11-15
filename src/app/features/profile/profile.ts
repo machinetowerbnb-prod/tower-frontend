@@ -77,6 +77,7 @@ export class Profile {
 
   logout() {
     console.log('Logged out');
+    localStorage.removeItem('userId');
     this.router.navigate(['/signin']);
   }
 
