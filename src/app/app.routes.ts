@@ -22,6 +22,7 @@ import { Users } from './admin/users/users'
 import { WithdrawRequest } from './admin/withdraw-request/withdraw-request'
 import { WithdrawAccepts } from './admin/withdraw-accepts/withdraw-accepts'
 import { WithdrawRejects } from './admin/withdraw-rejects/withdraw-rejects'
+import { authGuard } from './guards/auth-guard';
 
 
 
@@ -40,6 +41,7 @@ export const routes: Routes = [
 {
     path: '',
     component: Layout,
+    canActivate: [authGuard],
     children: [
       { path: 'home', component: Home },
       { path: 'position', component: Position },
@@ -52,6 +54,7 @@ export const routes: Routes = [
   {
   path: 'admin',
   component: Adminlayout,
+  canActivate: [authGuard],
   children: [
     { path: 'dashboard', component: Dashboard },
     { path: 'users', component: Users },

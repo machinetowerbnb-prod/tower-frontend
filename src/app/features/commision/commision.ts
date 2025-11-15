@@ -41,7 +41,7 @@ export class Commision {
   fetchCommissionDetails(userId: string) {
     const payload = {
       screen: 'commission',
-      userId:"1761757294223237" // userId,
+      userId: userId,
     };
 
     console.log('🚀 Fetching commission details:', payload);
