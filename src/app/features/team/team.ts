@@ -54,7 +54,7 @@ export class Team implements OnInit {
     this.isLoading = true;
     const payload = {
       screen: 'teams',
-      userId:'1761757294223237' // userId
+      userId: userId
     };
 
     this.authService.avengers(payload).subscribe({

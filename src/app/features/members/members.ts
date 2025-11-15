@@ -76,7 +76,7 @@ export class Members implements OnInit {
         screen = 'genOne';
     }
 
-    const payload = { screen, userId:"1761757294223237" };
+    const payload = { screen, userId:userId };
 
     console.log('🚀 Fetching members with payload:', payload);
 
