@@ -53,4 +53,11 @@ adminWithdrawFilter(payload: any) {
 adminWithdrawConfirm(payload: any) {
   return this.http.post<any>(`${this.baseUrl}/withdraw-approval`, payload);
 }
+//Game Apis
+purchaseNow(payload: any) {
+  return this.http.post<any>(`${this.baseUrl}/purchaseNow`, payload);
+}
+activateGame(payload: any) {
+  return this.http.post<any>(`${this.baseUrl}/activateGame`, payload);
+}
 }
