@@ -10,12 +10,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { TopNav } from '../top-nav/top-nav'
-
+import { TopNav } from '../top-nav/top-nav';
 import { TranslatePipe } from '../../pipes/translate-pipe';
-
 
 @Component({
   selector: 'app-signup',
@@ -48,8 +46,10 @@ export class Signup implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private snackBar: MatSnackBar,
-    private authService: AuthService
+    private authService: AuthService,
+    private route: ActivatedRoute   // ⭐ Added
   ) {
+
     this.signupForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -57,28 +57,34 @@ export class Signup implements OnInit {
       epin: ['', [Validators.required, Validators.minLength(4)]],
       confirmEpin: ['', Validators.required],
       terms: [false, Validators.requiredTrue],
-      refferal: ['', Validators.required]
+      refferal: ['']  // ⭐ removed Validators.required
     });
-
   }
 
 
   ngOnInit(): void {
     console.log("we are in Signup page");
+
+    // ⭐ Auto patch referral code from URL
+    const code = this.route.snapshot.queryParamMap.get('code');
+    if (code) {
+      this.signupForm.patchValue({ refferal: code });
+      console.log("Referral code applied:", code);
+    }
   }
 
   togglePasswordVisibility() {
     this.hidePassword = !this.hidePassword;
   }
 
-onSubmit() {
+  onSubmit() {
     if (this.signupForm.valid) {
       const payload = {
         userName: this.signupForm.value.name,
         email: this.signupForm.value.email,
         password: this.signupForm.value.password,
         passcode: this.signupForm.value.epin,
-        refferedCode: this.signupForm.value.refferal || ''
+        refferedCode: this.signupForm.value.refferal || ''   // ⭐ safe
       };
 
       console.log('Signup payload:', payload);
@@ -111,4 +117,3 @@ onSubmit() {
     }
   }
 }
-
