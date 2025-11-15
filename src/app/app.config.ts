@@ -2,6 +2,9 @@ import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListen
 import { provideRouter } from '@angular/router';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { LoaderInterceptor } from './interceptors/loader-interceptor';
+
 import { routes } from './app.routes';
 
 import { HttpClientModule } from '@angular/common/http'; // ✅ Add this
@@ -14,8 +17,10 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes),
+    provideHttpClient(
+      withInterceptors([LoaderInterceptor])
+    ),
     provideClientHydration(withEventReplay()),
-
     // ✅ Import these modules properly using importProvidersFrom()
     importProvidersFrom(
       HttpClientModule,
