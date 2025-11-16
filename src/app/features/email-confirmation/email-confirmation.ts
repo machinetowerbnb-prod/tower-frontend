@@ -27,7 +27,7 @@ export class EmailConfirmation implements OnInit {
   ngOnInit(): void {
     // Read query params: /email-confirm?code=1234&email=mani@gmail.com
     this.route.queryParams.subscribe(params => {
-      this.otp = params['code'] || null;
+      this.otp = params['otp'] || null;
       this.email = params['email'] || null;
 
       if (this.email && this.otp) {
