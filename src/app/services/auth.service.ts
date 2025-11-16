@@ -9,9 +9,9 @@ import { environment } from '../../environments/environment';
 export class AuthService {
   private baseUrl = `${environment.apiUrl}`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
- signup(payload: {
+  signup(payload: {
     userName: string;
     email: string;
     password: string;
@@ -25,39 +25,43 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/login`, payload);
   }
 
- // Avengers api
-avengers(payload: any): Observable<any> {
-  return this.http.post(`${this.baseUrl}/avengers`, payload);
-}
+  // Avengers api
+  avengers(payload: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/avengers`, payload);
+  }
 
-confirmDeposit(payload: any): Observable<any> {
-  return this.http.post(`${this.baseUrl}/confirm`, payload);
-}
+  confirmDeposit(payload: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/confirm`, payload);
+  }
 
-withdraw(payload: any): Observable<any> {
-  return this.http.post(`${this.baseUrl}/withdraw`, payload);
-}
-//adminapis
-admin(payload: any) {
-  return this.http.post<any>(`${this.baseUrl}/adminAvengers`, payload);
-}
-adminTransactionAvengers(payload: any) {
-  return this.http.post<any>(`${this.baseUrl}/adminTransactionAvengers`, payload);
-}
-adminUpdateUserStatus(payload: any) {
-  return this.http.post<any>(`${this.baseUrl}/adminUpdateUserStatus`, payload);
-}
-adminWithdrawFilter(payload: any) {
-  return this.http.post<any>(`${this.baseUrl}/adminWithdrawFilter`, payload);
-}
-adminWithdrawConfirm(payload: any) {
-  return this.http.post<any>(`${this.baseUrl}/withdraw-approval`, payload);
-}
-//Game Apis
-purchaseNow(payload: any) {
-  return this.http.post<any>(`${this.baseUrl}/purchaseNow`, payload);
-}
-activateGame(payload: any) {
-  return this.http.post<any>(`${this.baseUrl}/activateGame`, payload);
-}
+  withdraw(payload: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/withdraw`, payload);
+  }
+
+  verifyOtp(payload: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/verify-otp`, payload);
+  }
+  //adminapis
+  admin(payload: any) {
+    return this.http.post<any>(`${this.baseUrl}/adminAvengers`, payload);
+  }
+  adminTransactionAvengers(payload: any) {
+    return this.http.post<any>(`${this.baseUrl}/adminTransactionAvengers`, payload);
+  }
+  adminUpdateUserStatus(payload: any) {
+    return this.http.post<any>(`${this.baseUrl}/adminUpdateUserStatus`, payload);
+  }
+  adminWithdrawFilter(payload: any) {
+    return this.http.post<any>(`${this.baseUrl}/adminWithdrawFilter`, payload);
+  }
+  adminWithdrawConfirm(payload: any) {
+    return this.http.post<any>(`${this.baseUrl}/withdraw-approval`, payload);
+  }
+  //Game Apis
+  purchaseNow(payload: any) {
+    return this.http.post<any>(`${this.baseUrl}/purchaseNow`, payload);
+  }
+  activateGame(payload: any) {
+    return this.http.post<any>(`${this.baseUrl}/activateGame`, payload);
+  }
 }
