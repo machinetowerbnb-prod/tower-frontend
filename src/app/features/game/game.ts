@@ -168,9 +168,9 @@ export class Game implements OnInit {
           let finalEligible = elegibleLevel;
 
           // If elegibleLevel is null → default Level3
-          if (!finalEligible) {
-            finalEligible = 'Level3';
-          }
+          // if (!finalEligible) {
+          //   finalEligible = 'Level3';
+          // }
 
           // If elegibleLevel is "Level4" → use Level3 instead
           if (finalEligible === 'Level4') {
