@@ -77,6 +77,8 @@ export class Profile {
       this.router.navigate(['/t&c']);
     } else if(label == 'Help & support') {
       this.openSupportPopup();
+    } else if(label == 'Change password') {
+      this.router.navigate(['/change-password']);
     }
   }
 
