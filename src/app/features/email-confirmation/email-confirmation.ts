@@ -32,7 +32,7 @@ export class EmailConfirmation implements OnInit {
 
       if (this.email && this.otp) {
         this.verifyOtp();
-        console.log(this.email,this.otp);
+        console.log(this.email, this.otp);
       } else {
         console.error("Missing query params.");
       }
@@ -53,9 +53,6 @@ export class EmailConfirmation implements OnInit {
           if (isPlatformBrowser(this.platformId)) {
             localStorage.setItem("userId", res.data.userId);
           }
-
-          // Redirect to home
-          this.router.navigate(['/home']);
         }
       },
       error: (err) => {
@@ -63,4 +60,10 @@ export class EmailConfirmation implements OnInit {
       }
     });
   }
+
+  continueForward() {
+    this.router.navigate(['/home']);
+  }
+
+  
 }
