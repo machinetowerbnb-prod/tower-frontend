@@ -37,7 +37,7 @@ export class Game implements OnInit {
   private authService = inject(AuthService);
   private ngZone = inject(NgZone);
   private cdr = inject(ChangeDetectorRef);
-  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object) { }
 
   cards: GameCard[] = [
     {
@@ -133,6 +133,7 @@ export class Game implements OnInit {
         const { isFreeTrailSubcraibed, currectLevel, elegibleLevel, activationTime } = res.data;
 
         // Save activationTime even if null
+        console.log(activationTime, "activationTime")
         localStorage.setItem('activationTime', activationTime ?? null);
 
         this.ngZone.run(() => {
@@ -212,10 +213,22 @@ export class Game implements OnInit {
     }
     if (card.buttonText === 'Active Now') {
       const userId = localStorage.getItem('userId');
-      this.activateGame(userId!);
+      let activationTime: any = localStorage.getItem('activationTime');
+
+      if (activationTime && activationTime != null) {
+        let currentTime = Date.now();
+        if (this.isCurrentGreaterThanYesterday(currentTime, activationTime)) {
+          this.timer.open(activationTime);
+        } else {
+          this.activateGame(userId!);
+        }
+      }
+      // const now = 1763141263280;
+      // this.timer.open(now);
+      // this.gameSuccessModel.openModal()
       return;
     }
-    if (card.buttonText === 'Unlock Now'){
+    if (card.buttonText === 'Unlock Now') {
       this.purchaseNow(card);
       return;
     }
@@ -237,13 +250,13 @@ export class Game implements OnInit {
         if (res.statusCode === 200 && res.data) {
           // Run UI updates in Angular zone for correct re-render
           this.ngZone.run(() => {
-            if (card.buttonText === 'Unlock Now'){
+            if (card.buttonText === 'Unlock Now') {
               this.getGameData(userId!);
               this.cdr.detectChanges();
               return;
-            }else{
-            this.activateGame(userId!);
-            this.cdr.detectChanges();
+            } else {
+              this.activateGame(userId!);
+              this.cdr.detectChanges();
             }
           });
         } else {
@@ -283,4 +296,9 @@ export class Game implements OnInit {
       },
     });
   }
+
+  isCurrentGreaterThanYesterday(currentTs: number, yesterdayTs: number): boolean {
+    return currentTs > yesterdayTs;
+  }
+
 }
