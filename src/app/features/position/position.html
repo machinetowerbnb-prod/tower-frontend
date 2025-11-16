@@ -64,7 +64,7 @@
     </div>
 
     <!-- 🔹 Sticky Current User (animated show/hide) -->
-    <div class="sticky-card" [class.visible]="showSticky" *ngIf="this.currentPosition">
+    <div class="sticky-card" [class.visible]="showSticky" *ngIf="currentPosition">
         <div class="rank">{{ currentPosition.pid }}</div>
         <div class="initials" [style.background]="getRandomColor(currentPosition.pid)">
             {{ getInitials(currentPosition.name) }}
