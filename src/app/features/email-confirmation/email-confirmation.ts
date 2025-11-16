@@ -65,4 +65,5 @@ export class EmailConfirmation implements OnInit {
     this.router.navigate(['/home']);
   }
 
+  
 }
