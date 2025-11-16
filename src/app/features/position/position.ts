@@ -35,32 +35,59 @@ export class Position implements OnInit, AfterViewInit {
     }
   }
   getPositions(userId: string) {
-    const payload = {
-      screen: 'position',
-      userId: userId,
-    };
-    this.authService.avengers(payload).subscribe({
-      next: (response) => {
-        this.isLoading = false;
-        if (response.statusCode === 200 && response.data) {
-          const { currentPosition, allPositions } = response.data;
-          this.currentPosition = currentPosition;
-          this.topThree = allPositions.slice(0, 3);
-          this.allPositions = allPositions.slice(3);
-          this.cdr.detectChanges();
-          setTimeout(() => this.cdr.detectChanges(), 1000);
+  const payload = {
+    screen: 'position',
+    userId: userId,
+  };
 
-          console.log('✅ Positions fetched successfully:', response.data);
-          console.log('✅ Positions fetched successfully:', response.data);
-        } else {
-          console.warn('⚠️ Unexpected API response:', response);
+  this.authService.avengers(payload).subscribe({
+    next: (response) => {
+      this.isLoading = false;
+
+      if (response.statusCode === 200 && response.data) {
+        const { currentPosition, allPositions } = response.data;
+
+        if (!currentPosition) {
+          console.warn("⚠️ No current position received");
+          return;
         }
-      },
-      error: (err) => {
-        console.error('❌ Failed to fetch positions:', err);
+
+        this.currentPosition = currentPosition;
+
+        // ---- 🔥 FIX: Insert currentPosition into correct index ----
+        const list = [...allPositions];
+        const insertIndex = currentPosition.pid - 1;
+
+        if (insertIndex >= 0 && insertIndex <= list.length) {
+          list.splice(insertIndex, 0, currentPosition);
+        } else {
+          // fallback (should not happen)
+          list.push(currentPosition);
+        }
+
+        // ---- 🔥 Recalculate top 3 and remaining ----
+        this.topThree = list.slice(0, 3);
+        this.allPositions = list.slice(3);
+
+        this.cdr.detectChanges();
+
+        // ---- 🔥 Auto scroll when DOM is ready ----
+        setTimeout(() => {
+          this.cdr.detectChanges();
+          this.scrollToCurrent();
+        }, 300);
+
+        console.log("✅ Positions fixed & rendered correctly");
+      } else {
+        console.warn("⚠️ Unexpected API response:", response);
       }
-    });
-  }
+    },
+    error: (err) => {
+      console.error('❌ Failed to fetch positions:', err);
+    }
+  });
+}
+
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
       // Run only in browser environment
