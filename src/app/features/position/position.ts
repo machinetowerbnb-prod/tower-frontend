@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { isPlatformBrowser } from '@angular/common';
-import { Inject, PLATFORM_ID,ChangeDetectorRef } from '@angular/core';
+import { Inject, PLATFORM_ID, ChangeDetectorRef } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -19,7 +19,7 @@ import { AuthService } from '../../services/auth.service';
 export class Position implements OnInit, AfterViewInit {
   @ViewChild('scrollContainer') scrollContainer!: ElementRef;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,private authService: AuthService,private cdr: ChangeDetectorRef,) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private authService: AuthService, private cdr: ChangeDetectorRef,) { }
 
   allPositions: any[] = [];
   topThree: any[] = [];
@@ -28,18 +28,18 @@ export class Position implements OnInit, AfterViewInit {
   colorMap: Map<number, string> = new Map();
   showSticky = false;
   isLoading = true;
-    ngOnInit() {
+  ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       const userId = localStorage.getItem('userId');
       if (userId) this.getPositions(userId);
     }
   }
-   getPositions(userId: string) {
-     const payload = {
+  getPositions(userId: string) {
+    const payload = {
       screen: 'position',
       userId: userId,
     };
-     this.authService.avengers(payload).subscribe({
+    this.authService.avengers(payload).subscribe({
       next: (response) => {
         this.isLoading = false;
         if (response.statusCode === 200 && response.data) {
@@ -48,6 +48,9 @@ export class Position implements OnInit, AfterViewInit {
           this.topThree = allPositions.slice(0, 3);
           this.allPositions = allPositions.slice(3);
           this.cdr.detectChanges();
+          setTimeout(() => this.cdr.detectChanges(), 1000);
+
+          console.log('✅ Positions fetched successfully:', response.data);
           console.log('✅ Positions fetched successfully:', response.data);
         } else {
           console.warn('⚠️ Unexpected API response:', response);
@@ -57,8 +60,8 @@ export class Position implements OnInit, AfterViewInit {
         console.error('❌ Failed to fetch positions:', err);
       }
     });
-   }
-    ngAfterViewInit() {
+  }
+  ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
       // Run only in browser environment
       // setTimeout(() => this.scrollToCurrent(), 500);
