@@ -73,6 +73,11 @@ export class Profile {
 
   onSetting(label: string) {
     console.log('Clicked setting:', label);
+    if(label == 'Terms and conditions') {
+      this.router.navigate(['/t&c']);
+    } else if(label == 'Help & support') {
+      this.openSupportPopup();
+    }
   }
 
   logout() {
