@@ -96,6 +96,7 @@ export class Signup implements OnInit {
               duration: 3000,
               panelClass: ['success-snackbar']
             });
+            localStorage.setItem('userId', res.data.userId);
             setTimeout(() => this.router.navigate(['/verify-email']), 1000);
           }
         },
