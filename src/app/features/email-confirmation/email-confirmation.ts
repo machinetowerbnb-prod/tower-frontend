@@ -45,22 +45,22 @@ export class EmailConfirmation implements OnInit {
       otp: this.otp
     };
 
-    // this.auth.verifyOtp(payload).subscribe({
-    //   next: (res) => {
-    //     if (res.success === 200) {
+    this.auth.verifyOtp(payload).subscribe({
+      next: (res) => {
+        if (res.success === 200) {
 
-    //       // Save userId in localStorage (browser only)
-    //       if (isPlatformBrowser(this.platformId)) {
-    //         localStorage.setItem("userId", res.data.userId);
-    //       }
+          // Save userId in localStorage (browser only)
+          if (isPlatformBrowser(this.platformId)) {
+            localStorage.setItem("userId", res.data.userId);
+          }
 
-    //       // Redirect to home
-    //       this.router.navigate(['/home']);
-    //     }
-    //   },
-    //   error: (err) => {
-    //     console.error("Email verification failed", err);
-    //   }
-    // });
+          // Redirect to home
+          this.router.navigate(['/home']);
+        }
+      },
+      error: (err) => {
+        console.error("Email verification failed", err);
+      }
+    });
   }
 }
