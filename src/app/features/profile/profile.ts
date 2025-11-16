@@ -152,6 +152,7 @@ export class Profile implements OnInit{
     } else if(label == 'Help & support') {
       this.openSupportPopup();
     } else if(label == 'Change password') {
+      localStorage.setItem("email",this.user.email)
       this.router.navigate(['/change-password']);
     }
   }

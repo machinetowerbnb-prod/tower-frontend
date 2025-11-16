@@ -41,6 +41,11 @@ export class AuthService {
   verifyOtp(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/verify-otp`, payload);
   }
+
+  changePassword(payload: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/change-password`, payload);
+  }
+
   //adminapis
   admin(payload: any) {
     return this.http.post<any>(`${this.baseUrl}/adminAvengers`, payload);
