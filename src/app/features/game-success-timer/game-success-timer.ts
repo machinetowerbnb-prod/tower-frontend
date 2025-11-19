@@ -5,7 +5,8 @@ import {
   NgZone,
   Inject,
   PLATFORM_ID,
-  OnDestroy
+  OnDestroy,
+  OnInit
 } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
@@ -17,7 +18,7 @@ import { ChangeDetectorRef } from '@angular/core';
   templateUrl: './game-success-timer.html',
   styleUrl: './game-success-timer.scss',
 })
-export class GameSuccessTimer implements OnDestroy {
+export class GameSuccessTimer implements OnDestroy, OnInit {
   isVisible = false;
   isClosing = false;
 
@@ -34,6 +35,10 @@ export class GameSuccessTimer implements OnDestroy {
     @Inject(PLATFORM_ID) private platformId: Object,
     private cdr: ChangeDetectorRef
   ) { }
+
+  ngOnInit() {
+  this.renderer.removeStyle(document.body, 'overflow');
+}
 
   /** Start timer popup */
   open(startTimestamp: number) {
@@ -81,13 +86,19 @@ export class GameSuccessTimer implements OnDestroy {
   close() {
     this.isClosing = true;
 
+    // match fade-out animation
     setTimeout(() => {
-      this.isVisible = false;
+      if (this.intervalId) clearInterval(this.intervalId);
+
+      // IMPORTANT — remove FIRST
       this.renderer.removeStyle(document.body, 'overflow');
 
-      if (this.intervalId) clearInterval(this.intervalId);
-    }, 250);  // match animation duration
+      // Now hide modal
+      this.isVisible = false;
+
+    }, 250);
   }
+
 
   ngOnDestroy() {
     if (this.intervalId) clearInterval(this.intervalId);
