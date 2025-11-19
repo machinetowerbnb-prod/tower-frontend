@@ -20,19 +20,20 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './profile.html',
   styleUrl: './profile.scss'
 })
-export class Profile implements OnInit{
+export class Profile implements OnInit {
 
-   private authService = inject(AuthService);
+  private authService = inject(AuthService);
   private ngZone = inject(NgZone);
   private cdr = inject(ChangeDetectorRef);
   @ViewChild('depositModal') depositModal!: Deposit;
 
   showSupport = false;
+  showLogout = false;
 
   constructor(
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) { }
 
   user = {
     name: 'Admin',
@@ -71,7 +72,7 @@ export class Profile implements OnInit{
       }
     }
   }
-    // ----------------------------------------------------------------------
+  // ----------------------------------------------------------------------
   // 🔥 PROFILE API CALL (Avengers API)
   // ----------------------------------------------------------------------
   getProfileData(userId: string) {
@@ -147,20 +148,28 @@ export class Profile implements OnInit{
 
   onSetting(label: string) {
     console.log('Clicked setting:', label);
-    if(label == 'Terms and conditions') {
+    if (label == 'Terms and conditions') {
       this.router.navigate(['/t&c']);
-    } else if(label == 'Help & support') {
+    } else if (label == 'Help & support') {
       this.openSupportPopup();
-    } else if(label == 'Change password') {
-      localStorage.setItem("email",this.user.email)
+    } else if (label == 'Change password') {
+      localStorage.setItem("email", this.user.email)
       this.router.navigate(['/change-password']);
     }
   }
 
   logout() {
+    this.showLogout = true;
+  }
+
+  confirmLogout() {
     console.log('Logged out');
     localStorage.removeItem('userId');
     this.router.navigate(['/signin']);
+  }
+
+  closeLogout() {
+    this.showLogout = false
   }
 
 }
