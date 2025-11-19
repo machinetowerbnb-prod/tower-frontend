@@ -38,7 +38,9 @@
                     </div>
 
                     <div class="tx-details">
-                        <p class="tx-type">{{ tx.type.toUpperCase() }}</p>
+                        <p class="tx-type">
+                            {{ tx.type === 'withdraw' ? 'PAYOUT WITHDRAW' : tx.type.toUpperCase() }}
+                        </p>
                         <h3 [ngClass]="{
                 credit: tx.type === 'credit',
                 deposit: tx.type === 'deposit',
