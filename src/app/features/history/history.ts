@@ -85,6 +85,12 @@ export class History implements OnInit {
 
   filters = [
     {
+      label: 'All Transactions',
+      desc: 'View Recent History',
+      icon: '/all-trans.svg',
+      value: 'all'
+    },
+    {
       label: 'Your deposits',
       desc: 'See all your top-ups.',
       icon: '/credits-filter.svg',
