@@ -67,31 +67,47 @@
     font-size: 13px;
     margin-bottom: 20px;
     padding: 0 10px;
+    padding-bottom: 25px;
+    border-bottom: 1px #DDDDDD solid;
   }
 }
-
 .countdown {
+  width: 100%;
+  background: #eef3ff;     // light bluish background EXACTLY like screenshot
+  padding: 10px 0;
+  border-radius: 12px;
   display: flex;
   justify-content: center;
-  gap: 22px;
-  margin: 20px 0;
-
-  .time-box {
-    text-align: center;
-
-    .num {
-      font-size: 22px;
-      font-weight: 600;
-      display: block;
-    }
-
-    .label {
-      font-size: 10px;
-      color: #666;
-      text-transform: uppercase;
-    }
-  }
+  align-items: center;
+  gap: 20px;
 }
+
+.cell {
+  text-align: center;
+  min-width: 70px;
+}
+
+.num {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2752E7;         // dark navy color same as screenshot
+  margin-bottom: 2px;
+  display: block;
+}
+
+.label {
+  font-size: 11px;
+  color: #6073a9;        // soft blue-gray text
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.divider {
+  width: 1px;
+  height: 35px;
+  background: #ccd6f6;   // faint divider line EXACT match
+}
+
 
 .footer-text {
   color: #707070;
