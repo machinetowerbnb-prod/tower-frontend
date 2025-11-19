@@ -1,63 +1,78 @@
 <div class="home-container">
 
-    <!-- 🔹 Carousel Section -->
-    <div class="carousel-container">
-        <!-- 🖼️ Dynamic Image -->
-        <img [src]="currentImage" alt="Carousel Image" class="carousel-image" />
+  <!-- 🔹 Carousel Section -->
+  <div
+    class="carousel-container"
+    (touchstart)="onTouchStart($event)"
+    (touchmove)="onTouchMove($event)"
+    (touchend)="onTouchEnd()"
+  >
+    <!-- 🖼️ Dynamic Image with smooth crossfade -->
+    <img
+      [src]="currentImage"
+      alt="Carousel Image"
+      class="carousel-image"
+      [class.fade]="isFading"
+      (load)="onImageLoad()"
+    />
 
-        <!-- 🔵 Dots (square indicators) -->
-        <div class="carousel-dots">
-            <span *ngFor="let img of carouselImages; let i = index" class="dot" [class.active]="i === currentIndex"
-                (click)="setCurrentSlide(i)"></span>
-        </div>
+    <!-- 🔵 Dots (square indicators) -->
+    <div class="carousel-dots">
+      <span
+        *ngFor="let img of carouselImages; let i = index"
+        class="dot"
+        [class.active]="i === currentIndex"
+        (click)="setCurrentSlide(i)"
+      ></span>
     </div>
+  </div>
 
-    <!-- 🔹 Wallet Section -->
-    <div class="wallet-section">
-        <div class="wallet-buttons">
-            <div class="wallet-btn" *ngFor="let action of walletActions" (click)="onWalletAction(action.label)">
-                <img [src]="action.icon" alt="{{action.label}}" />
-                <span>{{ action.label }}</span>
-            </div>
-        </div>
-     <app-deposit #depositModal (depositCompleted)="onDepositCompleted()"></app-deposit>
-        <div class="wallet-values">
-            <div class="wallet-item">
-                <p>Working Wallet</p>
-                <h3>{{ workingWallet }} <span>USDT</span></h3>
-            </div>
-            <div class="wallet-item">
-                <p>Withdrawal Wallet</p>
-                <h3>{{ withdrawalWallet }} <span>USDT</span></h3>
-            </div>
-        </div>
+  <!-- 🔹 Wallet Section -->
+  <div class="wallet-section">
+    <div class="wallet-buttons">
+      <div
+        class="wallet-btn"
+        *ngFor="let action of walletActions"
+        (click)="onWalletAction(action.label)"
+      >
+        <img [src]="action.icon" alt="{{ action.label }}" />
+        <span>{{ action.label }}</span>
+      </div>
     </div>
-
-    <!-- 🔹 Referral Section -->
-    <div class="referral-section">
-        <h6>SHARE YOUR CODE</h6>
-        <h3>You get $100, when every friend signs up!</h3>
-        <div class="code-box">
-            <input type="text" readonly value={{refferalCode}} />
-            <img src="/copy.svg" alt="copy" (click)="copyReferralLink()"/>
-        </div>
-        <div>
-            <!-- <img src="giftbox.svg" alt="gift" class="telegram-icon" /> -->
-        </div>
+    <app-deposit #depositModal (depositCompleted)="onDepositCompleted()"></app-deposit>
+    <div class="wallet-values">
+      <div class="wallet-item">
+        <p>Main Wallet</p>
+        <h3>{{ workingWallet }} <span>USDT</span></h3>
+      </div>
+      <div class="wallet-item">
+        <p>Withdrawal Account</p>
+        <h3>{{ withdrawalWallet }} <span>USDT</span></h3>
+      </div>
     </div>
+  </div>
 
-    <!-- 🔹 Telegram Banner -->
-    <div class="telegram-banner" (click)="openBannerLink()">
-        <img src="telegram.svg" alt="Telegram" class="telegram-icon" />
-        <div>
-            <p>Join us on Telegram</p>
-            <span>Get the latest updates here!</span>
-        </div>
-        <div>
-            <img src="go-inside.svg" alt="go" class="telegram-icon" />
-        </div>
+  <!-- 🔹 Referral Section -->
+  <div class="referral-section">
+    <h6>SHARE YOUR LINK</h6>
+    <h3>Earn up to 21% profit bonus when your friends sign up</h3>
+    <div class="code-box">
+      <input type="text" readonly [value]="refferalCode" />
+      <img src="/copy.svg" alt="copy" (click)="copyReferralLink()" />
     </div>
+  </div>
 
+  <!-- 🔹 Telegram Banner -->
+  <div class="telegram-banner" (click)="openBannerLink()">
+    <img src="telegram.svg" alt="Telegram" class="telegram-icon" />
+    <div>
+      <p>Join us on Telegram</p>
+      <span>Get the latest updates here!</span>
+    </div>
+    <div>
+      <img src="go-inside.svg" alt="go" class="telegram-icon" />
+    </div>
+  </div>
 </div>
 
 <!-- 🔹 Support Popup Overlay -->
