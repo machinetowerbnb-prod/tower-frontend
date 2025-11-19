@@ -15,68 +15,69 @@
 /* 🔹 Carousel */
 /* Carousel container adjustments */
 .carousel-container {
-  position: relative;
-  border-radius: 14px;
-  overflow: hidden;
-  margin-bottom: 16px;
-  width: 100%;
-  max-width: 420px;
-  margin-left: auto;
-  margin-right: auto;
-  touch-action: pan-y; /* allow vertical scrolling while handling horizontal swipe */
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    width: 100%;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+    touch-action: pan-y;
+    /* allow vertical scrolling while handling horizontal swipe */
 }
 
 /* Smooth image crossfade */
 .carousel-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-  transition: opacity 250ms ease-in-out, transform 300ms ease;
-  opacity: 1;
-  will-change: opacity, transform;
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: opacity 250ms ease-in-out, transform 300ms ease;
+    opacity: 1;
+    will-change: opacity, transform;
 }
 
 /* fade class applied during change */
 .carousel-image.fade {
-  opacity: 0.01;
-  transform: scale(0.995);
+    opacity: 0.01;
+    transform: scale(0.995);
 }
 
 /* Dots */
 .carousel-dots {
-  position: absolute;
-  bottom: 10px;
-  right: 12px;
-  display: flex;
-  gap: 6px;
-  z-index: 10;
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    display: flex;
+    gap: 6px;
+    z-index: 10;
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 2px;
-  background: #E7EDFF;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: #E7EDFF;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: inline-block;
 }
 
 .dot.active {
-  background: #2752E7;
-  width: 10px;
-  height: 10px;
-  transform: scale(1.05);
-  box-shadow: 0 0 6px rgba(39,82,231,0.15);
+    background: #2752E7;
+    width: 10px;
+    height: 10px;
+    transform: scale(1.05);
+    box-shadow: 0 0 6px rgba(39, 82, 231, 0.15);
 }
 
 /* for smaller screens tweak */
 @media (max-width: 420px) {
-  .carousel-dots {
-    right: 8px;
-    bottom: 8px;
-  }
+    .carousel-dots {
+        right: 8px;
+        bottom: 8px;
+    }
 }
 
 
@@ -121,6 +122,21 @@
         padding: 10px 25px;
         border-radius: 15px;
         margin-top: 15px;
+
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            bottom: 10px;
+            left: 50%;
+            width: 1.5px;
+            background: rgba(255, 255, 255, 0.4);
+            /* light white line */
+            transform: translateX(-50%);
+        }
+
 
         .wallet-item {
             // flex: 1;
@@ -362,4 +378,52 @@
     &:hover {
         background: #003ee6;
     }
+}
+
+.gif-placeholder {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+
+  img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+}
+
+
+.wallet-section .wallet-values {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 50%;
+    width: 1.5px;
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateX(-50%);
+  }
+}
+
+
+.code-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+//   margin-top: 12px;
+}
+
+.code-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.referral-gif {
+  width: 50%;
+  height: 50%;
+  object-fit: contain;
 }
