@@ -253,6 +253,7 @@ export class Game implements OnInit {
             if (card.buttonText === 'Unlock Now') {
               this.getGameData(userId!);
               this.cdr.detectChanges();
+              this.gameSuccessModel.openModal()
               return;
             } else {
               this.activateGame(userId!);
