@@ -32,7 +32,7 @@
                 tx.type === 'credit'
                   ? '/credit.svg'
                   : tx.type === 'deposit'
-                  ? '/deposits.svg'
+                  ? '/credit.svg' : tx.type === 'withdraw' ? '/deposits.svg'
                   : '/credit.svg'
               " alt="icon" />
                     </div>

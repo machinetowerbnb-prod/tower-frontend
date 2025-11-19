@@ -427,3 +427,26 @@
   height: 50%;
   object-fit: contain;
 }
+
+.bnb-section {
+  background: #E7EDFF;
+  padding: 16px;
+  border-radius: 14px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.bnb-section h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2440A0;
+  margin-bottom: 12px;
+}
+
+.bnb-section p {
+  font-size: 13px;
+  color: #42474E;
+  line-height: 1.55;
+  margin-bottom: 10px;
+}
