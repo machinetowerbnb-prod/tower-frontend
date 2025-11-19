@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './team.scss'
 })
 export class Team implements OnInit {
-  userName = 'Marcelo';
+  userName = '';
   data: any = {};
   levels: any[] = [];
   isLoading = false;
@@ -71,6 +71,7 @@ export class Team implements OnInit {
             teamRecharge: data.teamRecharge,
             teamWitdrawls: data.teamWitdrawls
           };
+          this.userName = data.username;
 
           // 🔹 Determine the max from reffered counts (for progress bars)
           const max = Math.max(
