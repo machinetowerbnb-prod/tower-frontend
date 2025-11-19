@@ -42,17 +42,32 @@ export class GameSuccessTimer implements OnDestroy, OnInit {
 
   /** Start timer popup */
   open(startTimestamp: number) {
-    if (!isPlatformBrowser(this.platformId)) return;
+  if (!isPlatformBrowser(this.platformId)) return;
 
-    this.targetTime = startTimestamp + 24 * 60 * 60 * 1000; // 24 hours
+  const now = Date.now();
+  const twentyFourHours = 24 * 60 * 60 * 1000;
 
+  // 🛑 If timestamp is older than 24h → stop timer
+  if (now - startTimestamp >= twentyFourHours) {
+    this.hours = '00';
+    this.minutes = '00';
+    this.seconds = '00';
     this.isVisible = true;
     this.isClosing = false;
-
     this.renderer.setStyle(document.body, 'overflow', 'hidden');
-
-    this.startCountdown();
+    return;
   }
+
+  // ✅ Not older → start countdown
+  this.targetTime = startTimestamp + twentyFourHours;
+
+  this.isVisible = true;
+  this.isClosing = false;
+  this.renderer.setStyle(document.body, 'overflow', 'hidden');
+
+  this.startCountdown();
+}
+
 
   /** Main timer logic */
   private startCountdown() {
