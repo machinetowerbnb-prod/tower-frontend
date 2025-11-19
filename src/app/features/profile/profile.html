@@ -37,19 +37,19 @@
 
     <!-- 🔹 Wallet Summary -->
     <div class="wallet-summary">
-      <h4>Wallet Summary Details</h4>
+        <h4>Wallet Summary Details</h4>
 
-      <div class="summary-card" *ngFor="let item of walletSummary">
-        <div class="summary-left">
-          <img src="/profile-summary.svg" alt="icon" />
-          <p>{{ item.label }}</p>
-        </div>
-        <div class="summary-right" [ngClass]="{
+        <div class="summary-card" *ngFor="let item of walletSummary">
+            <div class="summary-left">
+                <img src="/profile-summary.svg" alt="icon" />
+                <p>{{ item.label }}</p>
+            </div>
+            <div class="summary-right" [ngClass]="{
             'summary-right-negative': item.label === 'Your Total withdrawals'
           }">
-          <span>{{ item.value }} <b>USDT</b></span>
+                <span>{{ item.value }} <b>USDT</b></span>
+            </div>
         </div>
-      </div>
     </div>
 
     <!-- 🔹 Other Settings -->
@@ -83,25 +83,52 @@
     </div>
 
     <div class="support-content">
-        <p>
-            Get a Welcome Trial Bonus › Intern Newbies 2 Days Experience package RIB
-        </p>
-        <p>
-            -- Activation fee – [Free] Redeem 100 USDT for 2-day free trial to
-            Experience the work by joining the Official Group / Contact customer service
-            or Redeem through authorized Managers by providing your Account details.
-        </p>
-        <p>
-            Tips: The free trial bonus of 100 USDT is exclusively available to new users
-            for the purpose of experiencing the project, allowing them to earn up to
-            2 USDT. The earnings from the trial will be credited to the withdrawal
-            wallet and can be withdrawn once the user makes a subsequent official
-            investment in one of the RIBs packages.
-        </p>
-        <p>
-            Join Official Announcement Channel of Mission Tower:
-        </p>
+        <p>TowerBNB</p>
+
+        <p>• Sign-up and explore the Free Trial and earn 8 USDT fund.</p>
+
+        <p>• Join the group and contact your Manager or Customer Support to receive a 2 USDT joining bonus.</p>
+
+        <p>• Claim a total of 10 USDT and use the funds to circulate Tower Upgrade or withdraw upon upgrading to Core 1G
+            Tower Computing.</p>
+
+        <p>• $2 bonus when activating your account with $50.</p>
     </div>
 
     <button class="support-btn">Support</button>
+</div>
+
+
+<!-- 🔹 Logout Popup Overlay -->
+<div class="logout-overlay" *ngIf="showLogout" (click)="closeLogout()"></div>
+
+<!-- 🔹 Logout Popup -->
+<div class="logout-popup" *ngIf="showLogout">
+
+    <!-- Header -->
+    <div class="logout-header">
+        <h3>Log out!</h3>
+        <button class="close-btn" (click)="closeLogout()">×</button>
+    </div>
+
+    <!-- Icon -->
+    <div class="logout-icon">
+        <img src="logout.gif" alt="logout" />
+    </div>
+
+    <!-- Text -->
+    <div class="logout-text">
+        <h4>Are you sure?</h4>
+        <p>You will now be logged out of your current account</p>
+    </div>
+
+    <!-- Buttons -->
+    <button class="logout-confirm" (click)="confirmLogout()">
+        Yes, log out
+    </button>
+
+    <button class="logout-cancel" (click)="closeLogout()">
+        No, Cancel
+    </button>
+
 </div>

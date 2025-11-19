@@ -14,6 +14,7 @@ import { Withdrawal } from './features/withdrawal/withdrawal'
 import { History } from './features/history/history'
 import { Commision } from './features/commision/commision'
 import { Members } from './features/members/members'
+import { Success } from './features/success/success'
 import { ChangePassword } from './features/change-password/change-password'
 import { TermsAndConditions } from './features/terms-and-conditions/terms-and-conditions'
 import { Adminlayout } from './admin/adminlayout/adminlayout'
@@ -48,6 +49,7 @@ export const routes: Routes = [
       { path: 'game', component: Game },
       { path: 'team', component: Team },
       { path: 'profile', component: Profile },
+      { path: 'success', component: Success },
       
     ],
   },
