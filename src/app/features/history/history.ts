@@ -8,6 +8,7 @@ interface Transaction {
   amount: number;
   timestamp: string;
   transactionId: string;
+  status: string;
 }
 
 

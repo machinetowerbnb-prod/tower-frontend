@@ -218,7 +218,7 @@ export class Game implements OnInit {
       if (activationTime && activationTime != null) {
         let currentTime = Date.now();
         if (this.isCurrentGreaterThanYesterday(currentTime, activationTime)) {
-          this.timer.open(activationTime);
+          this.timer.open(Number(activationTime));
         } else {
           this.activateGame(userId!);
         }
@@ -253,6 +253,7 @@ export class Game implements OnInit {
             if (card.buttonText === 'Unlock Now') {
               this.getGameData(userId!);
               this.cdr.detectChanges();
+              this.gameSuccessModel.openModal()
               return;
             } else {
               this.activateGame(userId!);

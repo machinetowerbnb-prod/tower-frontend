@@ -87,7 +87,7 @@
 
   &:hover:not(.disabled-card) {
     transform: translateY(-3px);
-  } 
+  }
 
   .overlay {
     position: absolute;
@@ -110,7 +110,8 @@
     left: 18px;
     background: rgba(255, 255, 255, 0.95);
     color: #333;
-    padding: 2px 5px;
+    padding: 0px 5px;
+    padding-top: 2px;
     border-radius: 5px;
     font-size: 10px;
     font-weight: 600;
@@ -219,5 +220,23 @@
         font-size: 12px;
       }
     }
+  }
+}
+
+.first-card {
+  color: #E0CEA0 !important; // 🔥 Bright red same as screenshot
+
+  .reward,
+  // .validity,
+  // .status,
+  // .miningCycle,
+  // .buttonText,
+  h3,
+  p {
+    color: #E0CEA0 !important;
+  }
+
+  .validity {
+    background-color: rgb(206 206 206 / 95%);
   }
 }

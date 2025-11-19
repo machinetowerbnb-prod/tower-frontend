@@ -5,7 +5,8 @@ import {
   NgZone,
   Inject,
   PLATFORM_ID,
-  OnDestroy
+  OnDestroy,
+  OnInit
 } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
@@ -17,7 +18,7 @@ import { ChangeDetectorRef } from '@angular/core';
   templateUrl: './game-success-timer.html',
   styleUrl: './game-success-timer.scss',
 })
-export class GameSuccessTimer implements OnDestroy {
+export class GameSuccessTimer implements OnDestroy, OnInit {
   isVisible = false;
   isClosing = false;
 
@@ -35,19 +36,38 @@ export class GameSuccessTimer implements OnDestroy {
     private cdr: ChangeDetectorRef
   ) { }
 
+  ngOnInit() {
+  this.renderer.removeStyle(document.body, 'overflow');
+}
+
   /** Start timer popup */
   open(startTimestamp: number) {
-    if (!isPlatformBrowser(this.platformId)) return;
+  if (!isPlatformBrowser(this.platformId)) return;
 
-    this.targetTime = startTimestamp + 24 * 60 * 60 * 1000; // 24 hours
+  const now = Date.now();
+  const twentyFourHours = 24 * 60 * 60 * 1000;
 
+  // 🛑 If timestamp is older than 24h → stop timer
+  if (now - startTimestamp >= twentyFourHours) {
+    this.hours = '00';
+    this.minutes = '00';
+    this.seconds = '00';
     this.isVisible = true;
     this.isClosing = false;
-
     this.renderer.setStyle(document.body, 'overflow', 'hidden');
-
-    this.startCountdown();
+    return;
   }
+
+  // ✅ Not older → start countdown
+  this.targetTime = startTimestamp + twentyFourHours;
+
+  this.isVisible = true;
+  this.isClosing = false;
+  this.renderer.setStyle(document.body, 'overflow', 'hidden');
+
+  this.startCountdown();
+}
+
 
   /** Main timer logic */
   private startCountdown() {
@@ -81,13 +101,19 @@ export class GameSuccessTimer implements OnDestroy {
   close() {
     this.isClosing = true;
 
+    // match fade-out animation
     setTimeout(() => {
-      this.isVisible = false;
+      if (this.intervalId) clearInterval(this.intervalId);
+
+      // IMPORTANT — remove FIRST
       this.renderer.removeStyle(document.body, 'overflow');
 
-      if (this.intervalId) clearInterval(this.intervalId);
+      // Now hide modal
+      this.isVisible = false;
+
     }, 250);
   }
+
 
   ngOnDestroy() {
     if (this.intervalId) clearInterval(this.intervalId);

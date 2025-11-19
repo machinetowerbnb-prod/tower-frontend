@@ -1,9 +1,11 @@
 <div class="home-container">
 
     <!-- 🔹 Carousel Section -->
-    <div class="carousel-container">
-        <!-- 🖼️ Dynamic Image -->
-        <img [src]="currentImage" alt="Carousel Image" class="carousel-image" />
+    <div class="carousel-container" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)"
+        (touchend)="onTouchEnd()">
+        <!-- 🖼️ Dynamic Image with smooth crossfade -->
+        <img [src]="currentImage" alt="Carousel Image" class="carousel-image" [class.fade]="isFading"
+            (load)="onImageLoad()" />
 
         <!-- 🔵 Dots (square indicators) -->
         <div class="carousel-dots">
@@ -16,18 +18,18 @@
     <div class="wallet-section">
         <div class="wallet-buttons">
             <div class="wallet-btn" *ngFor="let action of walletActions" (click)="onWalletAction(action.label)">
-                <img [src]="action.icon" alt="{{action.label}}" />
+                <img [src]="action.icon" alt="{{ action.label }}" />
                 <span>{{ action.label }}</span>
             </div>
         </div>
-     <app-deposit #depositModal (depositCompleted)="onDepositCompleted()"></app-deposit>
+        <app-deposit #depositModal (depositCompleted)="onDepositCompleted()"></app-deposit>
         <div class="wallet-values">
             <div class="wallet-item">
-                <p>Working Wallet</p>
+                <p>Main Wallet</p>
                 <h3>{{ workingWallet }} <span>USDT</span></h3>
             </div>
             <div class="wallet-item">
-                <p>Withdrawal Wallet</p>
+                <p>Withdrawal Account</p>
                 <h3>{{ withdrawalWallet }} <span>USDT</span></h3>
             </div>
         </div>
@@ -35,15 +37,39 @@
 
     <!-- 🔹 Referral Section -->
     <div class="referral-section">
-        <h6>SHARE YOUR CODE</h6>
-        <h3>You get $100, when every friend signs up!</h3>
-        <div class="code-box">
-            <input type="text" readonly value={{refferalCode}} />
-            <img src="/copy.svg" alt="copy" (click)="copyReferralLink()"/>
+        <div class="code-row">
+            <div class="code-box" style="display: block;">
+                <h6>SHARE YOUR LINK</h6>
+                <h3>Earn up to 21% profit bonus when your friends sign up</h3>
+                <input type="text" readonly [value]="refferalCode" />
+                <img src="/copy.svg" alt="copy" (click)="copyReferralLink()" />
+            </div>
+
+            <img src="/gift.gif" class="referral-gif" alt="gif" />
         </div>
-        <div>
-            <!-- <img src="giftbox.svg" alt="gift" class="telegram-icon" /> -->
-        </div>
+
+    </div>
+
+    <div class="bnb-section">
+        <h3>Tower BNB Core Concept</h3>
+
+        <p>
+            At TowerBNB, the Circulation Yield Protocol (CYP) redefines how digital assets generate
+            value. Built on an IDV-based Circulation strategy model, it offers a highly stable
+            and quantitative trading design. It allows users to earn consistent returns from
+            digital assets, all while eliminating manual monitoring, trading risks, and
+            market volatility through automated and smart-driven interaction methods.
+        </p>
+
+        <p>
+            The TowerBNB Circulation Strategy is operated based on the Ethereum Network and uses
+            Tower’s circular product—Compound-Connected Loop Yield Technology for optimized
+            circulation strategy rewards. Tower’s Circular strategy helps the technology interact
+            with algorithms that automatically maximize returns, allowing participants to earn
+            predictable income from digital assets. The model focuses on high-yield accumulation
+            based on capital-flow efficiency, ensuring maximum potential for both new and existing
+            investors.
+        </p>
     </div>
 
     <!-- 🔹 Telegram Banner -->
@@ -57,7 +83,6 @@
             <img src="go-inside.svg" alt="go" class="telegram-icon" />
         </div>
     </div>
-
 </div>
 
 <!-- 🔹 Support Popup Overlay -->
@@ -65,31 +90,21 @@
 
 <!-- 🔹 Support Popup -->
 <div class="support-popup" *ngIf="showSupport">
-  <div class="support-header">
-    <h3>We’re here to help</h3>
-    <button class="close-btn" (click)="closeSupportPopup()">×</button>
-  </div>
+    <div class="support-header">
+        <h3>We’re here to help</h3>
+        <button class="close-btn" (click)="closeSupportPopup()">×</button>
+    </div>
 
-  <div class="support-content">
-    <p>
-      Get a Welcome Trial Bonus › Intern Newbies 2 Days Experience package RIB
-    </p>
-    <p>
-      -- Activation fee – [Free] Redeem 100 USDT for 2-day free trial to
-      Experience the work by joining the Official Group / Contact customer service
-      or Redeem through authorized Managers by providing your Account details.
-    </p>
-    <p>
-      Tips: The free trial bonus of 100 USDT is exclusively available to new users
-      for the purpose of experiencing the project, allowing them to earn up to
-      2 USDT. The earnings from the trial will be credited to the withdrawal
-      wallet and can be withdrawn once the user makes a subsequent official
-      investment in one of the RIBs packages.
-    </p>
-    <p>
-      Join Official Announcement Channel of Mission Tower:
-    </p>
-  </div>
+    <div class="support-content">
+        <p>• Sign-up and explore the Free Trial and earn 8 USDT fund.</p>
 
-  <button class="support-btn">Support</button>
+        <p>• Join the group and contact your Manager or Customer Support to receive a 2 USDT joining bonus.</p>
+
+        <p>• Claim a total of 10 USDT and use the funds to circulate Tower Upgrade or withdraw upon upgrading to Core 1G
+            Tower Computing.</p>
+
+        <p>• $2 bonus when activating your account with $50.</p>
+    </div>
+
+    <button class="support-btn">Support</button>
 </div>

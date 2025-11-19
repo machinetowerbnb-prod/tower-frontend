@@ -283,3 +283,15 @@ mat-form-field {
   box-shadow: none;
   cursor: not-allowed;
 }
+
+.numbered-list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  color: #42474e;
+  line-height: 1.55;
+
+  li {
+    margin-bottom: 8px;
+  }
+}

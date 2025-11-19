@@ -47,3 +47,27 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 [dir="ltr"] .header {
   text-align: left;
 }
+
+/* 🔹 Global Placeholder Color */
+::placeholder {
+  color: #94A3B8 !important;
+  opacity: 1; /* Ensure visible */
+}
+
+/* 🔹 For all browsers */
+input::placeholder,
+textarea::placeholder {
+  color: #94A3B8 !important;
+}
+
+input::-webkit-input-placeholder {
+  color: #94A3B8 !important;
+}
+
+input:-ms-input-placeholder {
+  color: #94A3B8 !important;
+}
+
+input::-ms-input-placeholder {
+  color: #94A3B8 !important;
+}

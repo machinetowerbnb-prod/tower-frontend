@@ -32,20 +32,26 @@
                 tx.type === 'credit'
                   ? '/credit.svg'
                   : tx.type === 'deposit'
-                  ? '/deposits.svg'
+                  ? '/credit.svg' : tx.type === 'withdraw' ? '/deposits.svg'
                   : '/credit.svg'
               " alt="icon" />
                     </div>
 
                     <div class="tx-details">
-                        <p class="tx-type">{{ tx.type.toUpperCase() }}</p>
+                        <p class="tx-type">
+                            {{ tx.type === 'withdraw' ? 'PAYOUT WITHDRAW' : tx.type.toUpperCase() }}
+                        </p>
                         <h3 [ngClass]="{
                 credit: tx.type === 'credit',
                 deposit: tx.type === 'deposit',
                 reward: tx.type === 'reward'
               }">
-                            {{ tx.type === 'credit' || tx.type === 'reward' ? '+' : '' }}{{ tx.amount | number: '1.0-2' }}
+                            {{ tx.type === 'credit' || tx.type === 'reward' ? '+' : '' }}{{ tx.amount | number: '1.0-2'
+                            }}
                             <span>USDT</span>
+                            <span *ngIf="tx.type === 'withdraw'" class="tx-status">
+                                • {{ tx.status }}
+                            </span>
                         </h3>
                         <div style="display: flex;">
                             <p class="tx-id">{{ tx.transactionId }}</p>
@@ -60,29 +66,25 @@
     </div>
 
     <!-- 🔹 Filter Popup (bottom sheet) -->
-<div class="filter-overlay" *ngIf="showFilter" (click)="closeFilterPopup()"></div>
+    <div class="filter-overlay" *ngIf="showFilter" (click)="closeFilterPopup()"></div>
 
-<div class="filter-popup" *ngIf="showFilter">
-  <div class="filter-header">
-    <h3>Smart Filters</h3>
-    <button class="close-btn" (click)="closeFilterPopup()">×</button>
-  </div>
+    <div class="filter-popup" *ngIf="showFilter">
+        <div class="filter-header">
+            <h3>Smart Filters</h3>
+            <button class="close-btn" (click)="closeFilterPopup()">×</button>
+        </div>
 
-  <div
-    class="filter-option"
-    *ngFor="let filter of filters"
-    [class.active]="filter.value === activeFilter"
-    (click)="selectFilter(filter.value)"
-  >
-    <div class="filter-icon">
-      <img [src]="filter.icon" alt="{{ filter.label }}" />
+        <div class="filter-option" *ngFor="let filter of filters" [class.active]="filter.value === activeFilter"
+            (click)="selectFilter(filter.value)">
+            <div class="filter-icon">
+                <img [src]="filter.icon" alt="{{ filter.label }}" />
+            </div>
+            <div class="filter-text">
+                <h4>{{ filter.label }}</h4>
+                <p>{{ filter.desc }}</p>
+            </div>
+            <div class="filter-arrow">›</div>
+        </div>
     </div>
-    <div class="filter-text">
-      <h4>{{ filter.label }}</h4>
-      <p>{{ filter.desc }}</p>
-    </div>
-    <div class="filter-arrow">›</div>
-  </div>
-</div>
 
 </div>
