@@ -119,3 +119,13 @@
     transform: translateY(50px);
   }
 }
+
+
+.overlay.fade-out {
+  animation: overlayFadeOut 0.25s ease-out forwards;
+}
+
+@keyframes overlayFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}

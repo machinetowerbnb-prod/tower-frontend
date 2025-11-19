@@ -1,7 +1,7 @@
 <div class="timer-modal" *ngIf="isVisible">
-  <div class="overlay" (click)="close()"></div>
-
-  <div class="modal-box" [class.fade-out]="isClosing">
+  
+  <div class="overlay" [class.fade-out]="isClosing" (click)="close()"></div>
+    <div class="modal-box" [class.fade-out]="isClosing">
     <div class="header">
       <h3>You’re On a Roll!</h3>
       <img src="/close_round.svg" alt="close" class="close-btn" (click)="close()" />

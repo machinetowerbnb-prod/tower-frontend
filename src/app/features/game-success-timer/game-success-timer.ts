@@ -86,7 +86,7 @@ export class GameSuccessTimer implements OnDestroy {
       this.renderer.removeStyle(document.body, 'overflow');
 
       if (this.intervalId) clearInterval(this.intervalId);
-    }, 250);
+    }, 250);  // match animation duration
   }
 
   ngOnDestroy() {
