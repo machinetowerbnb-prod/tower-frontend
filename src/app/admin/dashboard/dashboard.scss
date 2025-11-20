@@ -97,3 +97,20 @@
     justify-content: flex-start;
   }
 }
+
+/* ⭐ Mobile responsiveness patch */
+@media (max-width: 600px) {
+  .dashboard-container {
+    padding: 14px !important;
+  }
+
+  .cards-container {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .stat-card {
+    padding: 14px !important;
+  }
+}
+

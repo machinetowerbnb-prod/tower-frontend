@@ -186,3 +186,43 @@
   }
 }
 
+/* ⭐ Users table — perfect mobile responsiveness */
+@media (max-width: 768px) {
+  .users-container {
+    padding: 14px !important;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .right-controls {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .table-container {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+
+  .responsive-table {
+    min-width: 950px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .responsive-table {
+    min-width: 900px !important;
+  }
+
+  .send-email-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
