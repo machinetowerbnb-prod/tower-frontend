@@ -226,3 +226,54 @@
     text-align: center;
   }
 }
+
+/* ============================== */
+/* ⭐ FIXED ONLY NAME COLUMN      */
+/* ============================== */
+
+.table-container {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
+  position: relative;
+}
+
+/* ⭐ Clean table with no white blocks */
+.responsive-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+/* Sticky only SECOND column */
+.responsive-table td:nth-child(2),
+.responsive-table th:nth-child(2) {
+  position: sticky;
+  left: 60px; /* adjust based on SN column width */
+  background: #fff;
+  z-index: 10;
+  border-right: 1px solid #f0f0f0;
+}
+
+/* SN column — NOT sticky */
+.responsive-table th:first-child,
+.responsive-table td:first-child {
+  background: #fff;
+  z-index: 9;
+}
+
+/* Row styling */
+.responsive-table tbody tr:hover {
+  background: #f9fbff;
+}
+
+/* Header */
+.responsive-table thead th {
+  background: #eef2ff;
+  font-weight: 600;
+  color: #333;
+  padding: 10px 12px;
+}
