@@ -40,10 +40,8 @@ export class UserDetail {
   }
 
   openAmountPopup(action: string, walletValue: number) {
-    this.prefilledWallet = walletValue;
-
     this.openAmount.emit({
-      action: action,
+      action: action === 'Deposit' ? 'Credit' : 'Debit',  // FIX 1
       row: this.user,
       wallet: walletValue
     });

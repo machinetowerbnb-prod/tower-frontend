@@ -20,26 +20,19 @@
     <!-- 🔹 Wallet Field -->
     <div class="form-group">
       <label>Wallet</label>
-      <input type="text" [(ngModel)]="formData.wallet" readonly />
+      <input type="text" [value]="formData.wallet" readonly />
     </div>
 
     <!-- 🔹 Amount Field -->
     <div class="form-group">
       <label>Amount</label>
-      <input
-        type="number"
-        [(ngModel)]="formData.amount"
-        placeholder="Enter amount"
-      />
+      <input type="number" [(ngModel)]="formData.amount" placeholder="Enter amount" />
     </div>
 
     <!-- 🔹 Description Field -->
     <div class="form-group">
       <label>Description</label>
-      <textarea
-        [(ngModel)]="formData.description"
-        placeholder="Enter description"
-      ></textarea>
+      <textarea [(ngModel)]="formData.description" placeholder="Enter description"></textarea>
     </div>
   </div>
 

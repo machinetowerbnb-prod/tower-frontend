@@ -30,20 +30,23 @@ export class UpdateAmount implements OnChanges {
   ngOnChanges() {
     if (this.actionType && this.rowData) {
 
-      this.formData.screen = this.actionType;
+      // Set action dropdown (Credit / Debit)
       this.formData.action = this.actionType;
+      this.formData.screen = this.actionType;
 
-      // ✔ Wallet pre-fill from UserDetail OR Users table
-      if (this.prefilledWallet !== '') {
-        this.formData.wallet = this.prefilledWallet;
-      } else {
-        this.formData.wallet =
-          this.actionType === 'Deposit'
-            ? this.rowData.wallet
-            : this.rowData.earnings;
-      }
+      // Determine wallet type
+      const isDeposit = this.actionType === 'Deposit';
+
+      // LABEL: Working Wallet / Withdrawal Wallet
+      this.formData.wallet =
+        isDeposit ? 'Working Wallet' : 'Withdrawal Wallet';
+
+      // AMOUNT: Pre-fill current amount
+      this.formData.amount =
+        isDeposit ? this.rowData.wallet : this.rowData.earnings;
     }
   }
+
 
   closeModal() {
     this.close.emit();
