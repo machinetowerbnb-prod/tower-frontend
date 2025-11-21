@@ -52,6 +52,17 @@ export class Signin implements OnInit {
     private snackBar: MatSnackBar,
     private authService: AuthService
   ) {
+
+    localStorage.removeItem('userId');
+    localStorage.removeItem('email');
+
+    if ('caches' in window) {
+      caches.keys().then(names => {
+        names.forEach(name => caches.delete(name));
+      });
+    }
+
+
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
