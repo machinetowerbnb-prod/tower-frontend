@@ -20,8 +20,11 @@
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "cache": {
+              "optimization": true
+            },
             "assets": [
-              {
+              { 
                 "glob": "**/*",
                 "input": "public"
               }
