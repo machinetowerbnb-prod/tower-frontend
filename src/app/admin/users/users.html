@@ -38,14 +38,14 @@
           <td>{{ user.referralId }}</td>
 
           <!-- ⭐ FIXED width for wallet + button alignment -->
-          <td class="wallet-cell">
+          <td>
             <span class="amount">{{ user.wallet }}</span>
-            <button class="add-btn" (click)="openPopup('Deposit', user)">Add</button>
+            <!-- <button class="add-btn" (click)="openPopup('Deposit', user)">Add</button> -->
           </td>
 
-          <td class="wallet-cell">
+          <td>
             <span class="amount">{{ user.earnings }}</span>
-            <button class="add-btn" (click)="openPopup('Withdraw', user)">Add</button>
+            <!-- <button class="add-btn" (click)="openPopup('Withdraw', user)">Add</button> -->
           </td>
 
           <td>{{ user.referrals }}</td>
@@ -60,8 +60,9 @@
 
           <!-- ⭐ NEW Send email column -->
           <td>
-            <button class="email-btn" (click)="sendEmail(user)">
-              <i class="fa fa-envelope"></i>
+            <!-- {{ user.email }} -->
+            <button class="edit-btn" (click)="openUserDetail(user)" title="Edit user">
+              <i class="fa fa-edit"></i>
             </button>
           </td>
 
@@ -84,3 +85,7 @@
 
 <app-update-amount [show]="showPopup" [actionType]="selectedAction" [rowData]="selectedRow" (close)="closePopup()"
   (submitData)="handleSubmit($event)"></app-update-amount>
+
+<app-user-detail *ngIf="showDetail" [user]="selectedRow" (close)="closeUserDetail()"
+  (add)="openPopup($event.action, $event.user)" (toggleStatus)="toggleStatus($event)" (sendEmail)="sendEmail($event)">
+</app-user-detail>

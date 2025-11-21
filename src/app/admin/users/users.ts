@@ -4,10 +4,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { UpdateAmount } from '../update-amount/update-amount';
 import { AuthService } from '../../services/auth.service';
+import { UserDetail } from '../user-detail/user-detail';
 
 @Component({
   selector: 'app-users',
-  imports: [CommonModule, MatIconModule, FormsModule, UpdateAmount],
+  imports: [CommonModule, MatIconModule, FormsModule, UpdateAmount, UserDetail],
   templateUrl: './users.html',
   styleUrl: './users.scss'
 })
@@ -19,6 +20,7 @@ export class Users implements OnInit {
   pageSize: number = 10;
   currentPage: number = 1;
   showPopup = false;
+  showDetail = false;
 
   selectedAction = '';
   selectedRow: any = null;
@@ -163,5 +165,14 @@ export class Users implements OnInit {
   sendEmail(user: any) {
     console.log("📧 Send email clicked:", user);
   }
+
+  openUserDetail(user: any) {
+    this.selectedRow = user;
+    this.showDetail = true;
+  }
+
+  closeUserDetail() {
+  this.showDetail = false;
+}
 
 }
