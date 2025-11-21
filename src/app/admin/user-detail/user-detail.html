@@ -16,7 +16,7 @@
     <label>Working Wallet</label>
     <div class="wallet-actions">
       <span>{{ user.wallet }}</span>
-      <button class="add-btn" (click)="triggerAdd('Deposit')">Add</button>
+      <button class="add-btn" (click)="openAmountPopup('Deposit', user.wallet)">Add</button>
     </div>
   </div>
 
@@ -24,7 +24,7 @@
     <label>Withdraw Wallet</label>
     <div class="wallet-actions">
       <span>{{ user.earnings }}</span>
-      <button class="add-btn" (click)="triggerAdd('Withdraw')">Add</button>
+      <button class="add-btn" (click)="openAmountPopup('Withdraw', user.earnings)">Add</button>
     </div>
   </div>
 

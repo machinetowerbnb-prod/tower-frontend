@@ -83,9 +83,18 @@
 </div>
 
 
-<app-update-amount [show]="showPopup" [actionType]="selectedAction" [rowData]="selectedRow" (close)="closePopup()"
-  (submitData)="handleSubmit($event)"></app-update-amount>
+<app-update-amount [show]="showPopup" [actionType]="selectedAction" [rowData]="selectedRow"
+  [prefilledWallet]="prefilledWallet" (close)="closePopup()" (submitData)="handleSubmit($event)">
+</app-update-amount>
 
-<app-user-detail *ngIf="showDetail" [user]="selectedRow" (close)="closeUserDetail()"
-  (add)="openPopup($event.action, $event.user)" (toggleStatus)="toggleStatus($event)" (sendEmail)="sendEmail($event)">
+
+<app-user-detail 
+  #userDetailRef 
+  *ngIf="showDetail"
+  [user]="selectedRow"
+  (close)="closeUserDetail()"
+  (add)="openPopup($event.action, $event.row, $event.wallet)"
+  (toggleStatus)="toggleStatus($event)"
+  (sendEmail)="sendEmail($event)"
+  (openAmount)="openPopup($event.action, $event.row, $event.wallet)">
 </app-user-detail>

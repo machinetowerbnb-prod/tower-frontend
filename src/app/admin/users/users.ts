@@ -21,6 +21,10 @@ export class Users implements OnInit {
   currentPage: number = 1;
   showPopup = false;
   showDetail = false;
+  prefilledWallet: any = '';
+  showUserDetail = false;
+  editingUser: any = null;
+
 
   selectedAction = '';
   selectedRow: any = null;
@@ -155,12 +159,12 @@ export class Users implements OnInit {
     this.showPopup = false;
   }
 
-  openPopup(action: string, row: any) {
-    console.log('Open popup for', action, 'of user', row);
-    this.selectedAction = action;
-    this.selectedRow = row;
-    this.showPopup = true;
-  }
+  openPopup(action: string, row: any, wallet: number) {
+  this.selectedAction = action;
+  this.selectedRow = row;
+  this.prefilledWallet = wallet;     // ⭐ STORE PREFILL VALUE
+  this.showPopup = true;
+}
 
   sendEmail(user: any) {
     console.log("📧 Send email clicked:", user);
@@ -172,7 +176,7 @@ export class Users implements OnInit {
   }
 
   closeUserDetail() {
-  this.showDetail = false;
-}
+    this.showDetail = false;
+  }
 
 }
