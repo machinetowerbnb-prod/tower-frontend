@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
+import { EmailModal } from '../email-modal/email-modal';
 
 @Component({
   selector: 'app-user-detail',
-  imports: [],
+  imports: [EmailModal],
   templateUrl: './user-detail.html',
   styleUrl: './user-detail.scss'
 })
@@ -49,5 +49,13 @@ export class UserDetail {
     });
   }
 
+  onEmailSent(payload: { to: string[]; subject: string; html: string }) {
+    // payload contains everything; currently modal already console.logged it.
+    // Implement your real send email API here.
+    console.log('Parent received send payload', payload);
+  }
 
+  onEmailClosed() {
+    console.log('Email modal closed');
+  }
 }

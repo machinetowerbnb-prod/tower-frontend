@@ -5,10 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { UpdateAmount } from '../update-amount/update-amount';
 import { AuthService } from '../../services/auth.service';
 import { UserDetail } from '../user-detail/user-detail';
+import { EmailModal } from '../email-modal/email-modal';
 
 @Component({
   selector: 'app-users',
-  imports: [CommonModule, MatIconModule, FormsModule, UpdateAmount, UserDetail],
+  imports: [CommonModule, MatIconModule, FormsModule, UpdateAmount, UserDetail, EmailModal],
   templateUrl: './users.html',
   styleUrl: './users.scss'
 })
@@ -28,7 +29,7 @@ export class Users implements OnInit {
 
   selectedAction = '';
   selectedRow: any = null;
-
+  allEmails = [];
   constructor(
     private authService: AuthService,
     private ngZone: NgZone,
@@ -52,6 +53,7 @@ export class Users implements OnInit {
         console.log("✅ Users API Response:", res);
 
         if (res.statusCode === 200 && Array.isArray(res.data)) {
+          this.allEmails = res.data.map((email:any) => email.email) || [];
           this.ngZone.run(() => {
             this.users = res.data;
             this.filteredUsers = [...this.users];
@@ -160,11 +162,11 @@ export class Users implements OnInit {
   }
 
   openPopup(action: string, row: any, wallet: number) {
-  this.selectedAction = action;
-  this.selectedRow = row;
-  this.prefilledWallet = wallet;     // ⭐ STORE PREFILL VALUE
-  this.showPopup = true;
-}
+    this.selectedAction = action;
+    this.selectedRow = row;
+    this.prefilledWallet = wallet;     // ⭐ STORE PREFILL VALUE
+    this.showPopup = true;
+  }
 
   sendEmail(user: any) {
     console.log("📧 Send email clicked:", user);
@@ -177,6 +179,16 @@ export class Users implements OnInit {
 
   closeUserDetail() {
     this.showDetail = false;
+  }
+
+  onEmailSent(payload: { to: string[]; subject: string; html: string }) {
+    // payload contains everything; currently modal already console.logged it.
+    // Implement your real send email API here.
+    console.log('Parent received send payload', payload);
+  }
+
+  onEmailClosed() {
+    console.log('Email modal closed');
   }
 
 }

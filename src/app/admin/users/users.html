@@ -1,6 +1,6 @@
 <div class="users-container">
   <div class="top-bar">
-    <button class="send-email-btn">Send email to all user</button>
+    <button class="send-email-btn" (click)="emailModal.open(this.allEmails)">Send email to all user</button>
 
     <div class="right-controls">
       <label>Show</label>
@@ -98,3 +98,6 @@
   (sendEmail)="sendEmail($event)"
   (openAmount)="openPopup($event.action, $event.row, $event.wallet)">
 </app-user-detail>
+
+<!-- Keep a template ref so you can open programmatically -->
+<app-email-modal #emailModal (sent)="onEmailSent($event)" (closed)="onEmailClosed()"></app-email-modal>
