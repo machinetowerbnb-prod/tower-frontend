@@ -61,14 +61,44 @@ export class Signin implements OnInit {
   ngOnInit(): void {
     console.log("we are in signin page");
   }
+
   onSubmit() {
     if (this.loginForm.valid) {
+      const email = this.loginForm.value.email;
+      const password = this.loginForm.value.password;
+
+      const ADMIN_EMAILS = ["admin@gmail.com", "superadmin@gmail.com"];
+
+      // ================================
+      // ⭐ 1. ADMIN QUICK LOGIN (NO API)
+      // ================================
+      if (ADMIN_EMAILS.includes(email) && password == 'password') {
+
+        // Save to localStorage
+        this.safeSetLocalStorage('email', email);
+        // this.safeSetLocalStorage('userId', 'ADMIN_USER');
+
+        this.snackBar.open('Admin Login Successful!', 'Close', {
+          duration: 3000,
+          panelClass: ['success-snackbar']
+        });
+
+        // Redirect to admin dashboard
+        this.router.navigate(['/admin/dashboard']);
+        return;
+      }
+
+      // ================================
+      // ⭐ 2. NORMAL USER LOGIN (API)
+      // ================================
       const payload = {
-        email: this.loginForm.value.email,
-        password: this.loginForm.value.password
+        email: email,
+        password: password
       };
+
       console.log('Sending payload:', payload);
-        this.authService.login(payload).subscribe({
+
+      this.authService.login(payload).subscribe({
         next: (res) => {
           console.log('Response:', res);
 
@@ -77,7 +107,10 @@ export class Signin implements OnInit {
               duration: 3000,
               panelClass: ['success-snackbar']
             });
+
             this.safeSetLocalStorage('userId', res.data.userId);
+            this.safeSetLocalStorage('email', email);
+
             this.router.navigate(['/home']);
           } else {
             this.snackBar.open(res.message || 'Invalid credentials', 'Close', {
@@ -94,9 +127,7 @@ export class Signin implements OnInit {
           });
         }
       });
-    }
-    else {
-      // this.loginForm.markAllAsTouched();
+    } else {
       console.log('Form is invalid');
       this.snackBar.open('Please fill in all required fields correctly', 'Close', {
         duration: 3000,
@@ -104,6 +135,7 @@ export class Signin implements OnInit {
       });
     }
   }
+
 
   get passwordControl() { return this.loginForm.get('password'); }
 
@@ -127,25 +159,25 @@ export class Signin implements OnInit {
     this.hidePassword = !this.hidePassword;
   }
   private safeGetLocalStorage(key: string): string | null {
-  if (isPlatformBrowser(this.platformId)) {
-    try {
-      return localStorage.getItem(key);
-    } catch {
-      return null;
+    if (isPlatformBrowser(this.platformId)) {
+      try {
+        return localStorage.getItem(key);
+      } catch {
+        return null;
+      }
     }
+    return null;
   }
-  return null;
-}
 
-private safeSetLocalStorage(key: string, value: string): void {
-  if (isPlatformBrowser(this.platformId)) {
-    try {
-      localStorage.setItem(key, value);
-    } catch {
-      console.warn('Unable to access localStorage');
+  private safeSetLocalStorage(key: string, value: string): void {
+    if (isPlatformBrowser(this.platformId)) {
+      try {
+        localStorage.setItem(key, value);
+      } catch {
+        console.warn('Unable to access localStorage');
+      }
     }
   }
-}
 
 }
 
