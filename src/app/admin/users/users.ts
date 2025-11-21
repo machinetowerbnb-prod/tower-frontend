@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, Inject, ChangeDetectorRef,PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, NgZone, Inject, ChangeDetectorRef, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
@@ -28,7 +28,7 @@ export class Users implements OnInit {
     private ngZone: NgZone,
     @Inject(PLATFORM_ID) private platformId: Object,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -104,19 +104,19 @@ export class Users implements OnInit {
     }
     console.log("📌 Transaction Payload:", payload);
     this.authService.adminUpdateUserStatus(payload).subscribe({
-    next: (res) => {
-      console.log("✅ Transaction Response:", res);
+      next: (res) => {
+        console.log("✅ Transaction Response:", res);
 
-      if (res.statusCode === 200) {
-        alert(res.message || "Success");
-        this.loadUsers();  // Reload UI with updated wallet/earnings
+        if (res.statusCode === 200) {
+          alert(res.message || "Success");
+          this.loadUsers();  // Reload UI with updated wallet/earnings
+        }
+      },
+      error: (err) => {
+        console.error("❌ Transaction Error:", err);
+        alert("Something went wrong!");
       }
-    },
-    error: (err) => {
-      console.error("❌ Transaction Error:", err);
-      alert("Something went wrong!");
-    }
-  });
+    });
   }
 
   openAddPopup(user: any, field: string) {
@@ -137,19 +137,19 @@ export class Users implements OnInit {
     }
     console.log("📌 Transaction Payload:", payload);
     this.authService.adminTransactionAvengers(payload).subscribe({
-    next: (res) => {
-      console.log("✅ Transaction Response:", res);
+      next: (res) => {
+        console.log("✅ Transaction Response:", res);
 
-      if (res.statusCode === 200) {
-        alert(res.message || "Success");
-        this.loadUsers();  // Reload UI with updated wallet/earnings
+        if (res.statusCode === 200) {
+          alert(res.message || "Success");
+          this.loadUsers();  // Reload UI with updated wallet/earnings
+        }
+      },
+      error: (err) => {
+        console.error("❌ Transaction Error:", err);
+        alert("Something went wrong!");
       }
-    },
-    error: (err) => {
-      console.error("❌ Transaction Error:", err);
-      alert("Something went wrong!");
-    }
-  });
+    });
     this.showPopup = false;
   }
 
@@ -159,4 +159,9 @@ export class Users implements OnInit {
     this.selectedRow = row;
     this.showPopup = true;
   }
+
+  sendEmail(user: any) {
+    console.log("📧 Send email clicked:", user);
+  }
+
 }
