@@ -109,7 +109,7 @@ export class Game implements OnInit {
       if (userId) {
         this.getGameData(userId);
       } else {
-        console.error('❌ No userId found in localStorage');
+        //console.error('❌ No userId found in localStorage');
       }
     }
   }
@@ -119,21 +119,21 @@ export class Game implements OnInit {
       userId: userId,
     };
 
-    console.log('🚀 Fetching game details:', payload);
+    //console.log('🚀 Fetching game details:', payload);
 
     this.authService.avengers(payload).subscribe({
       next: (res) => {
-        console.log('✅ Game API response:', res);
+        //console.log('✅ Game API response:', res);
 
         if (res.statusCode !== 200 || !res.data) {
-          console.warn('⚠️ Invalid game response');
+          //console.warn('⚠️ Invalid game response');
           return;
         }
 
         const { isFreeTrailSubcraibed, currectLevel, elegibleLevel, activationTime } = res.data;
 
         // Save activationTime even if null
-        console.log(activationTime, "activationTime")
+        //console.log(activationTime, "activationTime")
         localStorage.setItem('activationTime', activationTime ?? null);
 
         this.ngZone.run(() => {
@@ -197,7 +197,7 @@ export class Game implements OnInit {
       },
 
       error: (err) => {
-        console.error('❌ Failed to fetch game data:', err);
+        //console.error('❌ Failed to fetch game data:', err);
       },
     });
   }
@@ -205,7 +205,7 @@ export class Game implements OnInit {
   onAction(card: GameCard) {
     if (!card.enabled && card.disableType === 'button') return;
     if (card.disableType === 'card') return;
-    console.log('🔹 Selected card action:', card);
+    //console.log('🔹 Selected card action:', card);
     // const now = Date.now();
     if (card.buttonText === 'Purchase Now') {
       this.purchaseNow(card);
@@ -217,10 +217,16 @@ export class Game implements OnInit {
 
       if (activationTime && activationTime != null) {
         let currentTime = Date.now();
-        if (this.isCurrentGreaterThanYesterday(currentTime, activationTime)) {
-          this.timer.open(Number(activationTime));
-        } else {
+        // if (this.isCurrentGreaterThanYesterday(currentTime, activationTime)) {
+        //   //console.log(currentTime, activationTime)
+        //   this.timer.open(Number(activationTime));
+        // } else {
+        //   this.activateGame(userId!);
+        // }
+        if (this.is24HoursCompleted(currentTime, Number(activationTime))) {
           this.activateGame(userId!);
+        } else {
+          this.timer.open(Number(activationTime));
         }
       }
       // const now = 1763141263280;
@@ -245,7 +251,7 @@ export class Game implements OnInit {
     };
     this.authService.purchaseNow(payload).subscribe({
       next: (res) => {
-        console.log('✅ Commission API response:', res);
+        //console.log('✅ Commission API response:', res);
 
         if (res.statusCode === 200 && res.data) {
           // Run UI updates in Angular zone for correct re-render
@@ -261,12 +267,12 @@ export class Game implements OnInit {
             }
           });
         } else {
-          console.warn('⚠️ ERROR response');
+          //console.warn('⚠️ ERROR response');
           this.cdr.detectChanges();
         }
       },
       error: (err) => {
-        console.error('❌ Failed to fetch commission details:', err);
+        //console.error('❌ Failed to fetch commission details:', err);
       },
     });
   }
@@ -275,31 +281,39 @@ export class Game implements OnInit {
       userId: userId,
     };
 
-    console.log('🚀 Fetching commission details:', payload);
+    //console.log('🚀 Fetching commission details:', payload);
 
     this.authService.activateGame(payload).subscribe({
       next: (res) => {
-        console.log('✅ Active Now API response:', res);
+        //console.log('✅ Active Now API response:', res);
 
         if (res.statusCode === 200 && res.data) {
           // Run UI updates in Angular zone for correct re-render
           this.ngZone.run(() => {
             this.getGameData(userId!);
             this.cdr.detectChanges();
+            this.gameSuccessModel.openModal();
           });
         } else {
-          console.warn('⚠️ Active Now data found or invalid response');
+          //console.warn('⚠️ Active Now data found or invalid response');
           this.cdr.detectChanges();
         }
       },
       error: (err) => {
-        console.error('❌ Failed:', err);
+        //console.error('❌ Failed:', err);
       },
     });
   }
 
-  isCurrentGreaterThanYesterday(currentTs: number, yesterdayTs: number): boolean {
-    return currentTs > yesterdayTs;
+  // isCurrentGreaterThanYesterday(currentTs: number, yesterdayTs: number): boolean {
+  //   //console.log("currentTs > yesterdayTs", currentTs > yesterdayTs);
+  //   return currentTs > yesterdayTs;
+  // }
+
+  is24HoursCompleted(currentTs: number, ts: number): boolean {
+    const diff = currentTs - ts;
+    const dayInMs = 24 * 60 * 60 * 1000; // 86400000  
+    return diff >= dayInMs;
   }
 
 }
