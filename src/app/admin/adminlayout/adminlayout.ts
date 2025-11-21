@@ -35,6 +35,7 @@ export class Adminlayout {
   navigateTo(page: string, event?: Event) {
     if (event) event.stopPropagation(); // Prevent collapse toggle on submenu click
     this.router.navigate([`/admin/${page}`]);
+    this.toggleSidebar()
   }
 
 }
