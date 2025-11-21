@@ -1,6 +1,6 @@
 <div class="users-container">
   <div class="top-bar">
-    <button class="send-email-btn">Send email to all user</button>
+    <button class="send-email-btn" (click)="emailModal.open(this.allEmails)">Send email to all user</button>
 
     <div class="right-controls">
       <label>Show</label>
@@ -9,12 +9,7 @@
       </select>
       <label>entries</label>
 
-      <input
-        type="text"
-        placeholder="Search..."
-        [(ngModel)]="searchText"
-        (input)="searchUsers()"
-      />
+      <input type="text" placeholder="Search..." [(ngModel)]="searchText" (input)="searchUsers()" />
     </div>
   </div>
 
@@ -30,39 +25,50 @@
           <th>Withdraw Wallet</th>
           <th>Referrals</th>
           <th>Status</th>
+          <th>Send Email</th> <!-- ⭐ NEW COLUMN -->
         </tr>
       </thead>
 
       <tbody>
         <tr *ngFor="let user of paginatedUsers; let i = index">
+
           <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
           <td>{{ user.name }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.referralId }}</td>
 
+          <!-- ⭐ FIXED width for wallet + button alignment -->
           <td>
-            {{ user.wallet }}
-            <button class="add-btn" (click)="openPopup('Deposit', user)">Add</button>
+            <span class="amount">{{ user.wallet }}</span>
+            <!-- <button class="add-btn" (click)="openPopup('Deposit', user)">Add</button> -->
           </td>
 
           <td>
-            {{ user.earnings }}
-            <button class="add-btn" (click)="openPopup('Withdraw', user)">Add</button>
+            <span class="amount">{{ user.earnings }}</span>
+            <!-- <button class="add-btn" (click)="openPopup('Withdraw', user)">Add</button> -->
           </td>
 
           <td>{{ user.referrals }}</td>
 
+          <!-- ⭐ TOGGLE switch instead of button -->
           <td>
-            <button
-              class="status-btn"
-              [ngClass]="user.status ? 'active' : 'inactive'"
-              (click)="toggleStatus(user)"
-            >
-              {{ user.status ? 'Active' : 'Inactive' }}
+            <label class="toggle-switch">
+              <input type="checkbox" [checked]="user.status" (change)="toggleStatus(user)" />
+              <span class="slider"></span>
+            </label>
+          </td>
+
+          <!-- ⭐ NEW Send email column -->
+          <td>
+            <!-- {{ user.email }} -->
+            <button class="edit-btn" (click)="openUserDetail(user)" title="Edit user">
+              <i class="fa fa-edit"></i>
             </button>
           </td>
+
         </tr>
       </tbody>
+
     </table>
   </div>
 
@@ -70,20 +76,28 @@
   <div class="pagination-controls">
     <button (click)="prevPage()" [disabled]="currentPage === 1">Prev</button>
     <span>Page {{ currentPage }} of {{ Math.ceil(filteredUsers.length / pageSize) }}</span>
-    <button
-      (click)="nextPage()"
-      [disabled]="currentPage * pageSize >= filteredUsers.length"
-    >
+    <button (click)="nextPage()" [disabled]="currentPage * pageSize >= filteredUsers.length">
       Next
     </button>
   </div>
 </div>
 
 
-<app-update-amount
-  [show]="showPopup"
-  [actionType]="selectedAction"
-  [rowData]="selectedRow"
-  (close)="closePopup()"
-  (submitData)="handleSubmit($event)"
-></app-update-amount>
+<app-update-amount [show]="showPopup" [actionType]="selectedAction" [rowData]="selectedRow"
+  [prefilledWallet]="prefilledWallet" (close)="closePopup()" (submitData)="handleSubmit($event)">
+</app-update-amount>
+
+
+<app-user-detail 
+  #userDetailRef 
+  *ngIf="showDetail"
+  [user]="selectedRow"
+  (close)="closeUserDetail()"
+  (add)="openPopup($event.action, $event.row, $event.wallet)"
+  (toggleStatus)="toggleStatus($event)"
+  (sendEmail)="sendEmail($event)"
+  (openAmount)="openPopup($event.action, $event.row, $event.wallet)">
+</app-user-detail>
+
+<!-- Keep a template ref so you can open programmatically -->
+<app-email-modal #emailModal (sent)="onEmailSent($event)" (closed)="onEmailClosed()"></app-email-modal>

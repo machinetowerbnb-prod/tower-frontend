@@ -10,9 +10,11 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './update-amount.scss'
 })
 export class UpdateAmount implements OnChanges {
+
   @Input() show = false;
   @Input() actionType: string = '';
   @Input() rowData: any;
+  @Input() prefilledWallet: any = '';   // ⭐ NEW — wallet passed from UserDetail
 
   @Output() close = new EventEmitter<void>();
   @Output() submitData = new EventEmitter<any>();
@@ -22,30 +24,35 @@ export class UpdateAmount implements OnChanges {
     wallet: '',
     amount: '',
     description: '',
-    action:""
+    action: ""
   };
 
   ngOnChanges() {
-    // When action type or rowData changes
-    if (this.actionType) {
-      console.log('Action Type:', this.actionType);
-      this.formData.screen = this.actionType;
-      if (this.actionType === 'Deposit') {
-      console.log('Row Data Wallet:', this.rowData.wallet);
-      this.formData.wallet = this.rowData.wallet;
-    }else{
-      this.formData.wallet = this.rowData.earnings;
-    }
+    if (this.actionType && this.rowData) {
+
+      // Set action dropdown (Credit / Debit)
+      this.formData.action = this.actionType;
+      this.formData.screen = this.actionType == "Deposit"? 'Debit':'Withdraw';
+
+      // Determine wallet type
+      const isDeposit = this.actionType === 'Deposit';
+
+      // LABEL: Working Wallet / Withdrawal Wallet
+      this.formData.wallet =
+        isDeposit ? 'Working Wallet' : 'Withdrawal Wallet';
+
+      // AMOUNT: Pre-fill current amount
+      this.formData.amount =
+        isDeposit ? this.rowData.wallet : this.rowData.earnings;
     }
   }
 
+
   closeModal() {
-    this.show = false;
     this.close.emit();
   }
 
   submitForm() {
-    console.log('Form submitted:', this.formData, 'Row data:', this.rowData);
     this.submitData.emit({ ...this.formData, row: this.rowData });
     this.closeModal();
   }

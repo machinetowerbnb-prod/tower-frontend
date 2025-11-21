@@ -1,0 +1,33 @@
+<div class="master-container">
+
+  <h2 class="title">Master Data</h2>
+
+  <!-- Maintenance Toggle -->
+  <div class="section">
+    <label class="label">Application Under Maintenance?</label>
+
+    <label class="toggle-switch">
+      <input type="checkbox"
+             [(ngModel)]="formData.isMaintenance"
+             (change)="checkIfChanged()" />
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <!-- Telegram URL -->
+  <div class="section">
+    <label class="label">Primary Telegram URL</label>
+    <input type="text"
+           [(ngModel)]="formData.telegramUrl"
+           class="input-box"
+           (input)="checkIfChanged()" />
+  </div>
+
+  <!-- UPDATE BUTTON -->
+  <button class="update-btn"
+          [disabled]="!isChanged"
+          (click)="updateMasterData()">
+    Update
+  </button>
+
+</div>

@@ -11,7 +11,7 @@ export class GameSuccessScreen {
   isVisible = false;
   isClosing = false;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2) { }
 
   openModal() {
     if (this.isClosing) return;
@@ -29,14 +29,17 @@ export class GameSuccessScreen {
     if (this.isClosing) return;
     this.isClosing = true;
 
+    // ⭐ Immediately restore scroll (fixes stuck scroll completely)
+    this.renderer.removeStyle(document.body, 'overflow');
+    this.renderer.removeStyle(document.body, 'position');
+    this.renderer.removeStyle(document.body, 'width');
+
+    // ⭐ Continue with fade-out animation
     setTimeout(() => {
       this.isVisible = false;
       this.isClosing = false;
-
-      // ✅ restore scroll cleanly
-      this.renderer.removeStyle(document.body, 'overflow');
-      this.renderer.removeStyle(document.body, 'position');
-      this.renderer.removeStyle(document.body, 'width');
-    }, 300); // match fade-out time
+    }, 300); // match fade-out
   }
+
+
 }

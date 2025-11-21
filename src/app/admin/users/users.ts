@@ -1,13 +1,15 @@
-import { Component, OnInit, NgZone, Inject, ChangeDetectorRef,PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, NgZone, Inject, ChangeDetectorRef, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { UpdateAmount } from '../update-amount/update-amount';
 import { AuthService } from '../../services/auth.service';
+import { UserDetail } from '../user-detail/user-detail';
+import { EmailModal } from '../email-modal/email-modal';
 
 @Component({
   selector: 'app-users',
-  imports: [CommonModule, MatIconModule, FormsModule, UpdateAmount],
+  imports: [CommonModule, MatIconModule, FormsModule, UpdateAmount, UserDetail, EmailModal],
   templateUrl: './users.html',
   styleUrl: './users.scss'
 })
@@ -19,16 +21,21 @@ export class Users implements OnInit {
   pageSize: number = 10;
   currentPage: number = 1;
   showPopup = false;
+  showDetail = false;
+  prefilledWallet: any = '';
+  showUserDetail = false;
+  editingUser: any = null;
+
 
   selectedAction = '';
   selectedRow: any = null;
-
+  allEmails = [];
   constructor(
     private authService: AuthService,
     private ngZone: NgZone,
     @Inject(PLATFORM_ID) private platformId: Object,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -46,6 +53,7 @@ export class Users implements OnInit {
         console.log("✅ Users API Response:", res);
 
         if (res.statusCode === 200 && Array.isArray(res.data)) {
+          this.allEmails = res.data.map((email:any) => email.email) || [];
           this.ngZone.run(() => {
             this.users = res.data;
             this.filteredUsers = [...this.users];
@@ -104,19 +112,19 @@ export class Users implements OnInit {
     }
     console.log("📌 Transaction Payload:", payload);
     this.authService.adminUpdateUserStatus(payload).subscribe({
-    next: (res) => {
-      console.log("✅ Transaction Response:", res);
+      next: (res) => {
+        console.log("✅ Transaction Response:", res);
 
-      if (res.statusCode === 200) {
-        alert(res.message || "Success");
-        this.loadUsers();  // Reload UI with updated wallet/earnings
+        if (res.statusCode === 200) {
+          alert(res.message || "Success");
+          this.loadUsers();  // Reload UI with updated wallet/earnings
+        }
+      },
+      error: (err) => {
+        console.error("❌ Transaction Error:", err);
+        alert("Something went wrong!");
       }
-    },
-    error: (err) => {
-      console.error("❌ Transaction Error:", err);
-      alert("Something went wrong!");
-    }
-  });
+    });
   }
 
   openAddPopup(user: any, field: string) {
@@ -137,26 +145,50 @@ export class Users implements OnInit {
     }
     console.log("📌 Transaction Payload:", payload);
     this.authService.adminTransactionAvengers(payload).subscribe({
-    next: (res) => {
-      console.log("✅ Transaction Response:", res);
+      next: (res) => {
+        console.log("✅ Transaction Response:", res);
 
-      if (res.statusCode === 200) {
-        alert(res.message || "Success");
-        this.loadUsers();  // Reload UI with updated wallet/earnings
+        if (res.statusCode === 200) {
+          alert(res.message || "Success");
+          this.loadUsers();  // Reload UI with updated wallet/earnings
+        }
+      },
+      error: (err) => {
+        console.error("❌ Transaction Error:", err);
+        alert("Something went wrong!");
       }
-    },
-    error: (err) => {
-      console.error("❌ Transaction Error:", err);
-      alert("Something went wrong!");
-    }
-  });
+    });
     this.showPopup = false;
   }
 
-  openPopup(action: string, row: any) {
-    console.log('Open popup for', action, 'of user', row);
+  openPopup(action: string, row: any, wallet: number) {
     this.selectedAction = action;
     this.selectedRow = row;
+    this.prefilledWallet = wallet;     // ⭐ STORE PREFILL VALUE
     this.showPopup = true;
   }
+
+  sendEmail(user: any) {
+    console.log("📧 Send email clicked:", user);
+  }
+
+  openUserDetail(user: any) {
+    this.selectedRow = user;
+    this.showDetail = true;
+  }
+
+  closeUserDetail() {
+    this.showDetail = false;
+  }
+
+  onEmailSent(payload: { to: string[]; subject: string; html: string }) {
+    // payload contains everything; currently modal already console.logged it.
+    // Implement your real send email API here.
+    console.log('Parent received send payload', payload);
+  }
+
+  onEmailClosed() {
+    console.log('Email modal closed');
+  }
+
 }

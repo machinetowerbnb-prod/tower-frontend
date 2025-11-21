@@ -11,7 +11,7 @@
   </header>
 
   <!-- 🔹 Sidebar -->
-  <aside class="sidebar" [class.closed]="!isSidebarOpen">
+  <aside class="sidebar" [class.closed]="!isSidebarOpen" [class.open]="isSidebarOpen">
     <div class="sidebar-logo">TMTB Admin</div>
     <ul class="sidebar-menu">
       <li (click)="navigateTo('dashboard')" routerLinkActive="active">
@@ -25,51 +25,35 @@
       </li>
 
       <!-- 🔹 Withdrawals main menu -->
-      <li
-        class="has-submenu"
-        [class.active]="activeSection === 'withdrawls'"
-        (click)="toggleWithdrawMenu()"
-      >
+      <li class="has-submenu" [class.active]="activeSection === 'withdrawls'" (click)="toggleWithdrawMenu()">
         <i class="fa fa-bank"></i>
         <span>Withdrawls</span>
-        <i
-          class="fa"
-          [ngClass]="{
+        <i class="fa" [ngClass]="{
             'fa-chevron-down': !withdrawMenuOpen,
             'fa-chevron-up': withdrawMenuOpen
-          }"
-          style="margin-left:auto;font-size:12px"
-        ></i>
+          }" style="margin-left:auto;font-size:12px"></i>
       </li>
 
       <!-- 🔹 Submenu items -->
-      <ul
-        class="submenu"
-        *ngIf="withdrawMenuOpen"
-        [@slideInOut]
-      >
-        <li
-          (click)="navigateTo('withdrawl-requests', $event)"
-          routerLinkActive="active"
-        >
+      <ul class="submenu" *ngIf="withdrawMenuOpen" [@slideInOut]>
+        <li (click)="navigateTo('withdrawl-requests', $event)" routerLinkActive="active">
           <i class="fa fa-list"></i>
           <span>Withdrawl Requests</span>
         </li>
-        <li
-          (click)="navigateTo('withdrawl-accepts', $event)"
-          routerLinkActive="active"
-        >
+        <li (click)="navigateTo('withdrawl-accepts', $event)" routerLinkActive="active">
           <i class="fa fa-check-circle"></i>
           <span>Withdrawl Accepts</span>
         </li>
-        <li
-          (click)="navigateTo('withdrawl-rejects', $event)"
-          routerLinkActive="active"
-        >
+        <li (click)="navigateTo('withdrawl-rejects', $event)" routerLinkActive="active">
           <i class="fa fa-times-circle"></i>
           <span>Withdrawl Rejects</span>
         </li>
       </ul>
+
+      <li routerLink="/admin/master-data" routerLinkActive="active">
+        <i class="fa fa-database"></i>
+        <span>Master Data</span>
+      </li>
     </ul>
   </aside>
 

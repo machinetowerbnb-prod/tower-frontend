@@ -186,3 +186,261 @@
   }
 }
 
+/* ⭐ Users table — perfect mobile responsiveness */
+@media (max-width: 768px) {
+  .users-container {
+    padding: 14px !important;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .right-controls {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .table-container {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+
+  .responsive-table {
+    min-width: 950px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .responsive-table {
+    min-width: 900px !important;
+  }
+
+  .send-email-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ============================== */
+/* ⭐ FIXED ONLY NAME COLUMN      */
+/* ============================== */
+
+.table-container {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
+  position: relative;
+}
+
+/* ⭐ Clean table with no white blocks */
+.responsive-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+/* Sticky only SECOND column */
+.responsive-table td:nth-child(2),
+.responsive-table th:nth-child(2) {
+  position: sticky;
+  left: 60px; /* adjust based on SN column width */
+  background: #fff;
+  z-index: 10;
+  border-right: 1px solid #f0f0f0;
+}
+
+/* SN column — NOT sticky */
+.responsive-table th:first-child,
+.responsive-table td:first-child {
+  background: #fff;
+  z-index: 9;
+}
+
+/* Row styling */
+.responsive-table tbody tr:hover {
+  background: #f9fbff;
+}
+
+/* Header */
+.responsive-table thead th {
+  background: #eef2ff;
+  font-weight: 600;
+  color: #333;
+  padding: 10px 12px;
+}
+
+/* ⭐ Wallet cell: fixed width alignment */
+.wallet-cell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 140px;
+  max-width: 140px;
+}
+
+.wallet-cell .amount {
+  width: 70px;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* ⭐ Toggle switch (Active/Inactive) */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 22px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: #e74c3c; /* INACTIVE RED */
+  border-radius: 22px;
+  transition: 0.3s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 2px;
+  background: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+/* ACTIVE green */
+.toggle-switch input:checked + .slider {
+  background: #27ae60;
+}
+
+.toggle-switch input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+/* ⭐ Email icon button */
+.email-btn {
+  background: #2752e7;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+
+  i {
+    font-size: 14px;
+  }
+
+  &:hover {
+    background: #1f45c3;
+  }
+}
+
+/* ------------------------------------------- */
+/*   FIX FOR ADD BUTTON ALIGNMENT              */
+/* ------------------------------------------- */
+
+.wallet-cell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 150px;     /* Prevents breaking */
+  max-width: 150px;     /* Keeps both columns equal */
+  white-space: nowrap;
+  padding-right: 8px;
+}
+
+.wallet-cell .amount {
+  flex: 1;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wallet-cell .add-btn {
+  width: 48px;          /* Fixed size */
+  text-align: center;
+  flex-shrink: 0;       /* Prevent push/resize */
+  margin-left: 8px;
+}
+
+/* --- FIXED COLUMN WIDTHS --- */
+.responsive-table th:nth-child(2),
+.responsive-table td:nth-child(2) {
+  min-width: 140px;
+  max-width: 140px;
+  width: 140px;
+
+  position: sticky;
+  left: 60px;
+  background: #fff;
+  z-index: 10;
+  border-right: 1px solid #f0f0f0;
+}
+
+/* SN column width */
+.responsive-table th:first-child,
+.responsive-table td:first-child {
+  min-width: 60px;
+  max-width: 60px;
+  width: 60px;
+}
+
+/* Working Wallet & Withdraw Wallet cell width control */
+.responsive-table td:nth-child(5),
+.responsive-table td:nth-child(6),
+.responsive-table th:nth-child(5),
+.responsive-table th:nth-child(6) {
+  min-width: 160px;
+  max-width: 160px;
+  width: 160px;
+}
+
+/* Add button fixed small width */
+.add-btn {
+  width: 48px;
+  text-align: center;
+  padding: 2px 0;
+}
+
+.table-container {
+  overflow-x: auto !important;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.responsive-table {
+  min-width: 1100px !important;
+}
+
+@media (max-width: 768px) {
+  .responsive-table {
+    min-width: 1000px !important;
+  }
+
+  .responsive-table td:nth-child(2),
+  .responsive-table th:nth-child(2) {
+    left: 60px;
+  }
+}
