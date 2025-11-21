@@ -50,7 +50,7 @@
         </li>
       </ul>
 
-      <li routerLink="/admin/master-data" routerLinkActive="active">
+      <li (click)="navigateTo('master-data', $event)" routerLinkActive="active">
         <i class="fa fa-database"></i>
         <span>Master Data</span>
       </li>
