@@ -23,6 +23,7 @@ import { Users } from './admin/users/users'
 import { WithdrawRequest } from './admin/withdraw-request/withdraw-request'
 import { WithdrawAccepts } from './admin/withdraw-accepts/withdraw-accepts'
 import { WithdrawRejects } from './admin/withdraw-rejects/withdraw-rejects'
+import { UserDeposits } from './admin/user-deposits/user-deposits'
 import { MasterData } from './admin/master-data/master-data'
 import { authGuard } from './guards/auth-guard';
 
@@ -65,6 +66,7 @@ export const routes: Routes = [
     { path: 'withdrawl-accepts', component: WithdrawAccepts },
     { path: 'withdrawl-rejects', component: WithdrawRejects },
     { path: 'master-data', component: MasterData },
+    { path: 'deposits', component: UserDeposits },
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' } // default route
   ]
 },
