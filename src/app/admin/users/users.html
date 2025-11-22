@@ -30,7 +30,7 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let user of paginatedUsers; let i = index">
+        <tr *ngFor="let user of paginatedUsers; let i = index" (click)="openTeamDetails(user)">
 
           <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
           <td>{{ user.name }}</td>

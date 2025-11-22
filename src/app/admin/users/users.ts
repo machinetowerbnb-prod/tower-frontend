@@ -6,6 +6,8 @@ import { UpdateAmount } from '../update-amount/update-amount';
 import { AuthService } from '../../services/auth.service';
 import { UserDetail } from '../user-detail/user-detail';
 import { EmailModal } from '../email-modal/email-modal';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-users',
@@ -34,8 +36,10 @@ export class Users implements OnInit {
     private authService: AuthService,
     private ngZone: NgZone,
     @Inject(PLATFORM_ID) private platformId: Object,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router,
   ) { }
+
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -53,7 +57,7 @@ export class Users implements OnInit {
         console.log("✅ Users API Response:", res);
 
         if (res.statusCode === 200 && Array.isArray(res.data)) {
-          this.allEmails = res.data.map((email:any) => email.email) || [];
+          this.allEmails = res.data.map((email: any) => email.email) || [];
           this.ngZone.run(() => {
             this.users = res.data;
             this.filteredUsers = [...this.users];
@@ -189,6 +193,12 @@ export class Users implements OnInit {
 
   onEmailClosed() {
     console.log('Email modal closed');
+  }
+
+  openTeamDetails(user: any) {
+    this.router.navigate(['/admin/teams'], {
+      queryParams: { email: user.email }
+    });
   }
 
 }
