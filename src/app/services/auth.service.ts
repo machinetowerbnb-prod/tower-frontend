@@ -50,6 +50,9 @@ export class AuthService {
   admin(payload: any) {
     return this.http.post<any>(`${this.baseUrl}/adminAvengers`, payload);
   }
+  getDeposit() {
+    return this.http.get<any>(`${this.baseUrl}/adminGetDeposits`);
+  }
   adminTransactionAvengers(payload: any) {
     return this.http.post<any>(`${this.baseUrl}/adminTransactionAvengers`, payload);
   }
@@ -61,6 +64,9 @@ export class AuthService {
   }
   adminWithdrawConfirm(payload: any) {
     return this.http.post<any>(`${this.baseUrl}/withdraw-approval`, payload);
+  }
+  sendBulkEmails(payload: any) {
+    return this.http.post<any>(`${this.baseUrl}/send-bulk-emails`, payload);
   }
   //Game Apis
   purchaseNow(payload: any) {
