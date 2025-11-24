@@ -7,6 +7,7 @@ import { AuthService } from '../../services/auth.service';
 import { UserDetail } from '../user-detail/user-detail';
 import { EmailModal } from '../email-modal/email-modal';
 import { Router } from '@angular/router';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class Users implements OnInit {
     @Inject(PLATFORM_ID) private platformId: Object,
     private cdr: ChangeDetectorRef,
     private router: Router,
+    private snackBar: MatSnackBar,
   ) { }
 
 
@@ -186,9 +188,29 @@ export class Users implements OnInit {
   }
 
   onEmailSent(payload: { to: string[]; subject: string; html: string }) {
-    // payload contains everything; currently modal already console.logged it.
-    // Implement your real send email API here.
-    console.log('Parent received send payload', payload);
+    let data = {
+      emails: payload.to,
+      subject: payload.subject,
+      html: payload.html
+    }
+    this.authService.sendBulkEmails(data).subscribe({
+      next: (res) => {
+        console.log("✅ Users API Response:", res);
+        if (res.statusCode === 200) {
+          this.ngZone.run(() => {
+        this.snackBar.open('Emails Sent Successfully!', 'Close', {
+          duration: 3000,
+          panelClass: ['success-snackbar']
+        });
+            this.cdr.detectChanges();
+          });
+        }
+      },
+      error: (err) => {
+        console.error("❌ Users API Error:", err);
+      }
+    });
+    console.log('Parent received send payload', data);
   }
 
   onEmailClosed() {
@@ -197,7 +219,7 @@ export class Users implements OnInit {
 
   openTeamDetails(user: any) {
     this.router.navigate(['/admin/teams'], {
-      queryParams: { email: user.email }
+      queryParams: { userId: user.userId }
     });
   }
 

@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
-
 
 
 @Component({
@@ -32,51 +32,53 @@ export class TeamDetails implements OnInit {
   filtered: any = { 1: [], 2: [], 3: [] };
   paginated: any = { 1: [], 2: [], 3: [] };
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef
+  ) { }
 
   ngOnInit() {
-    this.loadTeamData();
+    // Subscribe to query params so navigation with only query param changes still triggers data load
+    this.route.queryParams.subscribe(params => {
+      const userId = params['userId'];
+      if (userId) {
+        this.fetchTeamData(userId);
+      }
+    });
   }
 
-  loadTeamData() {
-    // replace with API call
-    setTimeout(() => {
-      this.data = {
-        genOne: {
-          users: [
-            { name: "Hariprasad", email: "hari@gmail.com", referralId: "A1B2C3D1", wallet: 2008, earnings: 10.5, referrals: 2, status: true },
-            { name: "Madhu", email: "madhu@gmail.com", referralId: "A1B2C3D2", wallet: 545, earnings: 3.1, referrals: 0, status: true },
-            { name: "Sravan", email: "sravan@gmail.com", referralId: "A1B2C3D3", wallet: 190.6, earnings: 0.5, referrals: 1, status: false },
-            { name: "Mani", email: "mani@gmail.com", referralId: "A1B2C3D4", wallet: 32, earnings: 1.2, referrals: 0, status: true },
-            { name: "Vijay", email: "vijay@gmail.com", referralId: "A1B2C3D5", wallet: 12.4, earnings: 0.1, referrals: 0, status: true },
-          ]
-        },
+  fetchTeamData(userId: string) {
+    this.loading = true;
 
-        genTwo: {
-          users: [
-            { name: "Raju", email: "raju@gmail.com", referralId: "B1B2C3D1", wallet: 800, earnings: 5.5, referrals: 4, status: true },
-            { name: "Kranthi", email: "kranthi@gmail.com", referralId: "B1B2C3D2", wallet: 120, earnings: 0.2, referrals: 1, status: true },
-            { name: "Teja", email: "teja@gmail.com", referralId: "B1B2C3D3", wallet: 56, earnings: 0.9, referrals: 0, status: true },
-            { name: "Ravi", email: "ravi@gmail.com", referralId: "B1B2C3D4", wallet: 92.7, earnings: 0.6, referrals: 2, status: false },
-            { name: "Suresh", email: "suresh@gmail.com", referralId: "B1B2C3D5", wallet: 31.2, earnings: 0.3, referrals: 0, status: true },
-          ]
-        },
+    const payload = {
+      screen: 'teams',
+      userId: userId,
+      isAdmin: true
+    };
 
-        genThree: {
-          users: [
-            { name: "Bhargav", email: "bhargav@gmail.com", referralId: "C1B2C3D1", wallet: 40, earnings: 0.0, referrals: 0, status: true },
-            { name: "Tarun", email: "tarun@gmail.com", referralId: "C1B2C3D2", wallet: 102, earnings: 1.5, referrals: 1, status: false },
-            { name: "Naveen", email: "naveen@gmail.com", referralId: "C1B2C3D3", wallet: 18.5, earnings: 0.3, referrals: 0, status: true },
-            { name: "Ajay", email: "ajay@gmail.com", referralId: "C1B2C3D4", wallet: 77, earnings: 0.8, referrals: 2, status: true },
-            { name: "Kishore", email: "kishore@gmail.com", referralId: "C1B2C3D5", wallet: 12, earnings: 0.1, referrals: 0, status: true },
-          ]
+    this.authService.avengers(payload).subscribe({
+      next: (response: any) => {
+        console.log('✅ TeamDetails API response:', response);
+        this.loading = false;
+
+        if (response && response.statusCode === 200 && response.data) {
+          // assign returned data to the component's data shape
+          this.data = response.data;
+
+          // If the API returns members as genOne.users etc., apply filters
+          this.applyFiltersForAllLevels();
         }
-      };
 
-      this.applyFiltersForAllLevels();
-
-      this.loading = false;
-    }, 500);
+        this.cdr.detectChanges();
+      },
+      error: (err: any) => {
+        console.error('❌ Failed to fetch TeamDetails data:', err);
+        this.loading = false;
+        this.cdr.detectChanges();
+      }
+    });
   }
 
   // 🔍 Apply search filter
@@ -91,13 +93,15 @@ export class TeamDetails implements OnInit {
   }
 
   applyFilterForLevel(level: number, users: any[]) {
-    const q = this.searchQuery[level].toLowerCase();
+    const q = (this.searchQuery[level] || '').toLowerCase();
 
-    this.filtered[level] = users.filter(u =>
-      u.name.toLowerCase().includes(q) ||
-      u.email.toLowerCase().includes(q) ||
-      u.referralId.toLowerCase().includes(q)
-    );
+    this.filtered[level] = users.filter((u: any) => {
+      const name = (u.name || '').toString().toLowerCase();
+      const email = (u.email || '').toString().toLowerCase();
+      const ref = (u.referralId || '').toString().toLowerCase();
+
+      return name.includes(q) || email.includes(q) || ref.includes(q);
+    });
 
     this.totalPages[level] = Math.max(1, Math.ceil(this.filtered[level].length / this.pageSize));
     this.currentPage[level] = 1;
