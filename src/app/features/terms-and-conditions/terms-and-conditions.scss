@@ -24,28 +24,17 @@
 }
 
 .back-btn {
-  font-size: 32px;
-  cursor: pointer;
-  font-family: inherit
-  // position: absolute;
-  // top: 16px;
-  // left: 16px;
-  // background: rgba(255, 255, 255, 0.25);
-  // border: none;
-  // border-radius: 50%;
-  // width: 36px;
-  // height: 36px;
-  // display: flex;
-  // align-items: center;
-  // justify-content: center;
-  // color: white;
-  // cursor: pointer;
-  // transition: background 0.3s ease;
+            position: absolute;
+            left: 16px;
+            background: none;
+            border: none;
+            cursor: pointer;
 
-  // &:hover {
-  //   background: rgba(255, 255, 255, 0.4);
-  // }
-}
+            img {
+                width: 18px;
+                height: 18px;
+            }
+        }
 
 .banner-text {
   h2 {
