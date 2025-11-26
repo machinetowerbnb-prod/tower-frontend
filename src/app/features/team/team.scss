@@ -97,18 +97,18 @@
       border: 1px solid #2752E7;
       border-radius: 12px;
       padding: 14px;
-      text-align: center;
+      // text-align: center;
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
       height: 135px;
 
       img {
-        width: 24px;
-        height: 24px;
+        width: 36px;
+        height: 36px;
         margin-bottom: 8px;
       }
 
       h2 {
-        font-size: 17px;
+        font-size: 28px;
         font-weight: 600;
         color: #000000;
         margin: 2px 0;
@@ -132,7 +132,7 @@
 
   .level-card {
     background: #fff;
-    border-radius: 12px;
+    border-radius: 8px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
     padding: 12px 14px;
 
@@ -140,14 +140,18 @@
       display: flex;
       justify-content: space-between;
       font-weight: 600;
-      font-size: 13px;
+      font-size: 16px;
       margin-bottom: 8px;
+      .level-percent{
+        font-size: 14px;
+        font-weight: 500;
+      }
     }
 
     .progress-bar {
-      height: 6px;
+      height: 12px;
       background: #eaeaea;
-      border-radius: 6px;
+      border-radius: 2px;
       overflow: hidden;
       margin-bottom: 6px;
 

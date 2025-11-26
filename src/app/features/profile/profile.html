@@ -25,11 +25,11 @@
         <app-deposit #depositModal></app-deposit>
         <div class="wallet-values">
             <div class="wallet-item">
-                <p>Working Wallet</p>
+                <p>Main Wallet</p>
                 <h3>{{ user.workingWallet }} <span>USDT</span></h3>
             </div>
             <div class="wallet-item">
-                <p>Withdrawal Wallet</p>
+                <p>Withdrawal Account</p>
                 <h3>{{ user.withdrawalWallet }} <span>USDT</span></h3>
             </div>
         </div>
@@ -110,7 +110,7 @@
         <h3>Log out!</h3>
         <button class="close-btn" (click)="closeLogout()">×</button>
     </div>
-
+  <div class="logout-body">
     <!-- Icon -->
     <div class="logout-icon">
         <img src="logout.gif" alt="logout" />
@@ -130,5 +130,5 @@
     <button class="logout-cancel" (click)="closeLogout()">
         No, Cancel
     </button>
-
+</div>
 </div>

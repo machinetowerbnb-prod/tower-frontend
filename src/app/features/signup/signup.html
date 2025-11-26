@@ -5,8 +5,8 @@
 
   <div class="signin-container">
     <div class="welcome-section">
-      <h2>{{ 'Welcome' | translate }}</h2>
-      <h4>{{ 'To Tower BNB' | translate }}</h4>
+      <div class="welcome-text">{{'Welcome' | translate}}</div>
+      <div class="bnb-text">{{'to Tower BNB' | translate}}</div>
     </div>
 
     <!-- Main Content -->
@@ -28,7 +28,7 @@
                   signupForm.get('name')?.invalid &&
                   (signupForm.get('name')?.touched || signupForm.get('name')?.dirty)
                 "
-                >{{ 'Full Name' | translate }}</span
+                >{{ 'Name' | translate }}*</span
               >
             </div>
             <mat-form-field class="password-field" appearance="outline">
@@ -52,7 +52,7 @@
                   signupForm.get('email')?.invalid &&
                   (signupForm.get('email')?.touched || signupForm.get('email')?.dirty)
                 "
-                >{{ 'Email' | translate }}</span
+                >{{ 'Email' | translate }}*</span
               >
             </div>
 
@@ -61,7 +61,7 @@
                 matInput
                 type="email"
                 formControlName="email"
-                placeholder="example@gmail.com"
+                placeholder="Enter Valid Email ID"
               />
               <mat-error *ngIf="signupForm.get('email')?.hasError('required')">
                 {{ 'Email is required' | translate }}
@@ -114,7 +114,7 @@
                   signupForm.get('epin')?.invalid &&
                   (signupForm.get('epin')?.touched || signupForm.get('epin')?.dirty)
                 "
-                >{{ 'M-PIN' | translate }}*</span
+                >{{ 'Pass Code' | translate }} *</span
               >
             </div>
             <mat-form-field class="password-field" appearance="outline">
@@ -143,7 +143,7 @@
                   signupForm.get('confirmEpin')?.invalid &&
                   (signupForm.get('confirmEpin')?.touched || signupForm.get('confirmEpin')?.dirty)
                 "
-                >{{ 'Confirm M-PIN' | translate }}*</span
+                >{{ 'Confirm Pass Code' | translate }} *</span
               >
             </div>
             <mat-form-field class="password-field" appearance="outline">
@@ -176,7 +176,7 @@
                 matInput
                 type="text"
                 formControlName="refferal"
-                placeholder="Q2WER3TY"
+                placeholder="Enter Referral Code"
               />
               <mat-error *ngIf="signupForm.get('name')?.hasError('required')">
                 {{ 'Refferal Code is required' | translate }}
@@ -186,8 +186,8 @@
 
           <!-- Terms and Conditions -->
           <div class="form-options">
-            <mat-checkbox formControlName="terms">
-              {{ 'I agree to all' |translate }} <span [routerLink]="['/signin']" class="signup-text">{{'Terma & Conditions' | translate}}</span>  {{'in Mission Tower-B' | translate }}
+            <mat-checkbox class="remember-checkbox" formControlName="terms">
+              {{ 'I agree to all' |translate }} <span [routerLink]="['/signin']" class="signup-text">{{'Terms & Conditions' | translate}}</span>  {{'in Mission Tower-B' | translate }}
             </mat-checkbox>
           </div>
         </form>
@@ -207,8 +207,8 @@
     </button>
 
     <div class="signup-link">
-      <span>{{ 'Already have an account?' | translate }} </span>
-      <a [routerLink]="['/signin']" class="signup-text">
+      <span>{{ 'Already have an account? ' | translate }} </span>
+      <a [routerLink]="['/signin']" class="signup-text" style="margin-left: 3px;">
         {{ 'Log In' | translate }}
       </a>
     </div>

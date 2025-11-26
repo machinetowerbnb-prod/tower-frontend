@@ -43,66 +43,66 @@
 
 .language-selector {
   min-width: 120px;
-  
+
   // Remove all Material Design styling to make it look clean
   ::ng-deep .mat-mdc-form-field-underline {
     display: none !important;
   }
-  
+
   ::ng-deep .mat-mdc-line-ripple {
     display: none !important;
   }
-  
+
   ::ng-deep .mat-mdc-form-field-subscript-wrapper {
     display: none !important;
   }
-  
+
   ::ng-deep .mat-mdc-form-field-bottom-align {
     display: none !important;
   }
-  
+
   ::ng-deep .mat-mdc-form-field-wrapper {
     background: white !important;
     padding: 0;
   }
-  
+
   ::ng-deep .mat-mdc-form-field-flex {
     background: white !important;
     border: none;
     padding: 0;
   }
-  
+
   // Make the select field background white
   ::ng-deep .mat-mdc-select-value {
     background: white !important;
   }
-  
+
   ::ng-deep .mat-mdc-form-field-infix {
     background: white !important;
   }
-  
+
   // Remove width from mdc-line-ripple to prevent underlines
   ::ng-deep .mdc-line-ripple::before,
   ::ng-deep .mdc-line-ripple::after {
     width: 0 !important;
   }
-  
+
   // Set width for text field wrapper specifically for language selector
   ::ng-deep .mat-mdc-text-field-wrapper {
     width: 50% !important;
   }
-  
+
   // Remove padding from mdc-text-field for language selector
   ::ng-deep .mdc-text-field {
     padding: 0 !important;
   }
-  
+
   // Higher specificity to override Material Design styles
   ::ng-deep.language-selector .mat-mdc-form-field {
     text-align: unset !important;
     display: block !important;
   }
-  
+
   // Multiple selectors for maximum coverage
   ::ng-deep .language-selector .mat-mdc-form-field,
   ::ng-deep .language-selector.mat-mdc-form-field,
@@ -110,7 +110,7 @@
     text-align: unset !important;
     display: block !important;
   }
-  
+
   // Target the specific class combination from your inspection
   ::ng-deep .mat-mdc-form-field.language-selector.mat-mdc-form-field-type-mat-select.mat-form-field-appearance-fill {
     text-align: unset !important;
@@ -157,6 +157,9 @@
   max-width: 400px;
   position: relative;
   overflow: visible; /* ensure coin can overflow */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 /* Removed login-hero gradient section */
@@ -164,18 +167,40 @@
   position:absolute;
   right:14px;
   top: -34px; /* raise coin to overlap card edge */
-  width:88px;
-  height:88px;
+  width:91px;
+  height:108px;
   z-index: 50; /* higher than card */
 }
 .hero-coin img { width:100%; height:100%; object-fit:contain; }
 
 .form-heading {
-  margin: 32px 0 16px;
-  text-align:left;
-  font-size:18px;
-  font-weight:600;
-  color:#0d2d7a;
+  // margin: 32px 0 16px;
+  // text-align:left;
+  // font-size:18px;
+  // font-weight:600;
+  // color:#2752E7;
+
+
+  /* Create your account */
+
+width: 307px;
+height: 32px;
+font-family: 'Poppins-SemiBold', sans-serif;
+font-style: normal;
+font-weight: 600;
+font-size: 22px;
+line-height: 145%;
+/* identical to box height, or 32px */
+letter-spacing: -1px;
+
+color: #2752E7;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
 }
 
 /* Optional curved overlay at bottom of hero */
@@ -202,10 +227,10 @@
   margin-bottom: 20px;
 }
 
-.mobile-section,
-.password-section {
-  margin-bottom: 20px;
-}
+// .mobile-section,
+// .password-section {
+//   // margin-bottom: 20px;
+// }
 
 .section-labels {
   display: flex;
@@ -280,9 +305,9 @@
 }
 
 // Ensure error text appears below input fields
-::ng-deep .mat-mdc-form-field-subscript-wrapper {
-  margin-top: 4px !important;
-}
+// ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+//   margin-top: 4px !important;
+// }
 
 .form-options {
   display: flex;
@@ -381,7 +406,7 @@
   cursor: pointer;
   font-weight: 500 !important;
   transition: all 0.3s ease;
-  
+
   &:hover {
     border-color: #007bff;
     background-color: #f8f9fa;
@@ -389,7 +414,7 @@
 }
 
 .signup-text {
-  color: #007bff;
+  color: #2752E7;
   text-decoration: none;
 }
 
@@ -420,6 +445,7 @@
   background: url('/Background_signin.svg') center top / cover no-repeat;
   opacity: 1;
   pointer-events: none;
+  border-radius: 0px 0px 12px 12px;
 }
 
 /* Remove mobile override difference – keep same look */
@@ -441,8 +467,23 @@
   padding: 0 16px;
   pointer-events: none; /* decorative */
 }
-.signin-container .welcome-section h2 { margin:0 0 4px; font-size:34px; font-weight:600; letter-spacing:.5px; }
-.signin-container .welcome-section h4 { margin:0; font-size:16px; font-weight:400; opacity:.9; }
+// .signin-container .welcome-section h2 { margin:0 0 4px; font-size:34px; font-weight:600; letter-spacing:.5px; }
+// .signin-container .welcome-section h4 { margin:0; font-size:16px; font-weight:400; opacity:.9; }
+.signin-container .welcome-section .welcome-text {
+position: absolute;
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 500;
+font-size: 34px;
+color: #FFFFFF;
+}
+.signin-container .welcome-section .bnb-text {
+font-family: 'Poppins';
+font-style: Medium;
+font-size: 18px;
+position: relative;
+top:30px;
+}
 /* Ensure background pseudo-element sits behind */
 .signin-container::before { z-index:0; }
 
@@ -474,4 +515,33 @@
 }
 .welcome-section{
   color:wheat
+}
+
+/* ============================================
+   INPUT BORDER OVERRIDES
+   Force a consistent 1px #CFCFCF border and 4px radius
+   across Material inputs and plain inputs
+   ============================================ */
+
+/* Ensure the notched-outline (if present) uses same color */
+::ng-deep .mat-mdc-form-field .mdc-notched-outline__leading,
+::ng-deep .mat-mdc-form-field .mdc-notched-outline__notch,
+::ng-deep .mat-mdc-form-field .mdc-notched-outline__trailing {
+  border-color: #CFCFCF !important;
+}
+.remember-checkbox {
+  ::ng-deep {
+    .mdc-checkbox__surface {
+      border-color: #2752E7 !important;
+      border-width: 2px !important;
+    }
+
+    .mdc-checkbox__background {
+      border-color: #2752E7 !important;
+    }
+
+    &.mdc-checkbox--checked .mdc-checkbox__checkmark {
+      color: #2752E7 !important;
+    }
+  }
 }
