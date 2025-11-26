@@ -4,8 +4,8 @@
   </header>
   <div class="signin-container">
     <div class="welcome-section">
-      <h2>{{'Welcome' | translate}}</h2>
-      <h4>{{'to Tower BNB' | translate}}</h4>
+      <div class="welcome-text">{{'Welcome' | translate}}</div>
+      <div class="bnb-text">{{'to Tower BNB' | translate}}</div>
     </div>
     <!-- Main Content -->
     <div class="main-content">
@@ -42,7 +42,7 @@
             </mat-form-field>
           </div>
           <!-- Password Section -->
-          <div class="password-section">
+          <div class="password-section" style="margin-bottom: 0px;">
             <div class="section-labels">
               <span
                 [class.error-label]="
@@ -58,7 +58,7 @@
                 matInput
                 [type]="hidePassword ? 'password' : 'text'"
                 formControlName="password"
-                placeholder="xxxxxxxxxx"
+                placeholder="Enter your password"
               />
               <button
                 mat-icon-button
@@ -82,7 +82,10 @@
 
           <!-- Remember Me and Forgot Password -->
           <div class="form-options">
-            <mat-checkbox formControlName="rememberMe">{{'Remember me' | translate}}</mat-checkbox>
+            <div class="remember-me-wrapper">
+              <mat-checkbox class="remember-checkbox" formControlName="rememberMe"></mat-checkbox>
+              <label class="remember-me-label">{{'Remember me' | translate}}</label>
+            </div>
             <a href="#" class="forgot-password">{{'Forgot password' | translate}}</a>
           </div>
 
@@ -104,7 +107,7 @@
     <!-- Sign Up Link -->
     <div class="signup-link">
       <span>{{"Don't have an account" | translate}} </span>
-      <a [routerLink]="['/signup']" class="signup-text"> {{'Sign Up' | translate}}</a>
+      <a [routerLink]="['/signup']" class="signup-text" style="margin-left: 4px;"> {{'Sign Up' | translate}}</a>
     </div>
   </footer>
 </div>

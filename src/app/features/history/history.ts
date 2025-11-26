@@ -23,7 +23,7 @@ export class History implements OnInit {
   transactions: Transaction[] = [];
   groupedTransactions: { date: string; transactions: Transaction[] }[] = [];
   showFilter = false;
-  activeFilter = 'all';
+  activeFilter = 'deposit';
   isLoading = true;
   errorMessage = '';
 
@@ -93,13 +93,13 @@ export class History implements OnInit {
     {
       label: 'Your deposits',
       desc: 'See all your top-ups.',
-      icon: '/credits-filter.svg',
+      icon: '/deposits-filter.svg',
       value: 'deposit'
     },
     {
       label: 'Your withdrawals',
       desc: 'View recent cashouts.',
-      icon: '/deposits-filter.svg',
+      icon: '/credits-filter.svg',
       value: 'withdraw'
     },
     {

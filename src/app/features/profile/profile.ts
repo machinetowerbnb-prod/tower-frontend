@@ -130,9 +130,9 @@ export class Profile implements OnInit {
     if (label === 'Deposit') {
       this.depositModal.openModal();
     } else if (label === 'Withdrawal') {
-      // this.router.navigate(['/withdraw']);
+      this.router.navigate(['/withdraw']);
     } else if (label === 'History') {
-      // this.router.navigate(['/history']);
+      this.router.navigate(['/history']);
     } else if (label === 'Support') {
       this.openSupportPopup();
     }

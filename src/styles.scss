@@ -71,3 +71,18 @@ input:-ms-input-placeholder {
 input::-ms-input-placeholder {
   color: #94A3B8 !important;
 }
+
+/* Override Angular Material raised-button label color.
+   The Material CSS uses the variable
+   `--mat-button-protected-label-text-color` for raised/contained buttons.
+   Setting it here (root scope) ensures raised button labels use the color
+   you expect. If you prefer a scoped change, move this into a component
+   stylesheet and use `:host ::ng-deep` or a more specific selector. */
+:root {
+  --mat-button-protected-label-text-color: #ffffff;
+}
+
+/* Optional: force the color on the class directly if you need higher specificity */
+.mat-mdc-raised-button {
+  color: var(--mat-button-protected-label-text-color) !important;
+}

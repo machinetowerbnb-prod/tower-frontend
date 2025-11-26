@@ -19,7 +19,7 @@
         You are about to start deposit process. The process is fully automated and usually takes about 20 minutes.
         Make sure to send exact total amount, including fees.
       </p>
-
+     <hr style="border: 0.5px solid #00000029;"/>
       <div class="input-section">
         <label>Enter amount</label>
         <input matInput type="number" [(ngModel)]="amount" placeholder="2500" />
@@ -35,12 +35,19 @@
       <div class="token-section">
         <label>BNB Smart Chain (BEP20) Token</label>
         <div class="token-options">
-          <button *ngFor="let token of transactionAccounts" class="token-btn" [class.active]="token.id === selectedToken?.id"
-            (click)="selectToken(token)">
-            {{ token.name }}
-          </button>
+          <div class="token-row">
+            <button *ngFor="let token of transactionAccounts.slice(0,2)" class="token-btn" [class.active]="token.id === selectedToken?.id"
+              (click)="selectToken(token)">
+              {{ token.name }}
+            </button>
+          </div>
+          <div class="token-row">
+            <button *ngIf="transactionAccounts.length > 2" class="token-btn full-width" [class.active]="transactionAccounts[2].id === selectedToken?.id"
+              (click)="selectToken(transactionAccounts[2])">
+              {{ transactionAccounts[2].name }}
+            </button>
+          </div>
         </div>
-
       </div>
 
       <div class="action-buttons">
@@ -58,7 +65,7 @@
       <p>Deposit Successful!</p>
     </div>
     <div *ngIf="this.compoletedDeposit == true" class="success-content"
-      style="padding: 0px 20px;color: #707070;font-size: 13px;">
+      style="color: #707070;font-size: 13px;">
       <p>Your payment has been submitted. You can track it anytime in your transaction history.</p>
     </div>
   </div>

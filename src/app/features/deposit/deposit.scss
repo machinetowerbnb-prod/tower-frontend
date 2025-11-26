@@ -30,9 +30,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: #fff;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
+  background:#2752E7;
+  border-radius: 20px 20px 0 0 ;
   z-index: 99;
   max-width: 420px;
   margin: auto;
@@ -57,6 +56,8 @@
   font-size: 16px;
   font-weight: 500;
   margin: 0;
+  flex: 1;
+  text-align: center;
 }
 
 .close-icon {
@@ -75,10 +76,11 @@
 .modal-body {
   padding: 20px;
   background: #fff;
+  border-radius: 20px 20px 0 0 ;
 }
 
 .info-text {
-  font-size: 13px;
+  font-size: 12px;
   color: #555;
   margin-bottom: 16px;
 }
@@ -96,12 +98,13 @@
   }
 
   input {
-    width: 100%;
+    width: 93.5%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 14px;
     outline: none;
+    height: 30px;
   }
 }
 
@@ -114,16 +117,17 @@
 }
 
 .quick-btn {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #d0d7ff;
-  border-radius: 8px;
-  background: #f5f8ff;
-  color: #0d2d7a;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #2752E7;
+    border-radius: 4px;
+    background: white;
+    color: #2752E7;
+    font-weight: 500;
+    height: 36px;
+    width: 82px;
+    cursor: pointer;
+    transition: all 0.3s ease;
   &.active,
   &:hover {
     background: #2752E7;
@@ -142,25 +146,37 @@
 
   .token-options {
     display: flex;
+    flex-direction: column;
     gap: 12px;
     margin-top: 6px;
+  }
+
+  .token-row {
+    display: flex;
+    gap: 12px;
   }
 
   .token-btn {
     flex: 1;
     padding: 10px;
-    border-radius: 8px;
+    border-radius: 4px;
     background: #f5f8ff;
     color: #94A3B8;
     border: 1px solid #d0d7ff;
     font-weight: 500;
     transition: all 0.3s ease;
     height: 50px;
+    min-width: 0;
 
     &.active {
       background: #E7EDFF;
       color: #2752E7;
       border-color: #2752E7;
+    }
+
+    &.full-width {
+      flex: 1 1 100%;
+      width: 100%;
     }
   }
 }
@@ -240,4 +256,5 @@
   align-items: center;
   width: 100%;
   justify-content: center;
+  text-align: center;
 }

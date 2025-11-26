@@ -21,7 +21,7 @@ export class Deposit implements OnInit{
   isClosing = false;
   amount: number | null = null;
   selectedToken: any = null;
-  quickAmounts = [500, 1000, 2000, 5000];
+  quickAmounts = [60, 500, 900, 1500];
   compoletedDeposit = false;
  transactionAccounts: any[] = [];
 
