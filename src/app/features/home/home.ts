@@ -22,9 +22,12 @@ export class Home implements OnInit, OnDestroy {
     private clipboard: Clipboard,
     private cdr: ChangeDetectorRef,
     private ngZone: NgZone
-  ) {}
+  ) { }
 
   @ViewChild('depositModal') depositModal!: Deposit;
+
+  transformStyle = 'translateX(0%)';
+
 
   // --- Carousel images: included sample of your uploaded file for testing ---
   carouselImages = [
@@ -75,10 +78,10 @@ export class Home implements OnInit, OnDestroy {
   }
 
   onDepositCompleted() {
-  console.log('✅ Deposit completed — refreshing home data immediately');
-  this.loadHomeData();
-  this.cdr.detectChanges(); // ensures immediate UI update in zoneless mode
-}
+    console.log('✅ Deposit completed — refreshing home data immediately');
+    this.loadHomeData();
+    this.cdr.detectChanges(); // ensures immediate UI update in zoneless mode
+  }
 
   loadHomeData() {
     const userId = this.safeGetLocalStorage('userId');
@@ -176,9 +179,8 @@ export class Home implements OnInit, OnDestroy {
   }
 
   private changeSlide(index: number) {
-    // small fade effect for UX
-    this.triggerFade();
-    this.currentIndex = index % this.carouselImages.length;
+    this.currentIndex = index;
+    this.transformStyle = `translateX(-${index * 100}%)`;
     this.cdr.detectChanges();
   }
 

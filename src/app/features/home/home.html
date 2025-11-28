@@ -4,8 +4,9 @@
     <div class="carousel-container" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)"
         (touchend)="onTouchEnd()">
         <!-- 🖼️ Dynamic Image with smooth crossfade -->
-        <img [src]="currentImage" alt="Carousel Image" class="carousel-image" [class.fade]="isFading"
-            (load)="onImageLoad()" />
+        <div class="carousel-track" [style.transform]="transformStyle">
+            <img *ngFor="let img of carouselImages" [src]="img" class="carousel-image" />
+        </div>
 
         <!-- 🔵 Dots (square indicators) -->
         <div class="carousel-dots">
@@ -84,17 +85,17 @@
         </div>
     </div> -->
 </div>
- <!-- 🔹 Telegram Banner -->
-    <div class="telegram-banner" (click)="openBannerLink()">
-        <img src="telegram.svg" alt="Telegram" class="telegram-icon" />
-        <div>
-            <p>Join us on Telegram</p>
-            <span>Get the latest updates here!</span>
-        </div>
-        <div>
-            <img src="go-inside.svg" alt="go" class="telegram-icon" />
-        </div>
+<!-- 🔹 Telegram Banner -->
+<div class="telegram-banner" (click)="openBannerLink()">
+    <img src="telegram.svg" alt="Telegram" class="telegram-icon" />
+    <div>
+        <p>Join us on Telegram</p>
+        <span>Get the latest updates here!</span>
     </div>
+    <div>
+        <img src="go-inside.svg" alt="go" class="telegram-icon" />
+    </div>
+</div>
 <!-- 🔹 Support Popup Overlay -->
 <div class="support-overlay" *ngIf="showSupport" (click)="closeSupportPopup()"></div>
 
