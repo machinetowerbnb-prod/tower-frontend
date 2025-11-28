@@ -18,6 +18,7 @@ import { Success } from './features/success/success'
 import { ChangePassword } from './features/change-password/change-password'
 import { TermsAndConditions } from './features/terms-and-conditions/terms-and-conditions'
 import { DepositOxapay } from './features/deposit-oxapay/deposit-oxapay'
+import { ForgetPassword } from './features/forget-password/forget-password'
 import { Adminlayout } from './admin/adminlayout/adminlayout'
 import { Dashboard } from './admin/dashboard/dashboard'
 import { Users } from './admin/users/users'
@@ -35,6 +36,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'signin', pathMatch: 'full' },
    { path: 'signin', component: Signin },
    { path: 'signup', component: Signup },
+   { path: 'forget', component: ForgetPassword },
    { path: 'verify-email', component: VerifyEmail },
    { path: 'email-confirm', component: EmailConfirmation },
    { path: 'withdraw', component: Withdrawal },
