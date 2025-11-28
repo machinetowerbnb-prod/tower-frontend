@@ -46,7 +46,7 @@ export class Profile implements OnInit {
     { icon: '/deposit.svg', label: 'Deposit' },
     { icon: '/withdrawal.svg', label: 'Withdrawal' },
     { icon: '/history.svg', label: 'History' },
-    { icon: '/support.svg', label: 'Support' }
+    { icon: '/support.svg', label: 'Group' }
   ];
 
   walletSummary = [
@@ -133,7 +133,7 @@ export class Profile implements OnInit {
       this.router.navigate(['/withdraw']);
     } else if (label === 'History') {
       this.router.navigate(['/history']);
-    } else if (label === 'Support') {
+    } else if (label === 'Group') {
       this.openSupportPopup();
     }
   }

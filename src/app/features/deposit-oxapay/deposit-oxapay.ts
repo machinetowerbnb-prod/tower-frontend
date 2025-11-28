@@ -28,21 +28,19 @@ export class DepositOxapay implements OnInit {
     @Inject(PLATFORM_ID) private platformId: Object,
     private ngZone: NgZone,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;
 
     // ✔ Backend API RESPONSE (static for now)
     this.data = {
-      track_id: '133955818',
-      network: 'Tron Network',
-      address: 'TRmsaepMSKeEXT8CB7g5vP7S2YQq6V6kRD',
-      memo: '',
-      qr_code:
-        'https://api.qrserver.com/v1/create-qr-code/?data=tron:TRmsaepMSKeEXT8CB7g5vP7S2YQq6V6kRD&size=150x150',
-      date: Math.floor(Date.now() / 1000), // current timestamp
-      amount: '7270.34',
+      "track_id": "112850141",
+      "network": "Tron Network",
+      "address": "TAYDGM48oyMshARPvDkHpQkkEyyPxaUYG3",
+      "memo": "",
+      "qr_code": "https://api.qrserver.com/v1/create-qr-code/?data=tron:TAYDGM48oyMshARPvDkHpQkkEyyPxaUYG3&size=150x150",
+      "date": 1764335914
     };
 
     this.startTimerFromBackend();
