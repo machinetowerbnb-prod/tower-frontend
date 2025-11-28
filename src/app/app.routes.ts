@@ -17,6 +17,7 @@ import { Members } from './features/members/members'
 import { Success } from './features/success/success'
 import { ChangePassword } from './features/change-password/change-password'
 import { TermsAndConditions } from './features/terms-and-conditions/terms-and-conditions'
+import { DepositOxapay } from './features/deposit-oxapay/deposit-oxapay'
 import { Adminlayout } from './admin/adminlayout/adminlayout'
 import { Dashboard } from './admin/dashboard/dashboard'
 import { Users } from './admin/users/users'
@@ -42,6 +43,7 @@ export const routes: Routes = [
    { path: 'members', component: Members },
    { path: 'change-password', component: ChangePassword },
    { path: 't&c', component: TermsAndConditions },
+   { path: 'payment', component: DepositOxapay },
 {
     path: '',
     component: Layout,
