@@ -30,30 +30,30 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let user of paginatedUsers; let i = index" (click)="openTeamDetails(user)">
+        <tr *ngFor="let user of paginatedUsers; let i = index" >
 
-          <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
-          <td>{{ user.name }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.referralId }}</td>
+          <td (click)="openTeamDetails(user)">{{ (currentPage - 1) * pageSize + i + 1 }}</td>
+          <td (click)="openTeamDetails(user)">{{ user.name }}</td>
+          <td (click)="openTeamDetails(user)">{{ user.email }}</td>
+          <td (click)="openTeamDetails(user)">{{ user.referralId }}</td>
 
           <!-- ⭐ FIXED width for wallet + button alignment -->
-          <td>
+          <td (click)="openTeamDetails(user)">
             <span class="amount">{{ user.wallet }}</span>
             <!-- <button class="add-btn" (click)="openPopup('Deposit', user)">Add</button> -->
           </td>
 
-          <td>
+          <td (click)="openTeamDetails(user)">
             <span class="amount">{{ user.earnings }}</span>
             <!-- <button class="add-btn" (click)="openPopup('Withdraw', user)">Add</button> -->
           </td>
 
-          <td>{{ user.referrals }}</td>
+          <td (click)="openTeamDetails(user)">{{ user.referrals }}</td>
 
           <!-- ⭐ TOGGLE switch instead of button -->
           <td>
             <label class="toggle-switch">
-              <input type="checkbox" [checked]="user.status" (change)="toggleStatus(user);$event.stopPropagation()"  />
+              <input type="checkbox" [checked]="user.status" (change)="toggleStatus(user)"  />
               <span class="slider"></span>
             </label>
           </td>
@@ -61,7 +61,7 @@
           <!-- ⭐ NEW Send email column -->
           <td>
             <!-- {{ user.email }} -->
-            <button class="edit-btn" (click)="openUserDetail(user);$event.stopPropagation()" title="Edit user" >
+            <button class="edit-btn" (click)="openUserDetail(user)" title="Edit user" >
               <i class="fa fa-edit"></i>
             </button>
           </td>
