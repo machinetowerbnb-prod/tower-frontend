@@ -28,9 +28,9 @@
       <p class="label">Your deposit address for payment</p>
 
       <div class="address-box">
-        <span>{{ data?.address }}</span>
-        <button class="copy" (click)="copy(data?.address)">
-          <img src="/copy.svg" />
+        <span class="address-text">{{ getMaskedAddress(data?.address) }}</span>
+        <button class="copy-btn" (click)="copyToClipboard(data?.address)" style="border: none;background-color: white;">
+          <img src="/copy.svg" alt="copy" />
         </button>
       </div>
 

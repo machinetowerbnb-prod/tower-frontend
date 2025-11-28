@@ -46,6 +46,10 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/change-password`, payload);
   }
 
+  doPayment(payload: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/confirm`, payload);
+  }
+
   //adminapis
   admin(payload: any) {
     return this.http.post<any>(`${this.baseUrl}/adminAvengers`, payload);

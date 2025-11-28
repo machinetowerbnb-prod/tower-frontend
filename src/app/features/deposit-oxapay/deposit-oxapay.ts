@@ -22,6 +22,7 @@ export class DepositOxapay implements OnInit {
   countdownSeconds = 180; // 3 minutes
   countdownText = '';
   intervalRef: any;
+  showCopyChip = true;
 
   constructor(
     private router: Router,
@@ -99,4 +100,22 @@ export class DepositOxapay implements OnInit {
   ngOnDestroy() {
     if (this.intervalRef) clearInterval(this.intervalRef);
   }
+
+  getMaskedAddress(addr: string): string {
+    if (!addr) return "";
+    if (addr.length <= 10) return addr;
+
+    return addr.substring(0, 10) + "..." + addr.substring(addr.length - 10);
+  }
+
+  copyToClipboard(text: string) {
+    if (!text) return;
+    navigator.clipboard.writeText(text)
+      .then(() => this.showCopyChip = true)
+      .catch(() => alert("Copy failed"));
+
+    setTimeout(() => this.showCopyChip = false, 2000);
+  }
+
+
 }
