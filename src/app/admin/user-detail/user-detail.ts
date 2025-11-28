@@ -1,5 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, NgZone, ChangeDetectorRef } from '@angular/core';
 import { EmailModal } from '../email-modal/email-modal';
+import { AuthService } from '../../services/auth.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+
+
 
 @Component({
   selector: 'app-user-detail',
@@ -9,6 +13,12 @@ import { EmailModal } from '../email-modal/email-modal';
 })
 export class UserDetail {
 
+  constructor(
+    private authService: AuthService,
+    private ngZone: NgZone,
+    private snackBar: MatSnackBar,
+    private cdr: ChangeDetectorRef,
+  ) { }
   @Output() openAmount = new EventEmitter<any>();
 
   prefilledWallet: any = null;
@@ -48,8 +58,29 @@ export class UserDetail {
   }
 
   onEmailSent(payload: { to: string[]; subject: string; html: string }) {
-    // payload contains everything; currently modal already console.logged it.
-    // Implement your real send email API here.
+
+    let data = {
+      emails: payload.to,
+      subject: payload.subject,
+      html: payload.html
+    }
+    this.authService.sendBulkEmails(data).subscribe({
+      next: (res) => {
+        console.log("✅ Users API Response:", res);
+        if (res.statusCode === 200) {
+          this.ngZone.run(() => {
+            this.snackBar.open('Emails Sent Successfully!', 'Close', {
+              duration: 3000,
+              panelClass: ['success-snackbar']
+            });
+            this.cdr.detectChanges();
+          });
+        }
+      },
+      error: (err) => {
+        console.error("❌ Users API Error:", err);
+      }
+    });
     console.log('Parent received send payload', payload);
   }
 
