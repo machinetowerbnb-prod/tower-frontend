@@ -53,7 +53,7 @@
           <!-- ⭐ TOGGLE switch instead of button -->
           <td>
             <label class="toggle-switch">
-              <input type="checkbox" [checked]="user.status" (change)="toggleStatus(user)" />
+              <input type="checkbox" [checked]="user.status" (change)="toggleStatus(user);$event.stopPropagation()"  />
               <span class="slider"></span>
             </label>
           </td>
@@ -61,7 +61,7 @@
           <!-- ⭐ NEW Send email column -->
           <td>
             <!-- {{ user.email }} -->
-            <button class="edit-btn" (click)="openUserDetail(user)" title="Edit user">
+            <button class="edit-btn" (click)="openUserDetail(user);$event.stopPropagation()" title="Edit user" >
               <i class="fa fa-edit"></i>
             </button>
           </td>
