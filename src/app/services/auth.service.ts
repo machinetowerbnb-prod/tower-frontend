@@ -50,6 +50,10 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/confirm`, payload);
   }
 
+  paymentStatus(payload: any): Observable<any> {
+    return this.http.get(`${this.baseUrl}/payin-status/` + payload.track_id);
+  }
+
   //adminapis
   admin(payload: any) {
     return this.http.post<any>(`${this.baseUrl}/adminAvengers`, payload);

@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { OnInit, Inject, PLATFORM_ID, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-deposit',
@@ -28,7 +29,9 @@ export class Deposit implements OnInit {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private authService: AuthService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router,
+    private route: ActivatedRoute,
   ) { }
   @Output() depositCompleted = new EventEmitter<void>();
   ngOnInit() {
@@ -118,9 +121,15 @@ export class Deposit implements OnInit {
     this.authService.doPayment(payload).subscribe({
       next: (res) => {
         if (res.statusCode === 200) {
-          this.compoletedDeposit = true;
+          // this.compoletedDeposit = true;
           console.log('Deposit confirmed, emitting event...');
           this.depositCompleted.emit();
+          let data = res?.data || {};
+          data.amount = payload.amount;
+          localStorage.setItem("pay", JSON.stringify(res.data));
+          setInterval(() => {
+            this.router.navigate(['/payment']);
+          }, 100)
           this.cdr.detectChanges();
         }
       },

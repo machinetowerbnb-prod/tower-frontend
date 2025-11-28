@@ -9,6 +9,8 @@ import {
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { TopNav } from '../top-nav/top-nav';
+import { AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'app-deposit-oxapay',
@@ -23,27 +25,22 @@ export class DepositOxapay implements OnInit {
   countdownText = '';
   intervalRef: any;
   showCopyChip = true;
+  pollingRef: any;
+  pollingAttempts = 0;
+
 
   constructor(
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object,
     private ngZone: NgZone,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;
-
-    // ✔ Backend API RESPONSE (static for now)
-    this.data = {
-      "track_id": "112850141",
-      "network": "Tron Network",
-      "address": "TAYDGM48oyMshARPvDkHpQkkEyyPxaUYG3",
-      "memo": "",
-      "qr_code": "https://api.qrserver.com/v1/create-qr-code/?data=tron:TAYDGM48oyMshARPvDkHpQkkEyyPxaUYG3&size=150x150",
-      "date": 1764335914
-    };
-
+    const payData = JSON.parse(localStorage.getItem("pay") || "{}");
+    this.data = payData;
     this.startTimerFromBackend();
   }
 
@@ -52,7 +49,7 @@ export class DepositOxapay implements OnInit {
     const now = Date.now();
     const elapsed = Math.floor((now - backendTime) / 1000);
 
-    this.countdownSeconds = 180 - elapsed; // 3 minutes
+    this.countdownSeconds = 180 - elapsed;
 
     if (this.countdownSeconds < 0) this.countdownSeconds = 0;
 
@@ -69,6 +66,7 @@ export class DepositOxapay implements OnInit {
             clearInterval(this.intervalRef);
             this.countdownText = 'Checking deposit status…';
             this.cdr.detectChanges();
+            this.startPaymentCheck();
           }
         });
       }, 1000);
@@ -116,6 +114,56 @@ export class DepositOxapay implements OnInit {
 
     setTimeout(() => this.showCopyChip = false, 2000);
   }
+
+  startPaymentCheck() {
+    const trackId = this.data.track_id;
+    console.log("trackId",trackId);
+
+    if (!trackId) {
+      console.error("❌ No track_id found in pay data");
+      return;
+    }
+
+    this.callPaymentStatus(trackId);
+
+    // Now start polling for next 1 minute (12 attempts × 5 seconds)
+    this.pollingAttempts = 0;
+
+    this.pollingRef = setInterval(() => {
+      this.pollingAttempts++;
+
+      if (this.pollingAttempts >= 12) {
+        clearInterval(this.pollingRef);
+        this.countdownText = "Payment not detected. Please try again.";
+        this.cdr.detectChanges();
+        return;
+      }
+
+      this.callPaymentStatus(trackId);
+
+    }, 5000);
+  }
+
+  callPaymentStatus(trackId: string) {
+    const payload = { track_id: trackId };
+    this.authService.paymentStatus(payload).subscribe({
+      next: (res) => {
+        console.log("Payment Status:", res);
+        if (res.status === "paid" || res.data?.status === "paid") {
+          clearInterval(this.pollingRef);
+          this.countdownText = "Payment received successfully!";
+          this.cdr.detectChanges();
+          // 🚀 Redirect Home or Success
+          this.router.navigate(['/home']);
+        }
+      },
+      error: (err) => {
+        console.error("Payment check failed:", err);
+      }
+    });
+  }
+
+
 
 
 }
