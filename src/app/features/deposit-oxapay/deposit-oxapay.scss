@@ -1,0 +1,120 @@
+.layout-container {
+  background: #f8faff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top Banner */
+.blue-banner {
+  position: relative;
+  height: 180px;
+  text-align: center;
+  color: #fff;
+}
+
+.upper-blue {
+  height: 160px;
+  background: url('/common-top.svg') center top / cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.back-btn {
+  position: absolute;
+  left: 16px;
+  top: 30px;
+  background: none;
+  border: none;
+}
+
+.spacer {
+  position: absolute;
+  right: 16px;
+  top: 30px;
+  width: 30px;
+}
+
+.banner-sub {
+  color: #ffffffcc;
+  font-size: 13px;
+  margin-top: -10px;
+}
+
+.lower-blue {
+  height: 20px;
+}
+
+/* Card */
+.content {
+  padding: 0 16px;
+  margin-top: -30px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(4, 29, 98, 0.08);
+}
+
+.qr {
+  width: 150px;
+  height: 150px;
+}
+
+.label {
+  font-size: 13px;
+  margin-top: 10px;
+  color: #333;
+}
+
+.amount {
+  font-size: 20px;
+  color: #0f172a;
+  margin: 6px 0 14px;
+  font-weight: 600;
+}
+
+.address-box {
+  background: #f3f5fb;
+  padding: 10px 12px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0 12px;
+}
+
+.copy img {
+  width: 18px;
+}
+
+/* Note & Timer */
+.note {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.timer {
+  margin-top: 12px;
+  color: #ff9900;
+  font-weight: 600;
+}
+
+/* Cancel Button */
+.cancel-box {
+  padding: 16px;
+  margin-top: auto;
+}
+
+.cancel-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #d0d5dd;
+  background: white;
+  font-size: 16px;
+}
