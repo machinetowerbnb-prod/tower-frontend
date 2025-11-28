@@ -11,7 +11,6 @@ import { Router, RouterModule } from '@angular/router';
 import { TopNav } from '../top-nav/top-nav';
 import { AuthService } from '../../services/auth.service';
 
-
 @Component({
   selector: 'app-deposit-oxapay',
   imports: [CommonModule, RouterModule, TopNav],
@@ -19,14 +18,17 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './deposit-oxapay.scss'
 })
 export class DepositOxapay implements OnInit {
+
   data: any = null;
 
-  countdownSeconds = 180; // 3 minutes
+  countdownSeconds = 180;
   countdownText = '';
   intervalRef: any;
+
   showCopyChip = true;
+
   pollingRef: any;
-  pollingAttempts = 0;
+  pollingStarted = false; // 🔵 NEW
 
 
   constructor(
@@ -35,12 +37,14 @@ export class DepositOxapay implements OnInit {
     private ngZone: NgZone,
     private cdr: ChangeDetectorRef,
     private authService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;
-    const payData = JSON.parse(localStorage.getItem("pay") || "{}");
+
+    const payData = JSON.parse(localStorage.getItem('pay') || '{}');
     this.data = payData;
+
     this.startTimerFromBackend();
   }
 
@@ -50,7 +54,6 @@ export class DepositOxapay implements OnInit {
     const elapsed = Math.floor((now - backendTime) / 1000);
 
     this.countdownSeconds = 180 - elapsed;
-
     if (this.countdownSeconds < 0) this.countdownSeconds = 0;
 
     this.updateCountdownText();
@@ -58,16 +61,31 @@ export class DepositOxapay implements OnInit {
     this.ngZone.runOutsideAngular(() => {
       this.intervalRef = setInterval(() => {
         this.ngZone.run(() => {
+
           if (this.countdownSeconds > 0) {
             this.countdownSeconds--;
             this.updateCountdownText();
+
+            // 🔵 Start polling EXACTLY after 2 minutes (when 60 sec left)
+            if (this.countdownSeconds === 60 && !this.pollingStarted) {
+              this.pollingStarted = true;
+              this.startPaymentPolling();
+            }
+
             this.cdr.detectChanges();
-          } else {
+          } 
+          
+          else {
+            // stop main timer
             clearInterval(this.intervalRef);
+
+            // stop polling also
+            this.stopPaymentPolling();
+
             this.countdownText = 'Checking deposit status…';
             this.cdr.detectChanges();
-            this.startPaymentCheck();
           }
+
         });
       }, 1000);
     });
@@ -76,11 +94,61 @@ export class DepositOxapay implements OnInit {
   updateCountdownText() {
     const min = Math.floor(this.countdownSeconds / 60);
     const sec = this.countdownSeconds % 60;
-
     this.countdownText = `Please wait for ${min} min ${sec
       .toString()
       .padStart(2, '0')} sec Do not go back, refresh, or close this page.`;
   }
+
+  // --------------------------------------------------------------
+  // 🔥 POLLING LOGIC (every 10 sec after 2 minutes)
+  // --------------------------------------------------------------
+
+  startPaymentPolling() {
+    const trackId = this.data.track_id;
+    if (!trackId) return;
+
+    // Call immediately once
+    this.callPaymentStatus(trackId);
+
+    // Then every 10 seconds
+    this.pollingRef = setInterval(() => {
+      this.callPaymentStatus(trackId);
+    }, 10000);
+  }
+
+  stopPaymentPolling() {
+    if (this.pollingRef) {
+      clearInterval(this.pollingRef);
+      this.pollingRef = null;
+    }
+  }
+
+  callPaymentStatus(trackId: string) {
+    const payload = { track_id: trackId };
+
+    this.authService.paymentStatus(payload).subscribe({
+      next: (res) => {
+        console.log('Payment Status:', res);
+
+        if (res.status === 'paid' || res.data?.status === 'paid') {
+          this.stopPaymentPolling();
+          clearInterval(this.intervalRef);
+
+          this.countdownText = 'Payment received successfully!';
+          this.cdr.detectChanges();
+
+          this.router.navigate(['/home']);
+        }
+      },
+      error: (err) => {
+        console.error('Payment check failed:', err);
+      }
+    });
+  }
+
+  // --------------------------------------------------------------
+  // EXISTING FUNCTIONS (unchanged)
+  // --------------------------------------------------------------
 
   goBack() {
     this.router.navigate(['/home']);
@@ -95,75 +163,24 @@ export class DepositOxapay implements OnInit {
     navigator.clipboard.writeText(text);
   }
 
-  ngOnDestroy() {
-    if (this.intervalRef) clearInterval(this.intervalRef);
-  }
-
   getMaskedAddress(addr: string): string {
-    if (!addr) return "";
+    if (!addr) return '';
     if (addr.length <= 10) return addr;
-
-    return addr.substring(0, 10) + "..." + addr.substring(addr.length - 10);
+    return addr.substring(0, 10) + '...' + addr.substring(addr.length - 10);
   }
 
   copyToClipboard(text: string) {
     if (!text) return;
     navigator.clipboard.writeText(text)
       .then(() => this.showCopyChip = true)
-      .catch(() => alert("Copy failed"));
+      .catch(() => alert('Copy failed'));
 
     setTimeout(() => this.showCopyChip = false, 2000);
   }
 
-  startPaymentCheck() {
-    const trackId = this.data.track_id;
-    console.log("trackId",trackId);
-
-    if (!trackId) {
-      console.error("❌ No track_id found in pay data");
-      return;
-    }
-
-    this.callPaymentStatus(trackId);
-
-    // Now start polling for next 1 minute (12 attempts × 5 seconds)
-    this.pollingAttempts = 0;
-
-    this.pollingRef = setInterval(() => {
-      this.pollingAttempts++;
-
-      if (this.pollingAttempts >= 12) {
-        clearInterval(this.pollingRef);
-        this.countdownText = "Payment not detected. Please try again.";
-        this.cdr.detectChanges();
-        return;
-      }
-
-      this.callPaymentStatus(trackId);
-
-    }, 5000);
+  ngOnDestroy() {
+    if (this.intervalRef) clearInterval(this.intervalRef);
+    this.stopPaymentPolling();
   }
-
-  callPaymentStatus(trackId: string) {
-    const payload = { track_id: trackId };
-    this.authService.paymentStatus(payload).subscribe({
-      next: (res) => {
-        console.log("Payment Status:", res);
-        if (res.status === "paid" || res.data?.status === "paid") {
-          clearInterval(this.pollingRef);
-          this.countdownText = "Payment received successfully!";
-          this.cdr.detectChanges();
-          // 🚀 Redirect Home or Success
-          this.router.navigate(['/home']);
-        }
-      },
-      error: (err) => {
-        console.error("Payment check failed:", err);
-      }
-    });
-  }
-
-
-
 
 }

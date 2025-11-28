@@ -24,6 +24,11 @@
         <span>Users</span>
       </li>
 
+      <li (click)="navigateTo('deposits', $event)" routerLinkActive="active">
+        <i class="fa fa-wallet"></i>
+        <span>Deposits</span>
+      </li>
+
       <!-- 🔹 Withdrawals main menu -->
       <li class="has-submenu" [class.active]="activeSection === 'withdrawls'" (click)="toggleWithdrawMenu()">
         <i class="fa fa-bank"></i>
@@ -55,18 +60,6 @@
         <span>Master Data</span>
       </li>
 
-      <li (click)="navigateTo('deposits', $event)" routerLinkActive="active">
-        <i class="fa fa-wallet"></i>
-        <span>Deposits</span>
-      </li>
-
-
-      <!-- <li routerLinkActive="active">
-        <a routerLink="/admin/user-deposits">
-          <img src="/wallet.svg" alt="icon" class="nav-icon" />
-          User Deposits
-        </a>
-      </li> -->
     </ul>
   </aside>
 
