@@ -1,17 +1,18 @@
-import { Component, EventEmitter, Input, Output, NgZone, ChangeDetectorRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, NgZone, ChangeDetectorRef, OnChanges } from '@angular/core';
 import { EmailModal } from '../email-modal/email-modal';
 import { AuthService } from '../../services/auth.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { FormsModule } from '@angular/forms';
 
 
 
 @Component({
   selector: 'app-user-detail',
-  imports: [EmailModal],
+  imports: [EmailModal, FormsModule],
   templateUrl: './user-detail.html',
   styleUrl: './user-detail.scss'
 })
-export class UserDetail {
+export class UserDetail implements OnChanges {
 
   constructor(
     private authService: AuthService,
@@ -22,6 +23,14 @@ export class UserDetail {
   @Output() openAmount = new EventEmitter<any>();
 
   prefilledWallet: any = null;
+  editablePasscode: any = '';
+
+  ngOnChanges() {
+    if (this.user) {
+      this.editablePasscode = this.user.passcode;
+    }
+  }
+
 
 
   @Input() user: any = null;
@@ -87,4 +96,33 @@ export class UserDetail {
   onEmailClosed() {
     console.log('Email modal closed');
   }
+
+  editPasscode() {
+    console.log("Passcode edit clicked for:", this.user.email);
+    console.log("Current Passcode:", this.editablePasscode);
+
+    let data = {
+      "email": this.user.email,
+      "passcode": this.editablePasscode
+    };
+    this.authService.updatePasscode(data).subscribe({
+      next: (res) => {
+        if (res.statusCode === 200) {
+          this.ngZone.run(() => {
+            this.snackBar.open('Passcode Updated successfully', 'Close', {
+              duration: 3000,
+              panelClass: ['success-snackbar']
+            });
+            this.cdr.detectChanges();
+          });
+        }
+      },
+      error: (err) => {
+        console.error("❌ Users API Error:", err);
+      }
+    });
+
+  }
+
+
 }

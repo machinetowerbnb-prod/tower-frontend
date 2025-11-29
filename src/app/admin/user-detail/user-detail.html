@@ -1,7 +1,7 @@
 <div class="user-details-overlay" (click)="close.emit()"></div>
 
 <div class="user-details-card">
-  
+
   <!-- NAME BADGE -->
   <div class="name-badge">{{ formattedName }}</div>
 
@@ -28,14 +28,24 @@
     </div>
   </div>
 
+  <div class="wallet-box">
+    <label>Passcode</label>
+
+    <div class="wallet-actions">
+      <input type="text" [(ngModel)]="editablePasscode" class="passcode-input" placeholder="Enter passcode" />
+
+      <button class="add-btn" (click)="editPasscode()">
+        Update
+      </button>
+    </div>
+  </div>
+
   <!-- ACTIVE/INACTIVE TOGGLE -->
   <div class="status-toggle">
     <label>Status</label>
 
     <label class="toggle-switch">
-      <input type="checkbox"
-             [checked]="user.status"
-             (change)="triggerStatusToggle()" />
+      <input type="checkbox" [checked]="user.status" (change)="triggerStatusToggle()" />
       <span class="slider"></span>
     </label>
   </div>

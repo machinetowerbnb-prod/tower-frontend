@@ -185,6 +185,7 @@ export class Users implements OnInit {
 
   closeUserDetail() {
     this.showDetail = false;
+    this.loadUsers()
   }
 
   onEmailSent(payload: { to: string[]; subject: string; html: string }) {
@@ -198,10 +199,10 @@ export class Users implements OnInit {
         console.log("✅ Users API Response:", res);
         if (res.statusCode === 200) {
           this.ngZone.run(() => {
-        this.snackBar.open('Emails Sent Successfully!', 'Close', {
-          duration: 3000,
-          panelClass: ['success-snackbar']
-        });
+            this.snackBar.open('Emails Sent Successfully!', 'Close', {
+              duration: 3000,
+              panelClass: ['success-snackbar']
+            });
             this.cdr.detectChanges();
           });
         }
