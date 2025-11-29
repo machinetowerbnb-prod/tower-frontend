@@ -1,80 +1,96 @@
 <div class="home-container">
-
-    <!-- 🔹 Carousel Section -->
-    <div class="carousel-container" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)"
-        (touchend)="onTouchEnd()">
-        <!-- 🖼️ Dynamic Image with smooth crossfade -->
-        <div class="carousel-track" [style.transform]="transformStyle">
-            <img *ngFor="let img of carouselImages" [src]="img" class="carousel-image" />
-        </div>
-
-        <!-- 🔵 Dots (square indicators) -->
-        <div class="carousel-dots">
-            <span *ngFor="let img of carouselImages; let i = index" class="dot" [class.active]="i === currentIndex"
-                (click)="setCurrentSlide(i)"></span>
-        </div>
+  <!-- 🔹 Carousel Section -->
+  <div
+    class="carousel-container"
+    (touchstart)="onTouchStart($event)"
+    (touchmove)="onTouchMove($event)"
+    (touchend)="onTouchEnd()"
+  >
+    <!-- 🖼️ Dynamic Image with smooth crossfade -->
+    <div class="carousel-track" [style.transform]="transformStyle">
+      <img *ngFor="let img of carouselImages" [src]="img" class="carousel-image" />
     </div>
 
-    <!-- 🔹 Wallet Section -->
-    <div class="wallet-section">
-        <div class="wallet-buttons">
-            <div class="wallet-btn" *ngFor="let action of walletActions" (click)="onWalletAction(action.label)">
-                <img [src]="action.icon" alt="{{ action.label }}" />
-                <span>{{ action.label }}</span>
-            </div>
-        </div>
-        <app-deposit #depositModal (depositCompleted)="onDepositCompleted()"></app-deposit>
-        <div class="wallet-values">
-            <div class="wallet-item">
-                <p>Main Wallet</p>
-                <h3>{{ workingWallet }} <span>USDT</span></h3>
-            </div>
-            <div class="wallet-item">
-                <p>Withdrawal Account</p>
-                <h3>{{ withdrawalWallet }} <span>USDT</span></h3>
-            </div>
-        </div>
+    <!-- 🔵 Dots (square indicators) -->
+    <div class="carousel-dots">
+      <span
+        *ngFor="let img of carouselImages; let i = index"
+        class="dot"
+        [class.active]="i === currentIndex"
+        (click)="setCurrentSlide(i)"
+      ></span>
     </div>
+  </div>
 
-    <!-- 🔹 Referral Section -->
-    <div class="referral-section">
-        <div class="code-row">
-            <div class="code-box" style="display: block;">
-                <h6>SHARE YOUR LINK</h6>
-                <h3>Earn up to 21% profit bonus when your friends sign up</h3>
-                <input type="text" readonly [value]="refferalCode" />
-                <img src="/copy.svg" alt="copy" (click)="copyReferralLink()" />
-            </div>
-
-            <img src="/gift.gif" class="referral-gif" alt="gif" />
+  <!-- 🔹 Wallet Section -->
+  <div class="wallet-section">
+    <div class="wallet-buttons">
+      <div
+        class="wallet-btn"
+        *ngFor="let action of walletActions"
+        (click)="onWalletAction(action.label)"
+      >
+        <img [src]="action.icon" alt="{{ action.label }}" />
+        <span>{{ action.label }}</span>
+      </div>
+    </div>
+    <app-deposit #depositModal (depositCompleted)="onDepositCompleted()"></app-deposit>
+    <div class="wallet-values">
+      <div class="wallet-item">
+        <p class="ptag">Main Wallet</p>
+        <div class="money-item">
+          <span class="money">{{ workingWallet }}</span>
+          <span class="curr">USDT</span>
         </div>
-
+      </div>
+      <div class="wallet-item">
+        <p class="ptag">Withdrawal Account</p>
+        <div class="money-item">
+          <span class="money">{{ withdrawalWallet }}</span>
+          <span class="curr">USDT</span>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="bnb-section">
-        <h3>Tower BNB Core Concept</h3>
-
-        <p>
-            At TowerBNB, the Circulation Yield Protocol (CYP) redefines how digital assets generate
-            value. Built on an IDV-based Circulation strategy model, it offers a highly stable
-            and quantitative trading design. It allows users to earn consistent returns from
-            digital assets, all while eliminating manual monitoring, trading risks, and
-            market volatility through automated and smart-driven interaction methods.
-        </p>
-
-        <p>
-            The TowerBNB Circulation Strategy is operated based on the Ethereum Network and uses
-            Tower’s circular product—Compound-Connected Loop Yield Technology for optimized
-            circulation strategy rewards. Tower’s Circular strategy helps the technology interact
-            with algorithms that automatically maximize returns, allowing participants to earn
-            predictable income from digital assets. The model focuses on high-yield accumulation
-            based on capital-flow efficiency, ensuring maximum potential for both new and existing
-            investors.
-        </p>
+  <!-- 🔹 Referral Section -->
+  <div class="referral-section">
+    <div class="code-row">
+      <div class="code-box">
+        <span class="code-title">SHARE YOUR LINK</span>
+        <span class="code-body">Earn up to 21% profit bonus when your friends sign up</span>
+      </div>
+      <div class="rferal-box">
+        <span>{{ refferalCode }}</span>
+        <img src="/copy.svg" alt="copy" (click)="copyReferralLink()" />
+      </div>
     </div>
+    <img src="/gift1.gif" class="referral-gif" alt="gif" />
+  </div>
 
-    <!-- 🔹 Telegram Banner -->
-    <!-- <div class="telegram-banner" (click)="openBannerLink()">
+  <div class="bnb-section">
+    <h3>Tower BNB Core Concept</h3>
+
+    <p>
+      At TowerBNB, the Circulation Yield Protocol (CYP) redefines how digital assets generate value.
+      Built on an IDV-based Circulation strategy model, it offers a highly stable and quantitative
+      trading design. It allows users to earn consistent returns from digital assets, all while
+      eliminating manual monitoring, trading risks, and market volatility through automated and
+      smart-driven interaction methods.
+    </p>
+
+    <p>
+      The TowerBNB Circulation Strategy is operated based on the Ethereum Network and uses Tower’s
+      circular product—Compound-Connected Loop Yield Technology for optimized circulation strategy
+      rewards. Tower’s Circular strategy helps the technology interact with algorithms that
+      automatically maximize returns, allowing participants to earn predictable income from digital
+      assets. The model focuses on high-yield accumulation based on capital-flow efficiency,
+      ensuring maximum potential for both new and existing investors.
+    </p>
+  </div>
+
+  <!-- 🔹 Telegram Banner -->
+  <!-- <div class="telegram-banner" (click)="openBannerLink()">
         <img src="telegram.svg" alt="Telegram" class="telegram-icon" />
         <div>
             <p>Join us on Telegram</p>
@@ -87,35 +103,44 @@
 </div>
 <!-- 🔹 Telegram Banner -->
 <div class="telegram-banner" (click)="openBannerLink()">
-    <img src="telegram.svg" alt="Telegram" class="telegram-icon" />
-    <div>
-        <p>Join us on Telegram</p>
-        <span>Get the latest updates here!</span>
+  <div class="telegram-section">
+    <div class="tele-icon">
+      <img src="tele.svg" alt="Telegram" class="telegram-icon" />
+      <div class="tele-text">
+        <span class="tele-head-text">Join our Telegram channel to stay updated</span>
+        <span class="tele-body-text">Get the latest updates insights!</span>
+      </div>
     </div>
-    <div>
-        <img src="go-inside.svg" alt="go" class="telegram-icon" />
+    <div class="expend-icon">
+      <img src="go-inside.svg" alt="go"/>
     </div>
+  </div>
 </div>
 <!-- 🔹 Support Popup Overlay -->
 <div class="support-overlay" *ngIf="showSupport" (click)="closeSupportPopup()"></div>
 
 <!-- 🔹 Support Popup -->
 <div class="support-popup" *ngIf="showSupport">
-    <div class="support-header">
-        <h3>We’re here to help</h3>
-        <button class="close-btn" (click)="closeSupportPopup()">×</button>
-    </div>
+  <div class="support-header">
+    <h3>We’re here to help</h3>
+    <button class="close-btn" (click)="closeSupportPopup()">×</button>
+  </div>
 
-    <div class="support-content">
-        <p>• Sign-up and explore the Free Trial and earn 8 USDT fund.</p>
+  <div class="support-content">
+    <p>• Sign-up and explore the Free Trial and earn 8 USDT fund.</p>
 
-        <p>• Join the group and contact your Manager or Customer Support to receive a 2 USDT joining bonus.</p>
+    <p>
+      • Join the group and contact your Manager or Customer Support to receive a 2 USDT joining
+      bonus.
+    </p>
 
-        <p>• Claim a total of 10 USDT and use the funds to circulate Tower Upgrade or withdraw upon upgrading to Core 1G
-            Tower Computing.</p>
+    <p>
+      • Claim a total of 10 USDT and use the funds to circulate Tower Upgrade or withdraw upon
+      upgrading to Core 1G Tower Computing.
+    </p>
 
-        <p>• $2 bonus when activating your account with $50.</p>
-    </div>
+    <p>• $2 bonus when activating your account with $50.</p>
+  </div>
 
-    <button class="support-btn">Support</button>
+  <button class="support-btn">Support</button>
 </div>

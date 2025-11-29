@@ -2,7 +2,6 @@
 :host ::ng-deep .language-selector.mat-mdc-form-field,
 :host ::ng-deep .language-selector .mat-mdc-form-field,
 :host ::ng-deep mat-form-field.language-selector {
-  text-align: unset !important;
   display: block !important;
 }
 
@@ -234,10 +233,10 @@ form {
   margin-bottom: 20px;
 }
 
-.mobile-section,
-.password-section {
-  margin-bottom: 20px;
-}
+// .mobile-section,
+// .password-section {
+//   margin-bottom: 20px;
+// }
 
 .section-labels {
   display: flex;
@@ -245,6 +244,7 @@ form {
   /* align labels to left instead of stretching */
   margin-bottom: 5px;
   font-weight: 500;
+  font-size: 16px;
 }
 
 .section-labels span:first-child {
@@ -262,7 +262,7 @@ form {
 }
 
 .error-label {
-  color: #f44336;
+  color: #E11D48 !important;
 }
 
 .mobile-input-group {
@@ -282,46 +282,51 @@ form {
 .password-field {
   width: 100%;
 }
+.formField{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
 // Error text styling - make validation errors red
 ::ng-deep .mat-mdc-form-field .mat-mdc-form-field-error {
-  color: #f44336 !important;
+  color: #E11D48 !important;
   font-size: 12px !important;
-  margin-top: 4px !important;
 }
 
 ::ng-deep .mat-error {
-  color: #f44336 !important;
+  color: #E11D48 !important;
   font-size: 12px !important;
 }
 
 // Specific targeting for password field errors
 ::ng-deep .password-field .mat-error {
-  color: #f44336 !important;
+  color: #E11D48 !important;
   font-size: 12px !important;
 }
 
 ::ng-deep .password-section .mat-error {
-  color: #f44336 !important;
+  color: #E11D48 !important;
   font-size: 12px !important;
 }
 
 // Additional selectors to ensure password errors are red
 ::ng-deep mat-form-field.password-field .mat-mdc-form-field-error,
 ::ng-deep mat-form-field.password-field mat-error {
-  color: #f44336 !important;
+  color: #E11D48 !important;
+  font-weight: 400;
 }
 
 // Global override for all mat-error elements
 ::ng-deep mat-error {
-  color: #f44336 !important;
+  color: #E11D48 !important;
   font-size: 12px !important;
 }
 
 // Ensure error text appears below input fields
-::ng-deep .mat-mdc-form-field-subscript-wrapper {
-  margin-top: 4px !important;
-}
+// ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+//   margin-top: 4px !important;
+// }
 
 .form-options {
   display: flex;
@@ -374,7 +379,7 @@ form {
 
 .forgot-password {
   font-size: 14px;
-  color: #007bff;
+  color: #2752E7;
   text-decoration: none;
 }
 .forgot-password:hover {
@@ -388,7 +393,9 @@ form {
   margin-top: auto;
   width: 100%;
   box-sizing: border-box;
-  position: relative;
+  position: sticky;
+  bottom: 0px;
+  z-index: 1;
   /* for pseudo-element */
   /* Stronger, more visible upward shadow */
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.06), 0 -6px 18px -4px rgba(0, 0, 0, 0.08);
@@ -467,13 +474,13 @@ form {
   transition: all 0.3s ease;
 
   &:hover {
-    border-color: #007bff;
+    border-color: #2752E7;
     background-color: #f8f9fa;
   }
 }
 
 .signup-text {
-  color: #007bff;
+  color: #2752E7;
   text-decoration: none;
 }
 
@@ -583,22 +590,39 @@ top:30px;
 ::ng-deep .mat-mdc-form-field .mdc-notched-outline__trailing {
   border-color: #CFCFCF !important;
 }
-::ng-deep .mat-mdc-form-field-bottom-align {
-  display: none !important;
-  visibility: hidden !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: hidden !important;
+// ::ng-deep .mat-mdc-form-field-bottom-align {
+//   display: none !important;
+//   visibility: hidden !important;
+//   height: 0 !important;
+//   margin: 0 !important;
+//   padding: 0 !important;
+//   overflow: hidden !important;
+// }
+
+// ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+//   display: none !important;
+//   visibility: hidden !important;
+//   height: 0 !important;
+//   margin: 0 !important;
+//   padding: 0 !important;
+//   overflow: hidden !important;
+// }
+::ng-deep mat-form-field.ng-invalid.ng-touched .mdc-notched-outline__leading,
+::ng-deep mat-form-field.ng-invalid.ng-touched .mdc-notched-outline__notch,
+::ng-deep mat-form-field.ng-invalid.ng-touched .mdc-notched-outline__trailing {
+  border-color: #E11D48 !important;
+  border-width: 2px !important;
 }
 
-::ng-deep .mat-mdc-form-field-subscript-wrapper {
-  display: none !important;
-  visibility: hidden !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: hidden !important;
+/* 🔥 Make Outline Gray When Valid & Touched */
+::ng-deep mat-form-field.ng-valid.ng-touched .mdc-notched-outline__leading,
+::ng-deep mat-form-field.ng-valid.ng-touched .mdc-notched-outline__notch,
+::ng-deep mat-form-field.ng-valid.ng-touched .mdc-notched-outline__trailing {
+  border-color: #CFCFCF !important;
 }
 
+/* 🔥 Fix Ripple underline also */
+::ng-deep mat-form-field.ng-invalid.ng-touched .mdc-line-ripple::after {
+  border-bottom-color: #E11D48 !important;
+}
 

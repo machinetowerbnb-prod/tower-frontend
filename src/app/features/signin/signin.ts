@@ -190,9 +190,9 @@ export class Signin implements OnInit {
     }
   }
 
-  forgetPassword() {
-    this.router.navigate(['/forget']);
-  }
+  // forgetPassword() {
+  //   this.router.navigate(['/forget']);
+  // }
 
 }
 

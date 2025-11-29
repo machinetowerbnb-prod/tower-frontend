@@ -1,12 +1,15 @@
 <div class="layout-container" fxLayout="column" fxFlexFill>
     <!-- <header>
-    <app-top-nav></app-top-nav>
+    <app-top-nav style="
+    height: 62px; overflow:hidden"
+
+></app-top-nav>
   </header> -->
 
     <div class="positions-container" (scroll)="onScroll($event)" #scrollContainer>
         <!-- 🔹 Top 3 Dynamic Ranks -->
         <div class="top-banner">
-            <img src="/positions-banner.svg" alt="bg" class="bg-image" />
+            <!-- <img src="/positions-banner.svg" alt="bg" class="bg-image" /> -->
 
             <div class="top3">
                 <!-- 🔹 Rank 2 -->
