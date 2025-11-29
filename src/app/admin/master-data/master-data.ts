@@ -14,13 +14,15 @@ export class MasterData implements OnInit {
   // INITIAL values from API (static for now)
   originalData = {
     isMaintenance: false,
-    telegramUrl: "https://t.me/YourTelegramGroup"
+    telegramUrl: "https://t.me/YourTelegramGroup",
+    telegramUrlOne: "https://t.me/YourTelegramGroup"
   };
 
   // BOUND VALUES (editable)
   formData = {
     isMaintenance: false,
-    telegramUrl: ""
+    telegramUrl: "",
+    telegramUrlOne: ""
   };
 
   // Button disable logic
@@ -30,6 +32,7 @@ export class MasterData implements OnInit {
     // Simulate API response
     this.formData.isMaintenance = this.originalData.isMaintenance;
     this.formData.telegramUrl = this.originalData.telegramUrl;
+    this.formData.telegramUrlOne = this.originalData.telegramUrlOne;
 
     this.checkIfChanged();
   }
@@ -37,7 +40,8 @@ export class MasterData implements OnInit {
   checkIfChanged() {
     this.isChanged =
       this.formData.isMaintenance !== this.originalData.isMaintenance ||
-      this.formData.telegramUrl !== this.originalData.telegramUrl;
+      this.formData.telegramUrl !== this.originalData.telegramUrl ||
+      this.formData.telegramUrlOne !== this.originalData.telegramUrlOne;
   }
 
   updateMasterData() {
