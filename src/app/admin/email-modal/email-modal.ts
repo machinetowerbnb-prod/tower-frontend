@@ -89,6 +89,7 @@ export class EmailModal {
   // Collect content and emit + console log
   send() {
     const to = this.getRecipientsArray();
+    console.log("MANI TEST",to)
     const subject = this.subject || '';
     const html = this.editor ? this.editor.nativeElement.innerHTML : '';
 

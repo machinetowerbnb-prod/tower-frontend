@@ -4,22 +4,17 @@
   </header>
 
   <!-- Blue Banner -->
-  <div class="blue-banner">
-    <div class="upper-blue">
+  <div class="banner">
+    <div class="banner-align">
       <button class="back-btn" (click)="goBack()">
-        <img src="/leftarraow.svg" />
+        <img src="/leftarraow.svg" alt="back" />
       </button>
-
-      <h2>Deposit</h2>
-
-      <div class="spacer"></div>
+      <!-- <span class="back-btn" (click)="goBack()"><</span> -->
+      <div class="banner-text">
+        <h2>Deposit</h2>
+      </div>
     </div>
-
-    <p class="banner-sub">
-      Experience smooth and secure deposits designed for effortless funding.
-    </p>
-
-    <div class="lower-blue"></div>
+    <p>Experience smooth and secure deposits designed for effortless funding.</p>
   </div>
 
   <!-- Body -->
@@ -33,9 +28,9 @@
       <p class="label">Your deposit address for payment</p>
 
       <div class="address-box">
-        <span>{{ data?.address }}</span>
-        <button class="copy" (click)="copy(data?.address)">
-          <img src="/copy.svg" />
+        <span class="address-text">{{ getMaskedAddress(data?.address) }}</span>
+        <button class="copy-btn" (click)="copyToClipboard(data?.address)" style="border: none;background-color: white;">
+          <img src="/copy.svg" alt="copy" />
         </button>
       </div>
 

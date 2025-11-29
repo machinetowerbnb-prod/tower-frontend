@@ -86,7 +86,7 @@
               <mat-checkbox class="remember-checkbox" formControlName="rememberMe"></mat-checkbox>
               <label class="remember-me-label">{{'Remember me' | translate}}</label>
             </div>
-            <a href="#" class="forgot-password">{{'Forgot password' | translate}}</a>
+            <a href="#" class="forgot-password" (click)="forgetPassword()">{{'Forgot password' | translate}}</a>
           </div>
 
           <!-- Login Button -->

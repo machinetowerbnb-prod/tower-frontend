@@ -5,9 +5,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
-import { OnInit, Inject, PLATFORM_ID, ChangeDetectorRef,Output,EventEmitter } from '@angular/core';
+import { OnInit, Inject, PLATFORM_ID, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-deposit',
@@ -16,30 +17,32 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './deposit.scss',
   standalone: true,
 })
-export class Deposit implements OnInit{
+export class Deposit implements OnInit {
   isVisible = false;
   isClosing = false;
   amount: number | null = null;
   selectedToken: any = null;
   quickAmounts = [60, 500, 900, 1500];
   compoletedDeposit = false;
- transactionAccounts: any[] = [];
+  transactionAccounts: any[] = [];
 
- constructor(
+  constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private authService: AuthService,
-    private cdr: ChangeDetectorRef
-  ) {}
- @Output() depositCompleted = new EventEmitter<void>();
-    ngOnInit() {
-      console.log('Deposit modal initialized');
+    private cdr: ChangeDetectorRef,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) { }
+  @Output() depositCompleted = new EventEmitter<void>();
+  ngOnInit() {
+    console.log('Deposit modal initialized');
     if (isPlatformBrowser(this.platformId)) {
       const userId = localStorage.getItem('userId');
       if (userId) this.loadAvengerAccounts(userId);
     }
   }
 
-   loadAvengerAccounts(userId: string) {
+  loadAvengerAccounts(userId: string) {
     const payload = { screen: 'deposits', userId };
 
     this.authService.avengers(payload).subscribe({
@@ -75,8 +78,8 @@ export class Deposit implements OnInit{
     icon?.classList.add('rotate-close');
 
     // Wait for animation to finish before hiding popup
-      icon?.classList.remove('rotate-close');
-      this.closeModal();
+    icon?.classList.remove('rotate-close');
+    this.closeModal();
   }
 
   closeModal() {
@@ -91,43 +94,49 @@ export class Deposit implements OnInit{
   }
 
   selectToken(token: any) {
-  this.selectedToken = token;
-}
+    this.selectedToken = token;
+  }
 
   confirmDeposit() {
-  if (!this.amount || !this.selectedToken) {
-    alert('Please enter amount and select a token.');
-    return;
-  }
-
-  const userId = isPlatformBrowser(this.platformId)
-    ? localStorage.getItem('userId')
-    : null;
-
-  if (!userId) {
-    alert('User not found');
-    return;
-  }
-
-  const payload = {
-    userId,
-    amount: this.amount,
-    transactionAccount: this.selectedToken
-  };
-
-  this.authService.confirmDeposit(payload).subscribe({
-    next: (res) => {
-      if (res.statusCode === 200) {
-        this.compoletedDeposit = true;
-        console.log('Deposit confirmed, emitting event...');
-        this.depositCompleted.emit();
-        this.cdr.detectChanges();
-      }
-    },
-    error: (err) => {
-      console.error('Deposit failed:', err);
-      alert('Deposit failed. Please try again.');
+    if (!this.amount || !this.selectedToken) {
+      alert('Please enter amount and select a token.');
+      return;
     }
-  });
-}
+
+    const userId = isPlatformBrowser(this.platformId)
+      ? localStorage.getItem('userId')
+      : null;
+
+    if (!userId) {
+      alert('User not found');
+      return;
+    }
+
+    const payload = {
+      userId,
+      amount: this.amount,
+      transactionAccount: this.selectedToken
+    };
+
+    this.authService.doPayment(payload).subscribe({
+      next: (res) => {
+        if (res.statusCode === 200) {
+          // this.compoletedDeposit = true;
+          console.log('Deposit confirmed, emitting event...');
+          this.depositCompleted.emit();
+          let data = res?.data || {};
+          data.amount = payload.amount;
+          localStorage.setItem("pay", JSON.stringify(res.data));
+          setInterval(() => {
+            this.router.navigate(['/payment']);
+          }, 100)
+          this.cdr.detectChanges();
+        }
+      },
+      error: (err) => {
+        console.error('Deposit failed:', err);
+        alert('Deposit failed. Please try again.');
+      }
+    });
+  }
 }
