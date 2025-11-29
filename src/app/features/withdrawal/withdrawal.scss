@@ -1,7 +1,7 @@
 // @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins';
   box-sizing: border-box;
 }
 
@@ -13,7 +13,7 @@
 
 .withdrawal-container {
   flex: 1;
-  background: #f8faff;
+  background: #F9F9F9;
   position: relative;
   overflow-x: hidden;
   padding-bottom: 40px;
@@ -53,7 +53,7 @@
   position: relative;
   z-index: 2;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 20px;
   bottom: 20px;
 }
 
@@ -82,7 +82,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 20px;
+  padding: 16px 0px 16px 20px;
   height: 105px;
   bottom: 45px;
 
@@ -91,17 +91,64 @@
   top: -35px;
   left: 0;
   // height: clamp(260px, 45vh, 420px); /* consistent band height across devices */
-  background: url('/wallet-bg.svg') center top / cover no-repeat;
+  background: url('/wallet-bg.svg') center / cover no-repeat;
   opacity: 1;
   pointer-events: none;
+  .wallet-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      color: #ffffff;
+      .money-item {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 3px;
+      }
+      .ptag {
+        font-family: Poppins;
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 140%;
+        text-align: center;
+        color: #FFFFFFAD;
+        margin: 0px;
+      }
+
+      .money {
+        font-family: Poppins;
+        font-weight: 600;
+        font-style: SemiBold;
+        font-size: 24px;
+        line-height: 140%;
+        letter-spacing: -1%;
+        text-align: center;
+      }
+      .curr {
+        font-family: Poppins;
+        font-weight: 600;
+        font-style: Medium;
+        font-size: 16px;
+        line-height: 140%;
+        letter-spacing: -1%;
+        text-align: center;
+      }
+    }
 }
 
-.wallet-info p {
+.wallet-info{
+  width: 297px;
+height: 57px;
+opacity: 1;
+gap: 125px;
+
+ p {
   margin: 0;
   color: white;
   font-size: 10px;
   opacity: 0.8;
   letter-spacing: 1px;
+}
 }
 
 .wallet-info h3 {
@@ -116,29 +163,30 @@
   color: white;
 }
 
-// .wallet-gif img {
-//   width: 60px;
-//   height: 60px;
-//   object-fit: contain;
-// }
-
 /* 🔹 Form Section */
 .form-section {
   width: 90%;
   max-width: 400px;
-  margin: 30px auto 0;
+  margin: 0px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap:16px;
 }
 
 .form-group {
-  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 label {
-  font-size: 14px;
-  font-weight: 500;
-  color: #333;
-  display: block;
-  margin-bottom: 4px;
+  font-family: Poppins;
+font-weight: 500;
+font-style: Medium;
+font-size: 16px;
+line-height: 140%;
+letter-spacing: -1%;
+color: #202020;
 }
 
 mat-form-field {
@@ -227,7 +275,8 @@ mat-form-field {
   margin-top: auto;
   width: 100%;
   box-sizing: border-box;
-  position: relative;
+  position: sticky;
+  bottom: 0px;
   /* for pseudo-element */
   /* Stronger, more visible upward shadow */
   box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.06), 0 -6px 18px -4px rgba(0, 0, 0, 0.08);

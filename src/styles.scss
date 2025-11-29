@@ -6,7 +6,7 @@
 @use '@angular/material' as mat;
 
 * {
-  font-family: 'Poppins', sans-serif !important;
+  font-family: Poppins !important;
 }
 
 i.fa, .fa {
@@ -127,3 +127,7 @@ input::-ms-input-placeholder {
 //   scrollbar-width: thin;
 //   scrollbar-color: #2752E7 #E7EDFF;
 // }
+.mat-mdc-form-field-hint-wrapper,
+.mat-mdc-form-field-error-wrapper {
+  padding: 0 0px !important;
+}

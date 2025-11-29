@@ -1,6 +1,9 @@
 <div class="layout-container" fxLayout="column" fxFlexFill>
   <header>
-    <app-top-nav></app-top-nav>
+    <app-top-nav style="
+    height: 62px; overflow:hidden"
+
+></app-top-nav>
   </header>
 
   <div class="withdrawal-container">
@@ -17,12 +20,15 @@
 
     <!-- 🔹 Floating Wallet Card -->
     <div class="wallet-card">
-      <div class="wallet-info">
-        <p>WITHDRAWAL ACCOUNT</p>
-        <h3>{{ totalRemainingBalance }} <span>USDT</span></h3>
+      <div class="wallet-item">
+        <p class="ptag">WITHDRAWAL ACCOUNT</p>
+        <div class="money-item">
+          <span class="money">{{ totalRemainingBalance }}</span>
+          <span class="curr">USDT</span>
+        </div>
       </div>
       <div class="wallet-gif">
-        <img src="/wallet.gif" alt="wallet" />
+        <img src="/wallet1.gif" alt="wallet" />
       </div>
     </div>
 
