@@ -9,6 +9,10 @@
   font-family: 'Poppins', sans-serif !important;
 }
 
+i.fa, .fa {
+  font-family: "FontAwesome" !important;
+}
+
 html {
   @include mat.theme((color: (primary: mat.$azure-palette,
         tertiary: mat.$blue-palette,
