@@ -167,6 +167,7 @@
     transition: all 0.3s ease;
     height: 50px;
     min-width: 0;
+    font-size: 16px;
 
     &.active {
       background: #E7EDFF;
@@ -177,6 +178,7 @@
     &.full-width {
       flex: 1 1 100%;
       width: 100%;
+      font-size: 16px !important;
     }
   }
 }
