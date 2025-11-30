@@ -134,7 +134,7 @@
       .money-item {
         display: flex;
         align-items: baseline;
-        justify-content: center;
+        justify-content: left;
         gap: 3px;
       }
       .ptag {
@@ -142,7 +142,7 @@
         font-weight: 400;
         font-size: 11px;
         line-height: 140%;
-        text-align: center;
+        text-align: left;
         color: #ffffffcc;
         margin: 0px;
       }
@@ -300,7 +300,7 @@
             font-family: Poppins;
             font-weight: 500;
             font-style: Medium;
-            font-size: 8px;
+            font-size: 11px;
             line-height: 148%;
             letter-spacing: -1%;
             color: #FFFFFFCC;

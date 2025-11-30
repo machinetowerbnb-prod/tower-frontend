@@ -93,7 +93,7 @@ export class History implements OnInit {
     {
       label: 'Your deposits',
       desc: 'See all your top-ups.',
-      icon: '/deposits-filter.svg',
+      icon: '/deposits-filters-changed.svg',
       value: 'deposit'
     },
     {
