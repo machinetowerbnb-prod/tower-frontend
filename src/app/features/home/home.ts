@@ -62,7 +62,8 @@ export class Home implements OnInit, OnDestroy {
   workingWallet: string = '0';
   withdrawalWallet: string = '0';
   referralLink: string = '';
-  bannerLink: string = '';
+  telegramLinkOne: string = '';
+  telegramLinkTwo:string = ''
   refferalCode: string = '';
 
   get currentImage() {
@@ -101,7 +102,8 @@ export class Home implements OnInit, OnDestroy {
           this.workingWallet = res.data.totalDeposits;
           this.withdrawalWallet = res.data.totalEarnings;
           this.referralLink = res.data.refferalLink;
-          this.bannerLink = res.data.bannerLink;
+          this.telegramLinkOne = res.data.telegramLinkOne;
+          this.telegramLinkTwo = res.data.telegramLinkTwo;
           this.refferalCode = res.data.refferalCode;
           this.cdr.detectChanges();
         });
@@ -119,9 +121,14 @@ export class Home implements OnInit, OnDestroy {
     }
   }
 
-  openBannerLink() {
-    if (this.bannerLink) {
-      window.open(this.bannerLink, '_blank');
+  opentelegramLinkOne() {
+    if (this.telegramLinkOne) {
+      window.open(this.telegramLinkOne, '_blank');
+    }
+  }
+  opentelegramLinkTwo() {
+    if (this.telegramLinkTwo) {
+      window.open(this.telegramLinkTwo, '_blank');
     }
   }
 
@@ -133,7 +140,7 @@ export class Home implements OnInit, OnDestroy {
     } else if (label === 'History') {
       this.router.navigate(['/history']);
     } else if (label === 'Group') {
-      this.openSupportPopup();
+      this.opentelegramLinkTwo();
     }
   }
 

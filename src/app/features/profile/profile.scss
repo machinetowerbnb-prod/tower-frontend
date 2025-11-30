@@ -1,7 +1,10 @@
 .profile-container {
   background: #f7f9fc;
   min-height: 100vh;
-  font-family: 'Poppins';
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  // gap:24px
 }
 
 /* 🔹 Banner Section */
@@ -85,48 +88,98 @@
   }
 }
 
-.wallet-balances {
-  display: flex;
-  justify-content: space-around;
-  gap: 16px;
-  background: linear-gradient(10deg, #2440a0, #2752e7);
-  padding: 14px;
-  border-radius: 10px;
-  color: #fff;
-  text-align: center;
+ .wallet-values {
+    /* Frame 1948755402 */
 
-  .wallet-item {
-    flex: 1;
-    p {
-      font-size: 11px;
-      margin: 0;
-      opacity: 0.85;
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px 10px;
+    gap: 10px;
+    position: relative;
+    margin-top: 15px;
+    background: linear-gradient(180deg, #2752e7 27.4%, #2440a0 100%);
+    border-radius: 12px;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      bottom: 10px;
+      left: 50%;
+      width: 1.5px;
+      background: rgba(255, 255, 255, 0.4);
+      /* light white line */
+      transform: translateX(-50%);
     }
-    h3 {
-      margin: 6px 0 0;
-      font-size: 18px;
-      font-weight: 600;
-      span {
-        font-size: 12px;
+
+    .wallet-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      color: #ffffff;
+      .money-item {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 3px;
+      }
+      .ptag {
+        font-family: Poppins;
+        font-weight: 400;
+        font-size: 11px;
+        line-height: 140%;
+        text-align: center;
+        color: #ffffffcc;
+        margin: 0px;
+      }
+
+      .money {
+        font-family: Poppins;
+        font-weight: 600;
+        font-style: SemiBold;
+        font-size: 22px;
+        line-height: 140%;
+        letter-spacing: -1%;
+        text-align: center;
+      }
+      .curr {
+        font-family: Poppins;
+        font-weight: 500;
+        font-style: Medium;
+        font-size: 14px;
+        line-height: 140%;
+        letter-spacing: -1%;
+        text-align: center;
       }
     }
   }
-}
 
 /* 🔹 Wallet Summary */
 .wallet-summary {
-  margin: 20px 16px;
-  h4 {
-    font-weight: 600;
-    margin-bottom: 12px;
+  margin: 0px 16px;
+gap: 6px;
+
+  .wallet-txt {
+font-family: Poppins;
+font-weight: 500;
+font-style: Medium;
+font-size: 12px;
+line-height: 140%;
+letter-spacing: -1%;
     color: #606060;
   }
 }
 
 .other-section {
-    h4 {
-    font-weight: 600;
-    margin-bottom: 12px;
+    span {
+font-family: Poppins;
+font-weight: 500;
+font-style: Medium;
+font-size: 12px;
+line-height: 140%;
+letter-spacing: -1%;
     color: #606060;
   }
 }
@@ -160,8 +213,8 @@
         display: block;
       }
     img {
-      width: 22px;
-      height: 22px;
+      width: 32px;
+      height: 32px;
     }
   }
 
@@ -179,7 +232,7 @@
 
 /* 🔹 Other Section */
 .other-section {
-  margin: 10px 16px 40px;
+  margin: 0px 16px 40px;
 
   .setting-card,
   .logout-card {
@@ -211,6 +264,13 @@
   }
 }
 
+.profile-cards{
+display: flex;
+flex-direction: column;
+opacity: 1;
+gap: 24px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .wallet-balances {
@@ -230,7 +290,7 @@
     padding: 16px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     // margin-bottom: 16px;
-    margin: 120px 10px 50px 10px !important;
+    margin: 120px 10px 0px 10px !important;
 
 
     .wallet-buttons {
@@ -263,9 +323,9 @@
         justify-content: space-between;
         text-align: start;
         border-top: 1px solid #2752E747;
-        padding-top: 12px;
+        // padding-top: 12px;
         background: linear-gradient(10deg, #2440A0, #2752E7, );
-        padding: 10px 25px;
+        padding: 16px 24px 10px;
         border-radius: 15px;
         margin-top: 15px;
 

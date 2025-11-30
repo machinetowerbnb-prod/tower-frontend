@@ -23,7 +23,7 @@ export class History implements OnInit {
   transactions: Transaction[] = [];
   groupedTransactions: { date: string; transactions: Transaction[] }[] = [];
   showFilter = false;
-  activeFilter = 'deposit';
+  activeFilter = 'all';
   isLoading = true;
   errorMessage = '';
 

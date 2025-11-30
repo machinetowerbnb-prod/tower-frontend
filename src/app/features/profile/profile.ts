@@ -46,7 +46,7 @@ export class Profile implements OnInit {
     { icon: '/deposit.svg', label: 'Deposit' },
     { icon: '/withdrawal.svg', label: 'Withdrawal' },
     { icon: '/history.svg', label: 'History' },
-    { icon: '/support.svg', label: 'Group' }
+    { icon: '/group.svg', label: 'Group' }
   ];
 
   walletSummary = [
