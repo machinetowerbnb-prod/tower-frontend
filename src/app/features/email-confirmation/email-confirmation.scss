@@ -10,7 +10,7 @@
 :host ::ng-deep .language-selector.mat-mdc-form-field,
 :host ::ng-deep .language-selector .mat-mdc-form-field,
 :host ::ng-deep mat-form-field.language-selector {
-    text-align: unset !important;
+    // text-align: unset !important;
     display: block !important;
 }
 
@@ -332,7 +332,8 @@ form {
     margin-top: auto;
     width: 100%;
     box-sizing: border-box;
-    position: relative;
+    position: sticky;
+    bottom: 0px;
     /* for pseudo-element */
     /* Stronger, more visible upward shadow */
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.06), 0 -6px 18px -4px rgba(0, 0, 0, 0.08);
@@ -356,7 +357,8 @@ form {
 .login-button {
     width: 100%;
     max-width: 400px;
-    margin: 0 auto 10px auto;
+    height: 56px;
+    // margin: 0 auto 10px auto;
     border-radius: 8px;
     font-weight: 600;
     background: blue !important;

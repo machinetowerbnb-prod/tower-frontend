@@ -3,11 +3,11 @@ import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
-
+import { TopNav } from '../top-nav/top-nav';
 
 @Component({
   selector: 'app-change-password',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,TopNav],
   templateUrl: './change-password.html',
   styleUrl: './change-password.scss'
 })

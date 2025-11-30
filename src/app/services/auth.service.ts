@@ -25,6 +25,10 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/login`, payload);
   }
 
+  forgotPassword(payload: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/forgot-password`, payload);
+  }
+
   // Avengers api
   avengers(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/avengers`, payload);

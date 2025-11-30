@@ -2,6 +2,7 @@ import { Component, OnInit , ChangeDetectorRef,PLATFORM_ID,Inject} from '@angula
 import { CommonModule,isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { title } from 'process';
 @Component({
   selector: 'app-team',
   imports: [CommonModule],
@@ -82,7 +83,8 @@ export class Team implements OnInit {
 
           this.levels = [
             {
-              id: 1,
+              id: "First Generation Data",
+              title:"First Generation Data",
               value: data.genOne?.valid || 0,
               max,
               color: '#ED5F9B',
@@ -90,6 +92,7 @@ export class Team implements OnInit {
             },
             {
               id: 2,
+              title:"Second Generation Data",
               value: data.genTwo?.valid || 0,
               max,
               color: '#2CB280',
@@ -97,6 +100,7 @@ export class Team implements OnInit {
             },
             {
               id: 3,
+              title:"Third Generation Data",
               value: data.genThree?.valid || 0,
               max,
               color: '#2FBDC1',
