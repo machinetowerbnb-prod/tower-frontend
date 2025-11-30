@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 
 @Component({
@@ -11,13 +14,13 @@ import { CommonModule } from '@angular/common';
 })
 export class MasterData implements OnInit {
 
-  // INITIAL values from API (static for now)
-  originalData = {
-    isMaintenance: false,
-    telegramUrl: "https://t.me/YourTelegramGroup",
-    telegramUrlOne: "https://t.me/YourTelegramGroup"
-  };
+  constructor(
+    private authService: AuthService,
+    private snackBar: MatSnackBar,
+  ) { }
 
+  // INITIAL values from API (static for now)
+  originalData: any = {}
   // BOUND VALUES (editable)
   formData = {
     isMaintenance: false,
@@ -30,10 +33,7 @@ export class MasterData implements OnInit {
 
   ngOnInit(): void {
     // Simulate API response
-    this.formData.isMaintenance = this.originalData.isMaintenance;
-    this.formData.telegramUrl = this.originalData.telegramUrl;
-    this.formData.telegramUrlOne = this.originalData.telegramUrlOne;
-
+    this.getData();
     this.checkIfChanged();
   }
 
@@ -50,5 +50,58 @@ export class MasterData implements OnInit {
     // After saving → treat new values as latest baseline
     this.originalData = { ...this.formData };
     this.isChanged = false;
+
+    let payload = {
+      "updates": {
+        "isUnderMaintainance": this.originalData.isMaintenance,
+        "telegramLinkOne": this.originalData.telegramUrl,
+        "telegramLinkTwo": this.originalData.telegramUrlOne
+      }
+    }
+
+    console.log(payload)
+
+    this.authService.updateMasterData(payload).subscribe({
+      next: (res) => {
+        if (res.statusCode === 200 && Array.isArray(res.data)) {
+          this.snackBar.open('Data Updated Successfully!', 'Close', {
+              duration: 3000,
+              panelClass: ['success-snackbar']
+            });
+        }
+      },
+      error: (err) => {
+        console.error("❌ Users API Error:", err);
+      }
+    });
   }
+
+
+  getData() {
+    const payload = { screen: 'Users' };
+
+    console.log("📌 Calling Admin Users API:", payload);
+
+    this.authService.getMasterData().subscribe({
+      next: (res) => {
+        console.log("✅ Users API Response:", res);
+
+        if (res.statusCode === 200 && Array.isArray(res.data)) {
+          this.originalData = {
+            isMaintenance: res.data[0].isUnderMaintainance,
+            telegramUrl: res.data[0].telegramLinkOne,
+            telegramUrlOne: res.data[0].telegramLinkTwo
+          };
+          this.formData.isMaintenance = this.originalData?.isMaintenance || false;
+          this.formData.telegramUrl = this.originalData?.telegramUrl || '';
+          this.formData.telegramUrlOne = this.originalData?.telegramUrlOne || '';
+        }
+      },
+      error: (err) => {
+        console.error("❌ Users API Error:", err);
+      }
+    });
+  }
+
+
 }
