@@ -127,9 +127,9 @@ export class Deposit implements OnInit {
           let data = res?.data || {};
           data.amount = payload.amount;
           localStorage.setItem("pay", JSON.stringify(res.data));
-          setInterval(() => {
-            this.router.navigate(['/payment']);
-          }, 100)
+          // setInterval(() => {
+          this.router.navigate(['/payment']);
+          // }, 100)
           this.cdr.detectChanges();
         }
       },
@@ -139,4 +139,12 @@ export class Deposit implements OnInit {
       }
     });
   }
+
+  ngOnDestroy() {
+    document.body.style.overflow = 'auto';
+    this.isVisible = false;
+    this.isClosing = false;
+  }
+
+
 }
