@@ -17,11 +17,17 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   ],
 })
 export class Adminlayout {
+
   isSidebarOpen = true;
   withdrawMenuOpen = false;
+
+  // ⭐ NEW: Track active clicked menu
+  currentActive: string | null = null;
+
+  // ⭐ existing variable
   activeSection: string | null = null;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
@@ -33,9 +39,23 @@ export class Adminlayout {
   }
 
   navigateTo(page: string, event?: Event) {
-    if (event) event.stopPropagation(); // Prevent collapse toggle on submenu click
+    if (event) event.stopPropagation();
+
+    this.currentActive = page;
+
+    // ⭐ If it's a withdrawl submenu → keep parent highlighted
+    if (page.startsWith('withdrawl')) {
+      this.activeSection = 'withdrawls';
+    } else {
+      // ⭐ FIX: Reset withdrawls highlight when clicking other menu items
+      this.activeSection = null;
+      this.withdrawMenuOpen = false; // also close submenu
+    }
+
     this.router.navigate([`/admin/${page}`]);
-    this.toggleSidebar()
+
+    this.toggleSidebar();
   }
+
 
 }

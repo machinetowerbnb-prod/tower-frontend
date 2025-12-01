@@ -71,12 +71,21 @@ export class Home implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.startCarousel();
-    if (isPlatformBrowser(this.platformId)) {
-      const userId = this.safeGetLocalStorage('userId');
-      if (userId) this.loadHomeData();
-    }
+  // 🧹 IMPORTANT: reset modal state
+  if (this.depositModal) {
+    this.depositModal.isVisible = false;
+    this.depositModal.isClosing = false;
+    document.body.style.overflow = 'auto';
   }
+
+  this.startCarousel();
+
+  if (isPlatformBrowser(this.platformId)) {
+    const userId = this.safeGetLocalStorage('userId');
+    if (userId) this.loadHomeData();
+  }
+}
+
 
   onDepositCompleted() {
     console.log('✅ Deposit completed — refreshing home data immediately');

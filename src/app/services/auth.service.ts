@@ -90,4 +90,17 @@ export class AuthService {
   activateGame(payload: any) {
     return this.http.post<any>(`${this.baseUrl}/activateGame`, payload);
   }
+
+  updatePasscode(payload: any) {
+    return this.http.post<any>(`${this.baseUrl}/adminUpdatePasscode`, payload);
+  }
+
+  getMasterData() {
+    return this.http.get<any>(`${this.baseUrl}/getAdminData`);
+  }
+
+  updateMasterData(payload: any) {
+    return this.http.post<any>(`${this.baseUrl}/adminUpdate`, payload);
+  }
+
 }

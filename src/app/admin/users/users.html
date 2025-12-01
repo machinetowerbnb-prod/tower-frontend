@@ -24,8 +24,9 @@
           <th>Working Wallet</th>
           <th>Withdraw Wallet</th>
           <th>Referrals</th>
+          <th>Pass Code</th>
           <th>Status</th>
-          <th>Send Email</th> <!-- ⭐ NEW COLUMN -->
+          <th>Actions</th> <!-- ⭐ NEW COLUMN -->
         </tr>
       </thead>
 
@@ -49,6 +50,8 @@
           </td>
 
           <td (click)="openTeamDetails(user)">{{ user.referrals }}</td>
+
+          <td >{{ user.passcode }}</td>
 
           <!-- ⭐ TOGGLE switch instead of button -->
           <td>

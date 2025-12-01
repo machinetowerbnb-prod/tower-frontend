@@ -1,61 +1,90 @@
 <div class="admin-layout">
+
   <!-- 🔹 Top Navigation -->
   <header class="admin-topnav">
     <div class="menu-icon" (click)="toggleSidebar()">
       <i class="fa fa-bars"></i>
     </div>
     <div class="topnav-title">Mission Tower Admin</div>
-    <div class="admin-profile">
-      <!-- optional profile/avatar -->
-    </div>
+    <div class="admin-profile"></div>
   </header>
 
   <!-- 🔹 Sidebar -->
   <aside class="sidebar" [class.closed]="!isSidebarOpen" [class.open]="isSidebarOpen">
     <div class="sidebar-logo">TMTB Admin</div>
+
     <ul class="sidebar-menu">
-      <li (click)="navigateTo('dashboard')" routerLinkActive="active">
+
+      <!-- Dashboard -->
+      <li 
+        (click)="navigateTo('dashboard')" 
+        [class.active]="currentActive === 'dashboard'">
         <i class="fa fa-home"></i>
         <span>Dashboard</span>
       </li>
 
-      <li (click)="navigateTo('users')" routerLinkActive="active">
+      <!-- Users -->
+      <li 
+        (click)="navigateTo('users')" 
+        [class.active]="currentActive === 'users'">
         <i class="fa fa-users"></i>
         <span>Users</span>
       </li>
 
-      <li (click)="navigateTo('deposits', $event)" routerLinkActive="active">
+      <!-- Deposits -->
+      <li 
+        (click)="navigateTo('deposits')" 
+        [class.active]="currentActive === 'deposits'">
         <i class="fa fa-wallet"></i>
         <span>Deposits</span>
       </li>
 
-      <!-- 🔹 Withdrawals main menu -->
-      <li class="has-submenu" [class.active]="activeSection === 'withdrawls'" (click)="toggleWithdrawMenu()">
+      <!-- Withdrawls Parent -->
+      <li 
+        class="has-submenu" 
+        [class.active]="activeSection === 'withdrawls'"
+        (click)="toggleWithdrawMenu()">
         <i class="fa fa-bank"></i>
         <span>Withdrawls</span>
-        <i class="fa" [ngClass]="{
+        <i 
+          class="fa" 
+          [ngClass]="{
             'fa-chevron-down': !withdrawMenuOpen,
             'fa-chevron-up': withdrawMenuOpen
-          }" style="margin-left:auto;font-size:12px"></i>
+          }" 
+          style="margin-left:auto;font-size:12px"></i>
       </li>
 
-      <!-- 🔹 Submenu items -->
-      <ul class="submenu" *ngIf="withdrawMenuOpen" [@slideInOut]>
-        <li (click)="navigateTo('withdrawl-requests', $event)" routerLinkActive="active">
+      <!-- Withdrawls Submenu -->
+      <ul class="submenu" *ngIf="withdrawMenuOpen">
+
+        <li 
+          (click)="navigateTo('withdrawl-requests', $event)" 
+          [class.active]="currentActive === 'withdrawl-requests'">
           <i class="fa fa-list"></i>
           <span>Withdrawl Requests</span>
         </li>
-        <li (click)="navigateTo('withdrawl-accepts', $event)" routerLinkActive="active">
+
+        <li 
+          (click)="navigateTo('withdrawl-accepts', $event)" 
+          [class.active]="currentActive === 'withdrawl-accepts'">
           <i class="fa fa-check-circle"></i>
           <span>Withdrawl Accepts</span>
         </li>
-        <li (click)="navigateTo('withdrawl-rejects', $event)" routerLinkActive="active">
+
+        <li 
+          (click)="navigateTo('withdrawl-rejects', $event)" 
+          [class.active]="currentActive === 'withdrawl-rejects'">
           <i class="fa fa-times-circle"></i>
           <span>Withdrawl Rejects</span>
         </li>
+
       </ul>
 
-      <li (click)="navigateTo('master-data', $event)" routerLinkActive="active">
+      <!-- Master Data -->
+      <li 
+        (click)="navigateTo('master-data')" 
+        [class.active]="currentActive === 'master-data'">
         <i class="fa fa-database"></i>
         <span>Master Data</span>
       </li>
@@ -67,4 +96,5 @@
   <main class="main-content" [class.expanded]="!isSidebarOpen">
     <router-outlet></router-outlet>
   </main>
+
 </div>
