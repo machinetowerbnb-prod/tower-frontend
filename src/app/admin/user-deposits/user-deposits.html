@@ -24,6 +24,7 @@
           <th>Status</th>
           <th>Transaction ID</th>
           <th>Time</th>
+          <th>Action</th>
         </tr>
       </thead>
 
@@ -35,6 +36,7 @@
           <td>{{ d.status }}</td>
           <td>{{ d.transactionId }}</td>
           <td>{{ d.time }}</td>
+          <td (click)="checkStatus(d.track_id)"><button>Status</button></td>
         </tr>
       </tbody>
     </table>
