@@ -26,11 +26,11 @@
     'disabled-button': card.disableType === 'button' && !card.enabled
   }" [style.background-image]="'url(' + card.background + ')'">
       <div class="overlay" *ngIf="card.disableType === 'card' && !card.enabled">
-        Coming Soon
+        Open on 2026  First Quarter (Q1)
       </div>
 
-      <div class="chip validity" style="display: flex;">
-        <div style="margin-top: 2px;">
+      <div class="chip validity">
+        <div style="position: relative; top: 3px;">
           <img src="game-clock.svg" alt="clock" />
         </div>
         <div style="margin-left: 4px;">{{ card.validity }}</div>
@@ -49,6 +49,7 @@
           {{ card.buttonText }}
         </button>
       </div>
+
     </div>
 
     <!-- ✅ Place modal outside loop -->

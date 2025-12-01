@@ -72,18 +72,23 @@
 
 /* 🔹 Game Cards */
 .game-card {
+   height: 191px; // default for first card
   position: relative;
-  border-radius: 14px;
+  border-radius: 16px;
   overflow: hidden;
   background-size: cover;
   background-position: center;
   color: #fff;
-  min-height: 180px;
-  // z-index: 9999; // To popup overlay
+  // z-index: 9999;
   display: flex;
   align-items: flex-end;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.25s ease;
+
+  // all cards except first
+  &:not(:first-child) {
+    height: 229px;
+  }
 
   &:hover:not(.disabled-card) {
     transform: translateY(-3px);
@@ -95,9 +100,11 @@
     background: rgb(0 0 0 / 87%);
     display: flex;
     justify-content: center;
+    text-align: center;
+    line-height: 28px;
     align-items: center;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 24px;
     color: #fff;
     letter-spacing: 0.5px;
     text-transform: uppercase;
@@ -105,16 +112,21 @@
   }
 
   .chip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
     position: absolute;
     top: 24px;
     left: 28px;
-    background: rgba(255, 255, 255, 0.95);
+    background:#FFFFFF;
+    opacity: 68%;
     color: #333;
     padding: 0px 5px;
     padding-top: 2px;
-    border-radius: 5px;
+    border-radius: 4px;
     font-size: 10px;
-    font-weight: 600;
+    font-weight: 500;
     text-transform: uppercase;
 
     &.small {
@@ -128,7 +140,7 @@
   }
 
   .card-content {
-    padding: 16px;
+    padding: 28px;
     width: 100%;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.45), transparent);
     border-radius: 0 0 14px 14px;
@@ -139,11 +151,12 @@
       margin: 0;
       color: black;
       margin-left: 6px;
+      line-height: 24px;
     }
 
     .reward {
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 400;
       opacity: 0.9;
       margin: 4px 0 12px;
       color: black;
@@ -158,7 +171,7 @@
     }
 
     .action-btn {
-      width: 60%;
+      width: 65%;
       background: #fff;
       color: #2752e7;
       border: none;
@@ -202,18 +215,18 @@
   }
 
   .cards-wrapper {
-    padding: 15px;
-    gap: 12px;
+    padding: 16px;
+    gap: 16px;
   }
 
   .game-card {
-    min-height: 215px;
+    // min-height: 215px;
 
     .card-content {
-      padding: 12px;
+      // padding: 12px;
 
       .title {
-        font-size: 14px;
+        font-size: 16px;
       }
 
       .reward {
@@ -237,7 +250,7 @@
   }
 
   .validity {
-    background-color: rgb(206 206 206 / 95%);
+    background:#FFFFFF;
   }
 }
 
