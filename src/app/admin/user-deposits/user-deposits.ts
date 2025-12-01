@@ -76,4 +76,17 @@ export class UserDeposits implements OnInit {
     if (this.currentPage > 1)
       this.currentPage--;
   }
+
+  checkStatus(trackId:any) {
+    const payload = { track_id: trackId };
+
+    this.authService.paymentStatus(payload).subscribe({
+      next: (res) => {
+        console.log('Payment Status:', res);
+      },
+      error: (err) => {
+        console.error('Payment check failed:', err);
+      }
+    });
+  }
 }
