@@ -19,6 +19,9 @@ export class UpdateAmount implements OnChanges {
   @Output() close = new EventEmitter<void>();
   @Output() submitData = new EventEmitter<any>();
 
+  @Input() walletName: string = '';
+
+
   formData = {
     screen: '',
     wallet: '',
@@ -32,10 +35,10 @@ export class UpdateAmount implements OnChanges {
 
       // Set action dropdown (Credit / Debit)
       this.formData.action = this.actionType;
-      this.formData.screen = this.actionType == "Deposit"? 'Debit':'Withdraw';
+      this.formData.screen = this.actionType == "Debit"? 'Withdraw':'Deposit';
 
       // Determine wallet type
-      const isDeposit = this.actionType === 'Deposit';
+      const isDeposit = this.actionType === 'Debit';
 
       // LABEL: Working Wallet / Withdrawal Wallet
       this.formData.wallet =
@@ -43,8 +46,11 @@ export class UpdateAmount implements OnChanges {
 
       // AMOUNT: Pre-fill current amount
       this.formData.amount =
-        isDeposit ? this.rowData.wallet : this.rowData.earnings;
+        isDeposit ? this.rowData.earnings : this.rowData.wallet;
     }
+
+    console.log("Wallet coming from UserDetail:", this.actionType);
+
   }
 
 

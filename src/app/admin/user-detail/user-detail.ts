@@ -24,6 +24,7 @@ export class UserDetail implements OnChanges {
 
   prefilledWallet: any = null;
   editablePasscode: any = '';
+  
 
   ngOnChanges() {
     if (this.user) {
@@ -62,7 +63,8 @@ export class UserDetail implements OnChanges {
     this.openAmount.emit({
       action: action === 'Deposit' ? 'Credit' : 'Debit',  // FIX 1
       row: this.user,
-      wallet: walletValue
+      wallet: walletValue,
+      walletName: action
     });
   }
 
