@@ -49,6 +49,9 @@ export class AuthService {
   changePassword(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/change-password`, payload);
   }
+  resetPassword(payload: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/reset-password`, payload);
+  }
 
   doPayment(payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/confirm`, payload);

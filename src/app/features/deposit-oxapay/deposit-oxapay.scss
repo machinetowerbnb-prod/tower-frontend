@@ -9,31 +9,15 @@
   flex-direction: column;
 }
 
-/* Top Banner */
-.blue-banner {
-  position: relative;
-  height: 180px;
-  text-align: center;
-  color: #fff;
+.deposite-banner{
+background: #F3F5F7;
+opacity: 1;
+display: flex;
+flex-direction: column;
+gap:12px
+
 }
 
-.upper-blue {
-  height: 160px;
-  background: url('/common-top.svg') center top / cover no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.back-btn {
-  position: absolute;
-  left: 16px;
-  top: 30px;
-  background: none;
-  border: none;
-  top: 40px;
-}
 
 .spacer {
   position: absolute;
@@ -60,11 +44,11 @@
 
 .card {
   background: #fff;
-  border-radius: 14px;
+  border-radius: 12px;
   padding: 20px;
   text-align: center;
   box-shadow: 0 6px 20px rgba(4, 29, 98, 0.08);
-  margin-top: 70px;
+  margin-top: 32px;
 }
 
 .qr {
@@ -114,13 +98,21 @@
 .cancel-box {
   padding: 16px;
   margin-top: auto;
+height: 106;
+background: #FFFFFF;
+border-top: 1px solid #CFCFCF;
+position: sticky;
+bottom: 0px;
+box-shadow: 0px -4px 12px 0px #00000014;
+
 }
 
 .cancel-btn {
   width: 100%;
   padding: 14px;
-  border-radius: 10px;
-  border: 1px solid #d0d5dd;
+  height: 58px;
+  border-radius: 8px;
+  border: 1px solid #CFCFCF;
   background: white;
   font-size: 16px;
 }
@@ -132,6 +124,7 @@
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   text-align: center;
+  height: 156px;
 }
 .banner-align{
   display: flex;
