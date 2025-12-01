@@ -51,9 +51,10 @@
                             {{ tx.type === 'credit' || tx.type === 'reward' ? '+' : '' }}{{ tx.amount | number: '1.0-2'
                             }}
                             <span>USDT</span>
-                            <span *ngIf="tx.type === 'withdraw'" class="tx-status">
-                                • {{ tx.status }}
-                            </span>
+                            <span *ngIf="tx.type === 'withdraw' || tx.type === 'deposit'" class="tx-status">
+                            • {{ tx.status }}
+                               </span>
+
                         </h3>
                         <div style="display: flex;">
                             <p class="tx-id">{{ tx.transactionId }}</p>
