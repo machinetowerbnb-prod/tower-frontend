@@ -41,7 +41,7 @@ export class Profile implements OnInit {
     workingWallet: 0,
     withdrawalWallet: 0,
   };
-
+  telegramLinkTwo:string = ''
   walletActions = [
     { icon: '/deposit.svg', label: 'Deposit' },
     { icon: '/withdrawal.svg', label: 'Withdrawal' },
@@ -100,7 +100,7 @@ export class Profile implements OnInit {
           this.user.email = data.email || 'Email';
           this.user.workingWallet = Number(data.totalDeposits ?? 0);
           this.user.withdrawalWallet = Number(data.totalEarnings ?? 0);
-
+          this.telegramLinkTwo = data.telegramLinkTwo
           // Update Summary dynamically
           this.walletSummary = [
             { label: "Today's Personal commission", value: Number(data.usersTodaysCommission ?? 0) },
@@ -134,10 +134,16 @@ export class Profile implements OnInit {
     } else if (label === 'History') {
       this.router.navigate(['/history']);
     } else if (label === 'Group') {
-      this.openSupportPopup();
+      this.opentelegramLinkTwo();
     }
   }
 
+
+   opentelegramLinkTwo() {
+    if (this.telegramLinkTwo) {
+      window.open(this.telegramLinkTwo, '_blank');
+    }
+  }
   openSupportPopup() {
     this.showSupport = true;
   }
