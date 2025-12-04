@@ -116,6 +116,7 @@ export class Home implements OnInit, OnDestroy {
           this.refferalCode = res.data.refferalCode;
           this.cdr.detectChanges();
         });
+        localStorage.setItem('earnings',this.withdrawalWallet);
       },
       error: (err) => {
         console.error('Error fetching home data:', err);
