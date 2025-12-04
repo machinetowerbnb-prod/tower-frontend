@@ -21,7 +21,7 @@ export class VerifyEmail implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    setTimeout(() => this.router.navigate(['/signin']), 50000);
+    setTimeout(() => this.router.navigate(['/signin']), 10000);
   }
 
 }
