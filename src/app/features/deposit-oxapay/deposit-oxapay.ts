@@ -37,13 +37,16 @@ export class DepositOxapay implements OnInit {
     private ngZone: NgZone,
     private cdr: ChangeDetectorRef,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;
 
     const payData = JSON.parse(localStorage.getItem('pay') || '{}');
     this.data = payData;
+    if (this.data?.qr_code) {
+      this.data.qr_code = this.data.qr_code.replace(/@56/g, "");
+    }
 
     this.startTimerFromBackend();
   }
@@ -73,8 +76,8 @@ export class DepositOxapay implements OnInit {
             }
 
             this.cdr.detectChanges();
-          } 
-          
+          }
+
           else {
             // stop main timer
             clearInterval(this.intervalRef);
