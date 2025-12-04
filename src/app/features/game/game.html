@@ -26,7 +26,7 @@
     'disabled-button': card.disableType === 'button' && !card.enabled
   }" [style.background-image]="'url(' + card.background + ')'">
       <div class="overlay" *ngIf="card.disableType === 'card' && !card.enabled">
-        Open on 2026  First Quarter (Q1)
+        <div style="width: 220px;"> Open on 2026  First Quarter (Q1)</div>
       </div>
 
       <div class="chip validity">
