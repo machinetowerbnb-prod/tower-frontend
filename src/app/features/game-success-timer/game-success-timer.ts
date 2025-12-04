@@ -6,7 +6,9 @@ import {
   Inject,
   PLATFORM_ID,
   OnDestroy,
-  OnInit
+  OnInit,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
@@ -28,6 +30,9 @@ export class GameSuccessTimer implements OnDestroy, OnInit {
 
   private targetTime = 0;
   private intervalId: any;
+
+  @Output() closed = new EventEmitter<void>();
+
 
   constructor(
     private zone: NgZone,
@@ -110,6 +115,7 @@ export class GameSuccessTimer implements OnDestroy, OnInit {
 
       // Now hide modal
       this.isVisible = false;
+      this.closed.emit();   
 
     }, 250);
   }

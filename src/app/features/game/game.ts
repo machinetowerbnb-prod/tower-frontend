@@ -318,4 +318,8 @@ export class Game implements OnInit {
     return diff >= dayInMs;
   }
 
+  onPopupClosed() {
+    window.location.reload(); 
+  }
+
 }
