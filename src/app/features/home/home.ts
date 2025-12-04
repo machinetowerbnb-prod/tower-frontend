@@ -172,7 +172,7 @@ export class Home implements OnInit, OnDestroy {
       this.ngZone.run(() => {
         this.nextSlide();
       });
-    }, 3000); // set to 3000 ms for smoother testing; change to 5000 if needed
+    }, 8000); // set to 3000 ms for smoother testing; change to 5000 if needed
   }
 
   clearCarousel() {

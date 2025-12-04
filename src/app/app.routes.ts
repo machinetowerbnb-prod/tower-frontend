@@ -52,7 +52,7 @@ export const routes: Routes = [
     canActivate: [authGuard],
     children: [
       { path: 'home', component: Home },
-      { path: 'position', component: Position },
+      { path: 'rank', component: Position },
       { path: 'tower', component: Game },
       { path: 'team', component: Team },
       { path: 'profile', component: Profile },

@@ -131,8 +131,8 @@ export class Signin implements OnInit {
           }
         },
         error: (err) => {
-          console.error('Login error:', err);
-          this.snackBar.open('Server error. Please try again later.', 'Close', {
+          console.error('Login error:', err.error.message);
+          this.snackBar.open(err.error.message || 'Invalid Credentials', 'Close', {
             duration: 3000,
             panelClass: ['error-snackbar']
           });
