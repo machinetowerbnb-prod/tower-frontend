@@ -132,8 +132,6 @@ export class Signin implements OnInit {
         },
         error: (err) => {
           console.error('Login error:', err.error.message);
-          // let msg = err.error.message;
-          // if(msg == 'Invalid email or password') msg = 'Invalid password';
           this.snackBar.open(err.error.message || 'Invalid Credentials', 'Close', {
             duration: 3000,
             panelClass: ['error-snackbar']
