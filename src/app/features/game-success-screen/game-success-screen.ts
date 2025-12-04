@@ -1,4 +1,4 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component, EventEmitter, Output, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,6 +12,8 @@ export class GameSuccessScreen {
   isClosing = false;
 
   constructor(private renderer: Renderer2) { }
+  @Output() closed = new EventEmitter<void>();
+
 
   openModal() {
     if (this.isClosing) return;
@@ -33,6 +35,7 @@ export class GameSuccessScreen {
     this.renderer.removeStyle(document.body, 'overflow');
     this.renderer.removeStyle(document.body, 'position');
     this.renderer.removeStyle(document.body, 'width');
+    this.closed.emit();      
 
     // ⭐ Continue with fade-out animation
     setTimeout(() => {

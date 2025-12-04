@@ -57,5 +57,5 @@
   </div>
 </div>
 
-<app-game-success-screen #gameSuccessModel></app-game-success-screen>
-<app-game-success-timer #timer></app-game-success-timer>
+<app-game-success-screen #gameSuccessModel (closed)="onPopupClosed()"></app-game-success-screen>
+<app-game-success-timer #timer (closed)="onPopupClosed()"></app-game-success-timer>
