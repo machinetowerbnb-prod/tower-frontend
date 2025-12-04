@@ -27,6 +27,8 @@ export class GameSuccessTimer implements OnDestroy, OnInit {
   hours = '00';
   minutes = '00';
   seconds = '00';
+  msg = "Your Core Circulation Strategy Computing Trading activity is now in progress.You’ve earned *** points so far";
+
 
   private targetTime = 0;
   private intervalId: any;
@@ -42,36 +44,39 @@ export class GameSuccessTimer implements OnDestroy, OnInit {
   ) { }
 
   ngOnInit() {
-  this.renderer.removeStyle(document.body, 'overflow');
-}
+    this.renderer.removeStyle(document.body, 'overflow');
+    let earnings = localStorage.getItem('earnings');
+    this.msg = `Your Core Circulation Strategy Computing Trading activity is now in progress. You’ve earned ${earnings} points so far.`
+
+  }
 
   /** Start timer popup */
   open(startTimestamp: number) {
-  if (!isPlatformBrowser(this.platformId)) return;
+    if (!isPlatformBrowser(this.platformId)) return;
 
-  const now = Date.now();
-  const twentyFourHours = 24 * 60 * 60 * 1000;
+    const now = Date.now();
+    const twentyFourHours = 24 * 60 * 60 * 1000;
 
-  // 🛑 If timestamp is older than 24h → stop timer
-  if (now - startTimestamp >= twentyFourHours) {
-    this.hours = '00';
-    this.minutes = '00';
-    this.seconds = '00';
+    // 🛑 If timestamp is older than 24h → stop timer
+    if (now - startTimestamp >= twentyFourHours) {
+      this.hours = '00';
+      this.minutes = '00';
+      this.seconds = '00';
+      this.isVisible = true;
+      this.isClosing = false;
+      this.renderer.setStyle(document.body, 'overflow', 'hidden');
+      return;
+    }
+
+    // ✅ Not older → start countdown
+    this.targetTime = startTimestamp + twentyFourHours;
+
     this.isVisible = true;
     this.isClosing = false;
     this.renderer.setStyle(document.body, 'overflow', 'hidden');
-    return;
+
+    this.startCountdown();
   }
-
-  // ✅ Not older → start countdown
-  this.targetTime = startTimestamp + twentyFourHours;
-
-  this.isVisible = true;
-  this.isClosing = false;
-  this.renderer.setStyle(document.body, 'overflow', 'hidden');
-
-  this.startCountdown();
-}
 
 
   /** Main timer logic */
@@ -115,7 +120,7 @@ export class GameSuccessTimer implements OnDestroy, OnInit {
 
       // Now hide modal
       this.isVisible = false;
-      this.closed.emit();   
+      this.closed.emit();
 
     }, 250);
   }
