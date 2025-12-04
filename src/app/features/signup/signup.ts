@@ -54,11 +54,12 @@ export class Signup implements OnInit {
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      epin: ['', [Validators.required, Validators.minLength(4)]],
-      confirmEpin: ['', Validators.required],
-      terms: [false, Validators.requiredTrue],
+      epin: ['', [Validators.required, Validators.minLength(6)]],
+      confirmEpin: ['', Validators.required, , Validators.minLength(6)],
+      terms: [true, Validators.requiredTrue],
       refferal: ['']  // ⭐ removed Validators.required
-    });
+    },
+    { validator: this.matchPins });   // ⭐ ONLY CHANGE
   }
 
 
@@ -73,11 +74,27 @@ export class Signup implements OnInit {
     }
   }
 
+  matchPins(form: FormGroup) {
+    const epin = form.get('epin')?.value;
+    const confirmEpin = form.get('confirmEpin')?.value;
+
+    if (epin && confirmEpin && epin !== confirmEpin) {
+      form.get('confirmEpin')?.setErrors({ mismatch: true });
+    } else {
+      form.get('confirmEpin')?.setErrors(null);
+    }
+
+    return null;
+  }
+
+
   togglePasswordVisibility() {
     this.hidePassword = !this.hidePassword;
   }
 
   onSubmit() {
+    this.signupForm.markAllAsTouched();
+    console.log(this.signupForm.value);
     if (this.signupForm.valid) {
       const payload = {
         userName: this.signupForm.value.name,
