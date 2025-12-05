@@ -28,8 +28,7 @@
 
         <div *ngFor="let tx of group.transactions" class="transaction-card">
           <div class="tx-icon">
-            <img
-              [src]="
+            <img [src]="
                 tx.type === 'credit'
                   ? '/credit.svg'
                   : tx.type === 'deposit'
@@ -37,29 +36,26 @@
                   : tx.type === 'withdraw'
                   ? '/deposits.svg'
                   : '/credit.svg'
-              "
-              alt="icon"
-            />
+              " alt="icon" />
           </div>
 
           <div class="tx-details">
             <p class="tx-type">
               {{
-                tx.type === 'withdraw'
-                  ? 'PAYOUT WITHDRAW'
-                  : tx.type === 'reward'
-                  ? 'Circulation Quantitative Trading Earn'
-                  : tx.type.toUpperCase()
+              tx.type === 'withdraw'
+              ? 'PAYOUT WITHDRAW'
+              : tx.type === 'reward'
+              ? tx?.adminReward && tx?.adminReward == true?'Admin Internal Background':'Circulation Quantitative Trading
+              Earn'
+              : tx.type.toUpperCase()
               }}
             </p>
 
-            <h3
-              [ngClass]="{
+            <h3 [ngClass]="{
                 credit: tx.type === 'credit',
                 deposit: tx.type === 'deposit',
                 reward: tx.type === 'reward'
-              }"
-            >
+              }">
               {{ tx.type === 'credit' || tx.type === 'reward' ? '+' : ''
               }}{{ tx.amount | number : '1.0-2' }}
               <span>USDT</span>
@@ -88,12 +84,8 @@
       <button class="close-btn" (click)="closeFilterPopup()">×</button>
     </div>
 
-    <div
-      class="filter-option"
-      *ngFor="let filter of filters"
-      [class.active]="filter.value === activeFilter"
-      (click)="selectFilter(filter.value)"
-    >
+    <div class="filter-option" *ngFor="let filter of filters" [class.active]="filter.value === activeFilter"
+      (click)="selectFilter(filter.value)">
       <div class="filter-icon">
         <img [src]="filter.icon" alt="{{ filter.label }}" />
       </div>

@@ -109,7 +109,7 @@ export class Signup implements OnInit {
       this.authService.signup(payload).subscribe({
         next: (res) => {
           if (res.statusCode === 201) {
-            this.snackBar.open('Account created successfully!', 'Close', {
+            this.snackBar.open('Verification link sent to Gmail', 'Close', {
               duration: 3000,
               panelClass: ['success-snackbar']
             });
