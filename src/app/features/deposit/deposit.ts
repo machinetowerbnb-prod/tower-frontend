@@ -25,6 +25,8 @@ export class Deposit implements OnInit {
   quickAmounts = [60, 500, 900, 1500];
   compoletedDeposit = false;
   transactionAccounts: any[] = [];
+  showRechargeInfo = false;
+
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -146,5 +148,11 @@ export class Deposit implements OnInit {
     this.isClosing = false;
   }
 
+  openRechargeInfo() {
+    this.showRechargeInfo = true;
+  }
 
+  closeRechargeInfo() {
+    this.showRechargeInfo = false;
+  }
 }

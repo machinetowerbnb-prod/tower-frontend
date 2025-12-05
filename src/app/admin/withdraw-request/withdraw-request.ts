@@ -40,8 +40,8 @@ export class WithdrawRequest implements OnInit {
           if (res.statusCode === 200 && Array.isArray(res.data)) {
 
             this.withdraws = res.data.map((item:any) => {
-              const charge = item.amount * 0.02;         // 2% static fee
-              const total = item.amount - charge;        // amount - 2%
+              const charge = item.amount * 0.08;         // 8% static fee
+              const total = item.amount - charge;        // amount - 8%
               return {
                 user: item.user,
                 amount: item.amount,

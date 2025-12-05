@@ -133,7 +133,7 @@ export class DepositOxapay implements OnInit {
       next: (res) => {
         console.log('Payment Status:', res);
 
-        if (res.status === 'paid' || res.data?.status === 'paid') {
+        if (res.data?.txs && res.data?.txs.length > 0 && res.data?.txs[0].status == "confirmed") {
           this.stopPaymentPolling();
           clearInterval(this.intervalRef);
 

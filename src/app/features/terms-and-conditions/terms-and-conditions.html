@@ -1,17 +1,15 @@
 <div class="layout-container" fxLayout="column" fxFlexFill>
   <!-- 🔹 Top Navigation -->
   <header>
-    <app-top-nav
-
-></app-top-nav>
+    <app-top-nav></app-top-nav>
   </header>
 
   <!-- 🔹 Banner -->
   <div class="banner">
     <div class="banner-align">
       <button class="back-btn" (click)="goBack()">
-          <img src="/leftarraow.svg" alt="back" />
-        </button>
+        <img src="/leftarraow.svg" alt="back" />
+      </button>
       <div class="banner-text">
         <h2>Terms and Conditions</h2>
       </div>
@@ -21,67 +19,99 @@
 
   <!-- 🔹 Scrollable Content Section -->
   <div class="content-container">
-    <h3>User Terms and Conditions</h3>
-    <p>
-      <strong>TowerBNB Service Agreement: A Summary.</strong>
-    </p>
+
+    <h3>TowerBNB Service Agreement: A Summary</h3>
 
     <p>
       This document outlines the Service Agreement for the use of products and services provided by
-      TowerBNB Technologies Inc. ("TowerBNB" or "the platform"). By registering or using the
-      Platform, you agree to be bound by all the terms herein. If you do not agree, you must not use
-      the Platform’s services.
+      <strong>TowerBNB Technologies Inc.</strong> (referred to as "<strong>TowerBNB</strong>" or "the Platform").
+      By registering or using the Platform, you agree to be bound by all the terms herein. If you do
+      not agree, you must not use the Platform’s services.
     </p>
 
     <h4>Key Provisions of the Agreement</h4>
+
+    <!-- User Eligibility -->
     <h5>User Eligibility and Registration (Article 2):</h5>
     <ul>
-      <li>
-        You must be at least 18 years old and possess the full legal capacity to enter into this
-        agreement.
-      </li>
+      <li>You must be at least 18 years old and possess the full legal capacity to enter into this agreement.</li>
       <li>All registration information must be true, accurate, complete, and kept up-to-date.</li>
-      <li>
-        You are prohibited from using the Platform for any illegal activities or those that infringe
-        upon the rights of others.
-      </li>
+      <li>You are prohibited from using the Platform for any illegal activities or those that infringe upon the rights
+        of others.</li>
     </ul>
 
+    <!-- Service Offerings -->
     <h5>Service Offerings (Article 3):</h5>
+    <p>TowerBNB provides registered users with services including:</p>
     <ul>
       <li>Digital asset management, staking functions, and fund circulation (e.g., USDT).</li>
-      <li>
-        Smartphone Tower mining system (running a computing power package to generate income).
-      </li>
-      <li>Team Incentive Plans (Mission and Node logical incentives).</li>
+      <li>A smartphone Tower mining system (running a computing power package to generate income).</li>
+      <li>Team incentive plans (fission income and node ecological incentives).</li>
+      <li>Digital asset exchange and withdrawal services.</li>
     </ul>
+    <p>TowerBNB reserves the right to adjust the services offered at its discretion.</p>
 
+    <!-- Account Security -->
     <h5>Account Security and Management (Article 4):</h5>
     <ul>
-      <li>
-        You are solely responsible for maintaining the confidentiality of your login credentials.
-      </li>
-      <li>
-        TowerBNB shall not be liable for losses due to unauthorized account access caused by user
-        negligence.
-      </li>
+      <li>You are solely responsible for the safekeeping of your account, password, transaction password, and other key
+        information. Any asset loss resulting from your negligence is your responsibility.</li>
+      <li>Accounts may not be transferred, rented, loaned, or authorized for use by others.</li>
+      <li>You must immediately notify TowerBNB of any abnormal activity, password leaks, or unauthorized use.</li>
+      <li>The Platform reserves the right to freeze or restrict accounts for security purposes.</li>
     </ul>
 
-    <h5>Service Adjustments (Article 5):</h5>
+    <!-- Deposit / Withdraw -->
+    <h5>Deposit and Withdrawal Rules (Article 5):</h5>
+    <ul>
+      <li>You must ensure the correct currency, mainnet type, and address for all deposits, as incorrect operations may
+        result in asset loss for which you are responsible.</li>
+      <li>Withdrawals require a fund or payment password and must comply with the Platform's limits and fee structures.
+      </li>
+      <li>The Platform may delay processing withdrawals or deposits due to technical maintenance, compliance
+        requirements, or security reviews.</li>
+    </ul>
+
+    <!-- Profit Distribution -->
+    <h5>Profit Distribution and Disclaimer (Articles 6 & 8):</h5>
+    <ul>
+      <li>Income is distributed in USDT tokens.</li>
+      <li><strong>TowerBNB does not promise any fixed income.</strong> All earnings depend on actual mining operations,
+        market fluctuations, and platform development.</li>
+      <li>The Platform is a technical service provider and does not guarantee user investment decisions or returns.</li>
+      <li>Users assume sole responsibility for risks associated with participating in digital asset activities.</li>
+      <li>TowerBNB is not liable for losses caused by force majeure (natural disasters, hacker attacks, blockchain
+        failures), but will attempt to assist in recovery.</li>
+    </ul>
+
+    <!-- Prohibited Conduct -->
+    <h5>Prohibited Conduct (Article 7):</h5>
+    <p>Users are strictly forbidden from:</p>
+    <ul>
+      <li>Exploiting vulnerabilities or using scripts to illegally profit.</li>
+      <li>Engaging in illegal financial activities such as money laundering, fraud, or pyramid schemes.</li>
+      <li>Maliciously attacking the system or tampering with data.</li>
+      <li>Publishing false information or damaging the Platform's reputation.</li>
+    </ul>
+    <p>TowerBNB has the right to suspend or terminate services and pursue legal action against users who engage in these
+      behaviors.</p>
+
+    <!-- Intellectual Property -->
+    <h5>Intellectual Property and Agreement Updates (Articles 9 & 10):</h5>
+    <ul>
+      <li>All Platform content (trademarks, codes, etc.) is protected by law and cannot be used without authorization.
+      </li>
+      <li>TowerBNB reserves the right to update this Agreement at any time. Continued use of the Platform after an
+        update constitutes acceptance of the revised terms.</li>
+      <li>TowerBNB Technologies Inc. holds the final right of interpretation of this Agreement.</li>
+    </ul>
+
+    <!-- Conclusion -->
+    <h5>Conclusion</h5>
     <p>
-      TowerBNB reserves the right to modify, suspend, or discontinue any part of its services at any
-      time without prior notice.
+      TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power.
+      By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.
     </p>
 
-    <h5>Governing Law (Article 6):</h5>
-    <p>
-      This agreement shall be governed by the laws of the applicable jurisdiction. All disputes
-      shall be resolved through arbitration.
-    </p>
-
-    <p>
-      By continuing to use the Platform, you acknowledge that you have read and agreed to these
-      terms and conditions.
-    </p>
   </div>
 </div>
