@@ -260,3 +260,91 @@
   justify-content: center;
   text-align: center;
 }
+
+
+//tooltip
+
+/* 🔹 Info icon */
+.token-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.info-icon {
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    transition: 0.2s;
+  }
+}
+
+/* 🔹 Overlay */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  // background: rgba(0,0,0,0.4);
+  z-index: 3000;
+}
+
+/* 🔹 Popup Box */
+.recharge-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 3001;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  width: 80%;
+  max-width: 420px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  animation: fadeIn 0.25s ease;
+}
+
+.popup-content h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+.popup-content ul {
+  padding-left: 18px;
+  color: #444;
+  font-size: 14px;
+
+  li {
+    margin-bottom: 10px;
+  }
+}
+
+.close-btn {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  background: #2752E7 !important;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}

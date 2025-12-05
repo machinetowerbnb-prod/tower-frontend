@@ -158,7 +158,7 @@ export class Game implements OnInit {
                 currentCard.buttonText = 'Activated';
               } else {
                 currentCard.enabled = true;
-                currentCard.reward = "Status: Activated"
+                currentCard.reward = "Status: Core Activated"
                 currentCard.buttonText = 'Active Now';
               }
             }
@@ -185,7 +185,7 @@ export class Game implements OnInit {
             // If currentLevel equals eligibleLevel → DO NOT show Purchase Now
             if (currectLevel === finalEligible) {
               eligibleCard.enabled = true;
-              eligibleCard.reward = "Status: Activated"
+              eligibleCard.reward = "Status: Core Activated"
               eligibleCard.buttonText = 'Active Now';
             } else {
               eligibleCard.enabled = true;
