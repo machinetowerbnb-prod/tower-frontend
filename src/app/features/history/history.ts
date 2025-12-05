@@ -9,6 +9,7 @@ interface Transaction {
   timestamp: string;
   transactionId: string;
   status: string;
+  adminReward: boolean;
 }
 
 
