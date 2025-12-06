@@ -10,16 +10,18 @@ import { Router } from '@angular/router';
 
 export const ErrorLoggerInterceptor: HttpInterceptorFn = (req, next) => {
   const startTime = Date.now();
-  const router = inject(Router);   
- 
+  const router = inject(Router);
+
 
   return next(req).pipe(
-    tap(() => {}),
+    tap(() => { }),
     catchError((error: HttpErrorResponse) => {
       console.log("📝 Message:", error.error.message);
-      if(error?.error?.message == "User inactive, please contact support") {
+      if (error?.error?.message == "User inactive, please contact support") {
         console.log("GO TO LOGIN SCREEN")
         router.navigate(['/signin']);
+      } else if (error?.error?.message == "Under Maintainance") {
+        router.navigate(['/under-maintainance']);
       }
       return throwError(() => error);
     })
