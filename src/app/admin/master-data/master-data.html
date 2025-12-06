@@ -32,6 +32,15 @@
            (input)="checkIfChanged()" />
   </div>
 
+      <!-- Secondary Telegram URL -->
+  <div class="section">
+    <label class="label">Third Telegram URL</label>
+    <input type="text"
+           [(ngModel)]="formData.telegramUrlTwo"
+           class="input-box"
+           (input)="checkIfChanged()" />
+  </div>
+
   <!-- UPDATE BUTTON -->
   <button class="update-btn"
           [disabled]="!isChanged"

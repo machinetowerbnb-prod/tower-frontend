@@ -25,7 +25,8 @@ export class MasterData implements OnInit {
   formData = {
     isMaintenance: false,
     telegramUrl: "",
-    telegramUrlOne: ""
+    telegramUrlOne: "",
+    telegramUrlTwo: ""
   };
 
   // Button disable logic
@@ -41,7 +42,8 @@ export class MasterData implements OnInit {
     this.isChanged =
       this.formData.isMaintenance !== this.originalData.isMaintenance ||
       this.formData.telegramUrl !== this.originalData.telegramUrl ||
-      this.formData.telegramUrlOne !== this.originalData.telegramUrlOne;
+      this.formData.telegramUrlOne !== this.originalData.telegramUrlOne ||
+      this.formData.telegramUrlTwo !== this.originalData.telegramUrlTwo;
   }
 
   updateMasterData() {
@@ -55,7 +57,8 @@ export class MasterData implements OnInit {
       "updates": {
         "isUnderMaintainance": this.originalData.isMaintenance,
         "telegramLinkOne": this.originalData.telegramUrl,
-        "telegramLinkTwo": this.originalData.telegramUrlOne
+        "telegramLinkTwo": this.originalData.telegramUrlOne,
+        "telegramLinkThree": this.originalData.telegramUrlTwo
       }
     }
 
@@ -90,11 +93,13 @@ export class MasterData implements OnInit {
           this.originalData = {
             isMaintenance: res.data[0].isUnderMaintainance,
             telegramUrl: res.data[0].telegramLinkOne,
-            telegramUrlOne: res.data[0].telegramLinkTwo
+            telegramUrlOne: res.data[0].telegramLinkTwo,
+            telegramUrlTwo: res.data[0].telegramLinkThree,
           };
           this.formData.isMaintenance = this.originalData?.isMaintenance || false;
           this.formData.telegramUrl = this.originalData?.telegramUrl || '';
           this.formData.telegramUrlOne = this.originalData?.telegramUrlOne || '';
+          this.formData.telegramUrlTwo = this.originalData?.telegramUrlTwo || '';
         }
       },
       error: (err) => {
