@@ -39,6 +39,8 @@ export class Game implements OnInit {
   private cdr = inject(ChangeDetectorRef);
   constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object) { }
 
+  isGameEnabled = false;
+
   cards: GameCard[] = [
     {
       title: 'Tower BNB - Free Trial',
@@ -109,11 +111,13 @@ export class Game implements OnInit {
       if (userId) {
         this.getGameData(userId);
         this.loadHomeData();
+        console.log("this.isGameEnabled", this.isGameEnabled);
       } else {
         //console.error('❌ No userId found in localStorage');
       }
     }
   }
+
   getGameData(userId: string) {
     const payload = {
       screen: 'game',
@@ -132,7 +136,7 @@ export class Game implements OnInit {
         }
 
         const { isFreeTrailSubcraibed, currectLevel, elegibleLevel, activationTime } = res.data;
-
+        this.isGameEnabled = res.data.isGameEnabled;
         // Save activationTime even if null
         //console.log(activationTime, "activationTime")
         localStorage.setItem('activationTime', activationTime ?? null);
@@ -175,8 +179,10 @@ export class Game implements OnInit {
           // }
 
           // If elegibleLevel is "Level4" → use Level3 instead
-          if (finalEligible === 'Level4') {
-            finalEligible = 'Level3';
+          if (this.isGameEnabled == false) {
+            if (finalEligible === 'Level4') {
+              finalEligible = 'Level3';
+            }
           }
 
           // Now process eligible card
@@ -245,6 +251,7 @@ export class Game implements OnInit {
     // this.timer.open(now);
     // this.gameSuccessModel.openModal()
   }
+
   purchaseNow(card: GameCard) {
     const userId = localStorage.getItem('userId');
     let payload = {
@@ -278,6 +285,7 @@ export class Game implements OnInit {
       },
     });
   }
+
   activateGame(userId: string) {
     const payload = {
       userId: userId,
@@ -306,11 +314,6 @@ export class Game implements OnInit {
       },
     });
   }
-
-  // isCurrentGreaterThanYesterday(currentTs: number, yesterdayTs: number): boolean {
-  //   //console.log("currentTs > yesterdayTs", currentTs > yesterdayTs);
-  //   return currentTs > yesterdayTs;
-  // }
 
   is24HoursCompleted(currentTs: number, ts: number): boolean {
     const diff = currentTs - ts;
