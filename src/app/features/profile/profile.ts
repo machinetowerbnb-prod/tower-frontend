@@ -41,7 +41,8 @@ export class Profile implements OnInit {
     workingWallet: 0,
     withdrawalWallet: 0,
   };
-  telegramLinkTwo:string = ''
+  telegramLinkTwo: string = ''
+  telegramLinkThree: string = ''
   walletActions = [
     { icon: '/deposit.svg', label: 'Deposit' },
     { icon: '/withdrawal.svg', label: 'Withdrawal' },
@@ -100,7 +101,8 @@ export class Profile implements OnInit {
           this.user.email = data.email || 'Email';
           this.user.workingWallet = Number(data.totalDeposits ?? 0);
           this.user.withdrawalWallet = Number(data.totalEarnings ?? 0);
-          this.telegramLinkTwo = data.telegramLinkTwo
+          this.telegramLinkTwo = data.telegramLinkTwo;
+          this.telegramLinkThree = data.telegramLinkThree;
           // Update Summary dynamically
           this.walletSummary = [
             { label: "Today's Personal commission", value: Number(data.usersTodaysCommission ?? 0) },
@@ -139,7 +141,7 @@ export class Profile implements OnInit {
   }
 
 
-   opentelegramLinkTwo() {
+  opentelegramLinkTwo() {
     if (this.telegramLinkTwo) {
       window.open(this.telegramLinkTwo, '_blank');
     }
@@ -150,6 +152,13 @@ export class Profile implements OnInit {
 
   closeSupportPopup() {
     this.showSupport = false;
+  }
+
+  onSupport() {
+    console.log("SUPPORT");
+    if (this.telegramLinkThree) {
+      window.open(this.telegramLinkThree, '_blank');
+    }
   }
 
   onSetting(label: string) {

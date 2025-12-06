@@ -151,7 +151,7 @@ export class Home implements OnInit, OnDestroy {
     } else if (label === 'History') {
       this.router.navigate(['/history']);
     } else if (label === 'Group') {
-      this.opentelegramLinkTwo();
+      this.opentelegramLinkOne();
     }
   }
 

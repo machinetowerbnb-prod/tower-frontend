@@ -24,8 +24,10 @@ export class MasterData implements OnInit {
   // BOUND VALUES (editable)
   formData = {
     isMaintenance: false,
+    isGameEnabled: false,
     telegramUrl: "",
-    telegramUrlOne: ""
+    telegramUrlOne: "",
+    telegramUrlTwo: ""
   };
 
   // Button disable logic
@@ -40,8 +42,10 @@ export class MasterData implements OnInit {
   checkIfChanged() {
     this.isChanged =
       this.formData.isMaintenance !== this.originalData.isMaintenance ||
+      this.formData.isGameEnabled !== this.originalData.isGameEnabled ||
       this.formData.telegramUrl !== this.originalData.telegramUrl ||
-      this.formData.telegramUrlOne !== this.originalData.telegramUrlOne;
+      this.formData.telegramUrlOne !== this.originalData.telegramUrlOne ||
+      this.formData.telegramUrlTwo !== this.originalData.telegramUrlTwo;
   }
 
   updateMasterData() {
@@ -54,8 +58,10 @@ export class MasterData implements OnInit {
     let payload = {
       "updates": {
         "isUnderMaintainance": this.originalData.isMaintenance,
+        "isGameEnabled": this.originalData.isGameEnabled,
         "telegramLinkOne": this.originalData.telegramUrl,
-        "telegramLinkTwo": this.originalData.telegramUrlOne
+        "telegramLinkTwo": this.originalData.telegramUrlOne,
+        "telegramLinkThree": this.originalData.telegramUrlTwo
       }
     }
 
@@ -89,12 +95,16 @@ export class MasterData implements OnInit {
         if (res.statusCode === 200 && Array.isArray(res.data)) {
           this.originalData = {
             isMaintenance: res.data[0].isUnderMaintainance,
+            isGameEnabled: res.data[0].isGameEnabled,
             telegramUrl: res.data[0].telegramLinkOne,
-            telegramUrlOne: res.data[0].telegramLinkTwo
+            telegramUrlOne: res.data[0].telegramLinkTwo,
+            telegramUrlTwo: res.data[0].telegramLinkThree,
           };
           this.formData.isMaintenance = this.originalData?.isMaintenance || false;
+          this.formData.isGameEnabled = this.originalData?.isGameEnabled || false;
           this.formData.telegramUrl = this.originalData?.telegramUrl || '';
           this.formData.telegramUrlOne = this.originalData?.telegramUrlOne || '';
+          this.formData.telegramUrlTwo = this.originalData?.telegramUrlTwo || '';
         }
       },
       error: (err) => {
