@@ -108,6 +108,7 @@ export class Game implements OnInit {
       const userId = localStorage.getItem('userId');
       if (userId) {
         this.getGameData(userId);
+        this.loadHomeData();
       } else {
         //console.error('❌ No userId found in localStorage');
       }
@@ -189,7 +190,7 @@ export class Game implements OnInit {
               eligibleCard.buttonText = 'Active Now';
             } else {
               eligibleCard.enabled = true;
-              eligibleCard.buttonText = 'Purchase Now';
+              eligibleCard.buttonText = finalEligible == "Level1" ? 'Purchase Now' : 'Update Now';//Update logic
             }
           }
 
@@ -209,32 +210,31 @@ export class Game implements OnInit {
     if (card.disableType === 'card') return;
     //console.log('🔹 Selected card action:', card);
     // const now = Date.now();
-    if (card.buttonText === 'Purchase Now') {
+    if (card.buttonText === 'Purchase Now' || card.buttonText === 'Update Now') {
       this.purchaseNow(card);
       return;
     }
     if (card.buttonText === 'Active Now') {
-      const userId = localStorage.getItem('userId');
-      let activationTime: any = localStorage.getItem('activationTime');
+      setTimeout(() => {
+        const userId = localStorage.getItem('userId');
+        let activationTime: any = localStorage.getItem('activationTime');
 
-      if (activationTime && activationTime != null) {
-        let currentTime = Date.now();
-        // if (this.isCurrentGreaterThanYesterday(currentTime, activationTime)) {
-        //   //console.log(currentTime, activationTime)
-        //   this.timer.open(Number(activationTime));
-        // } else {
-        //   this.activateGame(userId!);
-        // }
-        if (this.is24HoursCompleted(currentTime, Number(activationTime))) {
-          this.activateGame(userId!);
-        } else {
-          this.timer.open(Number(activationTime));
+        if (activationTime && activationTime != null) {
+          let currentTime = Date.now();
+          // if (this.isCurrentGreaterThanYesterday(currentTime, activationTime)) {
+          //   //console.log(currentTime, activationTime)
+          //   this.timer.open(Number(activationTime));
+          // } else {
+          //   this.activateGame(userId!);
+          // }
+          if (this.is24HoursCompleted(currentTime, Number(activationTime))) {
+            this.activateGame(userId!);
+          } else {
+            this.timer.open(Number(activationTime));
+          }
         }
-      }
-      // const now = 1763141263280;
-      // this.timer.open(now);
-      // this.gameSuccessModel.openModal()
-      return;
+        return;
+      }, 0)
     }
     if (card.buttonText === 'Unlock Now') {
       this.purchaseNow(card);
@@ -319,7 +319,33 @@ export class Game implements OnInit {
   }
 
   onPopupClosed() {
-    window.location.reload(); 
+    window.location.reload();
+  }
+
+  loadHomeData() {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      console.error('No userId found in localStorage');
+      return;
+    }
+
+    const payload = {
+      screen: 'home',
+      userId
+    };
+    var withdrawalWallet = "0";
+    this.authService.avengers(payload).subscribe({
+      next: (res) => {
+        this.ngZone.run(() => {
+          withdrawalWallet = res.data.totalEarnings;
+          this.cdr.detectChanges();
+        });
+        localStorage.setItem('earnings', withdrawalWallet);
+      },
+      error: (err) => {
+        console.error('Error fetching home data:', err);
+      }
+    });
   }
 
 }

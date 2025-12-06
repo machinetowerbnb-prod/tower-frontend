@@ -37,7 +37,6 @@ export class Home implements OnInit, OnDestroy {
     '/corosule4.svg',
     '/corosule5.svg',
     '/corosule6.svg',
-    // '/mnt/data/69a44b5e-e831-48f2-8510-edfc3f298269.png' // <- your uploaded image path (for testing)
   ];
 
   walletActions = [

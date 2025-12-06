@@ -43,16 +43,23 @@ export class GameSuccessTimer implements OnDestroy, OnInit {
     private cdr: ChangeDetectorRef
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.renderer.removeStyle(document.body, 'overflow');
-    let earnings = localStorage.getItem('earnings');
-    this.msg = `Your Core Circulation Strategy Computing Trading activity is now in progress. You’ve earned ${earnings} points so far.`
-
   }
+
+  async updateEarningsMessage() {
+    let finalEarnings = await localStorage.getItem('earnings') || 0;
+    this.msg = `Your Core Circulation Strategy Computing Trading activity is now in progress.
+              You’ve earned <b>${finalEarnings}</b> points so far.`;
+    this.cdr.detectChanges();
+  }
+
 
   /** Start timer popup */
   open(startTimestamp: number) {
     if (!isPlatformBrowser(this.platformId)) return;
+
+    this.updateEarningsMessage();
 
     const now = Date.now();
     const twentyFourHours = 24 * 60 * 60 * 1000;
