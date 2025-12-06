@@ -137,8 +137,7 @@ export class Game implements OnInit {
 
         const { isFreeTrailSubcraibed, currectLevel, elegibleLevel, activationTime } = res.data;
         this.isGameEnabled = res.data.isGameEnabled;
-        // Save activationTime even if null
-        //console.log(activationTime, "activationTime")
+
         localStorage.setItem('activationTime', activationTime ?? null);
 
         if (this.isGameEnabled == true) {
@@ -202,6 +201,14 @@ export class Game implements OnInit {
               eligibleCard.buttonText = finalEligible == "Level1" ? 'Purchase Now' : 'Update Now';//Update logic
             }
           }
+
+          this.cards.map((x) => {
+            if(x.level == finalEligible) {
+              x.enabled = true
+            } else {
+              x.enabled = false
+            }
+          })
 
 
 
