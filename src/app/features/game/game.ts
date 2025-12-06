@@ -89,11 +89,11 @@ export class Game implements OnInit {
       level: 'Level3',
     },
     {
-      title: 'Core 30 Tower Computing',
-      reward: 'Earn 48 USDT',
-      validity: 'CIRCULATION VALIDITY 30 DAYS',
-      status: 'Stable Mining Operation',
-      miningCycle: '27 days mining cycle',
+      title: 'Core 4G Tower Computing',
+      reward: 'Status: Pending Activation',
+      validity: 'CIRCULATION VALIDITY 120 DAYS',
+      status: 'DEP : 1501-3500 USDT',
+      miningCycle: 'Earn: 2.3% per day',
       buttonText: 'Purchase Now',
       background: '/game-card-5.svg',
       enabled: false,
@@ -178,34 +178,17 @@ export class Game implements OnInit {
             }
           }
 
-          // -------------- RULE 3 ------------------
-          // elegibleLevel logic
+
           let finalEligible = elegibleLevel;
 
-          // If elegibleLevel is null → default Level3
-          // if (!finalEligible) {
-          //   finalEligible = 'Level3';
-          // }
-
-          // If elegibleLevel is "Level4" → use Level3 instead
           if (this.isGameEnabled == false) {
             if (finalEligible === 'Level4') {
               finalEligible = 'Level3';
             }
           }
 
-          // Now process eligible card
           const eligibleCard = this.cards.find((c) => c.level === finalEligible);
-          // if (this.isGameEnabled == true) {
-          //   if (finalEligible == "Level4") {
-          //     this.cards.map((x) => {
-          //       if (x.level == "Level4") {
-          //         x.enabled = true;
-          //         x.disableType = "button"
-          //       }
-          //     })
-          //   }
-          // }
+
 
 
           if (eligibleCard) {
@@ -219,6 +202,8 @@ export class Game implements OnInit {
               eligibleCard.buttonText = finalEligible == "Level1" ? 'Purchase Now' : 'Update Now';//Update logic
             }
           }
+
+
 
           // Trigger UI refresh
           this.cdr.detectChanges();
