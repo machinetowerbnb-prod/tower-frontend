@@ -97,7 +97,7 @@ export class Game implements OnInit {
       buttonText: 'Purchase Now',
       background: '/game-card-5.svg',
       enabled: false,
-      disableType: 'card', // 🔹 disabled (Coming Soon),
+      disableType: 'card', // 🔹 disabled (Coming Soon), 
       level: 'Level4',
     },
   ];
@@ -140,6 +140,15 @@ export class Game implements OnInit {
         // Save activationTime even if null
         //console.log(activationTime, "activationTime")
         localStorage.setItem('activationTime', activationTime ?? null);
+
+        if (this.isGameEnabled == true) {
+          this.cards.map((x) => {
+            if (x.level == "Level4") {
+              x.enabled = res.data.elegibleLevel == "Level4" ? true : false;
+              x.disableType = "button"
+            }
+          })
+        }
 
         this.ngZone.run(() => {
           // -------------- RULE 1 ------------------
@@ -187,6 +196,17 @@ export class Game implements OnInit {
 
           // Now process eligible card
           const eligibleCard = this.cards.find((c) => c.level === finalEligible);
+          // if (this.isGameEnabled == true) {
+          //   if (finalEligible == "Level4") {
+          //     this.cards.map((x) => {
+          //       if (x.level == "Level4") {
+          //         x.enabled = true;
+          //         x.disableType = "button"
+          //       }
+          //     })
+          //   }
+          // }
+
 
           if (eligibleCard) {
             // If currentLevel equals eligibleLevel → DO NOT show Purchase Now
