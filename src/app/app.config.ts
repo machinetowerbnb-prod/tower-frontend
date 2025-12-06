@@ -7,6 +7,9 @@ import { LoaderInterceptor } from './interceptors/loader-interceptor';
 
 import { routes } from './app.routes';
 
+import { ErrorLoggerInterceptor } from './interceptors/error-logger-interceptor';
+
+
 import { HttpClientModule } from '@angular/common/http'; // ✅ Add this
 import { FlexLayoutModule } from '@ngbracket/ngx-layout';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(routes),
     provideHttpClient(
-      withInterceptors([LoaderInterceptor])
+      withInterceptors([LoaderInterceptor,ErrorLoggerInterceptor])
     ),
     provideClientHydration(withEventReplay()),
     // ✅ Import these modules properly using importProvidersFrom()

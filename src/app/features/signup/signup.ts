@@ -52,7 +52,7 @@ export class Signup implements OnInit {
 
     this.signupForm = this.fb.group({
       name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email,this.gmailOnly.bind(this)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       epin: ['', [Validators.required, Validators.minLength(6)]],
       confirmEpin: ['', Validators.required, , Validators.minLength(6)],
@@ -73,6 +73,11 @@ export class Signup implements OnInit {
       console.log("Referral code applied:", code);
     }
   }
+
+  gmailOnly(control: any) {
+  const value = control.value || '';
+  return value.toLowerCase().endsWith('@gmail.com') ? null : { gmailOnly: true };
+}
 
   matchPins(form: FormGroup) {
     const epin = form.get('epin')?.value;
