@@ -66,7 +66,7 @@
             <div style="display: flex">
               <p class="tx-id">{{ tx.transactionId }}</p>
               <button class="copy-btn">
-                <img src="/copy.svg" alt="copy" />
+                <img src="/copy.svg" alt="copy" (click)="copyCode(tx.transactionId)" />
               </button>
             </div>
           </div>
