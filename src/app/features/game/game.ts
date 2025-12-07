@@ -203,10 +203,12 @@ export class Game implements OnInit {
           }
 
           this.cards.map((x) => {
-            if(x.level == finalEligible) {
-              x.enabled = true
-            } else {
-              x.enabled = false
+            if (x.level != 'free') {
+              if (x.level == finalEligible) {
+                x.enabled = true
+              } else {
+                x.enabled = false
+              }
             }
           })
 

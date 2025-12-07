@@ -1,8 +1,10 @@
-import { Component, OnInit , Inject, PLATFORM_ID,ChangeDetectorRef,NgZone} from '@angular/core';
-import { CommonModule ,isPlatformBrowser} from '@angular/common';
+import { Component, OnInit, Inject, PLATFORM_ID, ChangeDetectorRef, NgZone } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { TopNav } from '../top-nav/top-nav';
 import { AuthService } from '../../services/auth.service';
+import { Clipboard } from '@angular/cdk/clipboard';
+
 interface Transaction {
   type: string;
   amount: number;
@@ -29,9 +31,10 @@ export class History implements OnInit {
   errorMessage = '';
 
   constructor(private router: Router,
-     private authService: AuthService,
+    private authService: AuthService,
     @Inject(PLATFORM_ID) private platformId: Object,
     private cdr: ChangeDetectorRef,
+    private clipboard: Clipboard,
     private ngZone: NgZone
   ) { }
 
@@ -62,13 +65,13 @@ export class History implements OnInit {
 
         if (response.statusCode === 200 && response.data?.transactions) {
           this.ngZone.run(() => {
-          this.transactions = response.data.transactions.map((t: any) => ({
-            ...t,
-            amount: parseFloat(t.amount), // Ensure it's a number
-          }));
-          this.cdr.detectChanges();
-          this.groupTransactions();
-        })
+            this.transactions = response.data.transactions.map((t: any) => ({
+              ...t,
+              amount: parseFloat(t.amount), // Ensure it's a number
+            }));
+            this.cdr.detectChanges();
+            this.groupTransactions();
+          })
         } else {
           this.errorMessage = 'No transactions found.';
           this.transactions = [];
@@ -221,6 +224,14 @@ export class History implements OnInit {
         if (b.date === 'Today') return 1;
         return new Date(b.date).getTime() - new Date(a.date).getTime();
       });
+  }
+
+  copyCode(val: string) {
+    if(val) {
+      this.clipboard.copy(val);
+      console.log(val)
+      alert('Code copied!');
+    }
   }
 
 
