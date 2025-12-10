@@ -78,7 +78,7 @@ export class Signin implements OnInit {
       const email = this.loginForm.value.email;
       const password = this.loginForm.value.password;
 
-      const ADMIN_EMAILS = ["admin@gmail.com", "superadmin@gmail.com","arjunkiran@gmail.com"];
+      const ADMIN_EMAILS = ["admin@gmail.com", "superadmin@gmail.com", "arjunkiran@gmail.com"];
 
       // ================================
       // ⭐ 1. ADMIN QUICK LOGIN (NO API)
