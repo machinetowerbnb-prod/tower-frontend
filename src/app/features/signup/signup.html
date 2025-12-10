@@ -123,12 +123,12 @@
               <span [class.error-label]="
                   signupForm.get('refferal')?.invalid &&
                   (signupForm.get('refferal')?.touched || signupForm.get('refferal')?.dirty)
-                ">{{ 'Referal Code' | translate }}</span>
+                ">{{ 'Referral Code' | translate }}</span>
             </div>
             <mat-form-field class="password-field" appearance="outline">
-              <input matInput type="text" formControlName="refferal" placeholder="Enter Referal Code" />
+              <input matInput type="text" formControlName="refferal" placeholder="Enter Referral Code" />
               <mat-error *ngIf="signupForm.get('name')?.hasError('required')">
-                {{ 'Referal Code is required' | translate }}
+                {{ 'Referral Code is required' | translate }}
               </mat-error>
             </mat-form-field>
           </div>
