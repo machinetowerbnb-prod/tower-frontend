@@ -110,7 +110,7 @@ export class Signup implements OnInit {
       };
 
       console.log('Signup payload:', payload);
-
+      localStorage.setItem('signup', JSON.stringify(payload));
       this.authService.signup(payload).subscribe({
         next: (res) => {
           if (res.statusCode === 201) {

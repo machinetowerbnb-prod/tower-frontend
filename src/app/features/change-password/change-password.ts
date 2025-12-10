@@ -22,8 +22,6 @@ export class ChangePassword implements OnInit {
 
   ngOnInit() {
     // Read query params if present
-    localStorage.removeItem('userId');
-    localStorage.removeItem('email');
 
     if ('caches' in window) {
       caches.keys().then(names => {
