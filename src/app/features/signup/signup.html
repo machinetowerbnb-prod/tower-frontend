@@ -123,12 +123,12 @@
               <span [class.error-label]="
                   signupForm.get('refferal')?.invalid &&
                   (signupForm.get('refferal')?.touched || signupForm.get('refferal')?.dirty)
-                ">{{ 'Refferal Code' | translate }}</span>
+                ">{{ 'Referal Code' | translate }}</span>
             </div>
             <mat-form-field class="password-field" appearance="outline">
-              <input matInput type="text" formControlName="refferal" placeholder="Enter Referral Code" />
+              <input matInput type="text" formControlName="refferal" placeholder="Enter Referal Code" />
               <mat-error *ngIf="signupForm.get('name')?.hasError('required')">
-                {{ 'Refferal Code is required' | translate }}
+                {{ 'Referal Code is required' | translate }}
               </mat-error>
             </mat-form-field>
           </div>
@@ -136,8 +136,7 @@
           <!-- Terms and Conditions -->
           <div class="form-options">
             <mat-checkbox class="remember-checkbox" formControlName="terms">
-              {{ 'I hereby agree to all' |translate }} <span [routerLink]="['/t&c']" class="signup-text">{{'Terms &
-                Conditions' | translate}}</span> {{'of TowerBNB' | translate }}
+              {{ 'I hereby agree to all' |translate }} <span [routerLink]="['/t&c']" class="signup-text">{{'Terms & Conditions' | translate}}</span> {{'of TowerBNB' | translate }}
             </mat-checkbox>
           </div>
         </form>
