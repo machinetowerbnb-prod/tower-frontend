@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { TopNav } from '../top-nav/top-nav';
 import { AuthService } from '../../services/auth.service';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { TranslatePipe } from '../../pipes/translate-pipe';
 
 interface Transaction {
   type: string;
@@ -17,7 +18,7 @@ interface Transaction {
 
 @Component({
   selector: 'app-history',
-  imports: [CommonModule, RouterModule, TopNav],
+  imports: [CommonModule, RouterModule, TopNav, TranslatePipe],
   templateUrl: './history.html',
   styleUrl: './history.scss'
 })
@@ -227,7 +228,7 @@ export class History implements OnInit {
   }
 
   copyCode(val: string) {
-    if(val) {
+    if (val) {
       this.clipboard.copy(val);
       console.log(val)
       alert('Code copied!');

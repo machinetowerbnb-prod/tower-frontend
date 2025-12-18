@@ -10,10 +10,11 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { TopNav } from '../top-nav/top-nav';
 import { AuthService } from '../../services/auth.service';
+import { TranslatePipe } from '../../pipes/translate-pipe';
 
 @Component({
   selector: 'app-deposit-oxapay',
-  imports: [CommonModule, RouterModule, TopNav],
+  imports: [CommonModule, RouterModule, TopNav, TranslatePipe],
   templateUrl: './deposit-oxapay.html',
   styleUrl: './deposit-oxapay.scss'
 })

@@ -6,13 +6,14 @@ import {
   NgZone,
   ChangeDetectorRef,
 } from '@angular/core';
-import { CommonModule,isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { TopNav } from '../top-nav/top-nav';
 import { MatIconModule } from '@angular/material/icon';
 import { inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { TranslatePipe } from '../../pipes/translate-pipe';
 interface Member {
   email: string;
   timestamp: string;
@@ -22,7 +23,7 @@ interface Member {
 
 @Component({
   selector: 'app-members',
-  imports: [CommonModule, RouterModule, FormsModule, MatIconModule, TopNav],
+  imports: [CommonModule, RouterModule, FormsModule, MatIconModule, TopNav, TranslatePipe],
   templateUrl: './members.html',
   styleUrl: './members.scss'
 })
@@ -30,7 +31,7 @@ export class Members implements OnInit {
   members: Member[] = [];
   filteredMembers: Member[] = [];
   searchText = '';
- level: number | null = null;
+  level: number | null = null;
   // constructor(private router: Router, private route: ActivatedRoute) { }
 
   private router = inject(Router);
@@ -38,9 +39,9 @@ export class Members implements OnInit {
   private authService = inject(AuthService);
   private ngZone = inject(NgZone);
   private cdr = inject(ChangeDetectorRef);
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
 
-    ngOnInit(): void {
+  ngOnInit(): void {
     // 🔹 Extract level from query params
     this.route.queryParams.subscribe((params) => {
       this.level = params['level'] ? Number(params['level']) : null;
@@ -76,7 +77,7 @@ export class Members implements OnInit {
         screen = 'genOne';
     }
 
-    const payload = { screen, userId:userId };
+    const payload = { screen, userId: userId };
 
     console.log('🚀 Fetching members with payload:', payload);
 

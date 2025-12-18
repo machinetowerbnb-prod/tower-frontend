@@ -7,10 +7,12 @@ import { AuthService } from '../../services/auth.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { ChangeDetectorRef } from '@angular/core';
 
+import { TranslatePipe } from '../../pipes/translate-pipe';
+
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, MatIconModule, Deposit],
+  imports: [CommonModule, MatIconModule, Deposit, TranslatePipe],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })
@@ -64,7 +66,7 @@ export class Home implements OnInit, OnDestroy {
   withdrawalWallet: string = '0';
   referralLink: string = '';
   telegramLinkOne: string = '';
-  telegramLinkTwo:string = ''
+  telegramLinkTwo: string = ''
   refferalCode: string = '';
 
   get currentImage() {
@@ -72,20 +74,20 @@ export class Home implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-  // 🧹 IMPORTANT: reset modal state
-  if (this.depositModal) {
-    this.depositModal.isVisible = false;
-    this.depositModal.isClosing = false;
-    document.body.style.overflow = 'auto';
-  }
+    // 🧹 IMPORTANT: reset modal state
+    if (this.depositModal) {
+      this.depositModal.isVisible = false;
+      this.depositModal.isClosing = false;
+      document.body.style.overflow = 'auto';
+    }
 
-  this.startCarousel();
+    this.startCarousel();
 
-  if (isPlatformBrowser(this.platformId)) {
-    const userId = this.safeGetLocalStorage('userId');
-    if (userId) this.loadHomeData();
+    if (isPlatformBrowser(this.platformId)) {
+      const userId = this.safeGetLocalStorage('userId');
+      if (userId) this.loadHomeData();
+    }
   }
-}
 
 
   onDepositCompleted() {
@@ -117,7 +119,7 @@ export class Home implements OnInit, OnDestroy {
           this.refferalCode = res.data.refferalCode;
           this.cdr.detectChanges();
         });
-        localStorage.setItem('earnings',this.withdrawalWallet);
+        localStorage.setItem('earnings', this.withdrawalWallet);
       },
       error: (err) => {
         console.error('Error fetching home data:', err);

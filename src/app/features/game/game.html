@@ -5,10 +5,10 @@
 
     <div class="banner-content">
       <div class="banner-text">
-        <h2>Earn more, level up</h2>
+        <h2>{{ 'Earn more, level up' | translate }}</h2>
         <p>
-          Unlock your Tower Strategy Level, circulate your digital assets, and
-          generate sustainable returns with smart circulation
+          {{ 'Unlock your Tower Strategy Level, circulate your digital assets, and generate sustainable returns with
+          smart circulation' | translate }}
         </p>
       </div>
 
@@ -26,7 +26,7 @@
     'disabled-button': card.disableType === 'button' && !card.enabled
   }" [style.background-image]="'url(' + card.background + ')'">
       <div class="overlay" *ngIf="card.disableType === 'card' && !card.enabled">
-        <div style="width: 220px;"> Open on 2026  First Quarter (Q1)</div>
+        <div style="width: 220px;"> {{ 'Open on 2026 First Quarter (Q1)' | translate }}</div>
       </div>
 
       <div class="chip validity">

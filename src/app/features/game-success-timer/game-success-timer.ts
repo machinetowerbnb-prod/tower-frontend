@@ -12,10 +12,11 @@ import {
 } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
+import { TranslatePipe } from '../../pipes/translate-pipe';
 
 @Component({
   selector: 'app-game-success-timer',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   standalone: true,
   templateUrl: './game-success-timer.html',
   styleUrl: './game-success-timer.scss',

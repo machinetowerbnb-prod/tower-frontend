@@ -1,8 +1,6 @@
 <div class="layout-container" fxLayout="column" fxFlexFill>
   <header>
-    <app-top-nav
-
-></app-top-nav>
+    <app-top-nav></app-top-nav>
   </header>
   <div class="signin-container">
     <div class="welcome-section">
@@ -13,18 +11,20 @@
     <div class="main-content">
 
       <img src="/email-gif.gif" alt="Confirm email" class="verify-img" />
-      <h2 style="color: #111111;font-weight: 500;">Verified successfully</h2>
-      <div class="verification-text">Your Email has been successfully verified. Tap Continue to log in to your account.</div>
+      <h2 style="color: #111111;font-weight: 500;">{{'Verified successfully' | translate}}</h2>
+      <div class="verification-text">{{'Your Email has been successfully verified. Tap Continue to log in to your
+        account.' | translate}}</div>
     </div>
   </div>
   <footer class="footer">
-    <button mat-raised-button type="submit" class="login-button" style="color: #ffffff;background: #2752E7 !important;" (click)="continueForward()">
+    <button mat-raised-button type="submit" class="login-button" style="color: #ffffff;background: #2752E7 !important;"
+      (click)="continueForward()">
       {{'Continue' | translate}}
     </button>
     <!-- Sign Up Link -->
     <!-- <div class="signup-link"> -->
-      <!-- <span>{{"Resend email" | translate}} </span> -->
-      <!-- <a [routerLink]="['/signup']" class="signup-text"> {{'Sign Up' | translate}}</a> -->
+    <!-- <span>{{"Resend email" | translate}} </span> -->
+    <!-- <a [routerLink]="['/signup']" class="signup-text"> {{'Sign Up' | translate}}</a> -->
     <!-- </div> -->
   </footer>
 </div>

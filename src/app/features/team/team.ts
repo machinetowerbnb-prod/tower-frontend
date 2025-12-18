@@ -1,11 +1,12 @@
-import { Component, OnInit , ChangeDetectorRef,PLATFORM_ID,Inject} from '@angular/core';
-import { CommonModule,isPlatformBrowser } from '@angular/common';
+import { Component, OnInit, ChangeDetectorRef, PLATFORM_ID, Inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { title } from 'process';
+import { TranslatePipe } from '../../pipes/translate-pipe';
 @Component({
   selector: 'app-team',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './team.html',
   styleUrl: './team.scss'
 })
@@ -16,7 +17,7 @@ export class Team implements OnInit {
   isLoading = false;
   errorMessage = '';
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,private router: Router, private route: ActivatedRoute,
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router, private route: ActivatedRoute,
     private authService: AuthService,
     private cdr: ChangeDetectorRef
   ) { }
@@ -51,7 +52,7 @@ export class Team implements OnInit {
     //   { id: 3, value: this.data.levelThree, max, color: '#2FBDC1', progress: Math.round((this.data.levelThree / max) * 100) },
     // ];
   }
-  fetchTeamData(userId:string) {
+  fetchTeamData(userId: string) {
     this.isLoading = true;
     const payload = {
       screen: 'teams',
@@ -84,7 +85,7 @@ export class Team implements OnInit {
           this.levels = [
             {
               id: "First Generation Data",
-              title:"First Generation Data",
+              title: "First Generation Data",
               value: data.genOne?.valid || 0,
               max,
               color: '#ED5F9B',
@@ -92,7 +93,7 @@ export class Team implements OnInit {
             },
             {
               id: 2,
-              title:"Second Generation Data",
+              title: "Second Generation Data",
               value: data.genTwo?.valid || 0,
               max,
               color: '#2CB280',
@@ -100,7 +101,7 @@ export class Team implements OnInit {
             },
             {
               id: 3,
-              title:"Third Generation Data",
+              title: "Third Generation Data",
               value: data.genThree?.valid || 0,
               max,
               color: '#2FBDC1',
