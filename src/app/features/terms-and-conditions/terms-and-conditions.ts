@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
 import { TopNav } from '../top-nav/top-nav';
+import { TranslatePipe } from '../../pipes/translate-pipe';
 
 @Component({
   selector: 'app-terms-and-conditions',
-  imports: [CommonModule, MatIconModule, RouterModule, TopNav],
+  imports: [CommonModule, MatIconModule, RouterModule, TopNav, TranslatePipe],
   templateUrl: './terms-and-conditions.html',
   styleUrl: './terms-and-conditions.scss'
 })

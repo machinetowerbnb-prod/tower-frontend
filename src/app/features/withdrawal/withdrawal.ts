@@ -1,7 +1,7 @@
-import { Component ,PLATFORM_ID,OnInit, Inject,ChangeDetectorRef} from '@angular/core';
+import { Component, PLATFORM_ID, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { CommonModule,isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { TopNav } from '../top-nav/top-nav'
 import { AuthService } from '../../services/auth.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { TranslatePipe } from '../../pipes/translate-pipe';
 @Component({
   selector: 'app-withdrawal',
   imports: [CommonModule,
@@ -19,12 +20,14 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     MatIconModule,
     MatSnackBarModule,
     RouterModule,
-    TopNav ],
+    TopNav,
+    TranslatePipe
+  ],
   templateUrl: './withdrawal.html',
   styleUrl: './withdrawal.scss'
 })
-export class Withdrawal implements OnInit{
-   totalRemainingBalance: number = 0;
+export class Withdrawal implements OnInit {
+  totalRemainingBalance: number = 0;
   withdrawAddress: string = '';
 
   withdrawalForm: FormGroup;
@@ -87,7 +90,7 @@ export class Withdrawal implements OnInit{
       alert('User not found');
       return;
     }
-console.log('🔹 Withdrawal payload');
+    console.log('🔹 Withdrawal payload');
     // 🔹 Prepare payload for withdrawal API
     const payload = {
       userId,
@@ -106,23 +109,23 @@ console.log('🔹 Withdrawal payload');
         if (res.statusCode === 200) {
           this.totalRemainingBalance = res.data.remainingBalance || 0;
           this.snackBar.open('Withdraw Successfully', 'Close', {
-              duration: 3000,
-              panelClass: ['success-snackbar']
-            });
+            duration: 3000,
+            panelClass: ['success-snackbar']
+          });
           this.router.navigate(['/home']);
         } else {
-          this.snackBar.open(res.message ||'Withdrawal failed. Please try again.', 'Close', {
-              duration: 3000,
-              panelClass: ['error-snackbar']
-            });
+          this.snackBar.open(res.message || 'Withdrawal failed. Please try again.', 'Close', {
+            duration: 3000,
+            panelClass: ['error-snackbar']
+          });
         }
       },
       error: (err) => {
         console.error('Withdrawal request failed:', err);
-        this.snackBar.open(err?.error?.message ||'Something went wrong. Please try again later.', 'Close', {
-              duration: 3000,
-              panelClass: ['error-snackbar']
-            });
+        this.snackBar.open(err?.error?.message || 'Something went wrong. Please try again later.', 'Close', {
+          duration: 3000,
+          panelClass: ['error-snackbar']
+        });
       }
     });
   }

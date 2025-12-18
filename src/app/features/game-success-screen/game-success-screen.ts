@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Output, Renderer2 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '../../pipes/translate-pipe';
 
 @Component({
   selector: 'app-game-success-screen',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './game-success-screen.html',
   styleUrl: './game-success-screen.scss'
 })
@@ -35,7 +36,7 @@ export class GameSuccessScreen {
     this.renderer.removeStyle(document.body, 'overflow');
     this.renderer.removeStyle(document.body, 'position');
     this.renderer.removeStyle(document.body, 'width');
-    this.closed.emit();      
+    this.closed.emit();
 
     // ⭐ Continue with fade-out animation
     setTimeout(() => {

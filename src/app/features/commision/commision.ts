@@ -11,22 +11,23 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { TopNav } from '../top-nav/top-nav';
 import { AuthService } from '../../services/auth.service';
+import { TranslatePipe } from '../../pipes/translate-pipe';
 
 @Component({
   selector: 'app-commision',
-  imports: [CommonModule, RouterModule, TopNav],
+  imports: [CommonModule, RouterModule, TopNav, TranslatePipe],
   templateUrl: './commision.html',
   styleUrl: './commision.scss'
 })
 export class Commision {
-  commissionDetails:any = [];
+  commissionDetails: any = [];
   private authService = inject(AuthService);
   private ngZone = inject(NgZone);
   private cdr = inject(ChangeDetectorRef);
 
-  constructor(private router: Router,@Inject(PLATFORM_ID) private platformId: Object) { }
+  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object) { }
 
-    ngOnInit(): void {
+  ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       const userId = localStorage.getItem('userId');
       if (userId) {

@@ -13,6 +13,7 @@ import { RouterModule, Router } from '@angular/router';
 import { GameSuccessScreen } from '../game-success-screen/game-success-screen';
 import { GameSuccessTimer } from '../game-success-timer/game-success-timer';
 import { AuthService } from '../../services/auth.service';
+import { TranslatePipe } from '../../pipes/translate-pipe';
 
 interface GameCard {
   title: string;
@@ -29,7 +30,7 @@ interface GameCard {
 
 @Component({
   selector: 'app-game',
-  imports: [CommonModule, RouterModule, GameSuccessScreen, GameSuccessTimer],
+  imports: [CommonModule, RouterModule, GameSuccessScreen, GameSuccessTimer, TranslatePipe],
   templateUrl: './game.html',
   styleUrl: './game.scss',
 })

@@ -7,8 +7,8 @@
 
             <div class="banner-content">
                 <div class="banner-text">
-                    <span>Hello {{ userName }},</span>
-                    <p>An overview of your team’s recent performance.</p>
+                    <span>{{ 'Hello' | translate }} {{ userName }},</span>
+                    <p>{{ 'An overview of your team’s recent performance.' | translate }}</p>
                 </div>
 
                 <div class="banner-img">
@@ -21,53 +21,54 @@
         <!-- 🔹 Team Overview -->
         <div class="overview-section">
             <div class="section-header">
-                <h3>Team overview</h3>
-                <a href="/commission" class="details-link">Commission History ></a>
+                <h3>{{ "Team overview" | translate }}</h3>
+                <a href="/commission" class="details-link">{{ "Commission History" | translate }} ></a>
             </div>
 
             <div class="overview-grid">
-              <div class="firstcard">
-                <div class="card">
-                    <img src="/total-teams.svg" alt="icon" />
-                    <div class="card-data">
-                    <span class="card-amnt">{{ data.totalTeams }}</span>
-                    <span class="card-txt">Total Number of Downlines</span>
+                <div class="firstcard">
+                    <div class="card">
+                        <img src="/total-teams.svg" alt="icon" />
+                        <div class="card-data">
+                            <span class="card-amnt">{{ data.totalTeams }}</span>
+                            <span class="card-txt">{{ 'Total Number of Downlines' | translate }}</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="card">
-                    <img src="/total-comission.svg" alt="icon" />
-                    <div class="card-data">
-                    <span class="card-amnt">${{ data.totalPromationComission | number: '1.2-2' }}</span>
-                    <span class="card-txt">Total Team commission</span>
+                    <div class="card">
+                        <img src="/total-comission.svg" alt="icon" />
+                        <div class="card-data">
+                            <span class="card-amnt">${{ data.totalPromationComission | number: '1.2-2' }}</span>
+                            <span class="card-txt">{{ 'Total Team commission' | translate }}</span>
+                        </div>
                     </div>
                 </div>
-             </div>
-             <div class="secondcard">
-                <div class="card">
-                    <img src="/total-recharge.svg" alt="icon" />
-                    <div class="card-data">
-                    <span class="card-amnt">${{ data.teamRecharge | number: '1.2-2' }}</span>
-                    <span class="card-txt">Total amount of the team recharge</span>
+                <div class="secondcard">
+                    <div class="card">
+                        <img src="/total-recharge.svg" alt="icon" />
+                        <div class="card-data">
+                            <span class="card-amnt">${{ data.teamRecharge | number: '1.2-2' }}</span>
+                            <span class="card-txt">{{ 'Total amount of the team recharge' | translate }}</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="card">
-                    <img src="/total-withdraw.svg" alt="icon" />
-                    <div class="card-data">
-                    <span class="card-amnt">${{ data.teamWitdrawls | number: '1.2-2' }}</span>
-                    <span class="card-txt">The team's total withdrawals</span>
+                    <div class="card">
+                        <img src="/total-withdraw.svg" alt="icon" />
+                        <div class="card-data">
+                            <span class="card-amnt">${{ data.teamWitdrawls | number: '1.2-2' }}</span>
+                            <span class="card-txt">{{ "The team's total withdrawals" | translate }}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
 
         <!-- 🔹 Levels Section -->
         <div class="levels-section">
-            <div *ngFor="let level of levels" class="level-card" [ngStyle]="{'border': '1px solid ' + level.color}" (click)="openMembers(level.id)">
+            <div *ngFor="let level of levels" class="level-card" [ngStyle]="{'border': '1px solid ' + level.color}"
+                (click)="openMembers(level.id)">
                 <div class="level-header">
-                    <span class="level-title">{{ level.title}}</span>
+                    <span class="level-title">{{ level.title | translate }}</span>
                     <span class="level-percent">{{ level.progress }}%</span>
                 </div>
                 <div class="progress-bar">
@@ -75,7 +76,7 @@
                     </div>
                 </div>
                 <p class="level-info">
-                    TOTAL VALID MEMBERS: {{ level.value }}/{{ level.max }}
+                    {{ 'TOTAL VALID MEMBERS:' | translate }} {{ level.value }}/{{ level.max }}
                 </p>
             </div>
         </div>

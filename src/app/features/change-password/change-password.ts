@@ -1,14 +1,16 @@
-import { Component, OnInit,PLATFORM_ID,Inject } from '@angular/core';
+import { Component, OnInit, PLATFORM_ID, Inject } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router ,ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { TopNav } from '../top-nav/top-nav';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { isPlatformBrowser } from '@angular/common';
+import { TranslatePipe } from '../../pipes/translate-pipe';
+
 @Component({
   selector: 'app-change-password',
-  imports: [ReactiveFormsModule, CommonModule,TopNav,MatSnackBarModule],
+  imports: [ReactiveFormsModule, CommonModule, TopNav, MatSnackBarModule, TranslatePipe],
   templateUrl: './change-password.html',
   styleUrl: './change-password.scss'
 })
@@ -18,7 +20,7 @@ export class ChangePassword implements OnInit {
   urlEmail: string | null = null;
   otp: string | null = null;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,private fb: FormBuilder, private router: Router, private auth: AuthService,private route: ActivatedRoute,private snackBar: MatSnackBar) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private fb: FormBuilder, private router: Router, private auth: AuthService, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     // Read query params if present
@@ -30,7 +32,7 @@ export class ChangePassword implements OnInit {
     }
     this.urlEmail = this.route.snapshot.queryParamMap.get('email');
     this.otp = this.route.snapshot.queryParamMap.get('otp');
-    console.log(this.urlEmail,this.otp)
+    console.log(this.urlEmail, this.otp)
     this.form = this.fb.group(
       {
         newPassword: ['', [Validators.required, Validators.minLength(6)]],
@@ -55,33 +57,33 @@ export class ChangePassword implements OnInit {
   updatePassword() {
     let emailToSend = this.urlEmail ?? localStorage.getItem('email');
 
-let payload: any = {
-  email: emailToSend,
-  password: this.form.value.newPassword
-};
+    let payload: any = {
+      email: emailToSend,
+      password: this.form.value.newPassword
+    };
 
-if (this.otp) {
-  payload.otp = this.otp;
-}
+    if (this.otp) {
+      payload.otp = this.otp;
+    }
     console.log(payload);
 
-    if(!this.otp){
+    if (!this.otp) {
       this.auth.changePassword(payload).subscribe({
-      next: (res) => {
-        if (res.statusCode === 200) {
-          console.log("Done 200")
-          setTimeout(() => {
-            this.router.navigate(['/profile']);
-          }, 1000)
+        next: (res) => {
+          if (res.statusCode === 200) {
+            console.log("Done 200")
+            setTimeout(() => {
+              this.router.navigate(['/profile']);
+            }, 1000)
+          }
+        },
+        error: (err) => {
+          console.error("Password changed", err);
         }
-      },
-      error: (err) => {
-        console.error("Password changed", err);
-      }
-    });
-    }else{
+      });
+    } else {
       this.auth.resetPassword(payload).subscribe({
-      next: (res) => {
+        next: (res) => {
           console.log('Response:', res);
           if (res.statusCode === 200) {
             this.snackBar.open('Password changed Successful! Welcome back!', 'Close', {
@@ -94,11 +96,11 @@ if (this.otp) {
 
             this.router.navigate(['/home']);
           }
-      },
-      error: (err) => {
-        console.error("Password changed", err);
-      }
-    });
+        },
+        error: (err) => {
+          console.error("Password changed", err);
+        }
+      });
     }
   }
   private safeSetLocalStorage(key: string, value: string): void {

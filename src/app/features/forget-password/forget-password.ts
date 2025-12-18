@@ -1,20 +1,23 @@
-import {  Component,
+import {
+  Component,
   ViewChild,
   OnInit,
   Inject,
   PLATFORM_ID,
   NgZone,
   ChangeDetectorRef,
-  inject } from '@angular/core';
+  inject
+} from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from '../../services/auth.service';
 import { TopNav } from '../top-nav/top-nav'
+import { TranslatePipe } from '../../pipes/translate-pipe';
 @Component({
   selector: 'app-forget-password',
-  imports: [ReactiveFormsModule, CommonModule,TopNav,MatSnackBarModule,],
+  imports: [ReactiveFormsModule, CommonModule, TopNav, MatSnackBarModule, TranslatePipe],
   templateUrl: './forget-password.html',
   styleUrl: './forget-password.scss'
 })
@@ -23,7 +26,7 @@ export class ForgetPassword implements OnInit {
   private ngZone = inject(NgZone);
 
   private cdr = inject(ChangeDetectorRef);
-  isDisable =  false;
+  isDisable = false;
   form: any;
 
   constructor(private fb: FormBuilder, private router: Router, private auth: AuthService, private snackBar: MatSnackBar) { }
@@ -42,7 +45,7 @@ export class ForgetPassword implements OnInit {
   }
 
   resend() {
-    console.log("Re-send email",this.form.value.email)
+    console.log("Re-send email", this.form.value.email)
     const payload = {
       email: this.form.value.email,
     };
@@ -58,12 +61,12 @@ export class ForgetPassword implements OnInit {
           return;
         }
         this.ngZone.run(() => {
-         this.isDisable = true
-         this.form.email = ''
-         this.snackBar.open('Email Sent Successful!', 'Close', {
-          duration: 3000,
-          panelClass: ['success-snackbar']
-        });
+          this.isDisable = true
+          this.form.email = ''
+          this.snackBar.open('Email Sent Successful!', 'Close', {
+            duration: 3000,
+            panelClass: ['success-snackbar']
+          });
           this.cdr.detectChanges();
         });
       },

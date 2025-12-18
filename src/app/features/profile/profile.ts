@@ -13,10 +13,11 @@ import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { Deposit } from '../deposit/deposit';
 import { AuthService } from '../../services/auth.service';
+import { TranslatePipe } from '../../pipes/translate-pipe';
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule, RouterModule, MatIconModule, Deposit],
+  imports: [CommonModule, RouterModule, MatIconModule, Deposit, TranslatePipe],
   templateUrl: './profile.html',
   styleUrl: './profile.scss'
 })

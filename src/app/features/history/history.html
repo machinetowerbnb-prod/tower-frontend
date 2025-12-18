@@ -10,13 +10,13 @@
         <button class="back-btn" (click)="goBack()">
           <img src="/leftarraow.svg" alt="back" />
         </button>
-        <h2>Transaction history</h2>
+        <h2>{{ 'Transaction history' | translate }}</h2>
         <button class="filter-btn" (click)="openFilterPopup()">
           <img src="/filter.svg" alt="filter" />
         </button>
       </div>
       <p style="z-index: 9; padding: 50px; color: #ffffffad">
-        Track your recent spends, transfers, and deposits in one place.
+        {{ 'Track your recent spends, transfers, and deposits in one place.' | translate }}
       </p>
       <div class="lower-blue"></div>
     </div>
@@ -43,10 +43,10 @@
             <p class="tx-type">
               {{
               tx.type === 'withdraw'
-              ? 'PAYOUT WITHDRAW'
+              ? ('PAYOUT WITHDRAW' | translate)
               : tx.type === 'reward'
-              ? tx?.adminReward && tx?.adminReward == true?'Admin Internal Background':'Circulation Quantitative Trading
-              Earn'
+              ? tx?.adminReward && tx?.adminReward == true ? ('Admin Internal Background' | translate) : ('Circulation
+              Quantitative Trading Earn' | translate)
               : tx.type.toUpperCase()
               }}
             </p>
@@ -80,7 +80,7 @@
 
   <div class="filter-popup" *ngIf="showFilter">
     <div class="filter-header">
-      <h3>Smart Filters</h3>
+      <h3>{{ 'Smart Filters' | translate }}</h3>
       <button class="close-btn" (click)="closeFilterPopup()">×</button>
     </div>
 

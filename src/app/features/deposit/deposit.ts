@@ -10,9 +10,11 @@ import { isPlatformBrowser } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { TranslatePipe } from '../../pipes/translate-pipe';
+
 @Component({
   selector: 'app-deposit',
-  imports: [CommonModule, MatButtonModule, MatInputModule, MatIconModule, FormsModule],
+  imports: [CommonModule, MatButtonModule, MatInputModule, MatIconModule, FormsModule, TranslatePipe],
   templateUrl: './deposit.html',
   styleUrl: './deposit.scss',
   standalone: true,
