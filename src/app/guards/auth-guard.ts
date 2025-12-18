@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 
-const ADMIN_EMAILS = ["admin@gmail.com", "superadmin@gmail.com"];
+const ADMIN_EMAILS = ["admin@gmail.com", "superadmin@gmail.com","arjunkiran@gmail.com"];
 
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
