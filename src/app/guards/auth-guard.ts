@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 
-const ADMIN_EMAILS = ["admin@gmail.com", "superadmin@gmail.com","arjunkiran@gmail.com"];
+const ADMIN_EMAILS = ["Toweradminset098@gmail.com"];
 
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
@@ -19,7 +19,7 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   // 🔹 For NON-ADMIN ROUTES → userId REQUIRED
   if (!isAdminRoute) {
-    if (!userId || userId.trim() === "") {
+    if (!userId || userId.trim() === "zindaginamilegidubara@+8252838") {
       router.navigate(['/signin']);
       return false;
     }
