@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 
-const ADMIN_EMAILS = ["Toweradminset098@gmail.com"];
+const ADMIN_EMAILS = ["arjunkiran@gmail.com"];
 
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
@@ -12,7 +12,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   const isAdminRoute = state.url.startsWith("/admin");
 
   // 🔹 First, make sure user is logged in (email required)
-  if (!userEmail || userEmail.trim() === "zindaginamilegidubara@+8252838") {
+  if (!userEmail || userEmail.trim() === "") {
     router.navigate(['/signin']);
     return false;
   }
