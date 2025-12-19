@@ -132,12 +132,13 @@
 }
 
 .welcome-section .welcome-text {
-position: absolute;
-font-family: 'Poppins';
-font-style: normal;
-font-weight: 500;
-font-size: 34px;
-color: #FFFFFF;
+  // position: absolute;
+  text-align: left;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 34px;
+  color: #FFFFFF;
 }
 
 .welcome-section p {
@@ -169,8 +170,8 @@ color: #FFFFFF;
   right: 14px;
   top: -34px;
   /* raise coin to overlap card edge */
-  width:91px;
-  height:108px;
+  width: 91px;
+  height: 108px;
   z-index: 50;
   /* higher than card */
 }
@@ -191,20 +192,20 @@ color: #FFFFFF;
 
   /* Log In */
 
-width: 307px;
-height: 32px;
-font-family: 'Poppins';
-font-style: normal;
-font-weight: 600;
-font-size: 22px;
-line-height: 145%;
-/* identical to box height, or 32px */
-letter-spacing: -1px;
-color: #2752E7;
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 0;
+  width: 307px;
+  height: 32px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 145%;
+  /* identical to box height, or 32px */
+  letter-spacing: -1px;
+  color: #2752E7;
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
 
 }
 
@@ -282,7 +283,8 @@ form {
 .password-field {
   width: 100%;
 }
-.formField{
+
+.formField {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -382,6 +384,7 @@ form {
   color: #2752E7;
   text-decoration: none;
 }
+
 .forgot-password:hover {
   text-decoration: underline;
 }
@@ -529,9 +532,18 @@ form {
 }
 
 .signin-container .welcome-section {
+  // position: absolute;
+  // top: 45px;
+  // left: 22%;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  gap: 10px;
   position: absolute;
-  top: 45px;
-  left: 22%;
+  width: 170px;
+  height: 84px;
+  left: 28%;
+  top: 47px;
   transform: translateX(-50%);
   text-align: center;
   color: #ffffff;
@@ -543,11 +555,11 @@ form {
 }
 
 .signin-container .welcome-section .bnb-text {
-font-family: 'Poppins';
-font-style: Medium;
-font-size: 18px;
-position: relative;
-top:30px;
+  font-family: 'Poppins';
+  font-style: Medium;
+  font-size: 18px;
+  // position: relative;
+  // top: 30px;
 }
 
 /* Ensure background pseudo-element sits behind */
@@ -585,11 +597,13 @@ top:30px;
 .welcome-section {
   color: wheat
 }
+
 ::ng-deep .mat-mdc-form-field .mdc-notched-outline__leading,
 ::ng-deep .mat-mdc-form-field .mdc-notched-outline__notch,
 ::ng-deep .mat-mdc-form-field .mdc-notched-outline__trailing {
   border-color: #CFCFCF !important;
 }
+
 // ::ng-deep .mat-mdc-form-field-bottom-align {
 //   display: none !important;
 //   visibility: hidden !important;
@@ -625,4 +639,3 @@ top:30px;
 ::ng-deep mat-form-field.ng-invalid.ng-touched .mdc-line-ripple::after {
   border-bottom-color: #E11D48 !important;
 }
-
