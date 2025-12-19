@@ -53,8 +53,8 @@
               <mat-error *ngIf="signupForm.get('email')?.hasError('email')">
                 {{ 'Please enter a valid email' | translate }}
               </mat-error>
-              <mat-hint style="color: #808080;">Enter your valid Gmail address to receive the verification link to
-                create an account</mat-hint>
+              <mat-hint style="color: #808080;">{{'Enter your valid Gmail address to receive the verification link to
+                create an account' | translate }}</mat-hint>
             </mat-form-field>
           </div>
 
@@ -136,7 +136,8 @@
           <!-- Terms and Conditions -->
           <div class="form-options">
             <mat-checkbox class="remember-checkbox" formControlName="terms">
-              {{ 'I hereby agree to all' |translate }} <span [routerLink]="['/t&c']" class="signup-text">{{'Terms & Conditions' | translate}}</span> {{'of TowerBNB' | translate }}
+              {{ 'I hereby agree to all' |translate }} <span [routerLink]="['/t&c']" class="signup-text">{{'Terms &
+                Conditions' | translate}}</span> {{'of TowerBNB' | translate }}
             </mat-checkbox>
           </div>
         </form>
@@ -150,9 +151,9 @@
     </button>
 
     <div class="signup-link">
-      <span>{{ 'Already have an account? ' | translate }} </span>
+      <span>{{ "Already have an account?" | translate }} </span>
       <a [routerLink]="['/signin']" class="signup-text" style="margin-left: 3px;">
-        {{ 'Log In' | translate }}
+        {{ "Log In" | translate }}
       </a>
     </div>
   </footer>

@@ -8,7 +8,7 @@
             <div class="banner-content">
                 <div class="banner-text">
                     <span>{{ 'Hello' | translate }} {{ userName }},</span>
-                    <p>{{ 'An overview of your team’s recent performance.' | translate }}</p>
+                    <p>{{ "An overview of your team’s recent performance." | translate }}</p>
                 </div>
 
                 <div class="banner-img">
@@ -21,7 +21,7 @@
         <!-- 🔹 Team Overview -->
         <div class="overview-section">
             <div class="section-header">
-                <h3>{{ "Team overview" | translate }}</h3>
+                <h3>{{ "Team Overview" | translate }}</h3>
                 <a href="/commission" class="details-link">{{ "Commission History" | translate }} ></a>
             </div>
 
@@ -31,7 +31,7 @@
                         <img src="/total-teams.svg" alt="icon" />
                         <div class="card-data">
                             <span class="card-amnt">{{ data.totalTeams }}</span>
-                            <span class="card-txt">{{ 'Total Number of Downlines' | translate }}</span>
+                            <span class="card-txt">{{ "Total Number of Downlines" | translate }}</span>
                         </div>
                     </div>
 
@@ -39,7 +39,7 @@
                         <img src="/total-comission.svg" alt="icon" />
                         <div class="card-data">
                             <span class="card-amnt">${{ data.totalPromationComission | number: '1.2-2' }}</span>
-                            <span class="card-txt">{{ 'Total Team commission' | translate }}</span>
+                            <span class="card-txt">{{ "Total Team commission" | translate }}</span>
                         </div>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                         <img src="/total-recharge.svg" alt="icon" />
                         <div class="card-data">
                             <span class="card-amnt">${{ data.teamRecharge | number: '1.2-2' }}</span>
-                            <span class="card-txt">{{ 'Total amount of the team recharge' | translate }}</span>
+                            <span class="card-txt">{{ "Total amount of the team recharge" | translate }}</span>
                         </div>
                     </div>
 
