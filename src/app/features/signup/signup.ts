@@ -52,14 +52,14 @@ export class Signup implements OnInit {
 
     this.signupForm = this.fb.group({
       name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email,this.gmailOnly.bind(this)]],
+      email: ['', [Validators.required, Validators.email, this.gmailOnly.bind(this)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       epin: ['', [Validators.required, Validators.minLength(6)]],
       confirmEpin: ['', Validators.required, , Validators.minLength(6)],
       terms: [true, Validators.requiredTrue],
       refferal: ['']  // ⭐ removed Validators.required
     },
-    { validator: this.matchPins });   // ⭐ ONLY CHANGE
+      { validator: this.matchPins });   // ⭐ ONLY CHANGE
   }
 
 
@@ -75,9 +75,9 @@ export class Signup implements OnInit {
   }
 
   gmailOnly(control: any) {
-  const value = control.value || '';
-  return value.toLowerCase().endsWith('@gmail.com') ? null : { gmailOnly: true };
-}
+    const value = control.value || '';
+    return value.toLowerCase().endsWith('@gmail.com') ? null : { gmailOnly: true };
+  }
 
   matchPins(form: FormGroup) {
     const epin = form.get('epin')?.value;
@@ -114,12 +114,12 @@ export class Signup implements OnInit {
       this.authService.signup(payload).subscribe({
         next: (res) => {
           if (res.statusCode === 201) {
-            this.snackBar.open('Verification link sent to Gmail', 'Close', {
+            this.snackBar.open('Account created successfully', 'Close', {
               duration: 3000,
               panelClass: ['success-snackbar']
             });
             localStorage.setItem('userId', res.data.userId);
-            setTimeout(() => this.router.navigate(['/verify-email']), 1000);
+            setTimeout(() => this.router.navigate(['/signin']), 1000);
           }
         },
         error: (err) => {
