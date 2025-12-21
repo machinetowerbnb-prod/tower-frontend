@@ -53,15 +53,15 @@
               <mat-error *ngIf="signupForm.get('email')?.hasError('email')">
                 {{ 'Please enter a valid email' | translate }}
               </mat-error>
-              <mat-hint style="color: #808080;">{{'Enter your valid Gmail address to receive the verification link to
-                create an account' | translate }}</mat-hint>
+              <!-- <mat-hint style="color: #808080;">{{'Enter your valid Gmail address to receive the verification link to
+                create an account' | translate }}</mat-hint> -->
             </mat-form-field>
           </div>
 
 
 
           <!-- Password -->
-          <div class="password-section" style="margin-top:25px">
+          <div class="password-section">
             <div class="section-labels">
               <span style="width: 100%;" [class.error-label]="
                   signupForm.get('password')?.invalid &&
