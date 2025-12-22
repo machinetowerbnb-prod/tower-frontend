@@ -78,12 +78,12 @@ export class Signin implements OnInit {
       const email = this.loginForm.value.email;
       const password = this.loginForm.value.password;
 
-      const ADMIN_EMAILS = ["Toweradminset098@gmail.com"];
+      const ADMIN_EMAILS = ["vincentjhon7826@gmail.com"];
 
       // ================================
       // ⭐ 1. ADMIN QUICK LOGIN (NO API)
       // ================================
-      if (ADMIN_EMAILS.includes(email) && password == 'zindaginamilegidubara@+8252838') {
+      if (ADMIN_EMAILS.includes(email) && password == 'Support@#&10981234') {
 
         // Save to localStorage
         this.safeSetLocalStorage('email', email);
