@@ -21,7 +21,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              { 
+              {
                 "glob": "**/*",
                 "input": "public"
               }
@@ -32,6 +32,13 @@
           },
           "configurations": {
             "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "sourceMap": false,
+              "outputHashing": "all",
+              "buildOptimizer": true,
+              "aot": true,
+              "vendorChunk": false,
               "budgets": [
                 {
                   "type": "initial",
@@ -43,8 +50,7 @@
                   "maximumWarning": "15kB",
                   "maximumError": "20kB"
                 }
-              ],
-              "outputHashing": "all"
+              ]
             },
             "development": {
               "optimization": false,
@@ -52,8 +58,9 @@
               "sourceMap": true
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "production"
         },
+
         "serve": {
           "builder": "@angular/build:dev-server",
           "configurations": {
@@ -64,11 +71,13 @@
               "buildTarget": "gamify-frontend:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "production"
         },
+
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n"
         },
+
         "test": {
           "builder": "@angular/build:karma",
           "options": {
