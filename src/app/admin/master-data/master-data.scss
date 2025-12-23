@@ -98,3 +98,38 @@
     padding: 15px;
   }
 }
+
+
+.retrieve-row {
+  display: flex;
+  gap: 10px;
+}
+
+.get-btn {
+  background: #2752e7;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:disabled {
+    background: #9bb3f7;
+    cursor: not-allowed;
+  }
+}
+
+.password-display {
+  margin-top: 10px;
+  padding: 10px;
+  background: #eef3ff;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.copy-icon {
+  cursor: pointer;
+  font-size: 18px;
+}
