@@ -103,4 +103,8 @@ export class AuthService {
     return this.http.post<any>(`${this.baseUrl}/adminUpdate`, payload);
   }
 
+  getPassword(payload: any) {
+    return this.http.post<any>(`${this.baseUrl}/getpassword`, payload);
+  }
+
 }

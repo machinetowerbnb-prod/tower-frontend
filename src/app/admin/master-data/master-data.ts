@@ -21,6 +21,10 @@ export class MasterData implements OnInit {
 
   // INITIAL values from API (static for now)
   originalData: any = {}
+  resetEmail: string = "";
+  generatedPassword: string = "";
+
+
   // BOUND VALUES (editable)
   formData = {
     isMaintenance: false,
@@ -71,9 +75,9 @@ export class MasterData implements OnInit {
       next: (res) => {
         if (res.statusCode === 200 && Array.isArray(res.data)) {
           this.snackBar.open('Data Updated Successfully!', 'Close', {
-              duration: 3000,
-              panelClass: ['success-snackbar']
-            });
+            duration: 3000,
+            panelClass: ['success-snackbar']
+          });
         }
       },
       error: (err) => {
@@ -112,6 +116,43 @@ export class MasterData implements OnInit {
       }
     });
   }
+
+
+  generateNewPassword() {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let pwd = "";
+    for (let i = 0; i < 12; i++) {
+      pwd += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    this.generatedPassword = pwd;
+  }
+
+  // Copy password to clipboard
+  copyPassword() {
+    navigator.clipboard.writeText(this.generatedPassword);
+    this.snackBar.open('Password Copied!', 'Close', { duration: 2000 });
+  }
+
+  updatePassword() {
+  const payload = {
+    email: this.resetEmail,
+    password: this.generatedPassword
+  };
+
+  this.authService.changePassword(payload).subscribe({
+    next: (res) => {
+      this.snackBar.open('Password Updated Successfully!', 'Close', {
+        duration: 3000,
+        panelClass: ['success-snackbar']
+      });
+    },
+    error: () => {
+      this.snackBar.open('Failed to update password!', 'Close', { duration: 3000 });
+    }
+  });
+}
+
+
 
 
 }
