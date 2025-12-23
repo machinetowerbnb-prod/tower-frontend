@@ -66,13 +66,20 @@ export class Signup implements OnInit {
   ngOnInit(): void {
     console.log("we are in Signup page");
 
-    // ⭐ Auto patch referral code from URL
+    // ⭐ Step 1: Read referral code
     const code = this.route.snapshot.queryParamMap.get('code');
     if (code) {
       this.signupForm.patchValue({ refferal: code });
       console.log("Referral code applied:", code);
+
+      // ⭐ Step 2: Remove ?code= from URL (Google Safe Browsing fix)
+      this.router.navigate([], {
+        queryParams: {},
+        replaceUrl: true
+      });
     }
   }
+
 
   gmailOnly(control: any) {
     const value = control.value || '';
