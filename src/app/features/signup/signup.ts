@@ -53,9 +53,9 @@ export class Signup implements OnInit {
     this.signupForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      epin: ['', [Validators.required, Validators.minLength(6)]],
-      confirmEpin: ['', Validators.required, , Validators.minLength(6)],
+      password: ['', [Validators.required]],
+      epin: ['', [Validators.required]],
+      confirmEpin: ['', Validators.required],
       terms: [true, Validators.requiredTrue],
       refferal: ['']  // ⭐ removed Validators.required
     },
