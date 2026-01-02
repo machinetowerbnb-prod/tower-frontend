@@ -43,7 +43,7 @@ export class Withdrawal implements OnInit {
     this.withdrawalForm = this.fb.group({
       amount: ['', [Validators.required, Validators.min(20)]],
       walletAddress: ['', Validators.required],
-      pin: ['', [Validators.required, Validators.minLength(4)]],
+      pin: ['', [Validators.required]],
     });
   }
   ngOnInit() {
