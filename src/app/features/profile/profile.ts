@@ -12,12 +12,13 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { Deposit } from '../deposit/deposit';
+import { Transfer } from '../transfer/transfer';
 import { AuthService } from '../../services/auth.service';
 import { TranslatePipe } from '../../pipes/translate-pipe';
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule, RouterModule, MatIconModule, Deposit, TranslatePipe],
+  imports: [CommonModule, RouterModule, MatIconModule, Deposit, Transfer, TranslatePipe],
   templateUrl: './profile.html',
   styleUrl: './profile.scss'
 })
@@ -27,9 +28,12 @@ export class Profile implements OnInit {
   private ngZone = inject(NgZone);
   private cdr = inject(ChangeDetectorRef);
   @ViewChild('depositModal') depositModal!: Deposit;
+  @ViewChild('transferModal') transferModal!: Transfer;
+
 
   showSupport = false;
   showLogout = false;
+  amount = 0;
 
   constructor(
     private router: Router,
@@ -138,6 +142,8 @@ export class Profile implements OnInit {
       this.router.navigate(['/history']);
     } else if (label === 'Group') {
       this.opentelegramLinkTwo();
+    } else if (label == 'Transfer') {
+      this.transferModal.openModal();
     }
   }
 
@@ -187,5 +193,17 @@ export class Profile implements OnInit {
   closeLogout() {
     this.showLogout = false
   }
+
+  onTransferClosed() {
+    if (isPlatformBrowser(this.platformId)) {
+      const userId = localStorage.getItem('userId');
+      if (userId) {
+        this.getProfileData(userId);
+      } else {
+        console.error('❌ No userId found in localStorage');
+      }
+    }
+  }
+
 
 }

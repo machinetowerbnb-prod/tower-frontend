@@ -13,6 +13,7 @@ interface Transaction {
   transactionId: string;
   status: string;
   adminReward: boolean;
+  isConverted: boolean;
 }
 
 

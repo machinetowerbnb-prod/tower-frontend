@@ -107,4 +107,8 @@ export class AuthService {
     return this.http.post<any>(`${this.baseUrl}/getpassword`, payload);
   }
 
+  transfer(payload: any) {
+    return this.http.post<any>(`${this.baseUrl}/convert-earnings`, payload);
+  }
+
 }
