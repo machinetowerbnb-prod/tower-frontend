@@ -42,13 +42,17 @@
           <div class="tx-details">
             <p class="tx-type">
               {{
-              tx.type === 'withdraw'
+              tx?.isConverted === true
+              ? ('Withdrawal Funds Transfer' | translate)
+              : tx.type === 'withdraw'
               ? ('PAYOUT WITHDRAW' | translate)
               : tx.type === 'reward'
-              ? tx?.adminReward && tx?.adminReward == true ? ('Admin Internal Background' | translate) : ('Circulation
-              Quantitative Trading Earn' | translate)
+              ? tx?.adminReward === true
+              ? ('Admin Internal Background' | translate)
+              : ('Circulation Quantitative Trading Earn' | translate)
               : tx.type.toUpperCase()
               }}
+
             </p>
 
             <h3 [ngClass]="{
@@ -60,7 +64,7 @@
               }}{{ tx.amount | number : '1.0-2' }}
               <span>USDT</span>
               <span *ngIf="tx.type === 'withdraw' || tx.type === 'deposit'" class="tx-status">
-                • {{ tx.status }}
+                • {{ tx.status === 'paid' ? 'success' : tx.status }}
               </span>
             </h3>
             <div style="display: flex">

@@ -32,6 +32,7 @@ export class Language {
 
   private translations: Record<string, Record<string, string>> = {
     "English": {
+      // "Cancel": "Cancel",
       "Email": "Email",
       "Password": "Password",
       "Log In": "Log In",
@@ -273,6 +274,7 @@ export class Language {
     },
 
     "Russian - Русский": {
+      "Cancel": "Отмена",
       "Email": "Электронная почта",
       "Password": "Пароль",
       "Log In": "Войти",
@@ -497,11 +499,25 @@ export class Language {
       "All Platform content (trademarks, codes, etc.) is protected by law and cannot be used without authorization.": "Весь контент Платформы (товарные знаки, коды и т.д.) защищён законом и не может использоваться без разрешения.",
       "TowerBNB reserves the right to update this Agreement at any time. Continued use of the Platform after an update constitutes acceptance of the revised terms.": "TowerBNB оставляет за собой право обновлять настоящее Соглашение в любое время. Продолжение использования Платформы после обновления означает принятие изменённых условий.",
       "TowerBNB Technologies Inc. holds the final right of interpretation of this Agreement.": "TowerBNB Technologies Inc. обладает окончательным правом толкования настоящего Соглашения.",
-      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB стремится быть ориентированной на пользователя платформой, обеспечивая безопасность активов и расширяя доступ к интеллектуальным вычислительным мощностям. Выбирая TowerBNB, вы соглашаетесь с настоящими условиями и начинаете путь умного майнинга и роста активов."
+      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB стремится быть ориентированной на пользователя платформой, обеспечивая безопасность активов и расширяя доступ к интеллектуальным вычислительным мощностям. Выбирая TowerBNB, вы соглашаетесь с настоящими условиями и начинаете путь умного майнинга и роста активов.",
 
+
+      //transfer
+    "Transfer your": "Переведите ваш",
+    "Withdrawal Amount": "Сумму вывода",
+    "to": "в",
+    // "Main Wallet": "Основной кошелёк",
+    "here": "здесь",
+    "Transfer Funds": "Перевести средства",
+    // "Withdrawal Account": "Счёт для вывода",
+    "Funds transferred from your Withdrawal Account to your Main Wallet": "Средства, переведённые с вашего счёта вывода в основной кошелёк",
+    "the transferred amount will be compounded for up to 120 days": "переведённая сумма будет капитализироваться до 120 дней",
+    "Transfer amount": "Сумма перевода",
+    "Max": "Макс"
     },
 
     "Spanish - Español": {
+      "Cancel": "Cancelar",
       "Email": "Correo electrónico",
       "Password": "Contraseña",
       "Log In": "Iniciar sesión",
@@ -726,10 +742,24 @@ export class Language {
       "All Platform content (trademarks, codes, etc.) is protected by law and cannot be used without authorization.": "Todo el contenido de la Plataforma (marcas comerciales, códigos, etc.) está protegido por la ley y no puede utilizarse sin autorización.",
       "TowerBNB reserves the right to update this Agreement at any time. Continued use of the Platform after an update constitutes acceptance of the revised terms.": "TowerBNB se reserva el derecho de actualizar este Acuerdo en cualquier momento. El uso continuado de la Plataforma después de una actualización constituye la aceptación de los términos revisados.",
       "TowerBNB Technologies Inc. holds the final right of interpretation of this Agreement.": "TowerBNB Technologies Inc. posee el derecho final de interpretación de este Acuerdo.",
-      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB tiene como objetivo centrarse en el usuario, garantizando la seguridad de los activos y promoviendo el acceso a potencia informática inteligente. Al elegir TowerBNB, usted acepta estos términos al iniciar un camino de minería inteligente y crecimiento de activos."
+      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB tiene como objetivo centrarse en el usuario, garantizando la seguridad de los activos y promoviendo el acceso a potencia informática inteligente. Al elegir TowerBNB, usted acepta estos términos al iniciar un camino de minería inteligente y crecimiento de activos.",
 
+      "Transfer your": "Transfiere tu",
+    "Withdrawal Amount": "Monto de Retiro",
+    "to": "a",
+    // "Main Wallet": "Billetera Principal",
+    "here": "aquí",
+    "Transfer Funds": "Transferir Fondos",
+    // "Withdrawal Account": "Cuenta de Retiro",
+    "Funds transferred from your Withdrawal Account to your Main Wallet": "Los fondos transferidos desde tu Cuenta de Retiro a tu Billetera Principal",
+    "the transferred amount will be compounded for up to 120 days": "el monto transferido se capitalizará hasta por 120 días",
+    "Transfer amount": "Monto a transferir",
+    "Max": "Máx",
+
+    
     },
     "Italian - Italiano": {
+      "Cancel": "Annulla",
       "Email": "Email",
       "Password": "Password",
       "Log In": "Accedi",
@@ -954,10 +984,23 @@ export class Language {
       "All Platform content (trademarks, codes, etc.) is protected by law and cannot be used without authorization.": "Tutti i contenuti della Piattaforma (marchi, codici, ecc.) sono protetti dalla legge e non possono essere utilizzati senza autorizzazione.",
       "TowerBNB reserves the right to update this Agreement at any time. Continued use of the Platform after an update constitutes acceptance of the revised terms.": "TowerBNB si riserva il diritto di aggiornare il presente Accordo in qualsiasi momento. L’uso continuato della Piattaforma dopo un aggiornamento costituisce accettazione dei termini modificati.",
       "TowerBNB Technologies Inc. holds the final right of interpretation of this Agreement.": "TowerBNB Technologies Inc. detiene il diritto finale di interpretazione del presente Accordo.",
-      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB mira a essere orientata all’utente, garantendo la sicurezza degli asset e promuovendo l’accesso alla potenza di calcolo intelligente. Scegliendo TowerBNB, accetti questi termini mentre intraprendi un percorso di mining intelligente e crescita degli asset."
+      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB mira a essere orientata all’utente, garantendo la sicurezza degli asset e promuovendo l’accesso alla potenza di calcolo intelligente. Scegliendo TowerBNB, accetti questi termini mentre intraprendi un percorso di mining intelligente e crescita degli asset.",
 
+      "Transfer your": "Trasferisci il tuo",
+    "Withdrawal Amount": "Importo di Prelievo",
+    "to": "nel",
+    // "Main Wallet": "Portafoglio Principale",
+    "here": "qui",
+    "Transfer Funds": "Trasferisci Fondi",
+    // "Withdrawal Account": "Conto di Prelievo",
+    "Funds transferred from your Withdrawal Account to your Main Wallet": "I fondi trasferiti dal tuo Conto di Prelievo al Portafoglio Principale",
+    "the transferred amount will be compounded for up to 120 days": "l’importo trasferito sarà capitalizzato fino a 120 giorni",
+    "Transfer amount": "Importo del trasferimento",
+    "Max": "Max"
+    
     },
     "German - Deutsch": {
+      "Cancel": "Abbrechen",
       "Email": "E-Mail",
       "Password": "Passwort",
       "Log In": "Anmelden",
@@ -1182,11 +1225,25 @@ export class Language {
       "All Platform content (trademarks, codes, etc.) is protected by law and cannot be used without authorization.": "Alle Inhalte der Plattform (Marken, Codes usw.) sind gesetzlich geschützt und dürfen ohne Genehmigung nicht verwendet werden.",
       "TowerBNB reserves the right to update this Agreement at any time. Continued use of the Platform after an update constitutes acceptance of the revised terms.": "TowerBNB behält sich das Recht vor, diesen Vertrag jederzeit zu aktualisieren. Die fortgesetzte Nutzung der Plattform nach einer Aktualisierung gilt als Zustimmung zu den geänderten Bedingungen.",
       "TowerBNB Technologies Inc. holds the final right of interpretation of this Agreement.": "TowerBNB Technologies Inc. behält sich das endgültige Auslegungsrecht dieses Vertrags vor.",
-      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB verfolgt einen nutzerzentrierten Ansatz, gewährleistet die Sicherheit von Vermögenswerten und fördert den Zugang zu intelligenter Rechenleistung. Mit der Wahl von TowerBNB stimmen Sie diesen Bedingungen zu, während Sie eine Reise des intelligenten Minings und Vermögenswachstums beginnen."
+      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB verfolgt einen nutzerzentrierten Ansatz, gewährleistet die Sicherheit von Vermögenswerten und fördert den Zugang zu intelligenter Rechenleistung. Mit der Wahl von TowerBNB stimmen Sie diesen Bedingungen zu, während Sie eine Reise des intelligenten Minings und Vermögenswachstums beginnen.",
 
+      "Transfer your": "Übertrage deinen",
+    "Withdrawal Amount": "Auszahlungsbetrag",
+    "to": "in",
+    // "Main Wallet": "Hauptbörse",
+    "here": "hier",
+    "Transfer Funds": "Geld übertragen",
+    // "Withdrawal Account": "Auszahlungskonto",
+    "Funds transferred from your Withdrawal Account to your Main Wallet": "Von deinem Auszahlungskonto in deine Hauptbörse übertragene Gelder",
+    "the transferred amount will be compounded for up to 120 days": "der übertragene Betrag wird bis zu 120 Tage verzinst",
+    "Transfer amount": "Übertragungsbetrag",
+    "Max": "Max"
+
+    
     },
 
     "Arabic - عربي": {
+      "Cancel": "إلغاء",
       "Email": "البريد الإلكتروني",
       "Password": "كلمة المرور",
       "Log In": "تسجيل الدخول",
@@ -1411,11 +1468,25 @@ export class Language {
       "All Platform content (trademarks, codes, etc.) is protected by law and cannot be used without authorization.": "جميع محتويات المنصة (العلامات التجارية، الأكواد، وغيرها) محمية بموجب القانون ولا يجوز استخدامها دون إذن.",
       "TowerBNB reserves the right to update this Agreement at any time. Continued use of the Platform after an update constitutes acceptance of the revised terms.": "تحتفظ TowerBNB بالحق في تحديث هذه الاتفاقية في أي وقت. ويُعد الاستمرار في استخدام المنصة بعد التحديث قبولًا للشروط المعدلة.",
       "TowerBNB Technologies Inc. holds the final right of interpretation of this Agreement.": "تحتفظ TowerBNB Technologies Inc. بالحق النهائي في تفسير هذه الاتفاقية.",
-      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "تهدف TowerBNB إلى أن تكون متمحورة حول المستخدم، مع ضمان أمان الأصول وتعزيز الوصول إلى قوة الحوسبة الذكية. وباختيارك TowerBNB، فإنك توافق على هذه الشروط أثناء شروعك في رحلة التعدين الذكي ونمو الأصول."
+      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "تهدف TowerBNB إلى أن تكون متمحورة حول المستخدم، مع ضمان أمان الأصول وتعزيز الوصول إلى قوة الحوسبة الذكية. وباختيارك TowerBNB، فإنك توافق على هذه الشروط أثناء شروعك في رحلة التعدين الذكي ونمو الأصول.",
 
+      "Transfer your": "حوّل",
+    "Withdrawal Amount": "مبلغ السحب",
+    "to": "إلى",
+    // "Main Wallet": "المحفظة الرئيسية",
+    "here": "هنا",
+    "Transfer Funds": "تحويل الأموال",
+    // "Withdrawal Account": "حساب السحب",
+    "Funds transferred from your Withdrawal Account to your Main Wallet": "الأموال المحولة من حساب السحب إلى محفظتك الرئيسية",
+    "the transferred amount will be compounded for up to 120 days": "سيتم تجميع المبلغ المحول لمدة تصل إلى 120 يومًا",
+    "Transfer amount": "مبلغ التحويل",
+    "Max": "الحد الأقصى"
+
+    
     },
 
     "French - Français": {
+      "Cancel": "Annuler",
       "Email": "E-mail",
       "Password": "Mot de passe",
       "Log In": "Connexion",
@@ -1640,11 +1711,25 @@ export class Language {
       "All Platform content (trademarks, codes, etc.) is protected by law and cannot be used without authorization.": "L’ensemble du contenu de la Plateforme (marques, codes, etc.) est protégé par la loi et ne peut être utilisé sans autorisation.",
       "TowerBNB reserves the right to update this Agreement at any time. Continued use of the Platform after an update constitutes acceptance of the revised terms.": "TowerBNB se réserve le droit de mettre à jour le présent accord à tout moment. L’utilisation continue de la Plateforme après une mise à jour constitue une acceptation des conditions révisées.",
       "TowerBNB Technologies Inc. holds the final right of interpretation of this Agreement.": "TowerBNB Technologies Inc. détient le droit final d’interprétation du présent accord.",
-      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB vise à placer l’utilisateur au centre de ses priorités, en garantissant la sécurité des actifs et en favorisant l’accès à une puissance de calcul intelligente. En choisissant TowerBNB, vous acceptez ces conditions en entamant un parcours de minage intelligent et de croissance des actifs."
+      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB vise à placer l’utilisateur au centre de ses priorités, en garantissant la sécurité des actifs et en favorisant l’accès à une puissance de calcul intelligente. En choisissant TowerBNB, vous acceptez ces conditions en entamant un parcours de minage intelligent et de croissance des actifs.",
 
+      "Transfer your": "Transférez votre",
+    "Withdrawal Amount": "Montant de Retrait",
+    "to": "vers",
+    // "Main Wallet": "Portefeuille Principal",
+    "here": "ici",
+    "Transfer Funds": "Transférer des fonds",
+    // "Withdrawal Account": "Compte de Retrait",
+    "Funds transferred from your Withdrawal Account to your Main Wallet": "Les fonds transférés de votre Compte de Retrait vers votre Portefeuille Principal",
+    "the transferred amount will be compounded for up to 120 days": "le montant transféré sera capitalisé jusqu’à 120 jours",
+    "Transfer amount": "Montant du transfert",
+    "Max": "Max"
+
+    
     },
 
     "Persian - فارسی": {
+      "Cancel": "لغو",
       "Email": "ایمیل",
       "Password": "رمز عبور",
       "Log In": "ورود",
@@ -1869,11 +1954,25 @@ export class Language {
       "All Platform content (trademarks, codes, etc.) is protected by law and cannot be used without authorization.": "کلیه محتوای پلتفرم (از جمله علائم تجاری و کدها) تحت حمایت قوانین بوده و بدون مجوز قابل استفاده نیست.",
       "TowerBNB reserves the right to update this Agreement at any time. Continued use of the Platform after an update constitutes acceptance of the revised terms.": "TowerBNB حق دارد این قرارداد را در هر زمان به‌روزرسانی کند. ادامه استفاده از پلتفرم پس از به‌روزرسانی، به منزله پذیرش شرایط اصلاح‌شده خواهد بود.",
       "TowerBNB Technologies Inc. holds the final right of interpretation of this Agreement.": "TowerBNB Technologies Inc. حق نهایی تفسیر این قرارداد را برای خود محفوظ می‌دارد.",
-      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB رویکردی کاربرمحور داشته و بر امنیت دارایی‌ها و دسترسی به توان محاسباتی هوشمند تمرکز دارد. با انتخاب TowerBNB، شما با این شرایط موافقت کرده و مسیر استخراج هوشمند و رشد دارایی را آغاز می‌کنید."
+      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB رویکردی کاربرمحور داشته و بر امنیت دارایی‌ها و دسترسی به توان محاسباتی هوشمند تمرکز دارد. با انتخاب TowerBNB، شما با این شرایط موافقت کرده و مسیر استخراج هوشمند و رشد دارایی را آغاز می‌کنید.",
 
+      "Transfer your": "انتقال",
+    "Withdrawal Amount": "مبلغ برداشت",
+    "to": "به",
+    // "Main Wallet": "کیف پول اصلی",
+    "here": "اینجا",
+    "Transfer Funds": "انتقال وجه",
+    // "Withdrawal Account": "حساب برداشت",
+    "Funds transferred from your Withdrawal Account to your Main Wallet": "وجوه منتقل‌شده از حساب برداشت به کیف پول اصلی شما",
+    "the transferred amount will be compounded for up to 120 days": "مبلغ منتقل‌شده تا ۱۲۰ روز تجمیع خواهد شد",
+    "Transfer amount": "مبلغ انتقال",
+    "Max": "حداکثر"
+
+    
     },
 
     "Turkish - Türkçe": {
+      "Cancel": "İptal",
       "Email": "E-posta",
       "Password": "Şifre",
       "Log In": "Giriş yap",
@@ -2098,8 +2197,21 @@ export class Language {
       "All Platform content (trademarks, codes, etc.) is protected by law and cannot be used without authorization.": "Platforma ait tüm içerikler (ticari markalar, kodlar vb.) yasa ile korunmaktadır ve izinsiz kullanılamaz.",
       "TowerBNB reserves the right to update this Agreement at any time. Continued use of the Platform after an update constitutes acceptance of the revised terms.": "TowerBNB bu Sözleşmeyi herhangi bir zamanda güncelleme hakkını saklı tutar. Güncellemeden sonra Platformun kullanılmaya devam edilmesi, güncellenmiş şartların kabul edildiği anlamına gelir.",
       "TowerBNB Technologies Inc. holds the final right of interpretation of this Agreement.": "Bu Sözleşmenin nihai yorumlama hakkı TowerBNB Technologies Inc.’e aittir.",
-      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB, varlık güvenliğini sağlamayı ve akıllı hesaplama gücüne erişimi teşvik etmeyi amaçlayan kullanıcı odaklı bir yaklaşıma sahiptir. TowerBNB’yi seçerek, akıllı madencilik ve varlık büyümesi yolculuğuna bu şartları kabul ederek başlarsınız."
+      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB, varlık güvenliğini sağlamayı ve akıllı hesaplama gücüne erişimi teşvik etmeyi amaçlayan kullanıcı odaklı bir yaklaşıma sahiptir. TowerBNB’yi seçerek, akıllı madencilik ve varlık büyümesi yolculuğuna bu şartları kabul ederek başlarsınız.",
 
+      "Transfer your": "Aktar",
+    "Withdrawal Amount": "Çekim Tutarını",
+    "to": "Ana",
+    // "Main Wallet": "Cüzdan",
+    "here": "buraya",
+    "Transfer Funds": "Fonları Aktar",
+    // "Withdrawal Account": "Çekim Hesabı",
+    "Funds transferred from your Withdrawal Account to your Main Wallet": "Çekim Hesabınızdan Ana Cüzdanınıza aktarılan fonlar",
+    "the transferred amount will be compounded for up to 120 days": "aktarılan tutar 120 güne kadar bileşik kazanç sağlar",
+    "Transfer amount": "Aktarım tutarı",
+    "Max": "Maks"
+
+    
     },
 
     "Hungarian - magyar": {
@@ -2327,8 +2439,22 @@ export class Language {
       "All Platform content (trademarks, codes, etc.) is protected by law and cannot be used without authorization.": "A Platform minden tartalma (védjegyek, kódok stb.) jogi védelem alatt áll, és engedély nélkül nem használható.",
       "TowerBNB reserves the right to update this Agreement at any time. Continued use of the Platform after an update constitutes acceptance of the revised terms.": "A TowerBNB fenntartja a jogot a jelen Megállapodás bármikori módosítására. A módosítást követő további Platformhasználat a frissített feltételek elfogadását jelenti.",
       "TowerBNB Technologies Inc. holds the final right of interpretation of this Agreement.": "A jelen Megállapodás végső értelmezési joga a TowerBNB Technologies Inc.-t illeti meg.",
-      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "A TowerBNB célja a felhasználóközpontú működés, az eszközbiztonság biztosítása és az intelligens számítási kapacitáshoz való hozzáférés elősegítése. A TowerBNB választásával Ön elfogadja ezeket a feltételeket, miközben elindul az intelligens bányászat és az eszközgyarapodás útján."
+      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "A TowerBNB célja a felhasználóközpontú működés, az eszközbiztonság biztosítása és az intelligens számítási kapacitáshoz való hozzáférés elősegítése. A TowerBNB választásával Ön elfogadja ezeket a feltételeket, miközben elindul az intelligens bányászat és az eszközgyarapodás útján.",
 
+      "Transfer your": "Utalja át",
+    "Withdrawal Amount": "Kifizetési összeget",
+    "to": "a",
+    // "Main Wallet": "Fő Tárcába",
+    "here": "itt",
+    "Transfer Funds": "Összeg átutalása",
+    // "Withdrawal Account": "Kifizetési számla",
+    "Funds transferred from your Withdrawal Account to your Main Wallet": "A Kifizetési számláról a Fő Tárcába áthelyezett összegek",
+    "the transferred amount will be compounded for up to 120 days": "az áthelyezett összeg legfeljebb 120 napig kamatozik",
+    "Transfer amount": "Átutalási összeg",
+    "Max": "Max",
+    "Cancel": "Mégse"
+
+    
     },
 
     "Polish - Polski": {
@@ -2556,8 +2682,22 @@ export class Language {
       "All Platform content (trademarks, codes, etc.) is protected by law and cannot be used without authorization.": "Wszelkie treści Platformy (znaki towarowe, kody itp.) są chronione prawem i nie mogą być wykorzystywane bez zezwolenia.",
       "TowerBNB reserves the right to update this Agreement at any time. Continued use of the Platform after an update constitutes acceptance of the revised terms.": "TowerBNB zastrzega sobie prawo do aktualizacji niniejszej Umowy w dowolnym momencie. Dalsze korzystanie z Platformy po aktualizacji oznacza akceptację zmienionych warunków.",
       "TowerBNB Technologies Inc. holds the final right of interpretation of this Agreement.": "TowerBNB Technologies Inc. posiada ostateczne prawo interpretacji niniejszej Umowy.",
-      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB dąży do podejścia zorientowanego na użytkownika, zapewniając bezpieczeństwo aktywów i promując dostęp do inteligentnej mocy obliczeniowej. Wybierając TowerBNB, akceptujesz niniejsze warunki, rozpoczynając drogę inteligentnego wydobycia i wzrostu aktywów."
+      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB dąży do podejścia zorientowanego na użytkownika, zapewniając bezpieczeństwo aktywów i promując dostęp do inteligentnej mocy obliczeniowej. Wybierając TowerBNB, akceptujesz niniejsze warunki, rozpoczynając drogę inteligentnego wydobycia i wzrostu aktywów.",
 
+      "Transfer your": "Przenieś",
+    "Withdrawal Amount": "Kwotę Wypłaty",
+    "to": "do",
+    // "Main Wallet": "Portfela Głównego",
+    "here": "tutaj",
+    "Transfer Funds": "Przenieś środki",
+    // "Withdrawal Account": "Konto Wypłat",
+    "Funds transferred from your Withdrawal Account to your Main Wallet": "Środki przeniesione z Konta Wypłat do Portfela Głównego",
+    "the transferred amount will be compounded for up to 120 days": "przeniesiona kwota będzie kapitalizowana przez maksymalnie 120 dni",
+    "Transfer amount": "Kwota transferu",
+    "Max": "Max",
+    "Cancel": "Anuluj"
+
+    
     },
 
     "Portuguese - Português": {
@@ -2785,8 +2925,22 @@ export class Language {
       "All Platform content (trademarks, codes, etc.) is protected by law and cannot be used without authorization.": "Todo o conteúdo da Plataforma (marcas registradas, códigos, etc.) é protegido por lei e não pode ser utilizado sem autorização.",
       "TowerBNB reserves the right to update this Agreement at any time. Continued use of the Platform after an update constitutes acceptance of the revised terms.": "A TowerBNB reserva-se o direito de atualizar este Contrato a qualquer momento. O uso contínuo da Plataforma após uma atualização constitui aceitação dos termos revisados.",
       "TowerBNB Technologies Inc. holds the final right of interpretation of this Agreement.": "A TowerBNB Technologies Inc. detém o direito final de interpretação deste Contrato.",
-      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "A TowerBNB busca ser centrada no usuário, garantindo a segurança dos ativos e promovendo o acesso à computação inteligente. Ao escolher a TowerBNB, você concorda com estes termos ao iniciar sua jornada de mineração inteligente e crescimento de ativos."
+      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "A TowerBNB busca ser centrada no usuário, garantindo a segurança dos ativos e promovendo o acesso à computação inteligente. Ao escolher a TowerBNB, você concorda com estes termos ao iniciar sua jornada de mineração inteligente e crescimento de ativos.",
 
+      "Transfer your": "Transfira seu",
+    "Withdrawal Amount": "Valor de Saque",
+    "to": "para a",
+    // "Main Wallet": "Carteira Principal",
+    "here": "aqui",
+    "Transfer Funds": "Transferir fundos",
+    // "Withdrawal Account": "Conta de Saque",
+    "Funds transferred from your Withdrawal Account to your Main Wallet": "Fundos transferidos da sua Conta de Saque para a Carteira Principal",
+    "the transferred amount will be compounded for up to 120 days": "o valor transferido será capitalizado por até 120 dias",
+    "Transfer amount": "Valor da transferência",
+    "Max": "Máx",
+    "Cancel": "Cancelar"
+
+    
     },
 
     "Czech - čeština": {
@@ -3014,8 +3168,22 @@ export class Language {
       "All Platform content (trademarks, codes, etc.) is protected by law and cannot be used without authorization.": "Veškerý obsah Platformy (ochranné známky, kódy apod.) je chráněn zákonem a nesmí být používán bez oprávnění.",
       "TowerBNB reserves the right to update this Agreement at any time. Continued use of the Platform after an update constitutes acceptance of the revised terms.": "TowerBNB si vyhrazuje právo kdykoli aktualizovat tuto Smlouvu. Pokračující používání Platformy po aktualizaci znamená souhlas s upravenými podmínkami.",
       "TowerBNB Technologies Inc. holds the final right of interpretation of this Agreement.": "TowerBNB Technologies Inc. má konečné právo výkladu této Smlouvy.",
-      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB usiluje o přístup zaměřený na uživatele, zajištění bezpečnosti aktiv a podporu přístupu k inteligentní výpočetní síle. Volbou TowerBNB souhlasíte s těmito podmínkami a zahajujete cestu chytré těžby a růstu aktiv."
+      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB usiluje o přístup zaměřený na uživatele, zajištění bezpečnosti aktiv a podporu přístupu k inteligentní výpočetní síle. Volbou TowerBNB souhlasíte s těmito podmínkami a zahajujete cestu chytré těžby a růstu aktiv.",
 
+       "Transfer your": "Převeďte",
+    "Withdrawal Amount": "Částku k výběru",
+    "to": "do",
+    // "Main Wallet": "Hlavní Peněženky",
+    "here": "zde",
+    "Transfer Funds": "Převést prostředky",
+    // "Withdrawal Account": "Výběrový účet",
+    "Funds transferred from your Withdrawal Account to your Main Wallet": "Prostředky převedené z Výběrového účtu do Hlavní Peněženky",
+    "the transferred amount will be compounded for up to 120 days": "převedená částka bude úročena až 120 dní",
+    "Transfer amount": "Částka převodu",
+    "Max": "Max",
+    "Cancel": "Zrušit"
+
+    
     },
 
     "Slovak - Slovák": {
@@ -3243,8 +3411,23 @@ export class Language {
       "All Platform content (trademarks, codes, etc.) is protected by law and cannot be used without authorization.": "Všetok obsah Platformy (ochranné známky, kódy atď.) je chránený zákonom a nesmie byť použitý bez oprávnenia.",
       "TowerBNB reserves the right to update this Agreement at any time. Continued use of the Platform after an update constitutes acceptance of the revised terms.": "TowerBNB si vyhradzuje právo kedykoľvek aktualizovať túto Zmluvu. Pokračujúce používanie Platformy po aktualizácii znamená súhlas s upravenými podmienkami.",
       "TowerBNB Technologies Inc. holds the final right of interpretation of this Agreement.": "TowerBNB Technologies Inc. má konečné právo výkladu tejto Zmluvy.",
-      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB sa zameriava na používateľa, zabezpečuje ochranu aktív a podporuje prístup k inteligentnému výpočtovému výkonu. Výberom TowerBNB súhlasíte s týmito podmienkami a vydávate sa na cestu inteligentnej ťažby a rastu aktív."
+      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB sa zameriava na používateľa, zabezpečuje ochranu aktív a podporuje prístup k inteligentnému výpočtovému výkonu. Výberom TowerBNB súhlasíte s týmito podmienkami a vydávate sa na cestu inteligentnej ťažby a rastu aktív.",
 
+      "Transfer your": "Preveďte",
+    "Withdrawal Amount": "Sumu výberu",
+    "to": "do",
+    // "Main Wallet": "Hlavnej Peňaženky",
+    "here": "tu",
+    "Transfer Funds": "Previesť prostriedky",
+    // "Withdrawal Account": "Výberový účet",
+    "Funds transferred from your Withdrawal Account to your Main Wallet": "Prostriedky prevedené z Výberového účtu do Hlavnej Peňaženky",
+    "the transferred amount will be compounded for up to 120 days": "prevedená suma sa bude zhodnocovať až 120 dní",
+    "Transfer amount": "Suma prevodu",
+    "Max": "Max",
+    "Cancel": "Zrušiť"
+
+
+    
     },
 
     "Indonesian": {
@@ -3472,12 +3655,27 @@ export class Language {
       "All Platform content (trademarks, codes, etc.) is protected by law and cannot be used without authorization.": "Seluruh konten Platform (merek dagang, kode, dan lainnya) dilindungi oleh hukum dan tidak boleh digunakan tanpa izin.",
       "TowerBNB reserves the right to update this Agreement at any time. Continued use of the Platform after an update constitutes acceptance of the revised terms.": "TowerBNB berhak memperbarui Perjanjian ini kapan saja. Penggunaan Platform secara berkelanjutan setelah pembaruan dianggap sebagai penerimaan terhadap ketentuan yang telah direvisi.",
       "TowerBNB Technologies Inc. holds the final right of interpretation of this Agreement.": "TowerBNB Technologies Inc. memiliki hak interpretasi akhir atas Perjanjian ini.",
-      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB berfokus pada pengguna dengan memastikan keamanan aset dan mendorong akses terhadap daya komputasi cerdas. Dengan memilih TowerBNB, Anda menyetujui ketentuan ini saat memulai perjalanan penambangan cerdas dan pertumbuhan aset."
+      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB berfokus pada pengguna dengan memastikan keamanan aset dan mendorong akses terhadap daya komputasi cerdas. Dengan memilih TowerBNB, Anda menyetujui ketentuan ini saat memulai perjalanan penambangan cerdas dan pertumbuhan aset.",
+
+      "Transfer your": "Transfer",
+    "Withdrawal Amount": "Jumlah Penarikan",
+    "to": "ke",
+    // "Main Wallet": "Dompet Utama",
+    "here": "di sini",
+    "Transfer Funds": "Transfer Dana",
+    // "Withdrawal Account": "Akun Penarikan",
+    "Funds transferred from your Withdrawal Account to your Main Wallet": "Dana yang ditransfer dari Akun Penarikan ke Dompet Utama",
+    "the transferred amount will be compounded for up to 120 days": "jumlah yang ditransfer akan dikompaun hingga 120 hari",
+    "Transfer amount": "Jumlah transfer",
+    "Max": "Maks",
+    "Cancel": "Batal"
 
 
+    
     },
 
     "Vietnamese - Tiếng Việt": {
+      "Cancel": "Hủy",
       "Email": "Email",
       "Password": "Mật khẩu",
       "Log In": "Đăng nhập",
@@ -3703,8 +3901,20 @@ export class Language {
       "All Platform content (trademarks, codes, etc.) is protected by law and cannot be used without authorization.": "Toàn bộ nội dung của Nền tảng (nhãn hiệu, mã nguồn, v.v.) được pháp luật bảo vệ và không được sử dụng khi chưa có sự cho phép.",
       "TowerBNB reserves the right to update this Agreement at any time. Continued use of the Platform after an update constitutes acceptance of the revised terms.": "TowerBNB có quyền cập nhật Thỏa thuận này bất cứ lúc nào. Việc tiếp tục sử dụng Nền tảng sau khi cập nhật đồng nghĩa với việc chấp nhận các điều khoản đã được sửa đổi.",
       "TowerBNB Technologies Inc. holds the final right of interpretation of this Agreement.": "TowerBNB Technologies Inc. giữ quyền giải thích cuối cùng đối với Thỏa thuận này.",
-      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB hướng tới lấy người dùng làm trung tâm, đảm bảo an toàn tài sản và thúc đẩy khả năng tiếp cận sức mạnh tính toán thông minh. Khi lựa chọn TowerBNB, bạn đồng ý với các điều khoản này khi bắt đầu hành trình khai thác thông minh và gia tăng tài sản."
+      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB hướng tới lấy người dùng làm trung tâm, đảm bảo an toàn tài sản và thúc đẩy khả năng tiếp cận sức mạnh tính toán thông minh. Khi lựa chọn TowerBNB, bạn đồng ý với các điều khoản này khi bắt đầu hành trình khai thác thông minh và gia tăng tài sản.",
+      "Transfer your": "Chuyển",
+    "Withdrawal Amount": "Số tiền rút",
+    "to": "vào",
+    // "Main Wallet": "Ví Chính",
+    "here": "tại đây",
+    "Transfer Funds": "Chuyển tiền",
+    // "Withdrawal Account": "Tài khoản Rút tiền",
+    "Funds transferred from your Withdrawal Account to your Main Wallet": "Số tiền được chuyển từ Tài khoản Rút tiền sang Ví Chính",
+    "the transferred amount will be compounded for up to 120 days": "số tiền chuyển sẽ được cộng dồn trong tối đa 120 ngày",
+    "Transfer amount": "Số tiền chuyển",
+    "Max": "Tối đa"
 
+    
     },
 
     "Uzbek - o'zbek": {
@@ -3933,8 +4143,21 @@ export class Language {
       "All Platform content (trademarks, codes, etc.) is protected by law and cannot be used without authorization.": "Platformadagi barcha kontent (savdo belgilari, kodlar va boshqalar) qonun bilan himoyalangan va ruxsatsiz foydalanish mumkin emas.",
       "TowerBNB reserves the right to update this Agreement at any time. Continued use of the Platform after an update constitutes acceptance of the revised terms.": "TowerBNB ushbu Shartnomani istalgan vaqtda yangilash huquqini o‘zida saqlab qoladi. Yangilanishdan keyin Platformadan foydalanishni davom ettirish o‘zgartirilgan shartlarni qabul qilganingizni anglatadi.",
       "TowerBNB Technologies Inc. holds the final right of interpretation of this Agreement.": "TowerBNB Technologies Inc. ushbu Shartnomaning yakuniy talqin huquqiga ega.",
-      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB foydalanuvchiga yo‘naltirilgan bo‘lishni, aktivlar xavfsizligini ta’minlashni va aqlli hisoblash quvvatiga kirishni rag‘batlantirishni maqsad qilgan. TowerBNB’ni tanlash orqali siz aqlli mayning va aktivlarni o‘sish yo‘liga kirar ekansiz, ushbu shartlarga rozilik bildirasiz."
+      "TowerBNB aims to be user-centric, ensuring asset security and promoting access to intelligent computing power. By choosing TowerBNB, you agree to these terms as you embark on a journey of smart mining and asset growth.": "TowerBNB foydalanuvchiga yo‘naltirilgan bo‘lishni, aktivlar xavfsizligini ta’minlashni va aqlli hisoblash quvvatiga kirishni rag‘batlantirishni maqsad qilgan. TowerBNB’ni tanlash orqali siz aqlli mayning va aktivlarni o‘sish yo‘liga kirar ekansiz, ushbu shartlarga rozilik bildirasiz.",
+      "Transfer your": "O‘tkazing",
+    "Withdrawal Amount": "Yechib olish summasini",
+    "to": "asosiy",
+    // "Main Wallet": "Hamyoniga",
+    "here": "bu yerda",
+    "Transfer Funds": "Mablag‘larni o‘tkazish",
+    // "Withdrawal Account": "Yechib olish hisobi",
+    "Funds transferred from your Withdrawal Account to your Main Wallet": "Yechib olish hisobidan Asosiy Hamyonga o‘tkazilgan mablag‘lar",
+    "the transferred amount will be compounded for up to 120 days": "o‘tkazilgan summa 120 kungacha jamlanadi",
+    "Transfer amount": "O‘tkazma summasi",
+    "Max": "Maks",
+    "Cancel": "Bekor qilish"
 
+    
     }
 
   };

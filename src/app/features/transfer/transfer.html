@@ -6,7 +6,7 @@
 
   <!-- 🔹 Blue Header -->
   <div class="modal-header-blue">
-    <h3>Transfer Funds</h3>
+    <h3>{{'Transfer Funds' | translate}}</h3>
     <img src="/close_round.svg" (click)="closeModal()" alt="close" />
   </div>
 
@@ -16,27 +16,27 @@
     <!-- Wallet Card -->
     <div class="wallet-card">
       <div class="wallet-item">
-        <p>Main Wallet</p>
+        <p>{{'Main Wallet' | translate}}</p>
         <h3>{{ mainWallet }} <span>USDT</span></h3>
       </div>
 
       <div class="divider"></div>
 
       <div class="wallet-item">
-        <p>Withdrawal Account</p>
+        <p>{{'Withdrawal Account' | translate}}</p>
         <h3>{{ withdrawalWallet }} <span>USDT</span></h3>
       </div>
     </div>
 
     <!-- Info -->
     <div class="info-box">
-      Funds transferred from your Withdrawal Account to your Main Wallet,
-      the transferred amount will be compounded for up to 120 days.
+      {{'Funds transferred from your Withdrawal Account to your Main Wallet' | translate}},
+      {{'the transferred amount will be compounded for up to 120 days' | translate}}.
     </div>
 
     <!-- Amount -->
     <div class="input-section">
-      <label>Transfer amount</label>
+      <label>{{'Transfer amount' | translate}}</label>
 
       <div class="input-wrapper">
         <input
@@ -44,14 +44,14 @@
           [(ngModel)]="amount"
           placeholder="0"
         />
-        <span class="max-btn" (click)="setMax()">Max</span>
+        <span class="max-btn" (click)="setMax()">{{'Max' | translate}}</span>
       </div>
     </div>
 
     <!-- Actions -->
     <div class="action-buttons">
-      <button class="confirm-btn" (click)="transfer()">Transfer Funds</button>
-      <button class="cancel-btn" (click)="closeModal()">Cancel</button>
+      <button class="confirm-btn" (click)="transfer()">{{'Transfer Funds' | translate}}</button>
+      <button class="cancel-btn" (click)="closeModal()">{{'Cancel' | translate}}</button>
     </div>
 
   </div>
