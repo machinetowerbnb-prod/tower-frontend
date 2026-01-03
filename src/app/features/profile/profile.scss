@@ -584,3 +584,53 @@ gap: 24px;
   from { transform: translateY(100%); }
   to { transform: translateY(0); }
 }
+
+
+
+
+
+
+/* 🔹 Transfer bar – attached to LIGHT BLUE container (exact) */
+.wallet-transfer-bar {
+  /* make it part of light-blue container */
+  // margin-top: 14px;
+
+  /* extend to container edges */
+  // margin-left: -16px;
+  // margin-right: -16px;
+  // margin-bottom: -16px;
+
+  height: 44px;
+
+  /* blue strip */
+  background: linear-gradient(180deg, #2752e7 0%, #2440a0 100%);
+
+  /* SAME border-radius as wallet-section */
+  border-radius: 0 0 14px 14px;
+
+  /* IMPORTANT: keep light-blue border visible */
+  border-top: 1px solid rgba(39, 82, 231, 0.25);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+
+  cursor: pointer;
+
+  /* subtle elevation like screenshot */
+  box-shadow: 0 6px 12px rgba(39, 82, 231, 0.35);
+}
+
+.wallet-transfer-bar span {
+  font-family: Poppins;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.wallet-transfer-bar img {
+  width: 16px;
+  height: 16px;
+  filter: brightness(0) invert(1);
+}
