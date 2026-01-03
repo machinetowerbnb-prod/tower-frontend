@@ -232,7 +232,7 @@ letter-spacing: -1%;
 
 /* 🔹 Other Section */
 .other-section {
-  margin: 0px 16px 40px;
+  margin: 24px 16px 40px;
 
   .setting-card,
   .logout-card {
@@ -268,7 +268,7 @@ letter-spacing: -1%;
 display: flex;
 flex-direction: column;
 opacity: 1;
-gap: 24px;
+// gap: 24px;
 }
 
 /* Responsive */
@@ -592,15 +592,10 @@ gap: 24px;
 
 /* 🔹 Transfer bar – attached to LIGHT BLUE container (exact) */
 .wallet-transfer-bar {
-  /* make it part of light-blue container */
-  // margin-top: 14px;
 
-  /* extend to container edges */
-  // margin-left: -16px;
-  // margin-right: -16px;
-  // margin-bottom: -16px;
+  height: 40px;
 
-  height: 44px;
+  margin: 0px 20px 24px;
 
   /* blue strip */
   background: linear-gradient(180deg, #2752e7 0%, #2440a0 100%);
@@ -624,8 +619,8 @@ gap: 24px;
 
 .wallet-transfer-bar span {
   font-family: Poppins;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 10px;
+  font-weight: 600;
   color: #ffffff;
 }
 
@@ -633,4 +628,9 @@ gap: 24px;
   width: 16px;
   height: 16px;
   filter: brightness(0) invert(1);
+}
+
+
+.wallet-section {
+  overflow: hidden; // 🔥 important for rounded corners
 }

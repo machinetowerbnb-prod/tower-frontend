@@ -22,7 +22,8 @@
         </div>
       </div>
       <app-deposit #depositModal></app-deposit>
-      <app-transfer #transferModal [mainWallet]="user.workingWallet" [withdrawalWallet]="user.withdrawalWallet" (closed)="onTransferClosed()">
+      <app-transfer #transferModal [mainWallet]="user.workingWallet" [withdrawalWallet]="user.withdrawalWallet"
+        (closed)="onTransferClosed()">
       </app-transfer>
       <div class="wallet-values">
         <div class="wallet-item">
