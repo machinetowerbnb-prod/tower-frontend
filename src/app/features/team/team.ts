@@ -29,28 +29,6 @@ export class Team implements OnInit {
       const userId = localStorage.getItem('userId');
       if (userId) this.fetchTeamData(userId);
     }
-    // const response = {
-    //   statusCode: 200,
-    //   message: 'success',
-    //   data: {
-    //     totalTeams: 2345,
-    //     totalPromationComission: 23456.76,
-    //     teamRecharge: 234434.87,
-    //     teamWitdrawls: 23454.43,
-    //     levelOne: 6, //genOne?.valid
-    //     levelTwo: 13,//genTwo?.valid
-    //     levelThree: 18,//genThree?.valid
-    //   },
-    // };
-
-    // this.data = response.data;
-    // const max = 18; //genOne?.reffered or genTwo?.reffered or genThree?.reffered dynamicly should change based on API data
-
-    // this.levels = [
-    //   { id: 1, value: this.data.levelOne, max, color: '#ED5F9B', progress: Math.round((this.data.levelOne / max) * 100) },
-    //   { id: 2, value: this.data.levelTwo, max, color: '#2CB280', progress: Math.round((this.data.levelTwo / max) * 100) },
-    //   { id: 3, value: this.data.levelThree, max, color: '#2FBDC1', progress: Math.round((this.data.levelThree / max) * 100) },
-    // ];
   }
   fetchTeamData(userId: string) {
     this.isLoading = true;
@@ -87,27 +65,34 @@ export class Team implements OnInit {
               id: "First Generation Data",
               title: "First Generation Data",
               value: data.genOne?.valid || 0,
-              max,
+              max: data.genOne?.reffered || 0,
               color: '#ED5F9B',
-              progress: max ? Math.round(((data.genOne?.valid || 0) / max) * 100) : 0
+              progress: data.genOne?.reffered
+                ? Math.round(((data.genOne?.valid || 0) / data.genOne.reffered) * 100)
+                : 0
             },
             {
               id: 2,
               title: "Second Generation Data",
               value: data.genTwo?.valid || 0,
-              max,
+              max: data.genTwo?.reffered || 0,
               color: '#2CB280',
-              progress: max ? Math.round(((data.genTwo?.valid || 0) / max) * 100) : 0
+              progress: data.genTwo?.reffered
+                ? Math.round(((data.genTwo?.valid || 0) / data.genTwo.reffered) * 100)
+                : 0
             },
             {
               id: 3,
               title: "Third Generation Data",
               value: data.genThree?.valid || 0,
-              max,
+              max: data.genThree?.reffered || 0,
               color: '#2FBDC1',
-              progress: max ? Math.round(((data.genThree?.valid || 0) / max) * 100) : 0
+              progress: data.genThree?.reffered
+                ? Math.round(((data.genThree?.valid || 0) / data.genThree.reffered) * 100)
+                : 0
             }
           ];
+
 
           // ✅ Force UI update
           this.cdr.detectChanges();
