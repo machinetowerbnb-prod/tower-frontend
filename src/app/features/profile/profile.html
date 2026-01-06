@@ -1,6 +1,26 @@
 <div class="profile-container">
+
   <!-- 🔹 Top Blue Banner -->
   <div class="banner">
+
+    <div class="cooldown-timer" style="height: fit-content;">
+      <div class="timer-box">
+        <div class="timer-value">{{ countdown.days }}</div>
+        <div class="timer-label">DAYS</div>
+      </div>
+
+      <div class="timer-box">
+        <div class="timer-value">{{ countdown.hours }}</div>
+        <div class="timer-label">HOURS</div>
+      </div>
+
+      <div class="timer-box">
+        <div class="timer-value">{{ countdown.minutes }}</div>
+        <div class="timer-label">MINUTES</div>
+      </div>
+    </div>
+    
+
     <div class="banner-content">
       <div class="profile-circle">
         <span>{{ getInitials(user.name) }}</span>
@@ -46,7 +66,11 @@
 
     <div class="wallet-transfer-bar" (click)="onWalletAction('Transfer')">
       <span>
-        <span style="font-size: 11px;color: #fff;margin-bottom: 4px;opacity: .85;">{{ 'Transfer your' | translate}}</span> <span>{{' '}}</span><span>{{'Withdrawal Amount' | translate}}</span> <span>{{' '}}</span> <span style="font-size: 11px;color: #fff;margin-bottom: 4px;opacity: .85;">{{'to' | translate}}</span><span>{{' '}}</span> <span>{{'Main Wallet' | translate}}</span> <span>{{' '}}</span><span style="font-size: 11px;color: #fff;margin-bottom: 4px;opacity: .85;">{{'here' | translate}}</span>
+        <span style="font-size: 11px;color: #fff;margin-bottom: 4px;opacity: .85;">{{ 'Transfer your' |
+          translate}}</span> <span>{{' '}}</span><span>{{'Withdrawal Amount' | translate}}</span> <span>{{' '}}</span>
+        <span style="font-size: 11px;color: #fff;margin-bottom: 4px;opacity: .85;">{{'to' | translate}}</span><span>{{'
+          '}}</span> <span>{{'Main Wallet' | translate}}</span> <span>{{' '}}</span><span
+          style="font-size: 11px;color: #fff;margin-bottom: 4px;opacity: .85;">{{'here' | translate}}</span>
       </span>
       <img src="/chevron_right.svg" alt="arrow" />
     </div>

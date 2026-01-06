@@ -634,3 +634,33 @@ opacity: 1;
 .wallet-section {
   overflow: hidden; // 🔥 important for rounded corners
 }
+
+
+
+
+.cooldown-timer {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.timer-box {
+  background: rgba(255,255,255,0.12);
+  border-radius: 10px;
+  padding: 10px 14px;
+  min-width: 70px;
+  text-align: center;
+}
+
+.timer-value {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.timer-label {
+  font-size: 10px;
+  opacity: 0.8;
+  color: #fff;
+}

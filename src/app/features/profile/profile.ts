@@ -35,6 +35,15 @@ export class Profile implements OnInit {
   showLogout = false;
   amount = 0;
 
+  countdown = {
+    days: 0,
+    hours: 0,
+    minutes: 0
+  };
+
+  private countdownInterval: any;
+
+
   constructor(
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
@@ -77,6 +86,10 @@ export class Profile implements OnInit {
         console.error('❌ No userId found in localStorage');
       }
     }
+
+    // example timestamp – YOU will replace this
+    this.startCooldownCountdown('2026-01-01T10:00:00Z');
+
   }
   // ----------------------------------------------------------------------
   // 🔥 PROFILE API CALL (Avengers API)
@@ -204,6 +217,34 @@ export class Profile implements OnInit {
       }
     }
   }
+
+
+  startCooldownCountdown(startTimestamp: string | number) {
+    const startTime = new Date(startTimestamp).getTime();
+    const endTime = startTime + (120 * 24 * 60 * 60 * 1000); // 120 days
+
+    const updateCountdown = () => {
+      const now = Date.now();
+      const diff = endTime - now;
+
+      if (diff <= 0) {
+        this.countdown = { days: 0, hours: 0, minutes: 0 };
+        clearInterval(this.countdownInterval);
+        return;
+      }
+
+      const totalMinutes = Math.floor(diff / (1000 * 60));
+      const days = Math.floor(totalMinutes / (60 * 24));
+      const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
+      const minutes = totalMinutes % 60;
+
+      this.countdown = { days, hours, minutes };
+    };
+
+    updateCountdown();
+    this.countdownInterval = setInterval(updateCountdown, 60 * 1000);
+  }
+
 
 
 }
