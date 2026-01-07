@@ -10,7 +10,7 @@
 /* 🔹 Banner Section */
 .banner {
   background: url('/common-top.svg') center/cover no-repeat;
-  height: 160px;
+  height: 200px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   position: relative;
@@ -664,3 +664,55 @@ opacity: 1;
   opacity: 0.8;
   color: #fff;
 }
+
+
+/* 🔹 Cooldown unified block (exact UI style) */
+.cooldown-wrapper {
+  position: absolute;
+  top: 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // padding: 0 16px;
+}
+
+.cooldown-block {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 320px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  padding: 14px 18px;
+  backdrop-filter: blur(6px);
+}
+
+.cooldown-item {
+  text-align: center;
+  flex: 1;
+}
+
+.cooldown-value {
+  font-size: 22px;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.cooldown-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 2px;
+}
+
+.cooldown-text {
+  margin-top: 10px;
+  max-width: 320px;
+  text-align: center;
+  font-size: 10px;
+  line-height: 140%;
+  font-weight: 400;
+  color: #FFFFFF;
+}
+

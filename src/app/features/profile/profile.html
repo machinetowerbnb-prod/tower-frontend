@@ -3,23 +3,31 @@
   <!-- 🔹 Top Blue Banner -->
   <div class="banner">
 
-    <div class="cooldown-timer" style="height: fit-content;" *ngIf="this.showTimer">
-      <div class="timer-box">
-        <div class="timer-value">{{ countdown.days }}</div>
-        <div class="timer-label">DAYS</div>
+    <div class="cooldown-wrapper" *ngIf="showTimer">
+      <div class="cooldown-block">
+        <div class="cooldown-item">
+          <div class="cooldown-value">{{ countdown.days }}</div>
+          <div class="cooldown-label">DAYS</div>
+        </div>
+
+        <div class="cooldown-item">
+          <div class="cooldown-value">{{ countdown.hours }}</div>
+          <div class="cooldown-label">HOURS</div>
+        </div>
+
+        <div class="cooldown-item">
+          <div class="cooldown-value">{{ countdown.minutes }}</div>
+          <div class="cooldown-label">MINUTES</div>
+        </div>
       </div>
 
-      <div class="timer-box">
-        <div class="timer-value">{{ countdown.hours }}</div>
-        <div class="timer-label">HOURS</div>
-      </div>
-
-      <div class="timer-box">
-        <div class="timer-value">{{ countdown.minutes }}</div>
-        <div class="timer-label">MINUTES</div>
-      </div>
+      <p class="cooldown-text">
+        Assets allocated to the Core Computing Tower. After the cooldown period,
+        funds will move to the Flexible Wallet.
+      </p>
     </div>
-    
+
+
 
     <div class="banner-content">
       <div class="profile-circle">
