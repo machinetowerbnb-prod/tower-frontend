@@ -30,6 +30,8 @@ export class Profile implements OnInit {
   @ViewChild('depositModal') depositModal!: Deposit;
   @ViewChild('transferModal') transferModal!: Transfer;
 
+  showTimer = false;
+
 
   showSupport = false;
   showLogout = false;
@@ -86,10 +88,6 @@ export class Profile implements OnInit {
         console.error('❌ No userId found in localStorage');
       }
     }
-
-    // example timestamp – YOU will replace this
-    this.startCooldownCountdown('2026-01-01T10:00:00Z');
-
   }
   // ----------------------------------------------------------------------
   // 🔥 PROFILE API CALL (Avengers API)
@@ -129,6 +127,13 @@ export class Profile implements OnInit {
             { label: 'Your Flexible Deposit', value: Number(data.flexibleDeposite ?? 0) },
             { label: 'Your Total withdrawals', value: Number(data.totalWithdrawals ?? 0) }
           ];
+
+          if (data.levelPurchasedAt == null) {
+            this.showTimer = false;
+          } else {
+            this.startCooldownCountdown(data.levelPurchasedAt);
+            this.showTimer = true;
+          }
 
           this.cdr.detectChanges();
         });
@@ -219,31 +224,39 @@ export class Profile implements OnInit {
   }
 
 
-  startCooldownCountdown(startTimestamp: string | number) {
-    const startTime = new Date(startTimestamp).getTime();
-    const endTime = startTime + (120 * 24 * 60 * 60 * 1000); // 120 days
+  startCooldownCountdown(startTimestamp: number) {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const startTime = startTimestamp; // already in milliseconds
+    const cooldownPeriod = 120 * 24 * 60 * 60 * 1000; // 120 days
+    const endTime = startTime + cooldownPeriod;
+
+    if (this.countdownInterval) clearInterval(this.countdownInterval);
 
     const updateCountdown = () => {
       const now = Date.now();
-      const diff = endTime - now;
-
-      if (diff <= 0) {
-        this.countdown = { days: 0, hours: 0, minutes: 0 };
-        clearInterval(this.countdownInterval);
-        return;
-      }
+      let diff = endTime - now;
+      if (diff < 0) diff = 0;
 
       const totalMinutes = Math.floor(diff / (1000 * 60));
       const days = Math.floor(totalMinutes / (60 * 24));
       const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
       const minutes = totalMinutes % 60;
 
-      this.countdown = { days, hours, minutes };
+      this.ngZone.run(() => {
+        this.countdown = { days, hours, minutes };
+        this.cdr.detectChanges();
+      });
+
+      if (diff === 0 && this.countdownInterval) {
+        clearInterval(this.countdownInterval);
+      }
     };
 
     updateCountdown();
     this.countdownInterval = setInterval(updateCountdown, 60 * 1000);
   }
+
 
 
 

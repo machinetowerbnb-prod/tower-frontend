@@ -3,7 +3,7 @@
   <!-- 🔹 Top Blue Banner -->
   <div class="banner">
 
-    <div class="cooldown-timer" style="height: fit-content;">
+    <div class="cooldown-timer" style="height: fit-content;" *ngIf="this.showTimer">
       <div class="timer-box">
         <div class="timer-value">{{ countdown.days }}</div>
         <div class="timer-label">DAYS</div>
