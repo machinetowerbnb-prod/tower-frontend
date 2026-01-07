@@ -24,6 +24,7 @@ export class Commision {
   private authService = inject(AuthService);
   private ngZone = inject(NgZone);
   private cdr = inject(ChangeDetectorRef);
+  totalCommissionAmount = 0;
 
   constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object) { }
 
@@ -55,6 +56,9 @@ export class Commision {
           // Run UI updates in Angular zone for correct re-render
           this.ngZone.run(() => {
             this.commissionDetails = res.data.commissionDetails;
+            const totalCommission = this.getTotalCommission(res);
+            this.totalCommissionAmount = totalCommission;
+
             this.cdr.detectChanges();
           });
         } else {
@@ -82,4 +86,16 @@ export class Commision {
   goBack() {
     this.router.navigate(['/team']);
   }
+
+  getTotalCommission(res: any): number {
+    if (!res?.data?.commissionDetails?.length) {
+      return 0;
+    }
+
+    return res.data.commissionDetails.reduce(
+      (total: number, item: any) => total + Number(item.commission || 0),
+      0
+    );
+  }
+
 }
