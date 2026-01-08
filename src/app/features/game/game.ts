@@ -306,7 +306,7 @@ export class Game implements OnInit {
     const userId = localStorage.getItem('userId');
     console.log("card.level", card.level);
 
-    if (card.level === 'Level4' && this.validToBuyFour === false) {
+    if (card.level === 'Level3' && this.validToBuyFour === false) {
       this.openLevel4Popup();
       return; // ⛔ stop API call
     }
