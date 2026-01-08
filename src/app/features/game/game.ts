@@ -41,6 +41,11 @@ export class Game implements OnInit {
   constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: Object) { }
 
   isGameEnabled = false;
+  totalValidUsers = 0;
+  validToBuyFour = false;
+
+  showLevel4Popup = false;
+
 
   cards: GameCard[] = [
     {
@@ -112,12 +117,47 @@ export class Game implements OnInit {
       if (userId) {
         this.getGameData(userId);
         this.loadHomeData();
+        this.fetchTeamData(userId);
         console.log("this.isGameEnabled", this.isGameEnabled);
       } else {
         //console.error('❌ No userId found in localStorage');
       }
     }
   }
+
+
+  fetchTeamData(userId: string) {
+    const payload = {
+      screen: 'teams',
+      userId: userId
+    };
+
+    this.authService.avengers(payload).subscribe({
+      next: (response) => {
+
+        if (response.statusCode === 200 && response.data) {
+          const data = response.data;
+          let totalValidUsers = data.genOne.valid + data.genTwo.valid + data.genThree.valid;
+          console.log('✅ Team API response:', totalValidUsers);
+          this.totalValidUsers = 12 - totalValidUsers
+          if (totalValidUsers < 12) {
+            this.validToBuyFour = false
+          } else {
+            this.validToBuyFour = true
+          }
+          console.log("this.validToBuyFour", this.validToBuyFour);
+          // ✅ Force UI update
+          this.cdr.detectChanges();
+        }
+      },
+      error: (err) => {
+        console.error('❌ Failed to fetch Team data:', err);
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+
 
   getGameData(userId: string) {
     const payload = {
@@ -242,12 +282,7 @@ export class Game implements OnInit {
 
         if (activationTime && activationTime != null) {
           let currentTime = Date.now();
-          // if (this.isCurrentGreaterThanYesterday(currentTime, activationTime)) {
-          //   //console.log(currentTime, activationTime)
-          //   this.timer.open(Number(activationTime));
-          // } else {
-          //   this.activateGame(userId!);
-          // }
+
           if (this.is24HoursCompleted(currentTime, Number(activationTime))) {
             this.activateGame(userId!);
           } else {
@@ -269,6 +304,13 @@ export class Game implements OnInit {
 
   purchaseNow(card: GameCard) {
     const userId = localStorage.getItem('userId');
+    console.log("card.level", card.level);
+
+    if (card.level === 'Level3' && this.validToBuyFour === false) {
+      this.openLevel4Popup();
+      return; // ⛔ stop API call
+    }
+
     let payload = {
       Level: card.level,
       userId: userId,
@@ -365,5 +407,15 @@ export class Game implements OnInit {
       }
     });
   }
+
+  openLevel4Popup() {
+    this.showLevel4Popup = true;
+    this.cdr.detectChanges();
+  }
+
+  closeLevel4Popup() {
+    this.showLevel4Popup = false;
+  }
+
 
 }

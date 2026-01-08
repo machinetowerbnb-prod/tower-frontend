@@ -1,6 +1,34 @@
 <div class="profile-container">
+
   <!-- 🔹 Top Blue Banner -->
   <div class="banner">
+
+    <div class="cooldown-wrapper" *ngIf="showTimer">
+      <div class="cooldown-block">
+        <div class="cooldown-item">
+          <div class="cooldown-value">{{ countdown.days }}</div>
+          <div class="cooldown-label">DAYS</div>
+        </div>
+
+        <div class="cooldown-item">
+          <div class="cooldown-value">{{ countdown.hours }}</div>
+          <div class="cooldown-label">HOURS</div>
+        </div>
+
+        <div class="cooldown-item">
+          <div class="cooldown-value">{{ countdown.minutes }}</div>
+          <div class="cooldown-label">MINUTES</div>
+        </div>
+      </div>
+
+      <p class="cooldown-text">
+        Assets allocated to the Core Computing Tower. After the cooldown period,
+        funds will move to the Flexible Wallet.
+      </p>
+    </div>
+
+
+
     <div class="banner-content">
       <div class="profile-circle">
         <span>{{ getInitials(user.name) }}</span>
@@ -46,7 +74,11 @@
 
     <div class="wallet-transfer-bar" (click)="onWalletAction('Transfer')">
       <span>
-        <span style="font-size: 11px;color: #fff;margin-bottom: 4px;opacity: .85;">{{ 'Transfer your' | translate}}</span> <span>{{' '}}</span><span>{{'Withdrawal Amount' | translate}}</span> <span>{{' '}}</span> <span style="font-size: 11px;color: #fff;margin-bottom: 4px;opacity: .85;">{{'to' | translate}}</span><span>{{' '}}</span> <span>{{'Main Wallet' | translate}}</span> <span>{{' '}}</span><span style="font-size: 11px;color: #fff;margin-bottom: 4px;opacity: .85;">{{'here' | translate}}</span>
+        <span style="font-size: 11px;color: #fff;margin-bottom: 4px;opacity: .85;">{{ 'Transfer your' |
+          translate}}</span> <span>{{' '}}</span><span>{{'Withdrawal Amount' | translate}}</span> <span>{{' '}}</span>
+        <span style="font-size: 11px;color: #fff;margin-bottom: 4px;opacity: .85;">{{'to' | translate}}</span><span>{{'
+          '}}</span> <span>{{'Main Wallet' | translate}}</span> <span>{{' '}}</span><span
+          style="font-size: 11px;color: #fff;margin-bottom: 4px;opacity: .85;">{{'here' | translate}}</span>
       </span>
       <img src="/chevron_right.svg" alt="arrow" />
     </div>
