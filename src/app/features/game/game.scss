@@ -263,3 +263,81 @@
   border-bottom-left-radius: 18px;
   border-bottom-right-radius: 18px;
 }
+
+
+
+
+/* 🔹 Level 4 Bottom Sheet */
+.level4-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(3px);
+  z-index: 400;
+}
+
+.level4-popup {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #2752E7;
+  border-radius: 18px 18px 0 0;
+  z-index: 500;
+  animation: slideUp 0.25s ease;
+}
+
+.level4-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center; // ✅ center text
+  padding: 14px 18px;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+
+  button {
+    position: absolute; // ✅ keep close button right
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: #fff;
+    cursor: pointer;
+  }
+}
+
+
+.level4-body {
+  background: #fff;
+  border-radius: 18px 18px 0 0;
+  padding: 20px;
+  text-align: center;
+
+  h4 {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 13px;
+    color: #555;
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+}
+
+.level4-image {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+
+  img {
+    width: 250px;
+    height: auto;
+  }
+}
