@@ -142,7 +142,7 @@ export class Game implements OnInit {
           } else {
             this.validToBuyFour = true
           }
-          console.log("this.validToBuyFour",this.validToBuyFour);
+          console.log("this.validToBuyFour", this.validToBuyFour);
           // ✅ Force UI update
           this.cdr.detectChanges();
         }
@@ -175,7 +175,7 @@ export class Game implements OnInit {
 
         const { isFreeTrailSubcraibed, currectLevel, elegibleLevel, activationTime } = res.data;
         this.isGameEnabled = res.data.isGameEnabled;
-        // this.isGameEnabled = true;
+        this.isGameEnabled = true;
 
         localStorage.setItem('activationTime', activationTime ?? null);
 
@@ -302,6 +302,13 @@ export class Game implements OnInit {
 
   purchaseNow(card: GameCard) {
     const userId = localStorage.getItem('userId');
+    console.log("card.level", card.level);
+
+    if (card.level === 'Level4' && this.validToBuyFour === false) {
+      console.log('Please have 12 valid depositors and come again');
+      return; // ⛔ STOP API CALL
+    }
+
     let payload = {
       Level: card.level,
       userId: userId,
