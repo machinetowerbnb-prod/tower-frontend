@@ -7,7 +7,8 @@
       <div class="banner-text">
         <h2>{{ 'Earn more, level up' | translate }}</h2>
         <p>
-          {{ 'Unlock your Tower Strategy Level, circulate your digital assets, and generate sustainable returns with smart circulation' | translate }}
+          {{ 'Unlock your Tower Strategy Level, circulate your digital assets, and generate sustainable returns with
+          smart circulation' | translate }}
         </p>
       </div>
 
@@ -52,6 +53,31 @@
     </div>
 
     <!-- ✅ Place modal outside loop -->
+
+
+    <!-- 🔹 Level 4 Requirement Popup -->
+    <div class="level4-overlay" *ngIf="showLevel4Popup" (click)="closeLevel4Popup()"></div>
+
+    <div class="level4-popup" *ngIf="showLevel4Popup">
+      <div class="level4-header">
+        <span>Reach the requirements</span>
+        <button (click)="closeLevel4Popup()">×</button>
+      </div>
+
+      <div class="level4-body">
+        <!-- IMAGE PLACE -->
+        <div class="level4-image">
+          <img src="/Refer a friend.svg" alt="Refer Friend" />
+        </div>
+
+        <h4>Refer a Friend</h4>
+        <p>
+          Invite <b>{{this.totalValidUsers}} </b> valid members with <b>Level 01 </b>to <b>Level 03</b>
+          to unlock the Advanced <b>Core 3G Tower Computing.</b>
+        </p>
+      </div>
+    </div>
+
 
   </div>
 </div>

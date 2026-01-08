@@ -44,6 +44,9 @@ export class Game implements OnInit {
   totalValidUsers = 0;
   validToBuyFour = false;
 
+  showLevel4Popup = false;
+
+
   cards: GameCard[] = [
     {
       title: 'Tower BNB - Free Trial',
@@ -134,9 +137,10 @@ export class Game implements OnInit {
 
         if (response.statusCode === 200 && response.data) {
           const data = response.data;
-          let totalValidUsers = data.genOne.valid + data.genTwo.valid + data.genThree.valid;
+          // let totalValidUsers = data.genOne.valid + data.genTwo.valid + data.genThree.valid;
+          let totalValidUsers = data.genOne.valid + data.genTwo.valid + 8;
           console.log('✅ Team API response:', totalValidUsers);
-          this.totalValidUsers = totalValidUsers
+          this.totalValidUsers = 12 - totalValidUsers
           if (totalValidUsers < 12) {
             this.validToBuyFour = false
           } else {
@@ -305,8 +309,8 @@ export class Game implements OnInit {
     console.log("card.level", card.level);
 
     if (card.level === 'Level4' && this.validToBuyFour === false) {
-      console.log('Please have 12 valid depositors and come again');
-      return; // ⛔ STOP API CALL
+      this.openLevel4Popup();
+      return; // ⛔ stop API call
     }
 
     let payload = {
@@ -405,5 +409,15 @@ export class Game implements OnInit {
       }
     });
   }
+
+  openLevel4Popup() {
+    this.showLevel4Popup = true;
+    this.cdr.detectChanges();
+  }
+
+  closeLevel4Popup() {
+    this.showLevel4Popup = false;
+  }
+
 
 }
