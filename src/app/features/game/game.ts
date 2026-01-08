@@ -137,8 +137,7 @@ export class Game implements OnInit {
 
         if (response.statusCode === 200 && response.data) {
           const data = response.data;
-          // let totalValidUsers = data.genOne.valid + data.genTwo.valid + data.genThree.valid;
-          let totalValidUsers = data.genOne.valid + data.genTwo.valid + 8;
+          let totalValidUsers = data.genOne.valid + data.genTwo.valid + data.genThree.valid;
           console.log('✅ Team API response:', totalValidUsers);
           this.totalValidUsers = 12 - totalValidUsers
           if (totalValidUsers < 12) {
@@ -179,7 +178,6 @@ export class Game implements OnInit {
 
         const { isFreeTrailSubcraibed, currectLevel, elegibleLevel, activationTime } = res.data;
         this.isGameEnabled = res.data.isGameEnabled;
-        this.isGameEnabled = true;
 
         localStorage.setItem('activationTime', activationTime ?? null);
 
