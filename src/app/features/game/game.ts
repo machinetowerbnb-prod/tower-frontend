@@ -175,7 +175,7 @@ export class Game implements OnInit {
 
         const { isFreeTrailSubcraibed, currectLevel, elegibleLevel, activationTime } = res.data;
         this.isGameEnabled = res.data.isGameEnabled;
-        this.isGameEnabled = true;
+        // this.isGameEnabled = true;
 
         localStorage.setItem('activationTime', activationTime ?? null);
 
