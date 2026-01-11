@@ -341,3 +341,25 @@
     height: auto;
   }
 }
+
+
+/* 🔹 Unlock Requirement Bottom Bar (Card 3 only) */
+/* 🔹 Unlock Requirement Bottom Bar – FIXED */
+.unlock-strip {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  background: #2752E7;
+  color: #fff;
+  text-align: center;
+
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 8px;
+
+  border-radius: 0 0 16px 16px;
+  z-index: 20;
+}
+

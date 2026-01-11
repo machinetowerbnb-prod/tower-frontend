@@ -50,6 +50,11 @@
         </button>
       </div>
 
+      <div class="unlock-strip" *ngIf="card.level === 'Level3' && !validToBuyFour">
+        Invite {{ totalValidUsers }} Valid Members to Unlock
+      </div>
+
+
     </div>
 
     <!-- ✅ Place modal outside loop -->
@@ -72,7 +77,8 @@
 
         <h4>Refer a Friend</h4>
         <p>
-          Invite <b>{{this.totalValidUsers}}</b> Valid Members needed within <b>Level 01</b> to <b>Level 03</b> to Unlock the Advanced <b>Core 3G Tower Computing.</b>
+          Invite <b>{{this.totalValidUsers}}</b> Valid Members needed within <b>Level 01</b> to <b>Level 03</b> to
+          Unlock the Advanced <b>Core 3G Tower Computing.</b>
         </p>
       </div>
     </div>
