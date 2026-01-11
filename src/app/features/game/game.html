@@ -66,7 +66,7 @@
       <!-- 🔹 BLUE STRIP (ONLY BELOW LEVEL 3 CARD) -->
       <div
         class="unlock-strip"
-        *ngIf="card.level === 'Level3' && !validToBuyFour">
+        *ngIf="card.level === 'Level3' && !validToBuyFour && totalValidUsers > 0">
         {{'Invite' | translate}} {{ totalValidUsers }} {{'Valid Members to Unlock' | translate}}
       </div>
 
