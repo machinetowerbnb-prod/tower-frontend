@@ -341,3 +341,37 @@
     height: auto;
   }
 }
+
+
+/* 🔹 Wrapper to keep card + strip together */
+.card-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.unlock-strip {
+  margin-top: -16px;          /* 🔥 pull strip upward */
+  border-radius: 0 0 16px 16px; /* same as card bottom */
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(180deg, #2752e7 0%, #2440a0 100%);
+  color: #fff;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  box-shadow: 0 6px 12px rgba(39, 82, 231, 0.35);
+
+  /* ensure it visually sticks to card */
+  position: relative;
+  z-index: 1;
+
+  width: calc(100% - 30px);   /* 👈 card padding match */
+  margin-left: 16px;
+
+}
+

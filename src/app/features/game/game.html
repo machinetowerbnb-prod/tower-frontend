@@ -7,8 +7,7 @@
       <div class="banner-text">
         <h2>{{ 'Earn more, level up' | translate }}</h2>
         <p>
-          {{ 'Unlock your Tower Strategy Level, circulate your digital assets, and generate sustainable returns with
-          smart circulation' | translate }}
+          {{ 'Unlock your Tower Strategy Level, circulate your digital assets, and generate sustainable returns with smart circulation' | translate }}
         </p>
       </div>
 
@@ -20,40 +19,58 @@
 
   <!-- 🔹 Game Cards Section -->
   <div class="cards-wrapper">
-    <div class="game-card" *ngFor="let card of cards; let i = index" [ngClass]="{
-    'first-card': i === 0,
-    'disabled-card': card.disableType === 'card' && !card.enabled,
-    'disabled-button': card.disableType === 'button' && !card.enabled
-  }" [style.background-image]="'url(' + card.background + ')'">
-      <div class="overlay" *ngIf="card.disableType === 'card' && !card.enabled">
-        <div style="width: 220px;"> {{ 'Open on 2026 First Quarter (Q1)' | translate }}</div>
-      </div>
 
-      <div class="chip validity">
-        <div style="position: relative; top: 3px;">
-          <img src="game-clock.svg" alt="clock" />
-        </div>
-        <div style="margin-left: 4px;">{{ card.validity }}</div>
-      </div>
+    <ng-container *ngFor="let card of cards; let i = index">
 
-      <div class="card-content">
-        <h3 class="title">{{ card.title }}</h3>
-        <p class="reward">{{ card.reward }}</p>
+      <!-- 🔹 GAME CARD (UNCHANGED) -->
+      <div
+        class="game-card"
+        [ngClass]="{
+          'first-card': i === 0,
+          'disabled-card': card.disableType === 'card' && !card.enabled,
+          'disabled-button': card.disableType === 'button' && !card.enabled
+        }"
+        [style.background-image]="'url(' + card.background + ')'">
 
-        <div *ngIf="card.status || card.miningCycle" class="status-chips">
-          <span class="chip small">{{ card.status }}</span>
-          <span class="chip small">{{ card.miningCycle }}</span>
+        <div class="overlay" *ngIf="card.disableType === 'card' && !card.enabled">
+          <div style="width: 220px;">
+            {{ 'Open on 2026 First Quarter (Q1)' | translate }}
+          </div>
         </div>
 
-        <button class="action-btn" [disabled]="!card.enabled && card.disableType === 'button'" (click)="onAction(card)">
-          {{ card.buttonText }}
-        </button>
+        <div class="chip validity">
+          <div style="position: relative; top: 3px;">
+            <img src="game-clock.svg" alt="clock" />
+          </div>
+          <div style="margin-left: 4px;">{{ card.validity }}</div>
+        </div>
+
+        <div class="card-content">
+          <h3 class="title">{{ card.title }}</h3>
+          <p class="reward">{{ card.reward }}</p>
+
+          <div *ngIf="card.status || card.miningCycle" class="status-chips">
+            <span class="chip small">{{ card.status }}</span>
+            <span class="chip small">{{ card.miningCycle }}</span>
+          </div>
+
+          <button
+            class="action-btn"
+            [disabled]="!card.enabled && card.disableType === 'button'"
+            (click)="onAction(card)">
+            {{ card.buttonText }}
+          </button>
+        </div>
       </div>
 
-    </div>
+      <!-- 🔹 BLUE STRIP (ONLY BELOW LEVEL 3 CARD) -->
+      <div
+        class="unlock-strip"
+        *ngIf="card.level === 'Level3' && !validToBuyFour && totalValidUsers > 0">
+        {{'Invite' | translate}} {{ totalValidUsers }} {{'Valid Members to Unlock' | translate}}
+      </div>
 
-    <!-- ✅ Place modal outside loop -->
-
+    </ng-container>
 
     <!-- 🔹 Level 4 Requirement Popup -->
     <div class="level4-overlay" *ngIf="showLevel4Popup" (click)="closeLevel4Popup()"></div>
@@ -65,18 +82,18 @@
       </div>
 
       <div class="level4-body">
-        <!-- IMAGE PLACE -->
         <div class="level4-image">
           <img src="/Refer a friend.svg" alt="Refer Friend" />
         </div>
 
         <h4>Refer a Friend</h4>
         <p>
-          Invite <b>{{this.totalValidUsers}}</b> Valid Members needed within <b>Level 01</b> to <b>Level 03</b> to Unlock the Advanced <b>Core 3G Tower Computing.</b>
+          Invite <b>{{ totalValidUsers }}</b> Valid Members needed within
+          <b>Level 01</b> to <b>Level 03</b> to Unlock the Advanced
+          <b>Core 3G Tower Computing.</b>
         </p>
       </div>
     </div>
-
 
   </div>
 </div>
