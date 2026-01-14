@@ -287,20 +287,20 @@ export class Game implements OnInit {
           // || (elegibleLevel == 'Level3' && currectLevel == "free")
 
           console.log("this.validToBuyFour", this.validToBuyFour)
-          if (finalEligible == 'Level3' && this.validToBuyFour == false) {
-            this.cards.map((x) => {
-              if (x.level != 'free') {
-                if (x.level == 'Level2' || x.level == 'Level3') {
-                  x.enabled = true
-                } else {
-                  x.enabled = false
-                }
-              }
+          // if (finalEligible == 'Level3' && this.validToBuyFour == false) {
+          //   this.cards.map((x) => {
+          //     if (x.level != 'free') {
+          //       if (x.level == 'Level2' || x.level == 'Level3') {
+          //         x.enabled = true
+          //       } else {
+          //         x.enabled = false
+          //       }
+          //     }
 
-              if (finalEligible == 'Level3' && currectLevel == "free" && x.level == 'Level2' && activationTime != null)
-                x.buttonText = 'Active Now'
-            })
-          }
+          //     if (finalEligible == 'Level3' && currectLevel == "free" && x.level == 'Level2' && activationTime != null)
+          //       x.buttonText = 'Active Now'
+          //   })
+          // }
 
 
 
