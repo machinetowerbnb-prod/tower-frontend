@@ -70,6 +70,12 @@
         {{'Invite' | translate}} {{ totalValidUsers }} {{'Valid Members to Unlock' | translate}}
       </div>
 
+      <div
+        class="unlock-strip"
+        *ngIf="card.level === 'Level4' && !validToBuyFive && total4cardValidUsers > 0">
+        {{'Invite' | translate}} {{ total4cardValidUsers }} {{'Valid Members to Unlock' | translate}}
+      </div>
+
     </ng-container>
 
     <!-- 🔹 Level 4 Requirement Popup -->

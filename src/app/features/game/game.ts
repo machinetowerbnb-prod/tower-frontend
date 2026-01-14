@@ -42,8 +42,9 @@ export class Game implements OnInit {
 
   isGameEnabled = false;
   totalValidUsers = 0;
+  total4cardValidUsers = 0;
   validToBuyFour = false;
-
+  validToBuyFive = false;
   showLevel4Popup = false;
 
 
@@ -138,13 +139,22 @@ export class Game implements OnInit {
         if (response.statusCode === 200 && response.data) {
           const data = response.data;
           let totalValidUsers = data.genOne.valid + data.genTwo.valid + data.genThree.valid;
-          console.log('✅ Team API response:', totalValidUsers);
-          this.totalValidUsers = 12 - totalValidUsers
+          
+          this.totalValidUsers = 12 - totalValidUsers;
+          this.total4cardValidUsers = 50 - totalValidUsers;
+          
           if (totalValidUsers < 12) {
             this.validToBuyFour = false
           } else {
             this.validToBuyFour = true
           }
+
+          if (totalValidUsers < 50) {
+            this.validToBuyFive = false
+          } else {
+            this.validToBuyFive = true
+          }
+
           console.log("this.validToBuyFour", this.validToBuyFour);
           // ✅ Force UI update
           this.cdr.detectChanges();
@@ -178,7 +188,7 @@ export class Game implements OnInit {
 
         const { isFreeTrailSubcraibed, currectLevel, elegibleLevel, activationTime } = res.data;
         this.isGameEnabled = res.data.isGameEnabled;
-
+        // this.isGameEnabled = true;
         localStorage.setItem('activationTime', activationTime ?? null);
 
         if (this.isGameEnabled == true) {
