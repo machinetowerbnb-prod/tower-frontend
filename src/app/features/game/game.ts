@@ -123,9 +123,7 @@ export class Game implements OnInit {
       if (userId) {
         this.getGameData(userId);
         this.loadHomeData();
-        setTimeout(() => {
-          this.fetchTeamData(userId);
-        }, 5000)
+        this.fetchTeamData(userId);
       } else {
         //console.error('❌ No userId found in localStorage');
       }
@@ -171,20 +169,20 @@ export class Game implements OnInit {
     });
 
     console.log(this.finalEligible, this.validToBuyFour, ">>>>>>>>>>>>>>>>>>>")
-    if (this.finalEligible == 'Level3' && this.validToBuyFour == false) {
-      this.cards.map((x) => {
-        if (x.level != 'free') {
-          if (x.level == 'Level2' || x.level == 'Level3') {
-            x.enabled = true
-          } else {
-            x.enabled = false
-          }
-        }
+    // if (this.finalEligible == 'Level3' && this.validToBuyFour == false) {
+    //   this.cards.map((x) => {
+    //     if (x.level != 'free') {
+    //       if (x.level == 'Level2' || x.level == 'Level3') {
+    //         x.enabled = true
+    //       } else {
+    //         x.enabled = false
+    //       }
+    //     }
 
-        if (this.finalEligible == 'Level3' && (this.currectLevel == "free" || this.currectLevel == "Level2") && x.level == 'Level2' && this.activationTime != null)
-          x.buttonText = 'Active Now'
-      })
-    }
+    //     if (this.finalEligible == 'Level3' && (this.currectLevel == "free" || this.currectLevel == "Level2") && x.level == 'Level2' && this.activationTime != null)
+    //       x.buttonText = 'Active Now'
+    //   })
+    // }
 
   }
 
@@ -289,20 +287,20 @@ export class Game implements OnInit {
           // || (elegibleLevel == 'Level3' && currectLevel == "free")
 
           console.log("this.validToBuyFour", this.validToBuyFour)
-          // if (finalEligible == 'Level3' && this.validToBuyFour == false) {
-          //   this.cards.map((x) => {
-          //     if (x.level != 'free') {
-          //       if (x.level == 'Level2' || x.level == 'Level3') {
-          //         x.enabled = true
-          //       } else {
-          //         x.enabled = false
-          //       }
-          //     }
+          if (finalEligible == 'Level3' && this.validToBuyFour == false) {
+            this.cards.map((x) => {
+              if (x.level != 'free') {
+                if (x.level == 'Level2' || x.level == 'Level3') {
+                  x.enabled = true
+                } else {
+                  x.enabled = false
+                }
+              }
 
-          //     if (finalEligible == 'Level3' && currectLevel == "free" && x.level == 'Level2' && activationTime != null)
-          //       x.buttonText = 'Active Now'
-          //   })
-          // }
+              if (finalEligible == 'Level3' && currectLevel == "free" && x.level == 'Level2' && activationTime != null)
+                x.buttonText = 'Active Now'
+            })
+          }
 
 
 
