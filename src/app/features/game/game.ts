@@ -123,7 +123,9 @@ export class Game implements OnInit {
       if (userId) {
         this.getGameData(userId);
         this.loadHomeData();
-        this.fetchTeamData(userId);
+        setTimeout(() => {
+          this.fetchTeamData(userId);
+        }, 5000)
       } else {
         //console.error('❌ No userId found in localStorage');
       }
@@ -212,7 +214,7 @@ export class Game implements OnInit {
         this.finalEligible = elegibleLevel;
         // this.isGameEnabled = true;
         localStorage.setItem('activationTime', activationTime ?? null);
-        
+
         if (this.isGameEnabled == true) {
           this.cards.map((x) => {
             if (x.level == "Level4") {
