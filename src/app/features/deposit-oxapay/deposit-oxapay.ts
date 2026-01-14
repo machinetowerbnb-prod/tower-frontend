@@ -117,7 +117,7 @@ export class DepositOxapay implements OnInit {
     // Then every 10 seconds
     this.pollingRef = setInterval(() => {
       this.callPaymentStatus(trackId);
-    }, 10000);
+    }, 20000);
   }
 
   stopPaymentPolling() {
