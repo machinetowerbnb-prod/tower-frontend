@@ -119,7 +119,6 @@ export class Game implements OnInit {
         this.getGameData(userId);
         this.loadHomeData();
         this.fetchTeamData(userId);
-        console.log("this.isGameEnabled", this.isGameEnabled);
       } else {
         //console.error('❌ No userId found in localStorage');
       }
@@ -139,10 +138,10 @@ export class Game implements OnInit {
         if (response.statusCode === 200 && response.data) {
           const data = response.data;
           let totalValidUsers = data.genOne.valid + data.genTwo.valid + data.genThree.valid;
-          
+
           this.totalValidUsers = 12 - totalValidUsers;
           this.total4cardValidUsers = 50 - totalValidUsers;
-          
+
           if (totalValidUsers < 12) {
             this.validToBuyFour = false
           } else {
@@ -155,13 +154,11 @@ export class Game implements OnInit {
             this.validToBuyFive = true
           }
 
-          console.log("this.validToBuyFour", this.validToBuyFour);
           // ✅ Force UI update
           this.cdr.detectChanges();
         }
       },
       error: (err) => {
-        console.error('❌ Failed to fetch Team data:', err);
         this.cdr.detectChanges();
       }
     });
@@ -262,6 +259,21 @@ export class Game implements OnInit {
               }
             }
           })
+          // || (elegibleLevel == 'Level3' && currectLevel == "free")
+          if (finalEligible == 'Level3' && this.validToBuyFour == false) {
+            this.cards.map((x) => {
+              if (x.level != 'free') {
+                if (x.level == 'Level2' || x.level == 'Level3') {
+                  x.enabled = true
+                } else {
+                  x.enabled = false
+                }
+              }
+
+              if (finalEligible == 'Level3' && currectLevel == "free" && x.level == 'Level2' && activationTime != null)
+                x.buttonText = 'Active Now'
+            })
+          }
 
 
 
@@ -314,7 +326,6 @@ export class Game implements OnInit {
 
   purchaseNow(card: GameCard) {
     const userId = localStorage.getItem('userId');
-    console.log("card.level", card.level);
 
     if (card.level === 'Level3' && this.validToBuyFour === false) {
       this.openLevel4Popup();
