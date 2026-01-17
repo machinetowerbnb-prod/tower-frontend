@@ -15,6 +15,7 @@ import { GameSuccessTimer } from '../game-success-timer/game-success-timer';
 import { AuthService } from '../../services/auth.service';
 import { TranslatePipe } from '../../pipes/translate-pipe';
 
+
 interface GameCard {
   title: string;
   reward: string;
@@ -42,9 +43,14 @@ export class Game implements OnInit {
 
   isGameEnabled = false;
   totalValidUsers = 0;
+  total4cardValidUsers = 0;
   validToBuyFour = false;
-
+  validToBuyFive = false;
   showLevel4Popup = false;
+
+  finalEligible = '';
+  currectLevel = '';
+  activationTime = '';
 
 
   cards: GameCard[] = [
@@ -115,10 +121,13 @@ export class Game implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       const userId = localStorage.getItem('userId');
       if (userId) {
+        this.fetchTeamData(userId);
+
+        setTimeout(() => {
         this.getGameData(userId);
         this.loadHomeData();
-        this.fetchTeamData(userId);
-        console.log("this.isGameEnabled", this.isGameEnabled);
+        }, 1000);
+
       } else {
         //console.error('❌ No userId found in localStorage');
       }
@@ -138,23 +147,47 @@ export class Game implements OnInit {
         if (response.statusCode === 200 && response.data) {
           const data = response.data;
           let totalValidUsers = data.genOne.valid + data.genTwo.valid + data.genThree.valid;
-          console.log('✅ Team API response:', totalValidUsers);
-          this.totalValidUsers = 12 - totalValidUsers
+
+          this.totalValidUsers = 12 - totalValidUsers;
+          this.total4cardValidUsers = 50 - totalValidUsers;
+          console.log("totalValidUsers", totalValidUsers);
           if (totalValidUsers < 12) {
             this.validToBuyFour = false
           } else {
             this.validToBuyFour = true
           }
-          console.log("this.validToBuyFour", this.validToBuyFour);
+
+          if (totalValidUsers < 50) {
+            this.validToBuyFive = false
+          } else {
+            this.validToBuyFive = true
+          }
+
           // ✅ Force UI update
           this.cdr.detectChanges();
         }
       },
       error: (err) => {
-        console.error('❌ Failed to fetch Team data:', err);
         this.cdr.detectChanges();
       }
     });
+
+
+    // if (this.finalEligible == 'Level3' && this.validToBuyFour == false) {
+    //   this.cards.map((x) => {
+    //     if (x.level != 'free') {
+    //       if (x.level == 'Level2' || x.level == 'Level3') {
+    //         x.enabled = true
+    //       } else {
+    //         x.enabled = false
+    //       }
+    //     }
+
+    //     if (this.finalEligible == 'Level3' && (this.currectLevel == "free" || this.currectLevel == "Level2") && x.level == 'Level2' && this.activationTime != null)
+    //       x.buttonText = 'Active Now'
+    //   })
+    // }
+
   }
 
 
@@ -176,9 +209,20 @@ export class Game implements OnInit {
           return;
         }
 
-        const { isFreeTrailSubcraibed, currectLevel, elegibleLevel, activationTime } = res.data;
+        let { isFreeTrailSubcraibed, currectLevel, elegibleLevel, activationTime } = res.data;
         this.isGameEnabled = res.data.isGameEnabled;
 
+        this.currectLevel = currectLevel;
+        this.activationTime = activationTime;
+        this.finalEligible = elegibleLevel;
+
+        if (this.finalEligible == 'Level3' && this.validToBuyFour == false) {
+          elegibleLevel = "Level2";
+        }
+
+        console.log(this.finalEligible, this.validToBuyFour, ">>>>>>>>>>>>>>>>>>>")
+
+        // this.isGameEnabled = true;
         localStorage.setItem('activationTime', activationTime ?? null);
 
         if (this.isGameEnabled == true) {
@@ -233,10 +277,10 @@ export class Game implements OnInit {
 
           if (eligibleCard) {
             // If currentLevel equals eligibleLevel → DO NOT show Purchase Now
-            if (currectLevel === finalEligible) {
+            if (currectLevel === finalEligible || (this.finalEligible == 'Level3' && this.validToBuyFour == false && (currectLevel == 'Level2' || currectLevel == 'free')) ) {
               eligibleCard.enabled = true;
               eligibleCard.reward = "Status: Core Activated"
-              eligibleCard.buttonText = 'Active Now';
+              eligibleCard.buttonText =  (activationTime == null && this.finalEligible == 'Level3' && currectLevel == 'free' && this.validToBuyFour == false) ? 'Purchase Now' :'Active Now';
             } else {
               eligibleCard.enabled = true;
               eligibleCard.buttonText = finalEligible == "Level1" ? 'Purchase Now' : 'Update Now';//Update logic
@@ -254,6 +298,25 @@ export class Game implements OnInit {
           })
 
 
+          console.log("<<<<finalEligible>>>", finalEligible, this.validToBuyFour)
+
+
+          if (this.finalEligible == 'Level3' && this.validToBuyFour == false) {
+            this.cards.map((x) => {
+              if (x.level != 'free') {
+                if (x.level == 'Level3') {
+                  x.enabled = true
+                }
+              }
+            })
+
+            //   if (finalEligible == 'Level3' && currectLevel == "free" && x.level == 'Level2' && activationTime != null)
+            //     x.buttonText = 'Active Now'
+            // })
+          }
+
+
+
 
           // Trigger UI refresh
           this.cdr.detectChanges();
@@ -264,6 +327,8 @@ export class Game implements OnInit {
         //console.error('❌ Failed to fetch game data:', err);
       },
     });
+
+
   }
 
   onAction(card: GameCard) {
@@ -304,7 +369,6 @@ export class Game implements OnInit {
 
   purchaseNow(card: GameCard) {
     const userId = localStorage.getItem('userId');
-    console.log("card.level", card.level);
 
     if (card.level === 'Level3' && this.validToBuyFour === false) {
       this.openLevel4Popup();
