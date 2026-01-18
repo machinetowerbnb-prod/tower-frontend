@@ -109,7 +109,7 @@ export class Home implements OnInit, OnDestroy {
 
     // 🔌 OFFLINE MODE
     if (!this.network.isOnline()) {
-      const cachedHome = await this.idb.get<any>('cache', 'home');
+      const cachedHome = await this.idb.get<any>('cache', `home_${userId}`);
       if (cachedHome) {
         this.applyHomeData(cachedHome);
       }
@@ -122,7 +122,7 @@ export class Home implements OnInit, OnDestroy {
     this.authService.avengers(payload).subscribe({
       next: async (res) => {
         if (res?.data) {
-          await this.idb.set('cache', 'home', res.data);
+          await this.idb.set('cache', `home_${userId}`, res.data);
           this.applyHomeData(res.data);
         }
       },
