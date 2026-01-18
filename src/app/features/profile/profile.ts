@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Deposit } from '../deposit/deposit';
 import { Transfer } from '../transfer/transfer';
 import { AuthService } from '../../services/auth.service';
+import { IndexedDbService } from '../../core/storage/indexed-db.service';
 import { TranslatePipe } from '../../pipes/translate-pipe';
 
 @Component({
@@ -25,14 +26,14 @@ import { TranslatePipe } from '../../pipes/translate-pipe';
 export class Profile implements OnInit {
 
   private authService = inject(AuthService);
+  private indexedDbService = inject(IndexedDbService); // ✅ ADD
   private ngZone = inject(NgZone);
   private cdr = inject(ChangeDetectorRef);
+
   @ViewChild('depositModal') depositModal!: Deposit;
   @ViewChild('transferModal') transferModal!: Transfer;
 
   showTimer = false;
-
-
   showSupport = false;
   showLogout = false;
   amount = 0;
@@ -45,7 +46,6 @@ export class Profile implements OnInit {
 
   private countdownInterval: any;
 
-
   constructor(
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
@@ -57,8 +57,10 @@ export class Profile implements OnInit {
     workingWallet: 0,
     withdrawalWallet: 0,
   };
-  telegramLinkTwo: string = ''
-  telegramLinkThree: string = ''
+
+  telegramLinkTwo: string = '';
+  telegramLinkThree: string = '';
+
   walletActions = [
     { icon: '/deposit.svg', label: 'Deposit' },
     { icon: '/withdrawal.svg', label: 'Withdrawal' },
@@ -79,72 +81,77 @@ export class Profile implements OnInit {
     { label: 'Terms and conditions' },
     { label: 'Help & support' }
   ];
+
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       const userId = localStorage.getItem('userId');
       if (userId) {
         this.getProfileData(userId);
-      } else {
-        console.error('❌ No userId found in localStorage');
       }
     }
   }
+
   // ----------------------------------------------------------------------
-  // 🔥 PROFILE API CALL (Avengers API)
+  // 🔥 PROFILE API + OFFLINE CACHE
   // ----------------------------------------------------------------------
   getProfileData(userId: string) {
+    const cacheKey = `profile_${userId}`;
+
     const payload = {
       screen: 'profile',
       userId: userId,
     };
 
-    console.log('📌 Calling Avengers Profile API:', payload);
-
     this.authService.avengers(payload).subscribe({
-      next: (res) => {
-        console.log('✅ Profile API Response:', res);
+      next: async (res) => {
+        if (res.statusCode === 200 && res.data) {
+          // ✅ SAVE TO INDEXED DB
+          await this.indexedDbService.set('cache', cacheKey, res.data);
 
-        if (res.statusCode !== 200 || !res.data) {
-          console.warn('⚠️ No profile data received');
-          return;
+          this.applyProfileData(res.data);
         }
-
-        const data = res.data;
-
-        this.ngZone.run(() => {
-          // Update user wallets
-          this.user.name = data.name || 'User';
-          this.user.email = data.email || 'Email';
-          this.user.workingWallet = Number(data.totalDeposits ?? 0);
-          this.user.withdrawalWallet = Number(data.totalEarnings ?? 0);
-          this.telegramLinkTwo = data.telegramLinkTwo;
-          this.telegramLinkThree = data.telegramLinkThree;
-          // Update Summary dynamically
-          this.walletSummary = [
-            { label: "Today's Personal commission", value: Number(data.usersTodaysCommission ?? 0) },
-            { label: 'Team daily commission', value: Number(data.teamDailyCommission ?? 0) },
-            { label: 'Grand Total commission', value: Number(data.grandTotalCommission ?? 0) },
-            { label: 'Your Flexible Deposit', value: Number(data.flexibleDeposite ?? 0) },
-            { label: 'Your Total withdrawals', value: Number(data.totalWithdrawals ?? 0) }
-          ];
-
-          if (data.levelPurchasedAt == null) {
-            this.showTimer = false;
-          } else {
-            this.startCooldownCountdown(data.levelPurchasedAt);
-            this.showTimer = true;
-          }
-
-          this.cdr.detectChanges();
-        });
       },
-
-      error: (err) => {
-        console.error('❌ Failed to fetch profile data:', err);
+      error: async () => {
+        // 🔁 OFFLINE FALLBACK
+        const cached = await this.indexedDbService.get<any>('cache', cacheKey);
+        if (cached) {
+          this.applyProfileData(cached);
+        }
       }
     });
   }
 
+  // 🔒 EXISTING LOGIC REUSED (NO CHANGE)
+  private applyProfileData(data: any) {
+    this.ngZone.run(() => {
+      this.user.name = data.name || 'User';
+      this.user.email = data.email || 'Email';
+      this.user.workingWallet = Number(data.totalDeposits ?? 0);
+      this.user.withdrawalWallet = Number(data.totalEarnings ?? 0);
+
+      this.telegramLinkTwo = data.telegramLinkTwo;
+      this.telegramLinkThree = data.telegramLinkThree;
+
+      this.walletSummary = [
+        { label: "Today's Personal commission", value: Number(data.usersTodaysCommission ?? 0) },
+        { label: 'Team daily commission', value: Number(data.teamDailyCommission ?? 0) },
+        { label: 'Grand Total commission', value: Number(data.grandTotalCommission ?? 0) },
+        { label: 'Your Flexible Deposit', value: Number(data.flexibleDeposite ?? 0) },
+        { label: 'Your Total withdrawals', value: Number(data.totalWithdrawals ?? 0) }
+      ];
+
+      if (data.levelPurchasedAt == null) {
+        this.showTimer = false;
+      } else {
+        this.startCooldownCountdown(data.levelPurchasedAt);
+        this.showTimer = true;
+      }
+
+      this.cdr.detectChanges();
+    });
+  }
+
+  // ----------------------------------------------------------------------
 
   getInitials(name: string): string {
     const parts = name.trim().split(' ');
@@ -165,12 +172,12 @@ export class Profile implements OnInit {
     }
   }
 
-
   opentelegramLinkTwo() {
     if (this.telegramLinkTwo) {
       window.open(this.telegramLinkTwo, '_blank');
     }
   }
+
   openSupportPopup() {
     this.showSupport = true;
   }
@@ -180,14 +187,12 @@ export class Profile implements OnInit {
   }
 
   onSupport() {
-    console.log("SUPPORT");
     if (this.telegramLinkThree) {
       window.open(this.telegramLinkThree, '_blank');
     }
   }
 
   onSetting(label: string) {
-    console.log('Clicked setting:', label);
     if (label == 'Terms and conditions') {
       this.router.navigate(['/t&c']);
     } else if (label == 'Help & support') {
@@ -203,7 +208,6 @@ export class Profile implements OnInit {
   }
 
   confirmLogout() {
-    console.log('Logged out');
     localStorage.removeItem('userId');
     this.router.navigate(['/signin']);
   }
@@ -217,18 +221,15 @@ export class Profile implements OnInit {
       const userId = localStorage.getItem('userId');
       if (userId) {
         this.getProfileData(userId);
-      } else {
-        console.error('❌ No userId found in localStorage');
       }
     }
   }
 
-
   startCooldownCountdown(startTimestamp: number) {
     if (!isPlatformBrowser(this.platformId)) return;
 
-    const startTime = startTimestamp; // already in milliseconds
-    const cooldownPeriod = 120 * 24 * 60 * 60 * 1000; // 120 days
+    const startTime = startTimestamp;
+    const cooldownPeriod = 120 * 24 * 60 * 60 * 1000;
     const endTime = startTime + cooldownPeriod;
 
     if (this.countdownInterval) clearInterval(this.countdownInterval);
@@ -256,8 +257,4 @@ export class Profile implements OnInit {
     updateCountdown();
     this.countdownInterval = setInterval(updateCountdown, 60 * 1000);
   }
-
-
-
-
 }
