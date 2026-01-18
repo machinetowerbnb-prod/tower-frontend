@@ -9,6 +9,10 @@ import { ChangeDetectorRef } from '@angular/core';
 
 import { TranslatePipe } from '../../pipes/translate-pipe';
 
+import { IndexedDbService } from '../../core/storage/indexed-db.service';
+import { NetworkService } from '../../core/network/network.service';
+
+
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -23,7 +27,10 @@ export class Home implements OnInit, OnDestroy {
     private authService: AuthService,
     private clipboard: Clipboard,
     private cdr: ChangeDetectorRef,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private idb: IndexedDbService,
+    private network: NetworkService
+
   ) { }
 
   @ViewChild('depositModal') depositModal!: Deposit;
@@ -96,36 +103,50 @@ export class Home implements OnInit, OnDestroy {
     this.cdr.detectChanges(); // ensures immediate UI update in zoneless mode
   }
 
-  loadHomeData() {
+  async loadHomeData() {
     const userId = this.safeGetLocalStorage('userId');
-    if (!userId) {
-      console.error('No userId found in localStorage');
+    if (!userId) return;
+
+    // 🔌 OFFLINE MODE
+    if (!this.network.isOnline()) {
+      const cachedHome = await this.idb.get<any>('cache', 'home');
+      if (cachedHome) {
+        this.applyHomeData(cachedHome);
+      }
       return;
     }
 
-    const payload = {
-      screen: 'home',
-      userId
-    };
+    // 🌐 ONLINE MODE
+    const payload = { screen: 'home', userId };
 
     this.authService.avengers(payload).subscribe({
-      next: (res) => {
-        this.ngZone.run(() => {
-          this.workingWallet = res.data.totalDeposits;
-          this.withdrawalWallet = res.data.totalEarnings;
-          this.referralLink = res.data.refferalLink;
-          this.telegramLinkOne = res.data.telegramLinkOne;
-          this.telegramLinkTwo = res.data.telegramLinkTwo;
-          this.refferalCode = res.data.refferalCode;
-          this.cdr.detectChanges();
-        });
-        localStorage.setItem('earnings', this.withdrawalWallet);
+      next: async (res) => {
+        if (res?.data) {
+          await this.idb.set('cache', 'home', res.data);
+          this.applyHomeData(res.data);
+        }
       },
       error: (err) => {
         console.error('Error fetching home data:', err);
       }
     });
   }
+
+
+  private applyHomeData(data: any) {
+    this.ngZone.run(() => {
+      this.workingWallet = data.totalDeposits;
+      this.withdrawalWallet = data.totalEarnings;
+      this.referralLink = data.refferalLink;
+      this.telegramLinkOne = data.telegramLinkOne;
+      this.telegramLinkTwo = data.telegramLinkTwo;
+      this.refferalCode = data.refferalCode;
+      this.cdr.detectChanges();
+    });
+
+    localStorage.setItem('earnings', data.totalEarnings);
+  }
+
 
   copyReferralLink() {
     if (this.referralLink) {
