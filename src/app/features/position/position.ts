@@ -4,11 +4,13 @@ import {
   ViewChild,
   ElementRef,
   AfterViewInit,
+  Inject,
+  PLATFORM_ID,
+  ChangeDetectorRef,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { isPlatformBrowser } from '@angular/common';
-import { Inject, PLATFORM_ID, ChangeDetectorRef } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { IndexedDbService } from '../../core/storage/indexed-db.service';
 
 @Component({
   selector: 'app-position',
@@ -19,7 +21,12 @@ import { AuthService } from '../../services/auth.service';
 export class Position implements OnInit, AfterViewInit {
   @ViewChild('scrollContainer') scrollContainer!: ElementRef;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private authService: AuthService, private cdr: ChangeDetectorRef,) { }
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private authService: AuthService,
+    private indexedDbService: IndexedDbService, // ✅ ADD
+    private cdr: ChangeDetectorRef
+  ) {}
 
   allPositions: any[] = [];
   topThree: any[] = [];
@@ -28,75 +35,94 @@ export class Position implements OnInit, AfterViewInit {
   colorMap: Map<number, string> = new Map();
   showSticky = false;
   isLoading = true;
+
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       const userId = localStorage.getItem('userId');
-      if (userId) this.getPositions(userId);
+      if (userId) {
+        this.getPositions(userId);
+      }
     }
   }
-  getPositions(userId: string) {
-  const payload = {
-    screen: 'position',
-    userId: userId,
-  };
 
-  this.authService.avengers(payload).subscribe({
-    next: (response) => {
-      this.isLoading = false;
+  async getPositions(userId: string) {
+    const cacheKey = `position_${userId}`;
 
-      if (response.statusCode === 200 && response.data) {
-        const { currentPosition, allPositions } = response.data;
+    const payload = {
+      screen: 'position',
+      userId: userId,
+    };
 
-        if (!currentPosition) {
-          console.warn("⚠️ No current position received");
+    this.authService.avengers(payload).subscribe({
+      next: async (response) => {
+        this.isLoading = false;
+
+        if (response.statusCode === 200 && response.data) {
+          // ✅ SAVE TO INDEXED DB
+          await this.indexedDbService.set('cache', cacheKey, response.data);
+
+          // ✅ APPLY DATA (existing logic reused)
+          this.applyPositionData(response.data);
           return;
         }
 
-        this.currentPosition = currentPosition;
-
-        // ---- 🔥 FIX: Insert currentPosition into correct index ----
-        const list = [...allPositions];
-        const insertIndex = currentPosition.pid - 1;
-
-        if (insertIndex >= 0 && insertIndex <= list.length) {
-          list.splice(insertIndex, 0, currentPosition);
-        } else {
-          // fallback (should not happen)
-          list.push(currentPosition);
+        // 🔁 Fallback to cache
+        const cached = await this.indexedDbService.get<any>('cache', cacheKey);
+        if (cached) {
+          this.applyPositionData(cached);
         }
+      },
+      error: async () => {
+        this.isLoading = false;
 
-        // ---- 🔥 Recalculate top 3 and remaining ----
-        this.topThree = list.slice(0, 3);
-        this.allPositions = list.slice(3);
-
-        this.cdr.detectChanges();
-
-        // ---- 🔥 Auto scroll when DOM is ready ----
-        setTimeout(() => {
-          this.cdr.detectChanges();
-          this.scrollToCurrent();
-        }, 300);
-
-        console.log("✅ Positions fixed & rendered correctly");
-      } else {
-        console.warn("⚠️ Unexpected API response:", response);
+        // 🔁 OFFLINE FALLBACK
+        const cached = await this.indexedDbService.get<any>('cache', cacheKey);
+        if (cached) {
+          this.applyPositionData(cached);
+        }
       }
-    },
-    error: (err) => {
-      console.error('❌ Failed to fetch positions:', err);
+    });
+  }
+
+  // 🔒 EXISTING LOGIC MOVED AS-IS (NO CHANGE)
+  private applyPositionData(data: any) {
+    const { currentPosition, allPositions } = data;
+
+    if (!currentPosition) {
+      console.warn("⚠️ No current position received");
+      return;
     }
-  });
-}
+
+    this.currentPosition = currentPosition;
+
+    const list = [...allPositions];
+    const insertIndex = currentPosition.pid - 1;
+
+    if (insertIndex >= 0 && insertIndex <= list.length) {
+      list.splice(insertIndex, 0, currentPosition);
+    } else {
+      list.push(currentPosition);
+    }
+
+    this.topThree = list.slice(0, 3);
+    this.allPositions = list.slice(3);
+
+    this.cdr.detectChanges();
+
+    setTimeout(() => {
+      this.cdr.detectChanges();
+      this.scrollToCurrent();
+    }, 300);
+  }
 
   ngAfterViewInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      // Run only in browser environment
-      // setTimeout(() => this.scrollToCurrent(), 500);
-    }
+    // no change
   }
 
   scrollToCurrent() {
-    if (!isPlatformBrowser(this.platformId)) return; // Prevent SSR errors
+    if (!isPlatformBrowser(this.platformId)) return;
+    if (!this.currentPosition) return;
+
     const el = document.getElementById(`rank-${this.currentPosition.pid}`);
     if (!el || !this.scrollContainer) return;
 
@@ -117,7 +143,6 @@ export class Position implements OnInit, AfterViewInit {
     const rect = el.getBoundingClientRect();
     const containerRect = container.getBoundingClientRect();
 
-    // 👇 Show sticky only when actual card is out of view
     const isVisible =
       rect.top >= containerRect.top && rect.bottom <= containerRect.bottom;
 
