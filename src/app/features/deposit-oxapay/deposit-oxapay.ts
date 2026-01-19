@@ -11,10 +11,12 @@ import { Router, RouterModule } from '@angular/router';
 import { TopNav } from '../top-nav/top-nav';
 import { AuthService } from '../../services/auth.service';
 import { TranslatePipe } from '../../pipes/translate-pipe';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-deposit-oxapay',
-  imports: [CommonModule, RouterModule, TopNav, TranslatePipe],
+  imports: [CommonModule, RouterModule, TopNav, TranslatePipe, MatSnackBarModule],
   templateUrl: './deposit-oxapay.html',
   styleUrl: './deposit-oxapay.scss'
 })
@@ -37,6 +39,7 @@ export class DepositOxapay implements OnInit {
     @Inject(PLATFORM_ID) private platformId: Object,
     private ngZone: NgZone,
     private cdr: ChangeDetectorRef,
+    private snackBar: MatSnackBar,
     private authService: AuthService
   ) { }
 
@@ -46,7 +49,9 @@ export class DepositOxapay implements OnInit {
     const payData = JSON.parse(localStorage.getItem('pay') || '{}');
     this.data = payData;
     if (this.data?.qr_code) {
-      this.data.qr_code = this.data.qr_code.replace(/@56/g, "");
+      this.data.qr_code = this.data.qr_code
+        .replace(/@56/g, '')
+        .replace(/ethereum:/gi, '');
     }
 
     this.startTimerFromBackend();
@@ -165,6 +170,10 @@ export class DepositOxapay implements OnInit {
   copy(text: string) {
     if (!text) return;
     navigator.clipboard.writeText(text);
+    this.snackBar.open('Copied', 'Close', {
+      duration: 3000,
+      panelClass: ['success-snackbar']
+    });
   }
 
   getMaskedAddress(addr: string): string {
@@ -178,6 +187,11 @@ export class DepositOxapay implements OnInit {
     navigator.clipboard.writeText(text)
       .then(() => this.showCopyChip = true)
       .catch(() => alert('Copy failed'));
+
+    this.snackBar.open('Copied to Clipboard', 'Close', {
+      duration: 3000,
+      panelClass: ['success-snackbar']
+    });
 
     setTimeout(() => this.showCopyChip = false, 2000);
   }
