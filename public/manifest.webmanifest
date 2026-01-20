@@ -2,10 +2,8 @@
   "name": "Mission Tower BNB",
   "short_name": "TowerGridBNB",
   "display": "standalone",
-  "scope": "./",
-  "start_url": "./",
-  "background_color": "#ffffff",
-  "theme_color": "#2752e7",
+  "scope": "/",
+  "start_url": "/?pwa=true",
   "icons": [
     {
       "src": "icons/72x72.svg",
