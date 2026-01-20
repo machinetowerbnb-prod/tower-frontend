@@ -8,14 +8,14 @@
   "theme_color": "#2752e7",
   "icons": [
     {
-      "src": "icons/192x192.png",
-      "sizes": "192x192",
+      "src": "/icons/192X192.png",
+      "sizes": "192X192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "icons/192x192.png",
-      "sizes": "192x192",
+      "src": "i/cons/192X192.png",
+      "sizes": "192X192",
       "type": "image/png",
       "purpose": "any maskable"
     }

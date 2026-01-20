@@ -18,6 +18,9 @@ import { TranslatePipe } from '../../pipes/translate-pipe';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
+import { PwaInstallService } from '../../services/pwa-install.service';
+
+
 
 @Component({
   selector: 'app-signin',
@@ -50,7 +53,8 @@ export class Signin implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private snackBar: MatSnackBar,
-    private authService: AuthService
+    private authService: AuthService,
+    public pwaInstall: PwaInstallService
   ) {
 
     localStorage.removeItem('userId');
@@ -133,7 +137,7 @@ export class Signin implements OnInit {
         error: (err) => {
           console.error('Login error:', err.error.message);
           let msg = err.error.message;
-          if(msg == 'Invalid email or password') msg = 'Invalid password';
+          if (msg == 'Invalid email or password') msg = 'Invalid password';
           this.snackBar.open(msg || 'Invalid Credentials', 'Close', {
             duration: 3000,
             panelClass: ['error-snackbar']
@@ -195,6 +199,14 @@ export class Signin implements OnInit {
   // forgetPassword() {
   //   this.router.navigate(['/forget']);
   // }
+
+  installApp() {
+    this.pwaInstall.install();
+  }
+
+  closeInstall() {
+    this.pwaInstall.canInstall = false;
+  }
 
 }
 
