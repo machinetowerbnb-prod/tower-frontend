@@ -3,21 +3,19 @@
   "short_name": "TowerGridBNB",
   "display": "standalone",
   "scope": "/",
-  "start_url": "/",
+  "start_url": "/signin",
   "background_color": "#ffffff",
   "theme_color": "#2752e7",
   "icons": [
     {
       "src": "/icons/192X192.png",
       "sizes": "192X192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
-      "src": "i/cons/192X192.png",
-      "sizes": "192X192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "src": "/icons/512X512.png",
+      "sizes": "512X512",
+      "type": "image/png"
     }
   ]
 }
