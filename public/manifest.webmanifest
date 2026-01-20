@@ -2,55 +2,55 @@
   "name": "Mission Tower BNB",
   "short_name": "TowerGridBNB",
   "display": "standalone",
-  "scope": "/",
-  "start_url": "/?pwa=true",
+  "scope": "./",
+  "start_url": "./",
   "icons": [
     {
-      "src": "icons/72x72.svg",
+      "src": "icons/72x72.png",
       "sizes": "72x72",
-      "type": "image/svg",
+      "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "icons/96x96.svg",
+      "src": "icons/96x96.png",
       "sizes": "96x96",
-      "type": "image/svg",
+      "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "icons/128x128.svg",
+      "src": "icons/128x128.png",
       "sizes": "128x128",
-      "type": "image/svg",
+      "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "icons/144x144.svg",
+      "src": "icons/144x144.png",
       "sizes": "144x144",
-      "type": "image/svg",
+      "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "icons/152x152.svg",
+      "src": "icons/152x152.png",
       "sizes": "152x152",
-      "type": "image/svg",
+      "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "icons/192x192.svg",
+      "src": "icons/192x192.png",
       "sizes": "192x192",
-      "type": "image/svg",
+      "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "icons/384x384.svg",
+      "src": "icons/384x384.png",
       "sizes": "384x384",
-      "type": "image/svg",
+      "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "icons/512x512.svg",
+      "src": "icons/512x512.png",
       "sizes": "512x512",
-      "type": "image/svg",
+      "type": "image/png",
       "purpose": "maskable any"
     }
   ]
