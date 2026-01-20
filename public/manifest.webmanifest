@@ -3,7 +3,7 @@
   "short_name": "TowerGridBNB",
   "display": "standalone",
   "scope": "/",
-  "start_url": "/",
+  "start_url": "/signin",
   "background_color": "#ffffff",
   "theme_color": "#2752e7",
   "icons": [
