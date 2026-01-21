@@ -2,8 +2,10 @@
   "name": "TowerGridBNB",
   "short_name": "TowerGridBNB",
   "display": "standalone",
-  "scope": "./",
-  "start_url": "./",
+  "start_url": "/",
+  "scope": "/",
+  "background_color": "#ffffff",
+  "theme_color": "#2752e7",
   "icons": [
     {
       "src": "icons/icon-72x72.png",
