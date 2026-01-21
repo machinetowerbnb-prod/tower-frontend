@@ -480,6 +480,4 @@ export class Game implements OnInit {
   closeLevel4Popup() {
     this.showLevel4Popup = false;
   }
-
-
 }
