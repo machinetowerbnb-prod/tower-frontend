@@ -1,11 +1,9 @@
 {
-  "name": "Mission Tower BNB",
-  "short_name": "TowerGridBNB",
+  "name": "gamify-frontend",
+  "short_name": "gamify-frontend",
   "display": "standalone",
-  "scope": "/",
-  "start_url": "/signin",
-  "background_color": "#ffffff",
-  "theme_color": "#2752e7",
+  "scope": "./",
+  "start_url": "./",
   "icons": [
     {
       "src": "/icons/192X192.png",
