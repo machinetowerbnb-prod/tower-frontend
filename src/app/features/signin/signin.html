@@ -1,5 +1,5 @@
 <!-- 🔥 ANDROID FORCE INSTALL POPUP -->
-<div class="install-overlay" *ngIf="pwaInstall.canInstall">
+<div class="install-overlay" *ngIf="isAndroid() && !isInstalled()">
   <div class="install-box">
     <h3>Install App</h3>
     <p>Install this app for faster and secure access.</p>

@@ -208,5 +208,16 @@ export class Signin implements OnInit {
     this.pwaInstall.canInstall = false;
   }
 
+
+  isAndroid(): boolean {
+    console.log("isAndroid()",/android/i.test(navigator.userAgent));
+    return /android/i.test(navigator.userAgent);
+  }
+
+  isInstalled(): boolean {
+    console.log("isInstalled()",window.matchMedia('(display-mode: standalone)').matches);
+    return window.matchMedia('(display-mode: standalone)').matches;
+  }
+
 }
 
