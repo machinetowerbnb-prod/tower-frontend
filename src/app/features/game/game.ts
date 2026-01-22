@@ -406,9 +406,9 @@ export class Game implements OnInit {
       },
     });
 
-    setTimeout(() => {
-      this.playActiveSound();
-    },1000);
+    // setTimeout(() => {
+    //   this.playActiveSound();
+    // },1000);
 
   }
 
@@ -486,14 +486,14 @@ export class Game implements OnInit {
     this.showLevel4Popup = false;
   }
 
-  playActiveSound() {
-    const audio = new Audio('/sounds/purchasenow.mp3');
-    audio.volume = 1.0;
+  // playActiveSound() {
+  //   const audio = new Audio('/sounds/purchasenow.mp3');
+  //   audio.volume = 1.0;
 
-    audio.play().catch(err => {
-      console.warn('Sound blocked:', err);
-    });
-  }
+  //   audio.play().catch(err => {
+  //     console.warn('Sound blocked:', err);
+  //   });
+  // }
 
 
 }
