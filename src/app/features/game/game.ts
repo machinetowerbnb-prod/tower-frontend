@@ -124,8 +124,8 @@ export class Game implements OnInit {
         this.fetchTeamData(userId);
 
         setTimeout(() => {
-        this.getGameData(userId);
-        this.loadHomeData();
+          this.getGameData(userId);
+          this.loadHomeData();
         }, 1000);
 
       } else {
@@ -277,10 +277,10 @@ export class Game implements OnInit {
 
           if (eligibleCard) {
             // If currentLevel equals eligibleLevel → DO NOT show Purchase Now
-            if (currectLevel === finalEligible || (this.finalEligible == 'Level3' && this.validToBuyFour == false && (currectLevel == 'Level2' || currectLevel == 'free')) ) {
+            if (currectLevel === finalEligible || (this.finalEligible == 'Level3' && this.validToBuyFour == false && (currectLevel == 'Level2' || currectLevel == 'free'))) {
               eligibleCard.enabled = true;
               eligibleCard.reward = "Status: Core Activated"
-              eligibleCard.buttonText =  (activationTime == null && this.finalEligible == 'Level3' && currectLevel == 'free' && this.validToBuyFour == false) ? 'Purchase Now' :'Active Now';
+              eligibleCard.buttonText = (activationTime == null && this.finalEligible == 'Level3' && currectLevel == 'free' && this.validToBuyFour == false) ? 'Purchase Now' : 'Active Now';
             } else {
               eligibleCard.enabled = true;
               eligibleCard.buttonText = finalEligible == "Level1" ? 'Purchase Now' : 'Update Now';//Update logic
@@ -405,6 +405,11 @@ export class Game implements OnInit {
         //console.error('❌ Failed to fetch commission details:', err);
       },
     });
+
+    setTimeout(() => {
+      this.playActiveSound();
+    },1000);
+
   }
 
   activateGame(userId: string) {
@@ -480,4 +485,15 @@ export class Game implements OnInit {
   closeLevel4Popup() {
     this.showLevel4Popup = false;
   }
+
+  playActiveSound() {
+    const audio = new Audio('/sounds/purchasenow.mp3');
+    audio.volume = 1.0;
+
+    audio.play().catch(err => {
+      console.warn('Sound blocked:', err);
+    });
+  }
+
+
 }
