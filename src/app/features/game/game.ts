@@ -47,6 +47,7 @@ export class Game implements OnInit {
   validToBuyFour = false;
   validToBuyFive = false;
   showLevel4Popup = false;
+  showLevel5Popup = false;
 
   finalEligible = '';
   currectLevel = '';
@@ -104,8 +105,8 @@ export class Game implements OnInit {
       title: 'Core 4G Tower Computing',
       reward: 'Status: Pending Activation',
       validity: 'CIRCULATION VALIDITY 120 DAYS',
-      status: 'DEP : 1501-3500 USDT',
-      miningCycle: 'Earn: 2.3% per day',
+      status: 'DEP : 1501-4000 USDT',
+      miningCycle: 'Earn: 2.6% per day',
       buttonText: 'Purchase Now',
       background: '/game-card-5.svg',
       enabled: false,
@@ -150,7 +151,7 @@ export class Game implements OnInit {
 
           this.totalValidUsers = 12 - totalValidUsers;
           this.total4cardValidUsers = 50 - totalValidUsers;
-          console.log("totalValidUsers", totalValidUsers);
+
           if (totalValidUsers < 12) {
             this.validToBuyFour = false
           } else {
@@ -171,22 +172,6 @@ export class Game implements OnInit {
         this.cdr.detectChanges();
       }
     });
-
-
-    // if (this.finalEligible == 'Level3' && this.validToBuyFour == false) {
-    //   this.cards.map((x) => {
-    //     if (x.level != 'free') {
-    //       if (x.level == 'Level2' || x.level == 'Level3') {
-    //         x.enabled = true
-    //       } else {
-    //         x.enabled = false
-    //       }
-    //     }
-
-    //     if (this.finalEligible == 'Level3' && (this.currectLevel == "free" || this.currectLevel == "Level2") && x.level == 'Level2' && this.activationTime != null)
-    //       x.buttonText = 'Active Now'
-    //   })
-    // }
 
   }
 
@@ -375,6 +360,11 @@ export class Game implements OnInit {
       return; // ⛔ stop API call
     }
 
+    if (card.level === 'Level4' && this.validToBuyFive === false) {
+      this.openLevel5Popup();
+      return; // ⛔ stop API call
+    }
+
     let payload = {
       Level: card.level,
       userId: userId,
@@ -484,6 +474,15 @@ export class Game implements OnInit {
 
   closeLevel4Popup() {
     this.showLevel4Popup = false;
+  }
+
+  openLevel5Popup() {
+    this.showLevel5Popup = true;
+    this.cdr.detectChanges();
+  }
+
+  closeLevel5Popup() {
+    this.showLevel5Popup = false;
   }
 
   // playActiveSound() {
