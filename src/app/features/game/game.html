@@ -101,6 +101,30 @@
       </div>
     </div>
 
+
+    <!-- 🔹 Level 5 Requirement Popup -->
+    <div class="level4-overlay" *ngIf="showLevel5Popup" (click)="closeLevel5Popup()"></div>
+
+    <div class="level4-popup" *ngIf="showLevel5Popup">
+      <div class="level4-header">
+        <span>Reach the requirements</span>
+        <button (click)="closeLevel5Popup()">×</button>
+      </div>
+
+      <div class="level4-body">
+        <div class="level4-image">
+          <img src="/Refer a friend.svg" alt="Refer Friend" />
+        </div>
+
+        <h4>Refer a Friend</h4>
+        <p>
+          Invite <b>{{ total4cardValidUsers }}</b> Valid Members needed within
+          <b>Level 01</b> to <b>Level 03</b> to Unlock the Advanced
+          <b>Core 3G Tower Computing.</b>
+        </p>
+      </div>
+    </div>
+
   </div>
 </div>
 
